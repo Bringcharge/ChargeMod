@@ -1,5 +1,7 @@
 package com.charge.chargemod;
 
+import com.charge.chargemod.item.ChargeBaseIngot;
+import com.charge.chargemod.item.ChargeBow;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.CreativeModeTab;
@@ -12,37 +14,31 @@ import net.minecraftforge.registries.RegistryObject;
 
 public class ChargeModItemRegistry {
     public static final String MODID = "charge";
+    //item的注册
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MODID);
-//    public static RegistryObject<Item> obsidianIngot = ITEMS.register("obsidian_ingot",() -> {
-//        return new ObsidianIngot();
-//    });
-//    public static RegistryObject<Item> obsidianApple = ITEMS.register("obsidian_apple",() -> {
-//        return new ObsidianApple();
-//    });
-//    public static RegistryObject<Item> obsidianSword = ITEMS.register("obsidian_sword",() -> {
-//        return new ObsidianSword();
-//    });
-//    public static RegistryObject<Item> bigBrid = ITEMS.register("big_brid",() -> {
-//        return new BigBrid((new Item.Properties()).maxDamage(384).group(ModGroup.itemGroup));
-//    });
-//    public static RegistryObject<Item> iceSword = ITEMS.register("ice_sword",() -> {
-//        return new IceSword();
-//    });
-
-
-    //以下是block函数
+    //block的注册
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, MODID);
-    //这个是什么？总不能是group吧
+    //这个是什么？
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MODID);
 
-    public static final RegistryObject<Item> EXAMPLE_ITEM = ITEMS.register("charge_item", () -> new Item(new Item.Properties().food(new FoodProperties.Builder()
-            .alwaysEat().nutrition(1).saturationMod(2f).build())));
+//    public static final RegistryObject<Item> EXAMPLE_ITEM = ITEMS.register("charge_item", () -> new Item(new Item.Properties().food(new FoodProperties.Builder()
+//            .alwaysEat().nutrition(1).saturationMod(2f).build())));
 
-    public static final RegistryObject<CreativeModeTab> EXAMPLE_TAB = CREATIVE_MODE_TABS.register("example_tab", () -> CreativeModeTab.builder()
+
+
+    //实际注册内容
+    public static final RegistryObject<Item> chargeBaseIngot = ITEMS.register("charge_base_ingot", () -> new ChargeBaseIngot());
+    public static final RegistryObject<Item> chargeBow = ITEMS.register("charge_bow", () ->{
+        return new ChargeBow((new Item.Properties()).defaultDurability(400));
+    });
+
+    //列表
+    public static final RegistryObject<CreativeModeTab> EXAMPLE_TAB = CREATIVE_MODE_TABS.register("charge_tab", () -> CreativeModeTab.builder()
             .withTabsBefore(CreativeModeTabs.COMBAT)
-            .icon(() -> EXAMPLE_ITEM.get().getDefaultInstance())
+            .icon(() -> chargeBaseIngot.get().getDefaultInstance())
             .displayItems((parameters, output) -> {
-                output.accept(EXAMPLE_ITEM.get()); // Add the example item to the tab. For your own tabs, this method is preferred over the event
+                output.accept(chargeBaseIngot.get()); // Add the example item to the tab. For your own tabs, this method is preferred over the event
+                output.accept(chargeBow.get());
             }).build());
 
 
