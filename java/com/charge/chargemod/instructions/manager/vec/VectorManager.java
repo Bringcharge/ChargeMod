@@ -6,6 +6,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 
 public class VectorManager {
@@ -32,13 +33,20 @@ public class VectorManager {
     }
 
     //V02是阻挡射线
-    public static Vec3 vecBlockPos(Vec3 vec1, Vec3 vec2, InstructionsModel model) {  //V020# 从vec1发出向量vec2的射线，看碰撞到什么方块上
+    public static Vec3 vecRayToBlockPos(Vec3 vec1, Vec3 vec2, InstructionsModel model) {  //V020# 从vec1发出向量vec2的射线，看到的方块中心，太远了的话，就miss
         Level worldIn = model.user.level();
         if (worldIn != null && model.user != null) {
+            if (vec2.length() < 50);
+            Vec3 vec3 = vec2.scale(50 / vec2.length());
+            Vec3 vec_to = vec3.add(vec1);
             //查看阻塞位置
-            ClipContext context = new ClipContext(vec1, vec2, ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, model.user);
+            ClipContext context = new ClipContext(vec1, vec_to, ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, model.user);//前两个参数是起点和终点坐标
             BlockHitResult blockRayTraceResult = worldIn.clip(context);
-            return blockRayTraceResult.getLocation();
+            if (blockRayTraceResult.getType() == HitResult.Type.BLOCK) {
+                return blockRayTraceResult.getBlockPos().getCenter();
+            } else {
+                return null;
+            }
         }
         return null;
     }
@@ -65,8 +73,8 @@ public class VectorManager {
         return null;
     }
 
-    //V2是一些block系列的操作，还有其他的操作
-    public static Vec3 vecBlockTarget (InstructionsModel model) {  //V201# block函数附带的参数
+    //V2是一些回调系列的操作，还有其他的操作
+    public static Vec3 vecBlockTarget (InstructionsModel model) {  //V201# 回调函数附带的参数
             return model.targetVec; //可能是空
     }
 

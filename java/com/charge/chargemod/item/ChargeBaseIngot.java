@@ -25,7 +25,8 @@ public class ChargeBaseIngot extends Item {
         model.user = player;
         model.holder = this;
         Instruction ins = new Instruction();
-        ins.str = "F002#V103#V101#DI4#{Fif#B001#E201#{F004#E101#E201#}{F003#E101#V201#}}";
+//        ins.str = "F002#V103#V101#DI4#{Fif#B001#E201#{F004#E101#E201#}{F003#E101#V201#}}";    大概是一个射箭然后射中了会触发if判断的东西
+        ins.str = "F005#V020#V103#V101#";
         InstructionsManager.functionWithString(ins, model);    //命令字符串
 
         return InteractionResultHolder.success(stack);

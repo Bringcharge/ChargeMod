@@ -4,56 +4,56 @@ package com.charge.chargemod.instructions.manager;
 import com.charge.chargemod.instructions.manager.doub.DoubleManager;
 
 public class DoubleInstruction {
-    public static double parser(Instruction instruction, InstructionsModel owner) {    //ÊäÈë
+    public static double parser(Instruction instruction, InstructionsModel owner) {    //è¾“å…¥
 
         String order = null;
         for (int i = 0; i<instruction.str.length(); i++) {
             if (instruction.str.charAt(i) == '#') {
-                order = instruction.str.substring(0, i+1);    //ÄÃ³öÃüÁî
+                order = instruction.str.substring(0, i+1);    //æ‹¿å‡ºå‘½ä»¤
                 if (i < instruction.str.length()) {
-                    instruction.str = instruction.str.substring(i + 1); //ÉèÖÃĞÂµÄÖµ
+                    instruction.str = instruction.str.substring(i + 1); //è®¾ç½®æ–°çš„å€¼
                 }
                 break;
             }
         }
 
-        if (order != null && order.substring(0,2).equals("DI")) {   //DIÖ±½ÓÈ¡Êı×Ö
-            String dou = order.substring(2,order.length()-1);   //È¥µô#ÃüÁî·û
+        if (order != null && order.substring(0,2).equals("DI")) {   //DIç›´æ¥å–æ•°å­—
+            String dou = order.substring(2,order.length()-1);   //å»æ‰#å‘½ä»¤ç¬¦
             return Double.parseDouble(dou);
         }
 
-        if (order != null && order.equals("D000#")) { //Ïà¼Ó
+        if (order != null && order.equals("D000#")) { //ç›¸åŠ 
             double p1 = InstructionsManager.doubleWithString(instruction, owner);
             double p2 = InstructionsManager.doubleWithString(instruction, owner);
             return DoubleManager.add(p1, p2, owner);
         }
 
-        if (order != null && order.equals("D001#")) { //Ïà¼õ
+        if (order != null && order.equals("D001#")) { //ç›¸å‡
             double p1 = InstructionsManager.doubleWithString(instruction, owner);
             double p2 = InstructionsManager.doubleWithString(instruction, owner);
             return DoubleManager.dec(p1, p2, owner);
         }
 
-        if (order != null && order.equals("D002#")) { //Ïà³Ë
+        if (order != null && order.equals("D002#")) { //ç›¸ä¹˜
             double p1 = InstructionsManager.doubleWithString(instruction, owner);
             double p2 = InstructionsManager.doubleWithString(instruction, owner);
             return DoubleManager.mult(p1, p2, owner);
         }
 
-        if (order != null && order.equals("D004#")) { //Ïà³ı
+        if (order != null && order.equals("D004#")) { //ç›¸é™¤
             double p1 = InstructionsManager.doubleWithString(instruction, owner);
             double p2 = InstructionsManager.doubleWithString(instruction, owner);
             return DoubleManager.div(p1, p2, owner);
         }
 
-        if (order != null && order.equals("D010#")) { //int×ªdouble
+        if (order != null && order.equals("D010#")) { //intè½¬double
             int p1 = InstructionsManager.integerWithString(instruction, owner);
             return DoubleManager.intToDouble(p1, owner);
         }
         return unexpectedInput();
     }
 
-    private static double unexpectedInput() {  //´íÎó×ßÕâ
+    private static double unexpectedInput() {  //é”™è¯¯èµ°è¿™
         return 0;
     }
 }

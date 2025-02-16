@@ -6,20 +6,20 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.phys.Vec3;
 
 public class VecInstruction {
-    public static Vec3 parser(Instruction instruction, InstructionsModel owner) {    //ÊäÈë¿Ú
+    public static Vec3 parser(Instruction instruction, InstructionsModel owner) {    //è¾“å…¥å£
 
         String order = null;
         for (int i = 0; i<instruction.str.length(); i++) {
             if (instruction.str.charAt(i) == '#') {
-                order = instruction.str.substring(0, i+1);    //ÄÃ³öÃüÁî
+                order = instruction.str.substring(0, i+1);    //æ‹¿å‡ºå‘½ä»¤
                 if (i < instruction.str.length()) {
-                    instruction.str = instruction.str.substring(i + 1); //ÉèÖÃĞÂµÄÖµ
+                    instruction.str = instruction.str.substring(i + 1); //è®¾ç½®æ–°çš„å€¼
                 }
                 break;
             }
         }
 
-        if (order != null && order.equals("V001#")) {   //ÏòÁ¿È¡·´
+        if (order != null && order.equals("V001#")) {   //å‘é‡å–å
             Vec3 p1 = InstructionsManager.vecWithString(instruction,owner);
             if (p1 == null) {
                 return  null;
@@ -27,7 +27,7 @@ public class VecInstruction {
             return VectorManager.vecRevert(p1,owner);
         }
 
-        if (order != null && order.equals("V002#")) {   //ÏòÁ¿Ëõ·Å
+        if (order != null && order.equals("V002#")) {   //å‘é‡ç¼©æ”¾
             Vec3 p1 = InstructionsManager.vecWithString(instruction,owner);
             int p2 = InstructionsManager.integerWithString(instruction,owner);
             if (p1 == null) {
@@ -36,7 +36,7 @@ public class VecInstruction {
             return VectorManager.vecScale(p1,p2,owner);
         }
 
-        if (order != null && order.equals("V003#")) {   //ÏòÁ¿Ëõ·Å
+        if (order != null && order.equals("V003#")) {   //å‘é‡ç¼©æ”¾
             Vec3 p1 = InstructionsManager.vecWithString(instruction,owner);
             if (p1 == null) {
                 return  null;
@@ -44,7 +44,7 @@ public class VecInstruction {
             return VectorManager.vecNormalize(p1, owner);
         }
 
-        if (order != null && order.equals("V011#")) {   //ÏòÁ¿¼Ó·¨
+        if (order != null && order.equals("V011#")) {   //å‘é‡åŠ æ³•
             Vec3 p1 = InstructionsManager.vecWithString(instruction,owner);
             Vec3 p2 = InstructionsManager.vecWithString(instruction,owner);
             if (p1 == null || p2 == null) {
@@ -53,7 +53,7 @@ public class VecInstruction {
             return VectorManager.vecAdd(p1,p2,owner);
         }
 
-        if (order != null && order.equals("V012#")) {   //ÏòÁ¿¼õ·¨
+        if (order != null && order.equals("V012#")) {   //å‘é‡å‡æ³•
             Vec3 p1 = InstructionsManager.vecWithString(instruction,owner);
             Vec3 p2 = InstructionsManager.vecWithString(instruction,owner);
             if (p1 == null || p2 == null) {
@@ -62,30 +62,39 @@ public class VecInstruction {
             return VectorManager.vecDec(p1,p2,owner);
         }
 
-        if (order != null && order.equals("V101#")) {   //Íæ¼ÒÊÓÏß
+        if (order != null && order.equals("V020#")) {
+            Vec3 p1 = InstructionsManager.vecWithString(instruction,owner);
+            Vec3 p2 = InstructionsManager.vecWithString(instruction,owner);
+            if (p1 == null || p2 == null) {
+                return  null;
+            }
+            return VectorManager.vecRayToBlockPos(p1,p2,owner);
+        }
+
+        if (order != null && order.equals("V101#")) {   //ç©å®¶è§†çº¿
             return VectorManager.vecPlayerLook(owner);
         }
 
-        if (order != null && order.equals("V102#")) {   //Íæ¼ÒÎ»ÖÃ
+        if (order != null && order.equals("V102#")) {   //ç©å®¶ä½ç½®
             return VectorManager.vecPlayerPos(owner);
         }
 
-        if (order != null && order.equals("V103#")) {   //ÉãÏñ»úÎ»ÖÃ
+        if (order != null && order.equals("V103#")) {   //æ‘„åƒæœºä½ç½®
             return VectorManager.vecCameraPos(owner);
         }
 
-        if (order != null && order.equals("V201#")) {   //blockº¯ÊıÀïµÄÎ»ÖÃ
+        if (order != null && order.equals("V201#")) {   //blockå‡½æ•°é‡Œçš„ä½ç½®
             return VectorManager.vecBlockTarget(owner);
         }
 
-        if (order != null && order.equals("V301#")) {   //ÊµÌåÎ»ÖÃ
+        if (order != null && order.equals("V301#")) {   //å®ä½“ä½ç½®
             Entity p1 = InstructionsManager.entityWithString(instruction,owner);
             return VectorManager.vecEntityPos(p1, owner);
         }
         return unexpectedInput();
     }
 
-    private static Vec3 unexpectedInput() {  //ËùÓĞµÄ´íÎó×ßÕâ
+    private static Vec3 unexpectedInput() {  //æ‰€æœ‰çš„é”™è¯¯èµ°è¿™
         return null;
     }
 }

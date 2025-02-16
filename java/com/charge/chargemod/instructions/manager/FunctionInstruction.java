@@ -34,6 +34,9 @@ public class FunctionInstruction {
             Vec3 p2 = InstructionsManager.vecWithString(instruction,owner);
             double p3 = InstructionsManager.doubleWithString(instruction,owner);
             String p4 = InstructionsManager.instructionsBlock(instruction,owner);
+            if (p1 == null || p2 == null) {
+                return;
+            }
             FunctionsManager.ShotArrow(p1,p2,p3,p4,owner);
         }
 
@@ -51,6 +54,14 @@ public class FunctionInstruction {
             if (p1 instanceof LivingEntity) {
                 FunctionsManager.switchEntity((LivingEntity) p1,(LivingEntity) p2, owner);
             }
+        }
+
+        if (order != null && order.equals("F005#")) {   //破坏方块
+            Vec3 p1 = InstructionsManager.vecWithString(instruction,owner);
+            if (p1 == null) {
+                return;
+            }
+            FunctionsManager.breakBlock(p1, owner);
         }
 
         if (order != null && order.equals("Fif#")) {
