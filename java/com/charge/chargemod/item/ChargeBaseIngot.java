@@ -1,17 +1,32 @@
 package com.charge.chargemod.item;
 
 
+import com.charge.chargemod.entity.ChargeDaggerEntity;
 import com.charge.chargemod.instructions.manager.Instruction;
 import com.charge.chargemod.instructions.manager.InstructionsManager;
 import com.charge.chargemod.instructions.manager.InstructionsModel;
 import net.minecraft.network.chat.Component;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.AbstractArrow;
+import net.minecraft.world.entity.projectile.Arrow;
 import net.minecraft.world.food.FoodProperties;
+import net.minecraft.world.item.ArrowItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
+
+import java.util.Random;
 
 public class ChargeBaseIngot extends Item {
     public ChargeBaseIngot() {
@@ -24,10 +39,12 @@ public class ChargeBaseIngot extends Item {
         InstructionsModel model = new InstructionsModel();
         model.user = player;
         model.holder = this;
-        Instruction ins = new Instruction();
+
+        releaseUsing(stack, level, player, 10);
+//        Instruction ins = new Instruction();
 //        ins.str = "F002#V103#V101#DI4#{Fif#B001#E201#{F004#E101#E201#}{F003#E101#V201#}}";    大概是一个射箭然后射中了会触发if判断的东西
-        ins.str = "F005#V020#V103#V101#";
-        InstructionsManager.functionWithString(ins, model);    //命令字符串
+//        ins.str = "F005#V020#V103#V101#";
+//        InstructionsManager.functionWithString(ins, model);    //命令字符串
 
         return InteractionResultHolder.success(stack);
         //如果消耗的话做下面这个
@@ -38,5 +55,114 @@ public class ChargeBaseIngot extends Item {
 //        }
 //        return InteractionResultHolder.consume(stack); // 返回消耗结果
     }
+    //以下是临时测试
 
+    private int delayTick;
+    private int arrowNumber;
+    private Vec3 target3d;
+
+    private void createArrowItem(Vec3 target3d, Level worldI) {
+        Random random = new Random();
+        Vec3 arrowCreatePosition = target3d.add((random.nextGaussian()-0.5) * 8.f ,20, (random.nextGaussian() -0.5) * 8.f);
+        Vec3 vectorToTarget = target3d.add(arrowCreatePosition.reverse());
+
+        //创建箭矢
+        ArrowItem arrowitem = (ArrowItem)(Items.ARROW); //最原版的箭矢
+        ChargeDaggerEntity arrow = new ChargeDaggerEntity(worldI ,arrowCreatePosition.x(),arrowCreatePosition.y(),arrowCreatePosition.z() );
+
+        //设置初速度和散布
+        arrow.shoot(vectorToTarget.x(),vectorToTarget.y(),vectorToTarget.z(),2.0f,3.f);
+//        abstractarrowentity.shoot(0,-1,0,2.0f,3.f);
+//        arrow.setIsCritical(false);    //箭后面是否带有大量暴击粒子
+        worldI.addFreshEntity(arrow);
+    }
+
+    @Override
+    //tick响应函数
+    public void inventoryTick(ItemStack stack, Level worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
+        super.inventoryTick(stack, worldIn, entityIn, itemSlot, isSelected);
+        if (this.delayTick > 0) {
+            this.delayTick--;
+        }
+        else if (this.arrowNumber > 0) {
+            this.arrowNumber--;
+            this.createArrowItem(this.target3d,entityIn.level());
+            this.delayTick = 1;
+        }
+    }
+
+    public void releaseUsing(ItemStack stack, Level worldIn, LivingEntity entityLiving, int timeLeft) {
+        Random random = new Random();
+        if (entityLiving instanceof Player) {
+            Player player = (Player)entityLiving;
+            boolean flag =player.getAbilities().instabuild || EnchantmentHelper.getItemEnchantmentLevel(Enchantments.INFINITY_ARROWS, stack) > 0;
+            ItemStack itemstack = player.getProjectile(stack);//寻找弹药的函数，根据父类的函数修改之后可以匹配相应的弹药
+
+            int i = 20;
+            i = net.minecraftforge.event.ForgeEventFactory.onArrowLoose(stack, worldIn, player, i, !itemstack.isEmpty() || flag);
+            if (i < 0) return;
+
+            if (!itemstack.isEmpty() || flag) {
+                if (itemstack.isEmpty()) {
+                    itemstack = new ItemStack(Items.ARROW);
+                }
+
+                float f = 4;   //拉弓时间计算出弓箭初速
+                if (!((double)f < 0.1D)) {
+                    boolean flag1 = player.getAbilities().instabuild || (itemstack.getItem() instanceof ArrowItem && ((ArrowItem)itemstack.getItem()).isInfinite(itemstack, stack, player));
+                    if (!worldIn.isClientSide) {
+                        ArrowItem arrowitem = (ArrowItem)(itemstack.getItem() instanceof ArrowItem ? itemstack.getItem() : Items.ARROW);
+                        ChargeDaggerEntity abstractarrowentity = new ChargeDaggerEntity(worldIn,player);
+
+                        //设置击中怪物后的函数
+                        abstractarrowentity.setConsumer((a,b)->{
+                            this.arrowNumber = a;
+                            this.target3d = b;
+                        });
+
+                        //击中地面时候的函数
+//                        abstractarrowentity.setConsumer((e)->{
+//                            this.flash(entityLiving,e);
+//                        });
+
+                        abstractarrowentity.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, f * 9.0F, 1.0F);
+                        if (f == 1.0F) {
+//                            abstractarrowentity.setIsCritical(true);    //暴击粒子？
+                        }
+//                        int j = EnchantmentHelper.getEnchantmentLevel(Enchantments.POWER, stack);
+//                        if (j > 0) {
+//                            abstractarrowentity.setDamage(abstractarrowentity.getDamage() + (double)j * 0.5D + 0.5D);
+//                        }
+
+                        //击退
+//                        abstractarrowentity.setKnockbackStrength(-5);
+
+
+//                        if (EnchantmentHelper.getEnchantmentLevel(Enchantments.FLAME, stack) > 0) {
+//                            abstractarrowentity.setFire(100);
+//                        }
+
+//                        stack.damageItem(1, playerentity, (p_220009_1_) -> {
+//                            p_220009_1_.sendBreakAnimation(playerentity.getActiveHand());
+//                        });
+                        if (flag1 || player.getAbilities().instabuild && (itemstack.getItem() == Items.SPECTRAL_ARROW || itemstack.getItem() == Items.TIPPED_ARROW)) {
+                            abstractarrowentity.pickup = AbstractArrow.Pickup.DISALLOWED;
+                        }
+
+                        worldIn.addFreshEntity(abstractarrowentity);
+                    }
+
+                    worldIn.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.ARROW_SHOOT, SoundSource.PLAYERS, 1.0F, 1.0F / (random.nextFloat() * 0.4F + 1.2F) + f * 0.5F);
+                    if (!flag1 && !player.getAbilities().instabuild) {
+                        itemstack.shrink(1);    //消耗弓箭
+                        if (itemstack.isEmpty()) {
+                            player.getInventory().removeItem(itemstack);
+                        }
+                    }
+
+                    player.awardStat(Stats.ITEM_USED.get(this));
+                }
+            }
+        }
+    }
 }

@@ -1,0 +1,19 @@
+{
+  "textures": {
+    "particle": "charge:entity/charge_dagger"
+  },
+  "elements": [
+    {
+      "from": [0, 0, 0],
+      "to": [0.5, 0.5, 0.5],
+      "faces": {
+        "north": {"texture": "#particle", "uv": [0, 0, 16, 16]},
+        "east": {"texture": "#particle", "uv": [0, 0, 16, 16]},
+        "south": {"texture": "#particle", "uv": [0, 0, 16, 16]},
+        "west": {"texture": "#particle", "uv": [0, 0, 16, 16]},
+        "up": {"texture": "#particle", "uv": [0, 0, 16, 16]},
+        "down": {"texture": "#particle", "uv": [0, 0, 16, 16]}
+      }
+    }
+  ]
+}
