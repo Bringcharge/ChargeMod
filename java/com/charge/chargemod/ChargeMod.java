@@ -1,7 +1,9 @@
 package com.charge.chargemod;
 
+import com.charge.chargemod.blockRegistry.ChargeBlockRegistry;
 import com.charge.chargemod.entity.ChargeDaggerEntity;
 import com.charge.chargemod.entityModel.ChargeDaggerEntityModel;
+import com.charge.chargemod.render.ChargeAltarRender;
 import com.charge.chargemod.render.ChargeDaggerEntityRenderer;
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.Minecraft;
@@ -46,13 +48,6 @@ import org.slf4j.Logger;
 @Mod.EventBusSubscriber(modid = ChargeModItemRegistry.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ChargeMod
 {
-//    public static final EntityType<ChargeDaggerEntity> CHARGE_DAGGER =  Registry.register(BuiltInRegistries.ENTITY_TYPE, "charge_dagger", EntityType.Builder.<ChargeDaggerEntity>of(
-//            ChargeDaggerEntity::new, MobCategory.MISC)
-//            .sized(0.5F, 0.5F)
-//            .clientTrackingRange(4)
-//            .updateInterval(20)
-//            .build("charge_dagger")
-//    );
     // Define mod id in a common place for everything to reference
 
     // Directly reference a slf4j logger
@@ -71,6 +66,8 @@ public class ChargeMod
 //        ChargeModItemRegistry.BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
         // Register the commonSetup method for modloading
         modEventBus.addListener(this::commonSetup);
+        int k = ChargeBlockRegistry.charge_int_to_load;
+
         // Register the Deferred Register to the mod event bus so blocks get registered
         ChargeModItemRegistry.BLOCKS.register(modEventBus);
         // Register the Deferred Register to the mod event bus so items get registered
@@ -79,6 +76,7 @@ public class ChargeMod
         ChargeModItemRegistry.CREATIVE_MODE_TABS.register(modEventBus);
         //注册entity
         ChargeModItemRegistry.ENTITY_TYPES.register(modEventBus);
+        ChargeModItemRegistry.BLOCK_ENTITIES.register(modEventBus);
         // Register ourselves for server and other game events we are interested in
 //        MinecraftForge.EVENT_BUS.register(this);
 
@@ -99,15 +97,22 @@ public class ChargeMod
     public static void onRegisterRenderers(EntityRenderersEvent.RegisterRenderers event) {  //渲染关联
         System.out.println("Registering ChargeDaggerEntity...test2");
         event.registerEntityRenderer(ChargeModItemRegistry.CHARGE_DAGGER_ENTITY_TYPE.get(), ChargeDaggerEntityRenderer::new);
+        event.registerBlockEntityRenderer(ChargeModItemRegistry.CHARGE_ALTAR_ENTITY.get(), ChargeAltarRender::new);
     }
 
     // 在 Mod 初始化时注册
     @SubscribeEvent
     public static void onEntityRegister(RegisterEvent event) {
-        if (event.getRegistryKey().equals(ForgeRegistries.ENTITY_TYPES.getRegistryKey())) {
-            System.out.println("Registering ChargeDaggerEntity...");
+        if (event.getRegistryKey().equals(ForgeRegistries.ENTITY_TYPES.getRegistryKey())) { //普通entity type注册事件
+            System.out.println("Registering Entity Type...");
             event.register(ForgeRegistries.ENTITY_TYPES.getRegistryKey(), helper -> {
                 helper.register("charge_dagger", ChargeModItemRegistry.CHARGE_DAGGER_ENTITY_TYPE.get());
+            });
+        }
+        if (event.getRegistryKey().equals(ForgeRegistries.BLOCK_ENTITY_TYPES.getRegistryKey())) {   //注册block entity
+            event.register(ForgeRegistries.BLOCK_ENTITY_TYPES.getRegistryKey(), helper -> {
+                System.out.println("Registering Block Entity Type...");
+                helper.register("charge_altar_block", ChargeModItemRegistry.CHARGE_ALTAR_ENTITY.get());
             });
         }
     }

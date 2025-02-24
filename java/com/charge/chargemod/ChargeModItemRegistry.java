@@ -1,22 +1,37 @@
 package com.charge.chargemod;
 
+import com.charge.chargemod.block.ChargeAltarBlock;
+import com.charge.chargemod.block.ChargeAltarBlockEntity;
+import com.charge.chargemod.blockRegistry.ChargeBlockRegistry;
 import com.charge.chargemod.entity.ChargeDaggerEntity;
 import com.charge.chargemod.item.ChargeBaseIngot;
 import com.charge.chargemod.item.ChargeBow;
+import com.mojang.datafixers.types.Type;
+import net.minecraft.Util;
 import net.minecraft.client.model.geom.ModelLayerLocation;
+import net.minecraft.client.resources.model.Material;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.datafix.fixes.References;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.projectile.Arrow;
 import net.minecraft.world.food.FoodProperties;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.MapColor;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.DeferredRegister;
@@ -33,6 +48,8 @@ public class ChargeModItemRegistry {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, MODID);
     //entity注册器
     public static final DeferredRegister<EntityType<?>> ENTITY_TYPES = DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, MODID);
+    //block entity注册器
+    public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, MODID);
     //这个是什么？
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MODID);
 
@@ -40,12 +57,42 @@ public class ChargeModItemRegistry {
 //            .alwaysEat().nutrition(1).saturationMod(2f).build())));
 
 
-
     //实际注册内容
     public static final RegistryObject<Item> chargeBaseIngot = ITEMS.register("charge_base_ingot", () -> new ChargeBaseIngot());
-    public static final RegistryObject<Item> chargeBow = ITEMS.register("charge_bow", () ->{
+    public static final RegistryObject<Item> chargeBow = ITEMS.register("charge_bow", () -> {
         return new ChargeBow((new Item.Properties()).defaultDurability(400));
     });
+    public static final RegistryObject<Block> CHARGE_ALTAR_BLOCK = BLOCKS.register("charge_altar_block", () -> {
+        return new ChargeAltarBlock(BlockBehaviour.Properties.of()
+                .mapColor(MapColor.COLOR_GREEN) //地图颜色
+                .strength(1.0f, 50.0f) //硬度，石头是1.5 & 爆炸抗性，黑曜石是50
+                .lightLevel(state -> 10)
+                .sound(SoundType.STONE)
+                .noOcclusion()
+        ); //光照等级
+    });
+
+//    public static final RegistryObject<BlockEntityType<ChargeAltarBlockEntity>> CHARGE_ALTAR_ENTITY = BLOCK_ENTITIES.register("charge_altar_block", () ->
+//            BlockEntityType.Builder.of(ChargeAltarBlockEntity::new, CHARGE_ALTAR_BLOCK.get()).build(null));
+
+    //尝试直接创建block
+//    public static final Block chargeAltarBlockStatic = Blocks.register("charge_altar_block", new ChargeAltarBlock(BlockBehaviour.Properties.of()
+//            .mapColor(MapColor.COLOR_GREEN) //地图颜色
+//            .strength(1.0f, 50.0f) //硬度，石头是1.5 & 爆炸抗性，黑曜石是50
+//            .lightLevel(state -> 10)
+//            .sound(SoundType.STONE)
+//            .noOcclusion()
+//    ));
+
+//    public static final BlockEntityType<ChargeAltarBlockEntity> chargeAltarBlockEntityTypeStatic = register("charge_altar_block",
+//            BlockEntityType.Builder.of(ChargeAltarBlockEntity::new, CHARGE_ALTAR_BLOCK.get()));
+    //注册一些Blocks和BlockEntityType的类
+
+    public static final RegistryObject<BlockEntityType<ChargeAltarBlockEntity>> CHARGE_ALTAR_ENTITY = BLOCK_ENTITIES.register("charge_altar_block", () ->
+            BlockEntityType.Builder.of(ChargeAltarBlockEntity::new, CHARGE_ALTAR_BLOCK.get()).build(null));
+
+    public static final RegistryObject<Item> chargeAltarBlockItem = ITEMS.register("charge_altar_block", () -> new BlockItem(CHARGE_ALTAR_BLOCK.get(), new Item.Properties()));
+
     public static final ModelLayerLocation CHARGE_DAGGER_LAYER = new ModelLayerLocation(new ResourceLocation(ChargeModItemRegistry.MODID, "charge_dagger"), "main");
 
 
@@ -73,6 +120,7 @@ public class ChargeModItemRegistry {
             .displayItems((parameters, output) -> {
                 output.accept(chargeBaseIngot.get()); // Add the example item to the tab. For your own tabs, this method is preferred over the event
                 output.accept(chargeBow.get());
+                output.accept(chargeAltarBlockItem.get());
             }).build());
 
 //    @SubscribeEvent
@@ -115,4 +163,9 @@ public class ChargeModItemRegistry {
 //    public static RegistryObject<Item> obsidianCounterBlockItem = ITEMS.register("obsidian_counter_block", () -> {
 //        return new BlockItem(ChargeModItemRegistry.obsidianCounterBlock.get(), new Item.Properties().group(ModGroup.itemGroup));
 //    });
+
+    private static <T extends BlockEntity> BlockEntityType<T> register(String p_58957_, BlockEntityType.Builder<T> p_58958_) {
+        Type<?> type = Util.fetchChoiceType(References.BLOCK_ENTITY, p_58957_);
+        return Registry.register(BuiltInRegistries.BLOCK_ENTITY_TYPE, p_58957_, p_58958_.build(type));
+    }
 }

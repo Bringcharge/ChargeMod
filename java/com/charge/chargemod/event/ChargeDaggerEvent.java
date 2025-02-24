@@ -1,4 +1,4 @@
-package com.charge.chargemod.enent;
+package com.charge.chargemod.event;
 
 import com.charge.chargemod.ChargeModItemRegistry;
 import com.charge.chargemod.render.ChargeDaggerEntityRenderer;

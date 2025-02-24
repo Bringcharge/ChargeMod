@@ -27,7 +27,7 @@ public class ChargeDaggerEntityModel<T extends Entity> extends EntityModel<T> {
         // 定义飞刀的模型
         parts.addOrReplaceChild("charge_dagger", CubeListBuilder.create()
                         .texOffs(0, 0) // 纹理偏移
-                        .addBox(-0.5F, -0.5F, -0.5F, 1, 1, 1, new CubeDeformation(0.0F)), // 创建一个 1x1x1 的立方体
+                        .addBox(-0.5F, -0.5F, -0.5F, 16, 1, 16, new CubeDeformation(0.0F)), // 创建一个 1x1x1 的立方体
                 PartPose.offset(0.0F, 0.0F, 0.0F));
 
         return LayerDefinition.create(mesh, 16, 16);
