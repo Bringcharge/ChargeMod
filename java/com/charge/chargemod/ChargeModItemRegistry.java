@@ -6,6 +6,7 @@ import com.charge.chargemod.blockRegistry.ChargeBlockRegistry;
 import com.charge.chargemod.entity.ChargeDaggerEntity;
 import com.charge.chargemod.item.ChargeBaseIngot;
 import com.charge.chargemod.item.ChargeBow;
+import com.charge.chargemod.item.ChargeLingShi;
 import com.mojang.datafixers.types.Type;
 import net.minecraft.Util;
 import net.minecraft.client.model.geom.ModelLayerLocation;
@@ -50,18 +51,20 @@ public class ChargeModItemRegistry {
     public static final DeferredRegister<EntityType<?>> ENTITY_TYPES = DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, MODID);
     //block entity注册器
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, MODID);
-    //这个是什么？
+    //列表注册器
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MODID);
 
-//    public static final RegistryObject<Item> EXAMPLE_ITEM = ITEMS.register("charge_item", () -> new Item(new Item.Properties().food(new FoodProperties.Builder()
-//            .alwaysEat().nutrition(1).saturationMod(2f).build())));
 
 
-    //实际注册内容
+
+    //测试用的基本锭
     public static final RegistryObject<Item> chargeBaseIngot = ITEMS.register("charge_base_ingot", () -> new ChargeBaseIngot());
+    //测试用弓
     public static final RegistryObject<Item> chargeBow = ITEMS.register("charge_bow", () -> {
         return new ChargeBow((new Item.Properties()).defaultDurability(400));
     });
+
+    //祭坛
     public static final RegistryObject<Block> CHARGE_ALTAR_BLOCK = BLOCKS.register("charge_altar_block", () -> {
         return new ChargeAltarBlock(BlockBehaviour.Properties.of()
                 .mapColor(MapColor.COLOR_GREEN) //地图颜色
@@ -69,33 +72,16 @@ public class ChargeModItemRegistry {
                 .lightLevel(state -> 10)
                 .sound(SoundType.STONE)
                 .noOcclusion()
-        ); //光照等级
-    });
-
-//    public static final RegistryObject<BlockEntityType<ChargeAltarBlockEntity>> CHARGE_ALTAR_ENTITY = BLOCK_ENTITIES.register("charge_altar_block", () ->
-//            BlockEntityType.Builder.of(ChargeAltarBlockEntity::new, CHARGE_ALTAR_BLOCK.get()).build(null));
-
-    //尝试直接创建block
-//    public static final Block chargeAltarBlockStatic = Blocks.register("charge_altar_block", new ChargeAltarBlock(BlockBehaviour.Properties.of()
-//            .mapColor(MapColor.COLOR_GREEN) //地图颜色
-//            .strength(1.0f, 50.0f) //硬度，石头是1.5 & 爆炸抗性，黑曜石是50
-//            .lightLevel(state -> 10)
-//            .sound(SoundType.STONE)
-//            .noOcclusion()
-//    ));
-
-//    public static final BlockEntityType<ChargeAltarBlockEntity> chargeAltarBlockEntityTypeStatic = register("charge_altar_block",
-//            BlockEntityType.Builder.of(ChargeAltarBlockEntity::new, CHARGE_ALTAR_BLOCK.get()));
-    //注册一些Blocks和BlockEntityType的类
-
+        );}); //光照等级
+    //祭坛blockEntityType
     public static final RegistryObject<BlockEntityType<ChargeAltarBlockEntity>> CHARGE_ALTAR_ENTITY = BLOCK_ENTITIES.register("charge_altar_block", () ->
             BlockEntityType.Builder.of(ChargeAltarBlockEntity::new, CHARGE_ALTAR_BLOCK.get()).build(null));
-
+    //祭坛
     public static final RegistryObject<Item> chargeAltarBlockItem = ITEMS.register("charge_altar_block", () -> new BlockItem(CHARGE_ALTAR_BLOCK.get(), new Item.Properties()));
 
+    //飞刀layer
     public static final ModelLayerLocation CHARGE_DAGGER_LAYER = new ModelLayerLocation(new ResourceLocation(ChargeModItemRegistry.MODID, "charge_dagger"), "main");
-
-
+    //飞刀自定义entityType
     public static final RegistryObject<EntityType<ChargeDaggerEntity>> CHARGE_DAGGER_ENTITY_TYPE = ENTITY_TYPES.register("charge_dagger", () -> EntityType.Builder.
             <ChargeDaggerEntity>of(ChargeDaggerEntity::new, MobCategory.MISC)
             .sized(0.5F, 0.5F) // 设置实体大小
@@ -104,14 +90,8 @@ public class ChargeModItemRegistry {
             .build("charge_dagger")
     );
 
-//    public static final EntityType<ChargeDaggerEntity> CHARGE_DAGGER = EntityType.Builder.<ChargeDaggerEntity>of(ChargeDaggerEntity::new, MobCategory.MONSTER)
-//            .sized(1F, 1F) // 设置实体大小
-//            .clientTrackingRange(4) // 客户端跟踪范围
-//            .updateInterval(20) // 更新间隔
-//            .build("charge_dagger");    //目前这个build函数出错了，好像是没找到字段对应的匹配
-
-
-//
+    //灵石
+    public static final RegistryObject<Item> chargeLingShi = ITEMS.register("charge_ling_shi", () -> new ChargeLingShi());
 
     //列表
     public static final RegistryObject<CreativeModeTab> EXAMPLE_TAB = CREATIVE_MODE_TABS.register("charge_tab", () -> CreativeModeTab.builder()
@@ -121,51 +101,8 @@ public class ChargeModItemRegistry {
                 output.accept(chargeBaseIngot.get()); // Add the example item to the tab. For your own tabs, this method is preferred over the event
                 output.accept(chargeBow.get());
                 output.accept(chargeAltarBlockItem.get());
+                output.accept(chargeLingShi.get());
             }).build());
 
-//    @SubscribeEvent
-//    public static void onEntityRegister(RegisterEvent event) {
-//        if (event.getRegistryKey().equals(ForgeRegistries.ENTITY_TYPES.getRegistryKey())) {
-//            System.out.println("Registering ChargeDaggerEntity...Sub");
-//        }
-//    }
 
-//    public static RegistryObject<Block> obsidianBlock = BLOCK.register("obsidian_block",()->{
-//        return new ObsidianBlock();
-//    });
-//
-//    public static RegistryObject<Item> obsidianBlockItem = ITEMS.register("obsidian_block",()->{    //����һ��item����ʵû��itemҲ��block
-//        return new BlockItem(ChargeModItemRegistry.obsidianBlock.get(),new Item.Properties().group(ModGroup.itemGroup));
-//    });
-//
-//    //一个新的方块模型
-//    public static RegistryObject<Block> obsidianRubikCube = BLOCK.register("obsidian_rubik_cube",()->{
-//        return new ObsidianRubikCube();
-//    });
-//,
-//    public static RegistryObject<Item> obsidianRubikCubeItem = ITEMS.register("obsidian_rubik_cube",()->{
-//       return new BlockItem(ChargeModItemRegistry.obsidianRubikCube.get(),new Item.Properties().group(ModGroup.itemGroup));
-//    });
-//
-//    //
-//    public static RegistryObject<Block> obsidianFrame = BLOCK.register("obsidian_frame", () -> {
-//        return new ObsidianFrame();
-//    });
-//
-//    public static RegistryObject<Item> obssidianFrame = ITEMS.register("obsidian_frame", () -> {
-//        return new BlockItem(ChargeModItemRegistry.obsidianFrame.get(), new Item.Properties().group(ModGroup.itemGroup));
-//    });
-//
-//    //���Կ��ܲ�����һ��tileʵ������
-//    public static RegistryObject<Block> obsidianCounterBlock = BLOCK.register("obsidian_counter_block", () -> {
-//        return new ObsidianCounter();
-//    });
-//    public static RegistryObject<Item> obsidianCounterBlockItem = ITEMS.register("obsidian_counter_block", () -> {
-//        return new BlockItem(ChargeModItemRegistry.obsidianCounterBlock.get(), new Item.Properties().group(ModGroup.itemGroup));
-//    });
-
-    private static <T extends BlockEntity> BlockEntityType<T> register(String p_58957_, BlockEntityType.Builder<T> p_58958_) {
-        Type<?> type = Util.fetchChoiceType(References.BLOCK_ENTITY, p_58957_);
-        return Registry.register(BuiltInRegistries.BLOCK_ENTITY_TYPE, p_58957_, p_58958_.build(type));
-    }
 }
