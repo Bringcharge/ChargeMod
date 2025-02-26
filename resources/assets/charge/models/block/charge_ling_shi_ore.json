@@ -1,0 +1,6 @@
+{
+	"parent": "minecraft:block/cube_all",
+	"textures": {
+		"all": "charge:block/charge_ling_shi_ore"
+	}
+}

@@ -2,44 +2,29 @@ package com.charge.chargemod;
 
 import com.charge.chargemod.block.ChargeAltarBlock;
 import com.charge.chargemod.block.ChargeAltarBlockEntity;
-import com.charge.chargemod.blockRegistry.ChargeBlockRegistry;
+import com.charge.chargemod.block.ChargeLingShiOre;
 import com.charge.chargemod.entity.ChargeDaggerEntity;
 import com.charge.chargemod.item.ChargeBaseIngot;
 import com.charge.chargemod.item.ChargeBow;
 import com.charge.chargemod.item.ChargeLingShi;
-import com.mojang.datafixers.types.Type;
-import net.minecraft.Util;
 import net.minecraft.client.model.geom.ModelLayerLocation;
-import net.minecraft.client.resources.model.Material;
-import net.minecraft.core.Registry;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.datafix.fixes.References;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
-import net.minecraft.world.entity.projectile.Arrow;
-import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.MapColor;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegisterEvent;
 import net.minecraftforge.registries.RegistryObject;
-
+//方块，物品，实体注册器
 //@Mod.EventBusSubscriber(modid = "charge", bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ChargeModItemRegistry {
     public static final String MODID = "charge";
@@ -76,7 +61,7 @@ public class ChargeModItemRegistry {
     //祭坛blockEntityType
     public static final RegistryObject<BlockEntityType<ChargeAltarBlockEntity>> CHARGE_ALTAR_ENTITY = BLOCK_ENTITIES.register("charge_altar_block", () ->
             BlockEntityType.Builder.of(ChargeAltarBlockEntity::new, CHARGE_ALTAR_BLOCK.get()).build(null));
-    //祭坛
+    //祭坛item
     public static final RegistryObject<Item> chargeAltarBlockItem = ITEMS.register("charge_altar_block", () -> new BlockItem(CHARGE_ALTAR_BLOCK.get(), new Item.Properties()));
 
     //飞刀layer
@@ -92,8 +77,18 @@ public class ChargeModItemRegistry {
 
     //灵石
     public static final RegistryObject<Item> chargeLingShi = ITEMS.register("charge_ling_shi", () -> new ChargeLingShi());
+    //灵石矿
+    public static final RegistryObject<Block> CHARGE_LING_SHI_ORE = BLOCKS.register("charge_ling_shi_ore", () -> {
+       return new ChargeLingShiOre(BlockBehaviour.Properties.of()
+       .destroyTime(2.5f)
+       .explosionResistance(20)
+       .lightLevel(state -> 5).sound(SoundType.GLASS)
+       );
+    });
+    //灵石矿item
+    public static final RegistryObject<Item> CHARGE_LING_SHI_ORE_ITEM = ITEMS.register("charge_ling_shi_ore", () -> new BlockItem(CHARGE_LING_SHI_ORE.get(), new Item.Properties()));
 
-    //列表
+    //mod物品列表
     public static final RegistryObject<CreativeModeTab> EXAMPLE_TAB = CREATIVE_MODE_TABS.register("charge_tab", () -> CreativeModeTab.builder()
             .withTabsBefore(CreativeModeTabs.COMBAT)
             .icon(() -> chargeBaseIngot.get().getDefaultInstance())
@@ -102,6 +97,7 @@ public class ChargeModItemRegistry {
                 output.accept(chargeBow.get());
                 output.accept(chargeAltarBlockItem.get());
                 output.accept(chargeLingShi.get());
+                output.accept(CHARGE_LING_SHI_ORE.get());
             }).build());
 
 

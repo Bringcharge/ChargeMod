@@ -31,7 +31,7 @@ public class ChargeAltarRender implements BlockEntityRenderer<ChargeAltarBlockEn
         Level level = blockEntity.getLevel();
         if (!item.isEmpty()) {
             poseStack.pushPose();
-            poseStack.translate(0.5, 1 / 16., 0.5); // 调整物品的位置
+            poseStack.translate(0.5, 4 / 16., 0.5); // 调整物品的位置
             poseStack.scale(0.6F, 0.6F, 0.6F); // 调整物品的大小
             itemRenderer.renderStatic(item, ItemDisplayContext.GROUND, combinedLight, combinedOverlay, poseStack, buffer, level, 0); //第二个是变换方式，或者叫展示的方式
             poseStack.popPose();
