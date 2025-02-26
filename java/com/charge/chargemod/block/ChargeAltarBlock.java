@@ -1,6 +1,8 @@
 package com.charge.chargemod.block;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -9,11 +11,13 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.EntityBlock;
+import net.minecraft.world.level.block.entity.AbstractFurnaceBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -80,5 +84,22 @@ public class ChargeAltarBlock extends Block implements EntityBlock {
             }
         }
         return InteractionResult.sidedSuccess(level.isClientSide);
+    }
+
+
+    //被破坏时掉落物的情况
+    public void onRemove(BlockState state, Level level, BlockPos blockPos, BlockState state2, boolean flag) {
+        if (!state.is(state2.getBlock())) {
+            BlockEntity blockentity = level.getBlockEntity(blockPos);
+            if (blockentity instanceof ChargeAltarBlockEntity) {
+                if (level instanceof ServerLevel) {
+                    Containers.dropItemStack(level, blockPos.getX(), blockPos.getY(), blockPos.getZ(), ((ChargeAltarBlockEntity) blockentity).getItem());//获取内容物并掉落
+                }
+                //跟红石信号有关，可以不调用
+//                level.updateNeighbourForOutputSignal(blockPos, this);
+            }
+
+            super.onRemove(state, level, blockPos, state2, flag);
+        }
     }
 }
