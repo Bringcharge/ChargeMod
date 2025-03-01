@@ -7,6 +7,8 @@ import com.charge.chargemod.entity.ChargeDaggerEntity;
 import com.charge.chargemod.item.ChargeBaseIngot;
 import com.charge.chargemod.item.ChargeBow;
 import com.charge.chargemod.item.ChargeLingShi;
+import com.charge.chargemod.lingqi.PlayerLingQi;
+import com.charge.chargemod.lingqi.PlayerLingQiInterface;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
@@ -21,6 +23,9 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MapColor;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.capabilities.CapabilityManager;
+import net.minecraftforge.common.capabilities.CapabilityToken;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
@@ -38,7 +43,7 @@ public class ChargeModItemRegistry {
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, MODID);
     //列表注册器
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MODID);
-
+    public static final Capability<PlayerLingQi> PLAYER_LING_QI = CapabilityManager.get(new CapabilityToken<>() {});
 
 
 

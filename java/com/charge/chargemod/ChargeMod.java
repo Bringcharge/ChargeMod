@@ -2,6 +2,8 @@ package com.charge.chargemod;
 
 import com.charge.chargemod.entity.ChargeDaggerEntity;
 import com.charge.chargemod.entityModel.ChargeDaggerEntityModel;
+import com.charge.chargemod.lingqi.PlayerLingQiInterface;
+import com.charge.chargemod.network.ChargeNetwork;
 import com.charge.chargemod.render.ChargeAltarRender;
 import com.charge.chargemod.render.ChargeDaggerEntityRenderer;
 import com.mojang.logging.LogUtils;
@@ -24,6 +26,7 @@ import net.minecraft.world.level.material.MapColor;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.event.server.ServerStartingEvent;
@@ -83,12 +86,14 @@ public class ChargeMod
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.SPEC);
     }
 
+    //注册layer
     @SubscribeEvent
     public static void onRegisterLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {//实体layer关联
 //        System.out.println("Registering ChargeDaggerEntity...test1");
         event.registerLayerDefinition(ChargeModItemRegistry.CHARGE_DAGGER_LAYER, ChargeDaggerEntityModel::createBodyLayer);
     }
 
+    //注册render
     @SubscribeEvent
     public static void onRegisterRenderers(EntityRenderersEvent.RegisterRenderers event) {  //渲染关联
 //        System.out.println("Registering ChargeDaggerEntity...test2");
@@ -96,7 +101,13 @@ public class ChargeMod
         event.registerBlockEntityRenderer(ChargeModItemRegistry.CHARGE_ALTAR_ENTITY.get(), ChargeAltarRender::new);
     }
 
-    // 在 Mod 初始化时注册
+    //注册能力
+    @SubscribeEvent
+    public static void onRegisterCapabilities(RegisterCapabilitiesEvent event) {
+        event.register(PlayerLingQiInterface.class);
+    }
+
+    // 注册entity
     @SubscribeEvent
     public static void onEntityRegister(RegisterEvent event) {
         if (event.getRegistryKey().equals(ForgeRegistries.ENTITY_TYPES.getRegistryKey())) { //普通entity type注册事件
@@ -125,6 +136,8 @@ public class ChargeMod
         LOGGER.info(Config.magicNumberIntroduction + Config.magicNumber);
 
         Config.items.forEach((item) -> LOGGER.info("ITEM >> {}", item.toString()));
+
+        ChargeNetwork.register();
 
         event.enqueueWork(() -> {
             // 在这里执行需要在主线程中运行的任务

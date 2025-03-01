@@ -1,6 +1,8 @@
 package com.charge.chargemod.item;
 
 
+import com.charge.chargemod.lingqi.PlayerLingQiHelper;
+import com.charge.chargemod.network.ChargePacketSender;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
@@ -94,9 +96,13 @@ public class ChargeBow  extends BowItem {
             this.delayTick--;
         }
         else if (this.arrowNumber > 0) {
-            this.arrowNumber--;
-            this.createArrowItem(this.target3d,entityIn.level());
-            this.delayTick = 1;
+            if (!worldIn.isClientSide()) {
+                this.arrowNumber--;
+                this.createArrowItem(this.target3d, entityIn.level());
+                this.delayTick = 1;
+            } else {
+                System.out.println("这个会在本地运行");
+            }
         }
     }
 
@@ -146,7 +152,16 @@ public class ChargeBow  extends BowItem {
                 float f = getPowerForTime(i);   //拉弓时间计算出弓箭初速
                 if (!((double)f < 0.1D)) {
                     boolean flag1 = player.getAbilities().instabuild || (itemstack.getItem() instanceof ArrowItem && ((ArrowItem)itemstack.getItem()).isInfinite(itemstack, stack, player));
-                    if (!worldIn.isClientSide) {
+                    if (!worldIn.isClientSide()) {    //是服务器
+
+                        boolean canUse = PlayerLingQiHelper.consumeLingQi(player,100);
+                        if (!canUse) {
+                            return;
+                        } else {
+                            ChargePacketSender.sendLingqiMessageToClient((ServerPlayer) player, PlayerLingQiHelper.getLingQi(player));
+                        }
+
+
                         ArrowItem arrowitem = (ArrowItem)(itemstack.getItem() instanceof ArrowItem ? itemstack.getItem() : Items.ARROW);
                         ObsidianArrowEntity abstractarrowentity = new ObsidianArrowEntity(worldIn,player);
 
