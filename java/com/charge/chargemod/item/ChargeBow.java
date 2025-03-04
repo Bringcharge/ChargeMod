@@ -176,7 +176,8 @@ public class ChargeBow  extends BowItem {
                             this.flash(entityLiving,e);
                         });
 
-                        abstractarrowentity.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, f * 9.0F, 1.0F);
+                        abstractarrowentity.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, f * 3.0F, 1.0F);
+//                        abstractarrowentity.setDeltaMovement(); //可以用这个命令代替，射出高速的箭
                         if (f == 1.0F) {
 //                            abstractarrowentity.setIsCritical(true);    //暴击粒子？
                         }

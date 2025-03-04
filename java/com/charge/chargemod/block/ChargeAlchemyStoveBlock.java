@@ -1,6 +1,10 @@
 package com.charge.chargemod.block;
 
+import com.charge.chargemod.multiBlock.ChargeMultiBlockCheck;
+import com.charge.chargemod.multiBlock.XianTianBaGua;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
@@ -40,15 +44,22 @@ public class ChargeAlchemyStoveBlock extends Block implements EntityBlock {
             if (blockEntity instanceof ChargeAltarBlockEntity) {
                 ChargeAltarBlockEntity pedestal = (ChargeAltarBlockEntity) blockEntity; //java15模块不支持特殊写法，传统写法强制转换变量类型
                 ItemStack heldItem = player.getItemInHand(hand);
-                ItemStack pedestalItem = pedestal.getItem();    //祭坛里面的东西
-                if (heldItem.isEmpty()) {   //TODO:改成使用令牌
-                    //TODO： 加入判断多方快结构是否完整的代码
-
-                } else {
-                    if (!pedestal.getItem().isEmpty()) {    //如果里面有东西，拿出来
-                        player.getInventory().add(pedestalItem);
-                        pedestal.setItem(ItemStack.EMPTY);
+                ItemStack pedestalItem = pedestal.getItem();    //炉子里面的东西
+                if (!pedestal.getItem().isEmpty()) {    //里面有东西
+                    player.getInventory().add(pedestalItem);
+                    pedestal.setItem(ItemStack.EMPTY);
+                } else if (heldItem.isEmpty()) {  //空的炉子，检查手中令牌
+                    //TODO:改成使用令牌
+                    XianTianBaGua check = new XianTianBaGua();
+                    BlockPos blockPos = check.isCompleted(level, pos);  //检查方块是否完整
+                    if (blockPos == null) { //完整
+                        player.sendSystemMessage(Component.literal("多方快结构完整")
+                                .withStyle(ChatFormatting.AQUA));
+                    } else {  //不完整
+                        player.sendSystemMessage(Component.literal("多方快结构破损 x：" + blockPos.getX() + " y：" + blockPos.getY() + " z：" + blockPos.getY())
+                                .withStyle(ChatFormatting.AQUA));
                     }
+
                 }
             }
         }

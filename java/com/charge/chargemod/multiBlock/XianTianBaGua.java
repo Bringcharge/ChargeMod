@@ -15,7 +15,7 @@ public class XianTianBaGua implements ChargeMultiBlockCheck {
     public List<Vec3i> altarBlock;
     public Vec3i centerPos = new Vec3i(12,0,12);
 
-    XianTianBaGua() {
+    public XianTianBaGua() {
         List<Vec3i> baseBlocks = List.of(
                 new Vec3i(0,-1,22),
                 new Vec3i(0,-1,21),
@@ -168,7 +168,7 @@ public class XianTianBaGua implements ChargeMultiBlockCheck {
     }
 
     @Override
-    public boolean isCompleted(Level level, BlockPos center) {
+    public BlockPos isCompleted(Level level, BlockPos center) {
         boolean flag = true;
         for (Vec3i vec : this.baseBlock) {
             int offset_x = vec.getX() - this.centerPos.getX();
@@ -177,8 +177,7 @@ public class XianTianBaGua implements ChargeMultiBlockCheck {
             Vec3i targetBLock = center.offset(offset_x, offset_y, offset_z);
             BlockState state = level.getBlockState(new BlockPos(targetBLock));
             if (!state.is(ChargeModItemRegistry.CHARGE_BASE_BLOCK.get())) {  //如果不是基石
-                flag = false;
-                break;
+                return new BlockPos(targetBLock);
             }
         }
 
@@ -189,12 +188,11 @@ public class XianTianBaGua implements ChargeMultiBlockCheck {
             Vec3i targetBLock = center.offset(offset_x, offset_y, offset_z);
             BlockState state = level.getBlockState(new BlockPos(targetBLock));
             if (!state.is(ChargeModItemRegistry.CHARGE_ALTAR_BLOCK.get())) {  //如果不是祭坛
-                flag = false;
-                break;
+                return new BlockPos(targetBLock);
             }
         }
         //理论上不需要检测中间方块，因为这个事件应该就是需要中间的方块右键触发的
-        return flag;
+        return null;
     }
     @Override
     public BlockPos getAltarWithIndex(int index, BlockPos center) {
