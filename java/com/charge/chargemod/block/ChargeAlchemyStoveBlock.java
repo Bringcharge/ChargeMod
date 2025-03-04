@@ -1,6 +1,7 @@
 package com.charge.chargemod.block;
 
 import com.charge.chargemod.ChargeModItemRegistry;
+import com.charge.chargemod.multiBlock.ChargeAlchemyStoveHelper;
 import com.charge.chargemod.multiBlock.ChargeMultiBlockCheck;
 import com.charge.chargemod.multiBlock.XianTianBaGua;
 import net.minecraft.ChatFormatting;
@@ -11,6 +12,7 @@ import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -23,6 +25,9 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+
+import java.util.ArrayList;
+import java.util.List;
 
 //炼丹炉
 public class ChargeAlchemyStoveBlock extends Block implements EntityBlock {
@@ -42,8 +47,8 @@ public class ChargeAlchemyStoveBlock extends Block implements EntityBlock {
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
         if (!level.isClientSide) {
             BlockEntity blockEntity = level.getBlockEntity(pos);
-            if (blockEntity instanceof ChargeAltarBlockEntity) {
-                ChargeAltarBlockEntity pedestal = (ChargeAltarBlockEntity) blockEntity; //java15模块不支持特殊写法，传统写法强制转换变量类型
+            if (blockEntity instanceof ChargeAlchemyStoveBlockEntity) {
+                ChargeAlchemyStoveBlockEntity pedestal = (ChargeAlchemyStoveBlockEntity) blockEntity; //java15模块不支持特殊写法，传统写法强制转换变量类型
                 ItemStack heldItem = player.getItemInHand(hand);
                 ItemStack pedestalItem = pedestal.getItem();    //炉子里面的东西
                 if (!pedestal.getItem().isEmpty()) {    //里面有东西
@@ -56,7 +61,20 @@ public class ChargeAlchemyStoveBlock extends Block implements EntityBlock {
                     if (blockPos == null) { //完整
                         player.sendSystemMessage(Component.literal("多方快结构完整")
                                 .withStyle(ChatFormatting.AQUA));
-                        //TODO: 检测并使用容器里的东西合成
+
+                        List<ItemStack> list = new ArrayList<ItemStack>();
+                        for (int i = 0; i< 8; i++) {   //获取8个祭坛的东西
+                            BlockPos altarPos = check.getAltarWithIndex(i,pos);
+                            ItemStack stack = ((ChargeAltarBlockEntity)(level.getBlockEntity(altarPos))).getItem();
+                            list.add(stack);
+                        }
+                        ItemStack item = ChargeAlchemyStoveHelper.outputWithItemList(list); //获取炼丹的结果，因为数量也在里面
+                        if (!item.isEmpty()) {  //输出成功
+                            pedestal.setItem(item); //直接设置在输出口
+                            check.cleanAltar(level, pos);   //清空所有的祭坛
+                            //TODO 增加粒子效果
+                        }
+
                     } else {  //不完整
                         player.sendSystemMessage(Component.literal("多方快结构破损 x：" + blockPos.getX() + " y：" + blockPos.getY() + " z：" + blockPos.getY())
                                 .withStyle(ChatFormatting.AQUA));

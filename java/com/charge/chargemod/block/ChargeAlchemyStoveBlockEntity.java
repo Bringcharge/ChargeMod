@@ -14,7 +14,7 @@ public class ChargeAlchemyStoveBlockEntity extends BlockEntity {
 
     public ChargeAlchemyStoveBlockEntity(BlockPos pos, BlockState state) {
 //        super(BlockEntityType.BELL,pos,state);
-        super(ChargeModItemRegistry.CHARGE_ALTAR_ENTITY.get(), pos, state);
+        super(ChargeModItemRegistry.CHARGE_ALCHEMY_STOVE_ENTITY.get(), pos, state);
     }
 
     public ItemStack getItem() {

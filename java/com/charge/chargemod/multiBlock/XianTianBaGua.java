@@ -1,10 +1,13 @@
 package com.charge.chargemod.multiBlock;
 
 import com.charge.chargemod.ChargeModItemRegistry;
+import com.charge.chargemod.block.ChargeAltarBlockEntity;
 import com.charge.chargemod.block.ChargeBaseBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Vec3i;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.List;
@@ -153,14 +156,14 @@ public class XianTianBaGua implements ChargeMultiBlockCheck {
                 new Vec3i(24,-1,2)
         );
         List<Vec3i> altarBlocks = List.of(
-                new Vec3i(12,0,17),
-                new Vec3i(8,0,16),
-                new Vec3i(7,0,12),
-                new Vec3i(8,0,8),
-                new Vec3i(12,0,7),
-                new Vec3i(16,0,8),
-                new Vec3i(17,0,12),
-                new Vec3i(16,0,16)
+                new Vec3i(12,0,17), //乾 天
+                new Vec3i(8,0,16),  //巽 风
+                new Vec3i(7,0,12),  //坎 水
+                new Vec3i(8,0,8),   //艮 山
+                new Vec3i(12,0,7),  //坤 地
+                new Vec3i(16,0,8),  //震 雷
+                new Vec3i(17,0,12), //离 火
+                new Vec3i(16,0,16)  //兑 泽（金）
         );
 
         this.baseBlock = baseBlocks;
@@ -202,6 +205,22 @@ public class XianTianBaGua implements ChargeMultiBlockCheck {
         int offset_z = vec.getZ() - this.centerPos.getZ();
         Vec3i targetBLock = center.offset(offset_x, offset_y, offset_z);
         return new BlockPos(targetBLock);
+    }
+
+    @Override
+    public void cleanAltar(Level level, BlockPos center) {  //清空所有祭坛
+        for (int index = 0; index< this.altarBlock.size(); index++) {
+            Vec3i vec = this.altarBlock.get(index);
+            int offset_x = vec.getX() - this.centerPos.getX();
+            int offset_y = vec.getY() - this.centerPos.getY();
+            int offset_z = vec.getZ() - this.centerPos.getZ();
+            Vec3i targetBLock = center.offset(offset_x, offset_y, offset_z);
+            BlockEntity entity = level.getBlockEntity(new BlockPos(targetBLock));
+            if (entity instanceof ChargeAltarBlockEntity) {
+                ChargeAltarBlockEntity e = (ChargeAltarBlockEntity)entity;
+                e.setItem(ItemStack.EMPTY);
+            }
+        }
     }
 
     @Override

@@ -4,6 +4,7 @@ import com.charge.chargemod.entity.ChargeDaggerEntity;
 import com.charge.chargemod.entityModel.ChargeDaggerEntityModel;
 import com.charge.chargemod.lingqi.PlayerLingQiInterface;
 import com.charge.chargemod.network.ChargeNetwork;
+import com.charge.chargemod.render.ChargeAlchemyStoveRender;
 import com.charge.chargemod.render.ChargeAltarRender;
 import com.charge.chargemod.render.ChargeDaggerEntityRenderer;
 import com.mojang.logging.LogUtils;
@@ -99,6 +100,7 @@ public class ChargeMod
 //        System.out.println("Registering ChargeDaggerEntity...test2");
         event.registerEntityRenderer(ChargeModItemRegistry.CHARGE_DAGGER_ENTITY_TYPE.get(), ChargeDaggerEntityRenderer::new);
         event.registerBlockEntityRenderer(ChargeModItemRegistry.CHARGE_ALTAR_ENTITY.get(), ChargeAltarRender::new);
+        event.registerBlockEntityRenderer(ChargeModItemRegistry.CHARGE_ALCHEMY_STOVE_ENTITY.get(), ChargeAlchemyStoveRender::new);
     }
 
     //注册能力
