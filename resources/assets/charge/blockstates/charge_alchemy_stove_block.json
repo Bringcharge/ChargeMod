@@ -1,0 +1,5 @@
+{
+  "variants": {
+    "": { "model": "charge:block/charge_alchemy_stove_block" }
+  }
+}

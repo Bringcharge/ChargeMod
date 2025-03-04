@@ -1,8 +1,6 @@
 package com.charge.chargemod;
 
-import com.charge.chargemod.block.ChargeAltarBlock;
-import com.charge.chargemod.block.ChargeAltarBlockEntity;
-import com.charge.chargemod.block.ChargeLingShiOre;
+import com.charge.chargemod.block.*;
 import com.charge.chargemod.entity.ChargeDaggerEntity;
 import com.charge.chargemod.item.ChargeBaseIngot;
 import com.charge.chargemod.item.ChargeBow;
@@ -69,6 +67,34 @@ public class ChargeModItemRegistry {
     //祭坛item
     public static final RegistryObject<Item> chargeAltarBlockItem = ITEMS.register("charge_altar_block", () -> new BlockItem(CHARGE_ALTAR_BLOCK.get(), new Item.Properties()));
 
+    //祭坛基石
+    public static final RegistryObject<Block> CHARGE_BASE_BLOCK = BLOCKS.register("charge_base_block", () -> {
+        return new ChargeBaseBlock(BlockBehaviour.Properties.of()
+                .mapColor(MapColor.COLOR_BLACK) //地图颜色
+                .strength(1.0f, 50.0f) //硬度，石头是1.5 & 爆炸抗性，黑曜石是50
+                .lightLevel(state -> 10)
+                .sound(SoundType.STONE)
+        );}); //光照等级
+    //祭坛基石item
+    public static final RegistryObject<Item> chargeBaseBlockItem = ITEMS.register("charge_base_block", () -> new BlockItem(CHARGE_BASE_BLOCK.get(), new Item.Properties()));
+
+    //八卦炉
+    public static final RegistryObject<Block> CHARGE_ALCHEMY_STOVE_BLOCK = BLOCKS.register("charge_alchemy_stove_block", () -> {
+        return new ChargeAlchemyStoveBlock(BlockBehaviour.Properties.of()
+                .mapColor(MapColor.COLOR_BLUE) //地图颜色
+                .strength(1.0f, 50.0f) //硬度，石头是1.5 & 爆炸抗性，黑曜石是50
+                .lightLevel(state -> 15)
+                .sound(SoundType.STONE)
+                .noOcclusion()
+        );}); //光照等级
+    //八卦炉blockEntityType
+    public static final RegistryObject<BlockEntityType<ChargeAlchemyStoveBlockEntity>> CHARGE_ALCHEMY_STOVE_ENTITY = BLOCK_ENTITIES.register("charge_alchemy_stove_block", () ->
+            BlockEntityType.Builder.of(ChargeAlchemyStoveBlockEntity::new, CHARGE_ALCHEMY_STOVE_BLOCK.get()).build(null));
+    //祭坛item
+    public static final RegistryObject<Item> chargeAlchemyStoveBlockItem = ITEMS.register("charge_alchemy_stove_block", () -> new BlockItem(CHARGE_ALCHEMY_STOVE_BLOCK.get(), new Item.Properties()));
+
+
+
     //飞刀layer
     public static final ModelLayerLocation CHARGE_DAGGER_LAYER = new ModelLayerLocation(new ResourceLocation(ChargeModItemRegistry.MODID, "charge_dagger"), "main");
     //飞刀自定义entityType
@@ -102,7 +128,9 @@ public class ChargeModItemRegistry {
                 output.accept(chargeBow.get());
                 output.accept(chargeAltarBlockItem.get());
                 output.accept(chargeLingShi.get());
-                output.accept(CHARGE_LING_SHI_ORE.get());
+                output.accept(chargeLingShi.get());
+                output.accept(chargeBaseBlockItem.get());
+                output.accept(chargeAlchemyStoveBlockItem.get());
             }).build());
 
 
