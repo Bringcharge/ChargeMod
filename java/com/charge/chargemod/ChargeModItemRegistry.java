@@ -3,6 +3,7 @@ package com.charge.chargemod;
 import com.charge.chargemod.block.*;
 import com.charge.chargemod.entity.ChargeDaggerEntity;
 import com.charge.chargemod.item.ChargeBaseIngot;
+import com.charge.chargemod.item.ChargeBaseToken;
 import com.charge.chargemod.item.ChargeBow;
 import com.charge.chargemod.item.ChargeLingShi;
 import com.charge.chargemod.lingqi.PlayerLingQi;
@@ -119,6 +120,9 @@ public class ChargeModItemRegistry {
     //灵石矿item
     public static final RegistryObject<Item> CHARGE_LING_SHI_ORE_ITEM = ITEMS.register("charge_ling_shi_ore", () -> new BlockItem(CHARGE_LING_SHI_ORE.get(), new Item.Properties()));
 
+    //基本令牌，不知道会不会有高级令牌
+    public static final RegistryObject<Item> CHARGE_BASE_TOKEN = ITEMS.register("charge_base_token", () -> new ChargeBaseToken());
+
     //mod物品列表
     public static final RegistryObject<CreativeModeTab> EXAMPLE_TAB = CREATIVE_MODE_TABS.register("charge_tab", () -> CreativeModeTab.builder()
             .withTabsBefore(CreativeModeTabs.COMBAT)
@@ -131,6 +135,7 @@ public class ChargeModItemRegistry {
                 output.accept(chargeLingShi.get());
                 output.accept(chargeBaseBlockItem.get());
                 output.accept(chargeAlchemyStoveBlockItem.get());
+                output.accept(CHARGE_BASE_TOKEN.get());
             }).build());
 
 
