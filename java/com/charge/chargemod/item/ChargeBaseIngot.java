@@ -38,13 +38,13 @@ public class ChargeBaseIngot extends Item {
         ItemStack stack = player.getItemInHand(hand);
         InstructionsModel model = new InstructionsModel();
         model.user = player;
-        model.holder = this;
+        model.holder = stack;
 
-        releaseUsing(stack, level, player, 10);
-//        Instruction ins = new Instruction();
+//        releaseUsing(stack, level, player, 10);   临时射箭代码
+        Instruction ins = new Instruction();
 //        ins.str = "F002#V103#V101#DI4#{Fif#B001#E201#{F004#E101#E201#}{F003#E101#V201#}}";    大概是一个射箭然后射中了会触发if判断的东西
-//        ins.str = "F005#V020#V103#V101#";
-//        InstructionsManager.functionWithString(ins, model);    //命令字符串
+        ins.str = "F004#E101#E301#V103#V101#E101#"; //视野看到的单位，交换位置
+        InstructionsManager.functionWithString(ins, model);    //命令字符串
 
         return InteractionResultHolder.success(stack);
         //如果消耗的话做下面这个

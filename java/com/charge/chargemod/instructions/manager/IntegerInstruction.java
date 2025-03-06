@@ -1,28 +1,28 @@
 package com.charge.chargemod.instructions.manager;
 
 public class IntegerInstruction {
-    public static int parser(Instruction instruction, InstructionsModel owner) {    //ÊäÈë¿Ú
+    public static int parser(Instruction instruction, InstructionsModel owner) {    //è¾“å…¥å£
 
         String order = null;
         for (int i = 0; i<instruction.str.length(); i++) {
             if (instruction.str.charAt(i) == '#') {
-                order = instruction.str.substring(0, i+1);    //ÄÃ³öÃüÁî
+                order = instruction.str.substring(0, i+1);    //æ‹¿å‡ºå‘½ä»¤
                 if (i < instruction.str.length()) {
-                    instruction.str = instruction.str.substring(i + 1); //ÉèÖÃĞÂµÄÖµ
+                    instruction.str = instruction.str.substring(i + 1); //è®¾ç½®æ–°çš„å€¼
                 }
                 break;
             }
         }
 
         if (order != null && order.substring(0,2).equals("II")) {
-            String integer = order.substring(2,order.length()-1);   //È¥µô#ÃüÁî·û
+            String integer = order.substring(2,order.length()-1);   //å»æ‰#å‘½ä»¤ç¬¦
             return Integer.parseInt(integer);
         }
 
         return unexpectedInput();
     }
 
-    private static int unexpectedInput() {  //´íÎó×ßÕâ
+    private static int unexpectedInput() {  //é”™è¯¯èµ°è¿™
         return 0;
     }
 }

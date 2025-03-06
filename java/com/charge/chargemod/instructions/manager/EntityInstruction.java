@@ -3,6 +3,7 @@ package com.charge.chargemod.instructions.manager;
 
 import com.charge.chargemod.instructions.manager.entity.EntityManager;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.phys.Vec3;
 
 public class EntityInstruction {
     public static Entity parser(Instruction instruction, InstructionsModel owner) {    //输入口
@@ -17,12 +18,19 @@ public class EntityInstruction {
                 break;
             }
         }
-        if (order != null && order.equals("E101#")) {
+        if (order != null && order.equals("E101#")) { //施术者
             return EntityManager.entityOfUser(owner);
         }
 
-        if (order != null && order.equals("E201#")) {
+        if (order != null && order.equals("E201#")) {   //获取回调函数的entity
             return EntityManager.entityBlockTarget(owner);
+        }
+
+        if (order != null && order.equals("E301#")) {   //entity作为判定，从起点到终点的碰撞箱寻找碰到的livingEntity
+            Vec3 p1 = InstructionsManager.vecWithString(instruction,owner);
+            Vec3 p2 = InstructionsManager.vecWithString(instruction,owner);
+            Entity p3 = InstructionsManager.entityWithString(instruction,owner);
+            return EntityManager.entityLookTarget(p1, p2, p3, owner);
         }
 
         return unexpectedInput();

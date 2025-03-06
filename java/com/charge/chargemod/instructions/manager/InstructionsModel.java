@@ -3,12 +3,13 @@ package com.charge.chargemod.instructions.manager;
 
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.phys.Vec3;
 
 public class InstructionsModel {    //一个Model,用于存放各种需要传入的数据结构
     public Entity user;
-    public Item holder;
+    public ItemStack holder;
     //附加值
     public Entity targetEntity;
     public Vec3 targetVec;
