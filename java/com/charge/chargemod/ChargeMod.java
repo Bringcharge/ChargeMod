@@ -4,6 +4,7 @@ import com.charge.chargemod.entity.ChargeDaggerEntity;
 import com.charge.chargemod.entityModel.ChargeDaggerEntityModel;
 import com.charge.chargemod.lingqi.PlayerLingQiInterface;
 import com.charge.chargemod.network.ChargeNetwork;
+import com.charge.chargemod.particle.ChargeModParticleType;
 import com.charge.chargemod.render.ChargeAlchemyStoveRender;
 import com.charge.chargemod.render.ChargeAltarRender;
 import com.charge.chargemod.render.ChargeDaggerEntityRenderer;
@@ -77,6 +78,7 @@ public class ChargeMod
         ChargeModItemRegistry.ENTITY_TYPES.register(modEventBus);
         //注册block entity列表
         ChargeModItemRegistry.BLOCK_ENTITIES.register(modEventBus);
+        ChargeModParticleType.PARTICLE_TYPES.register(modEventBus);
         // Register ourselves for server and other game events we are interested in
 //        MinecraftForge.EVENT_BUS.register(this);
 
