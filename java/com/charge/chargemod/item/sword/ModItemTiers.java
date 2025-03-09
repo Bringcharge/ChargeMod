@@ -7,6 +7,8 @@ import net.minecraft.world.item.crafting.Ingredient;
 
 import java.util.function.Supplier;
 
+
+//仙剑工具材质类
 public enum ModItemTiers implements Tier {
     LingShi(3,2000,10F,4F,30,() -> Ingredient.of(ChargeModItemRegistry.chargeLingShi.get()));
 
