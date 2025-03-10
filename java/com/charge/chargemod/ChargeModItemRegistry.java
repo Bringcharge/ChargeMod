@@ -7,6 +7,7 @@ import com.charge.chargemod.item.ChargeBaseToken;
 import com.charge.chargemod.item.ChargeBow;
 import com.charge.chargemod.item.ChargeLingShi;
 import com.charge.chargemod.item.pellet.ChargeBiGuPellet;
+import com.charge.chargemod.item.sword.WaterSplitSword;
 import com.charge.chargemod.lingqi.PlayerLingQi;
 import com.charge.chargemod.lingqi.PlayerLingQiInterface;
 import net.minecraft.client.model.geom.ModelLayerLocation;
@@ -124,8 +125,12 @@ public class ChargeModItemRegistry {
     //基本令牌，不知道会不会有高级令牌
     public static final RegistryObject<Item> CHARGE_BASE_TOKEN = ITEMS.register("charge_base_token", () -> new ChargeBaseToken());
 
-
+    //辟谷丹的建模
     public static final RegistryObject<Item> CHARGE_BIGU_PELLET = ITEMS.register("charge_bigu_pellet", () -> new ChargeBiGuPellet());
+
+    //水剑——断水
+    public static final RegistryObject<Item> WATER_SPLIT_SWORD = ITEMS.register("water_split_sword", () -> new WaterSplitSword());
+
 
     //mod物品列表
     public static final RegistryObject<CreativeModeTab> EXAMPLE_TAB = CREATIVE_MODE_TABS.register("charge_tab", () -> CreativeModeTab.builder()
@@ -141,6 +146,7 @@ public class ChargeModItemRegistry {
                 output.accept(chargeAlchemyStoveBlockItem.get());
                 output.accept(CHARGE_BASE_TOKEN.get());
                 output.accept(CHARGE_BIGU_PELLET.get());
+                output.accept(WATER_SPLIT_SWORD.get());
             }).build());
 
 

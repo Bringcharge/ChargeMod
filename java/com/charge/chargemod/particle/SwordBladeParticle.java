@@ -21,7 +21,7 @@ public class SwordBladeParticle extends TextureSheetParticle {
         final float PARTICLE_SCALE_FOR_ONE_METRE = 0.5F; // 这是我们自定义的粒子大小,单位是米
         this.quadSize = PARTICLE_SCALE_FOR_ONE_METRE;// 放大的倍数
         this.hasPhysics = true; // 粒子是否可以被碰撞
-
+        this.lifetime = 3;  //设置粒子生命周期
     }
     // 这里指明渲染是半透明
     @Override

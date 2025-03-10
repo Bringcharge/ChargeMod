@@ -16,6 +16,7 @@ public class SwordBladeParticleType extends ParticleType implements ParticleOpti
     private final Vector3d speed;
     private final double alpha;
     private final float diameter;
+
     // 我们需要一个序列化和反序列化的东西,
     // 1. 目的是为了从命令行读取str的颜色,速度,等内容.
     // 2 是可以将将网络的发送的数据包中读取对应的颜色,速度.这里说的是客户端接受
