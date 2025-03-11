@@ -1,0 +1,14 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "charge:item/cang_feng_wan_li"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "charge:cangfeng_state": 1
+      },
+      "model": "charge:item/feng_wan_li"
+    }
+  ]
+}
