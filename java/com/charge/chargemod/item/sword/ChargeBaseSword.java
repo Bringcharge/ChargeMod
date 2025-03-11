@@ -23,15 +23,15 @@ public class ChargeBaseSword extends SwordItem {
         super(ModItemTiers.LingShi,3,-2.4f,new Item.Properties());
     }
 
-    public boolean skillWithEntity(LivingEntity entity, Player user) { //右键击中了怪物的函数，最高优先级
+    public boolean skillWithEntity(LivingEntity entity, Player user, InteractionHand hand) { //右键击中了怪物的函数，最高优先级
         return false;
     }
 
-    public boolean skillWithBlock(BlockPos blockPos, Player user) { //右键击中了方块的函数，第二优先级
+    public boolean skillWithBlock(BlockPos blockPos, Player user, InteractionHand hand) { //右键击中了方块的函数，第二优先级
         return false;
     }
 
-    public boolean skillWithNone(Player user) { //右键什么都没有击中，最低的优先级
+    public boolean skillWithNone(Player user, InteractionHand hand) { //右键什么都没有击中，最低的优先级
         return false;
     }
 
@@ -39,6 +39,7 @@ public class ChargeBaseSword extends SwordItem {
     //右键使用物品
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
+
         ItemStack stack = player.getItemInHand(hand);
         BlockHitResult viewPosResult = vecRayToBlockPos(player); //获取玩家视线尽头的方块
         EntityHitResult viewEntityResult = vecRayToEntity(player);   //获取玩家视野的entity
@@ -49,15 +50,15 @@ public class ChargeBaseSword extends SwordItem {
                 (viewPosResult == null ||
                 viewEntityResult.getLocation().distanceTo(player.getEyePosition()) < viewPosResult.getLocation().distanceTo(player.getEyePosition()))) { //距离判断，entity比block近
             //优先攻击entity，触发entity特效
-            consumeFlag = skillWithEntity((LivingEntity) viewEntityResult.getEntity(), player);
+            consumeFlag = skillWithEntity((LivingEntity) viewEntityResult.getEntity(), player, hand);
         }
 
         if (viewPosResult != null && !consumeFlag) {    //技能视野针对的方块
-            consumeFlag = skillWithBlock(viewPosResult.getBlockPos(),player);
+            consumeFlag = skillWithBlock(viewPosResult.getBlockPos(),player, hand);
         }
 
         if (!consumeFlag) {
-            consumeFlag = skillWithNone(player);
+            consumeFlag = skillWithNone(player, hand);
         }
 
         if (consumeFlag) {

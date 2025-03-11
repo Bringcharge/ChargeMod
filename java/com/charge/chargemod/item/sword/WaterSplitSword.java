@@ -24,17 +24,21 @@ import net.minecraft.world.phys.Vec3;
 
 public class WaterSplitSword  extends ChargeBaseSword {
     @Override
-    public boolean skillWithEntity(LivingEntity entity, Player user) { //右键击中了怪物的函数，最高优先级
-        hurtEntity(entity,user);
+    public boolean skillWithEntity(LivingEntity entity, Player user, InteractionHand hand) { //右键击中了怪物的函数，最高优先级
+        if (!user.level().isClientSide) {
+            hurtEntity(entity, user);
+        }
         return true;
     }
 
     @Override
-    public boolean skillWithNone(Player user) { //右键什么都没有击中，最低的优先级
-        Vec3 place = user.getPosition(1.0f);
-        Vec3i position = new Vec3i((int)Math.floor(place.x),(int)Math.floor(place.y),(int)Math.floor(place.z));
-        BlockPos pos = new BlockPos(position);
-        removeWaterBreadthFirstSearch(user.level(), pos);   //找到玩家位置
+    public boolean skillWithNone(Player user, InteractionHand hand) { //右键什么都没有击中，最低的优先级
+        if (!user.level().isClientSide) {
+            Vec3 place = user.getPosition(1.0f);
+            Vec3i position = new Vec3i((int) Math.floor(place.x), (int) Math.floor(place.y), (int) Math.floor(place.z));
+            BlockPos pos = new BlockPos(position);
+            removeWaterBreadthFirstSearch(user.level(), pos);   //找到玩家位置
+        }
         return true;
     }
 
