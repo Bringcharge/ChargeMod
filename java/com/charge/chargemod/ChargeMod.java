@@ -1,12 +1,14 @@
 package com.charge.chargemod;
 
 import com.charge.chargemod.entity.ChargeDaggerEntity;
+import com.charge.chargemod.entityModel.ChargeCangFengDaggerModel;
 import com.charge.chargemod.entityModel.ChargeDaggerEntityModel;
 import com.charge.chargemod.lingqi.PlayerLingQiInterface;
 import com.charge.chargemod.network.ChargeNetwork;
 import com.charge.chargemod.particle.ChargeModParticleType;
 import com.charge.chargemod.render.ChargeAlchemyStoveRender;
 import com.charge.chargemod.render.ChargeAltarRender;
+import com.charge.chargemod.render.ChargeCangFengDaggerEntityRenderer;
 import com.charge.chargemod.render.ChargeDaggerEntityRenderer;
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.Minecraft;
@@ -94,12 +96,14 @@ public class ChargeMod
     public static void onRegisterLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {//实体layer关联
 //        System.out.println("Registering ChargeDaggerEntity...test1");
         event.registerLayerDefinition(ChargeModItemRegistry.CHARGE_DAGGER_LAYER, ChargeDaggerEntityModel::createBodyLayer);
+        event.registerLayerDefinition(ChargeModItemRegistry.CHARGE_CANG_FENG_DAGGER_LAYER, ChargeCangFengDaggerModel::createBodyLayer);
     }
 
     //注册render
     @SubscribeEvent
     public static void onRegisterRenderers(EntityRenderersEvent.RegisterRenderers event) {  //渲染关联
 //        System.out.println("Registering ChargeDaggerEntity...test2");
+        event.registerEntityRenderer(ChargeModItemRegistry.CHARGE_CANG_FENG_DAGGER_ENTITY_TYPE.get(), ChargeCangFengDaggerEntityRenderer::new);
         event.registerEntityRenderer(ChargeModItemRegistry.CHARGE_DAGGER_ENTITY_TYPE.get(), ChargeDaggerEntityRenderer::new);
         event.registerBlockEntityRenderer(ChargeModItemRegistry.CHARGE_ALTAR_ENTITY.get(), ChargeAltarRender::new);
         event.registerBlockEntityRenderer(ChargeModItemRegistry.CHARGE_ALCHEMY_STOVE_ENTITY.get(), ChargeAlchemyStoveRender::new);
@@ -118,6 +122,7 @@ public class ChargeMod
 //            System.out.println("Registering Entity Type...");
             event.register(ForgeRegistries.ENTITY_TYPES.getRegistryKey(), helper -> {
                 helper.register("charge_dagger", ChargeModItemRegistry.CHARGE_DAGGER_ENTITY_TYPE.get());
+                helper.register("charge_cang_feng_dagger",ChargeModItemRegistry.CHARGE_CANG_FENG_DAGGER_ENTITY_TYPE.get());
             });
         }
         if (event.getRegistryKey().equals(ForgeRegistries.BLOCK_ENTITY_TYPES.getRegistryKey())) {   //注册block entity

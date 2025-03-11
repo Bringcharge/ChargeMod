@@ -1,6 +1,7 @@
 package com.charge.chargemod.item;
 
 
+import com.charge.chargemod.entity.ChargeCangFengDaggerEntity;
 import com.charge.chargemod.entity.ChargeDaggerEntity;
 import com.charge.chargemod.instructions.manager.Instruction;
 import com.charge.chargemod.instructions.manager.InstructionsManager;
@@ -42,19 +43,20 @@ public class ChargeBaseIngot extends Item {
         model.user = player;
         model.holder = stack;
 
-//        releaseUsing(stack, level, player, 10);   临时射箭代码
+        releaseUsing(stack, level, player, 10);   //临时射箭代码
 //        Instruction ins = new Instruction();
 //        ins.str = "F002#V103#V101#DI4#{Fif#B001#E201#{F004#E101#E201#}{F003#E101#V201#}}";    大概是一个射箭然后射中了会触发if判断的东西
 //        ins.str = "F004#E101#E301#V103#V101#E101#"; //视野看到的单位，交换位置
 //        InstructionsManager.functionWithString(ins, model);    //命令字符串
 
-        if (level.isClientSide) {
-            //addParticle(ParticleOptions particleData, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed);
-            Vec3 eyePosition = player.getEyePosition(1.0F);
-            Vec3 lookVector = player.getLookAngle();
-            Vec3 vec_to = lookVector.add(eyePosition);
-            level.addParticle(ChargeModParticleType.SWORD_BLADE_PARTICLE_TYPE.get(), vec_to.x, vec_to.y, vec_to.z,  0,0,0);
-        }
+//          这个是单机的粒子渲染逻辑
+//        if (level.isClientSide) {
+//            //addParticle(ParticleOptions particleData, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed);
+//            Vec3 eyePosition = player.getEyePosition(1.0F);
+//            Vec3 lookVector = player.getLookAngle();
+//            Vec3 vec_to = lookVector.add(eyePosition);
+//            level.addParticle(ChargeModParticleType.SWORD_BLADE_PARTICLE_TYPE.get(), vec_to.x, vec_to.y, vec_to.z,  0,0,0);
+//        }
 
         return InteractionResultHolder.success(stack);
         //如果消耗的话做下面这个
@@ -122,13 +124,7 @@ public class ChargeBaseIngot extends Item {
                     boolean flag1 = player.getAbilities().instabuild || (itemstack.getItem() instanceof ArrowItem && ((ArrowItem)itemstack.getItem()).isInfinite(itemstack, stack, player));
                     if (!worldIn.isClientSide) {
                         ArrowItem arrowitem = (ArrowItem)(itemstack.getItem() instanceof ArrowItem ? itemstack.getItem() : Items.ARROW);
-                        ChargeDaggerEntity abstractarrowentity = new ChargeDaggerEntity(worldIn,player);
-
-                        //设置击中怪物后的函数
-                        abstractarrowentity.setConsumer((a,b)->{
-                            this.arrowNumber = a;
-                            this.target3d = b;
-                        });
+                        ChargeCangFengDaggerEntity abstractarrowentity = new ChargeCangFengDaggerEntity(worldIn,player);
 
                         //击中地面时候的函数
 //                        abstractarrowentity.setConsumer((e)->{

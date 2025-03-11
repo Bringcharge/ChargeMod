@@ -1,6 +1,7 @@
 package com.charge.chargemod;
 
 import com.charge.chargemod.block.*;
+import com.charge.chargemod.entity.ChargeCangFengDaggerEntity;
 import com.charge.chargemod.entity.ChargeDaggerEntity;
 import com.charge.chargemod.item.ChargeBaseIngot;
 import com.charge.chargemod.item.ChargeBaseToken;
@@ -108,6 +109,16 @@ public class ChargeModItemRegistry {
             .clientTrackingRange(4) // 客户端跟踪范围
             .updateInterval(20) // 更新间隔
             .build("charge_dagger")
+    );
+    //藏锋飞剑
+    public static final ModelLayerLocation CHARGE_CANG_FENG_DAGGER_LAYER = new ModelLayerLocation(new ResourceLocation(ChargeModItemRegistry.MODID, "charge_cang_feng_dagger"), "main");
+    //藏锋飞剑自定义entityType
+    public static final RegistryObject<EntityType<ChargeCangFengDaggerEntity>> CHARGE_CANG_FENG_DAGGER_ENTITY_TYPE = ENTITY_TYPES.register("charge_cang_feng_dagger", () -> EntityType.Builder.
+            <ChargeCangFengDaggerEntity>of(ChargeCangFengDaggerEntity::new, MobCategory.MISC)
+            .sized(0.5F, 0.5F) // 设置实体大小
+            .clientTrackingRange(4) // 客户端跟踪范围
+            .updateInterval(20) // 更新间隔
+            .build("charge_cang_feng_dagger")
     );
 
     //灵石
