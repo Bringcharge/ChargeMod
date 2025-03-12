@@ -18,7 +18,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 public class ChargeModClientEvent {
 
     @SubscribeEvent
-    public static void chargeDaggerEvent(EntityRenderersEvent.RegisterRenderers event) {
+    public static void chargeDaggerEvent(EntityRenderersEvent.RegisterRenderers event) {    //不确定是否还有用
         event.registerEntityRenderer(ChargeModItemRegistry.CHARGE_DAGGER_ENTITY_TYPE.get(), ChargeDaggerEntityRenderer::new);
 
     }

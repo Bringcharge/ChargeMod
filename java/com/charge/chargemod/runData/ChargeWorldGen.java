@@ -1,6 +1,10 @@
-package com.charge.chargemod.runData.oreFeature;
+package com.charge.chargemod.runData;
 
 import com.charge.chargemod.ChargeModItemRegistry;
+import com.charge.chargemod.damage.ChargeDamageTypes;
+import com.charge.chargemod.runData.oreFeature.ChargeBiomeModifiers;
+import com.charge.chargemod.runData.oreFeature.ChargeOreFeatures;
+import com.charge.chargemod.runData.oreFeature.ChargeOrePlacements;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.Registries;
@@ -18,7 +22,11 @@ public class ChargeWorldGen extends DatapackBuiltinEntriesProvider {
             .add(Registries.CONFIGURED_FEATURE, ChargeOreFeatures::bootstrap)
             .add(Registries.PLACED_FEATURE, ChargeOrePlacements::bootstrap)
 
-            .add(ForgeRegistries.Keys.BIOME_MODIFIERS, ChargeBiomeModifiers::bootstrap);//ModBiomeModifiers
+            .add(ForgeRegistries.Keys.BIOME_MODIFIERS, ChargeBiomeModifiers::bootstrap)
+            .add(Registries.DAMAGE_TYPE, ChargeDamageTypes::bootstrap)
+            ;//ModBiomeModifiers
+
+
 
     public ChargeWorldGen(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
         super(output, registries, BUILDER, Set.of(ChargeModItemRegistry.MODID));

@@ -34,7 +34,7 @@ public class PlayerLingQiToClientPacket {
     public void handle(Supplier<NetworkEvent.Context> context) {
         context.get().enqueueWork(() -> {
             // 在客户端处理数据包
-            System.out.println("Received message from server: " + lingqi);
+//            System.out.println("Received message from server: " + lingqi);
             Player player = Minecraft.getInstance().player; //因为是客户端收到的信息，所以直接获取就可以拿到player了
             PlayerLingQiHelper.setLingQi(player, lingqi);   //覆盖当前的值
 
