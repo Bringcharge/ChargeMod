@@ -1,6 +1,7 @@
 package com.charge.chargemod;
 
 import com.charge.chargemod.entity.ChargeDaggerEntity;
+import com.charge.chargemod.entity.FakeVillager;
 import com.charge.chargemod.entityModel.ChargeCangFengDaggerModel;
 import com.charge.chargemod.entityModel.ChargeDaggerEntityModel;
 import com.charge.chargemod.lingqi.PlayerLingQiInterface;
@@ -123,6 +124,7 @@ public class ChargeMod
             event.register(ForgeRegistries.ENTITY_TYPES.getRegistryKey(), helper -> {
                 helper.register("charge_dagger", ChargeModItemRegistry.CHARGE_DAGGER_ENTITY_TYPE.get());
                 helper.register("charge_cang_feng_dagger",ChargeModItemRegistry.CHARGE_CANG_FENG_DAGGER_ENTITY_TYPE.get());
+                helper.register("fake_villager",ChargeModItemRegistry.FAKE_VILLAGER.get());
             });
         }
         if (event.getRegistryKey().equals(ForgeRegistries.BLOCK_ENTITY_TYPES.getRegistryKey())) {   //注册block entity
@@ -130,9 +132,14 @@ public class ChargeMod
                 System.out.println("Registering Block Entity Type...");
                 helper.register("charge_altar_block", ChargeModItemRegistry.CHARGE_ALTAR_ENTITY.get());
             });
+
         }
     }
-
+    @SubscribeEvent
+    public static void setupAttributes(EntityAttributeCreationEvent event) {
+        // 第一个参数是你的entityType，第二个参数是你的AttributeSupplier，通过我们写的Builder获得。
+        event.put(ChargeModItemRegistry.FAKE_VILLAGER.get(), FakeVillager.createAttributes().build());
+    }
 
     private void commonSetup(final FMLCommonSetupEvent event)
     {

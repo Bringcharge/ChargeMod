@@ -14,9 +14,9 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 
-public class DaoFalDamageSource extends DamageSource {
+public class DaoFaDamageSource extends DamageSource {
 
-    public DaoFalDamageSource(@NotNull Entity directEntity, @NotNull Entity causingEntity, ResourceKey<DamageType> ResourceKey , @Nullable Vec3 damageSourcePosition) {
+    public DaoFaDamageSource(@NotNull Entity directEntity, @NotNull Entity causingEntity, ResourceKey<DamageType> ResourceKey , @Nullable Vec3 damageSourcePosition) {
         super(getHolderFromResource(directEntity, ResourceKey), directEntity, causingEntity, damageSourcePosition);   //临时设置的
     }
 //    public SpellDamageSource(@NotNull Entity directEntity, @NotNull Entity causingEntity, @Nullable Vec3 damageSourcePosition) {
@@ -39,12 +39,12 @@ public class DaoFalDamageSource extends DamageSource {
         }
     }
 
-    public static DaoFalDamageSource source(@NotNull Entity entity, ResourceKey<DamageType> resourceKey) {
+    public static DaoFaDamageSource source(@NotNull Entity entity, ResourceKey<DamageType> resourceKey) {
         return source(entity, entity , resourceKey);
     }
 
-    public static DaoFalDamageSource source(@NotNull Entity directEntity, @NotNull Entity causingEntity, ResourceKey<DamageType> resourceKey) {
-        return new DaoFalDamageSource(directEntity, causingEntity, resourceKey, null);
+    public static DaoFaDamageSource source(@NotNull Entity directEntity, @NotNull Entity causingEntity, ResourceKey<DamageType> resourceKey) {
+        return new DaoFaDamageSource(directEntity, causingEntity, resourceKey, null);
     }
 
     public DamageSource get() {

@@ -2,31 +2,19 @@ package com.charge.chargemod.entity;
 
 import com.charge.chargemod.ChargeModItemRegistry;
 import com.charge.chargemod.damage.ChargeDamageTypes;
-import com.charge.chargemod.damage.DaoFalDamageSource;
-import com.charge.chargemod.instructions.manager.Instruction;
-import com.charge.chargemod.instructions.manager.InstructionsManager;
-import com.charge.chargemod.instructions.manager.InstructionsModel;
-import com.google.common.collect.Lists;
-import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
-import net.minecraft.advancements.CriteriaTriggers;
+import com.charge.chargemod.damage.DaoFaDamageSource;
 import net.minecraft.network.protocol.game.ClientboundGameEventPacket;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
-import net.minecraft.world.phys.Vec3;
-
-import java.util.Arrays;
-import java.util.function.BiConsumer;
 
 public class ChargeCangFengDaggerEntity extends AbstractArrow  {
     public ChargeCangFengDaggerEntity(Level level, double x, double y, double z) {
@@ -60,9 +48,9 @@ public class ChargeCangFengDaggerEntity extends AbstractArrow  {
         Entity entity1 = this.getOwner();
         DamageSource damagesource;
         if (entity1 == null) {
-            damagesource = DaoFalDamageSource.source(this, this, ChargeDamageTypes.DAO_REAL);
+            damagesource = DaoFaDamageSource.source(this, this, ChargeDamageTypes.DAO_REAL);
         } else {
-            damagesource = DaoFalDamageSource.source(entity1, this, ChargeDamageTypes.DAO_REAL);
+            damagesource = DaoFaDamageSource.source(entity1, this, ChargeDamageTypes.DAO_REAL);
         }
 
         //好像是处理着火的单位，和末影人的
