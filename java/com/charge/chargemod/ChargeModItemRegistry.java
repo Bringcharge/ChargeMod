@@ -149,8 +149,14 @@ public class ChargeModItemRegistry {
 
     //金剑高级——藏锋万里
     public static final RegistryObject<Item> CANG_FENG = ITEMS.register("cang_feng_sword", () -> new CangFengSword());
+    //高级木剑——欲风雨
+    public static final RegistryObject<Item> YU_FENG_YU = ITEMS.register("yu_feng_yu_sword", () -> new YuFengYuSword());
+    //水剑高级——百草零
+    public static final RegistryObject<Item> BAI_CAO_LING = ITEMS.register("bai_cao_ling_sword", () -> new BaiCaoLingSword());
     //火剑高级——愿天寒
     public static final RegistryObject<Item> MAY_COLD = ITEMS.register("may_cold_sword", () -> new MayColdSword());
+    //高级土剑——地动
+    public static final RegistryObject<Item> EARTH_BEAT = ITEMS.register("earth_beat_sword", () -> new EarthBeatSword());
     //高级剑——真
     public static final RegistryObject<Item> THE_REAL_SWORD = ITEMS.register("the_real_sword", () -> new TheRealSword());
     //高级剑——假
