@@ -180,7 +180,10 @@ public class ChargeModItemRegistry {
                 output.accept(WATER_SPLIT_SWORD.get());
                 output.accept(EMBER_SWORD.get());
                 output.accept(CANG_FENG.get());
+                output.accept(YU_FENG_YU.get());
+                output.accept(BAI_CAO_LING.get());
                 output.accept(MAY_COLD.get());
+                output.accept(EARTH_BEAT.get());
                 output.accept(THE_REAL_SWORD.get());
                 output.accept(THE_FAKE_SWORD.get());
             }).build());
