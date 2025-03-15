@@ -2,6 +2,7 @@ package com.charge.chargemod;
 
 import com.charge.chargemod.entity.ChargeDaggerEntity;
 import com.charge.chargemod.entity.FakeVillager;
+import com.charge.chargemod.entityModel.ChargeBladeExtendModel;
 import com.charge.chargemod.entityModel.ChargeCangFengDaggerModel;
 import com.charge.chargemod.entityModel.ChargeCopperCoinModel;
 import com.charge.chargemod.entityModel.ChargeDaggerEntityModel;
@@ -97,6 +98,7 @@ public class ChargeMod
         event.registerLayerDefinition(ChargeModItemRegistry.CHARGE_DAGGER_LAYER, ChargeDaggerEntityModel::createBodyLayer);
         event.registerLayerDefinition(ChargeModItemRegistry.CHARGE_CANG_FENG_DAGGER_LAYER, ChargeCangFengDaggerModel::createBodyLayer);
         event.registerLayerDefinition(ChargeModItemRegistry.COPPER_COIN_LAYER, ChargeCopperCoinModel::createBodyLayer);
+        event.registerLayerDefinition(ChargeModItemRegistry.CHARGE_BLADE_EXTEND_LAYER, ChargeBladeExtendModel::createBodyLayer);
     }
 
     //注册render
@@ -106,8 +108,10 @@ public class ChargeMod
         event.registerEntityRenderer(ChargeModItemRegistry.CHARGE_CANG_FENG_DAGGER_ENTITY_TYPE.get(), ChargeCangFengDaggerEntityRenderer::new);
         event.registerEntityRenderer(ChargeModItemRegistry.CHARGE_DAGGER_ENTITY_TYPE.get(), ChargeDaggerEntityRenderer::new);
         event.registerEntityRenderer(ChargeModItemRegistry.COPPER_COIN_ENTITY_TYPE.get(), ChargeCopperCoinRenderer::new);
+        event.registerEntityRenderer(ChargeModItemRegistry.CHARGE_BLADE_EXTEND_ENTITY_TYPE.get(), ChargeBladeExtendEntityRenderer::new);
         event.registerBlockEntityRenderer(ChargeModItemRegistry.CHARGE_ALTAR_ENTITY.get(), ChargeAltarRender::new);
         event.registerBlockEntityRenderer(ChargeModItemRegistry.CHARGE_ALCHEMY_STOVE_ENTITY.get(), ChargeAlchemyStoveRender::new);
+
     }
 
     //注册能力

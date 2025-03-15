@@ -1,7 +1,9 @@
 package com.charge.chargemod.item;
 
 
+import com.charge.chargemod.entity.ChargeBladeExtendEntity;
 import com.charge.chargemod.entity.ChargeCangFengDaggerEntity;
+import com.charge.chargemod.entity.ChargeCopperCoinEntity;
 import com.charge.chargemod.entity.ChargeDaggerEntity;
 import com.charge.chargemod.instructions.manager.Instruction;
 import com.charge.chargemod.instructions.manager.InstructionsManager;
@@ -124,7 +126,7 @@ public class ChargeBaseIngot extends Item {
                     boolean flag1 = player.getAbilities().instabuild || (itemstack.getItem() instanceof ArrowItem && ((ArrowItem)itemstack.getItem()).isInfinite(itemstack, stack, player));
                     if (!worldIn.isClientSide) {
                         ArrowItem arrowitem = (ArrowItem)(itemstack.getItem() instanceof ArrowItem ? itemstack.getItem() : Items.ARROW);
-                        ChargeCangFengDaggerEntity abstractarrowentity = new ChargeCangFengDaggerEntity(worldIn,player);
+                        ChargeBladeExtendEntity abstractarrowentity = new ChargeBladeExtendEntity(worldIn,player);
 
                         //击中地面时候的函数
 //                        abstractarrowentity.setConsumer((e)->{

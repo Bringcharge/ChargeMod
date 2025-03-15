@@ -1,10 +1,7 @@
 package com.charge.chargemod;
 
 import com.charge.chargemod.block.*;
-import com.charge.chargemod.entity.ChargeCangFengDaggerEntity;
-import com.charge.chargemod.entity.ChargeCopperCoinEntity;
-import com.charge.chargemod.entity.ChargeDaggerEntity;
-import com.charge.chargemod.entity.FakeVillager;
+import com.charge.chargemod.entity.*;
 import com.charge.chargemod.item.ChargeBaseIngot;
 import com.charge.chargemod.item.ChargeBaseToken;
 import com.charge.chargemod.item.ChargeBow;
@@ -131,6 +128,17 @@ public class ChargeModItemRegistry {
             .clientTrackingRange(4) // 客户端跟踪范围
             .updateInterval(20) // 更新间隔
             .build("charge_copper_coin")
+    );
+
+    //剑气
+    public static final ModelLayerLocation CHARGE_BLADE_EXTEND_LAYER = new ModelLayerLocation(new ResourceLocation(ChargeModItemRegistry.MODID, "charge_blade_extend"), "main");
+    //剑气entityType
+    public static final RegistryObject<EntityType<ChargeBladeExtendEntity>> CHARGE_BLADE_EXTEND_ENTITY_TYPE = ENTITY_TYPES.register("charge_blade_extend", () -> EntityType.Builder.
+            <ChargeBladeExtendEntity>of(ChargeBladeExtendEntity::new, MobCategory.MISC)
+            .sized(16.F, 8.F) // 设置实体大小，要改
+            .clientTrackingRange(4) // 客户端跟踪范围
+            .updateInterval(20) // 更新间隔
+            .build("charge_blade_extend")
     );
 
     //灵石
