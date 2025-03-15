@@ -2,6 +2,7 @@ package com.charge.chargemod;
 
 import com.charge.chargemod.block.*;
 import com.charge.chargemod.entity.ChargeCangFengDaggerEntity;
+import com.charge.chargemod.entity.ChargeCopperCoinEntity;
 import com.charge.chargemod.entity.ChargeDaggerEntity;
 import com.charge.chargemod.entity.FakeVillager;
 import com.charge.chargemod.item.ChargeBaseIngot;
@@ -121,6 +122,17 @@ public class ChargeModItemRegistry {
             .build("charge_cang_feng_dagger")
     );
 
+    //铜钱
+    public static final ModelLayerLocation COPPER_COIN_LAYER = new ModelLayerLocation(new ResourceLocation(ChargeModItemRegistry.MODID, "charge_copper_coin"), "main");
+    //铜钱entityType
+    public static final RegistryObject<EntityType<ChargeCopperCoinEntity>> COPPER_COIN_ENTITY_TYPE = ENTITY_TYPES.register("charge_copper_coin", () -> EntityType.Builder.
+            <ChargeCopperCoinEntity>of(ChargeCopperCoinEntity::new, MobCategory.MISC)
+            .sized(0.5F, 0.5F) // 设置实体大小
+            .clientTrackingRange(4) // 客户端跟踪范围
+            .updateInterval(20) // 更新间隔
+            .build("charge_copper_coin")
+    );
+
     //灵石
     public static final RegistryObject<Item> chargeLingShi = ITEMS.register("charge_ling_shi", () -> new ChargeLingShi());
     //灵石矿
@@ -139,7 +151,8 @@ public class ChargeModItemRegistry {
 
     //辟谷丹的建模
     public static final RegistryObject<Item> CHARGE_BIGU_PELLET = ITEMS.register("charge_bigu_pellet", () -> new ChargeBiGuPellet());
-
+    //金剑——孔方
+    public static final RegistryObject<Item> KONG_FANG_SWORD = ITEMS.register("kong_fang_sword", () -> new KongFangSword());
     //木剑——扶摇
     public static final RegistryObject<Item> FU_YAO_SWORD = ITEMS.register("fu_yao_sword", () -> new FuYaoSword());
     //水剑——断水
@@ -161,6 +174,8 @@ public class ChargeModItemRegistry {
     public static final RegistryObject<Item> THE_REAL_SWORD = ITEMS.register("the_real_sword", () -> new TheRealSword());
     //高级剑——假
     public static final RegistryObject<Item> THE_FAKE_SWORD = ITEMS.register("the_fake_sword", () -> new TheFakeSword());
+    //仙剑——无相剑
+    public static final RegistryObject<Item> WU_XIANG_SWORD = ITEMS.register("wu_xiang_sword", () -> new WuXiangSword());
 
     //mod物品列表
     public static final RegistryObject<CreativeModeTab> EXAMPLE_TAB = CREATIVE_MODE_TABS.register("charge_tab", () -> CreativeModeTab.builder()
@@ -176,6 +191,8 @@ public class ChargeModItemRegistry {
                 output.accept(chargeAlchemyStoveBlockItem.get());
                 output.accept(CHARGE_BASE_TOKEN.get());
                 output.accept(CHARGE_BIGU_PELLET.get());
+                //剑
+                output.accept(KONG_FANG_SWORD.get());
                 output.accept(FU_YAO_SWORD.get());
                 output.accept(WATER_SPLIT_SWORD.get());
                 output.accept(EMBER_SWORD.get());
@@ -186,10 +203,13 @@ public class ChargeModItemRegistry {
                 output.accept(EARTH_BEAT.get());
                 output.accept(THE_REAL_SWORD.get());
                 output.accept(THE_FAKE_SWORD.get());
+                output.accept(WU_XIANG_SWORD.get());
             }).build());
 
     public static final RegistryObject<EntityType<FakeVillager>> FAKE_VILLAGER = ENTITY_TYPES.register("fake_villager",
             () -> EntityType.Builder.of(FakeVillager::new, MobCategory.CREATURE)
                     .sized(0.6F, 1.95F) // 设置实体大小
                     .build("fake_villager"));
+
+
 }
