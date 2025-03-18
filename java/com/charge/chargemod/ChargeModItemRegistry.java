@@ -167,6 +167,8 @@ public class ChargeModItemRegistry {
     public static final RegistryObject<Item> WATER_SPLIT_SWORD = ITEMS.register("water_split_sword", () -> new WaterSplitSword());
     //火剑——余烬
     public static final RegistryObject<Item> EMBER_SWORD = ITEMS.register("ember_sword", () -> new EmberSword());
+    //土剑——冢中骨
+    public static final RegistryObject<Item> ZHONG_ZHONG_GU_SWORD = ITEMS.register("zhong_zhong_gu_sword", () -> new ZhongZhongGuSword());
 
     //金剑高级——藏锋万里
     public static final RegistryObject<Item> CANG_FENG = ITEMS.register("cang_feng_sword", () -> new CangFengSword());
@@ -176,7 +178,7 @@ public class ChargeModItemRegistry {
     public static final RegistryObject<Item> BAI_CAO_LING = ITEMS.register("bai_cao_ling_sword", () -> new BaiCaoLingSword());
     //火剑高级——愿天寒
     public static final RegistryObject<Item> MAY_COLD = ITEMS.register("may_cold_sword", () -> new MayColdSword());
-    //高级土剑——地动
+    //土剑—高级—地动
     public static final RegistryObject<Item> EARTH_BEAT = ITEMS.register("earth_beat_sword", () -> new EarthBeatSword());
     //高级剑——真
     public static final RegistryObject<Item> THE_REAL_SWORD = ITEMS.register("the_real_sword", () -> new TheRealSword());
@@ -204,6 +206,7 @@ public class ChargeModItemRegistry {
                 output.accept(FU_YAO_SWORD.get());
                 output.accept(WATER_SPLIT_SWORD.get());
                 output.accept(EMBER_SWORD.get());
+                output.accept(ZHONG_ZHONG_GU_SWORD.get());
                 output.accept(CANG_FENG.get());
                 output.accept(YU_FENG_YU.get());
                 output.accept(BAI_CAO_LING.get());

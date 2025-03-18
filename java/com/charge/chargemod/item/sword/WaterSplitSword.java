@@ -1,5 +1,7 @@
 package com.charge.chargemod.item.sword;
 
+import com.charge.chargemod.damage.ChargeDamageTypes;
+import com.charge.chargemod.damage.DaoFaDamageSource;
 import net.minecraft.core.*;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.server.commands.DamageCommand;
@@ -45,15 +47,17 @@ public class WaterSplitSword  extends ChargeBaseSword {
     private void hurtEntity(LivingEntity entity, Player player) {
         RegistryAccess registryAccess = player.level().registryAccess();
 
-        // 获取 DamageType 注册表
-        Registry<DamageType> damageTypeRegistry = registryAccess.registryOrThrow(Registries.DAMAGE_TYPE);
+//        // 获取 DamageType 注册表
+//        Registry<DamageType> damageTypeRegistry = registryAccess.registryOrThrow(Registries.DAMAGE_TYPE);
+//
+//        // 获取 DamageTypes.MAGIC 的 Holder
+//        Holder<DamageType> magicDamageTypeHolder = damageTypeRegistry.getHolderOrThrow(DamageTypes.MAGIC);
+//
+//        // 创建 DamageSource
+//        DamageSource damageSource = new DamageSource(magicDamageTypeHolder,player,player);
 
-        // 获取 DamageTypes.MAGIC 的 Holder
-        Holder<DamageType> magicDamageTypeHolder = damageTypeRegistry.getHolderOrThrow(DamageTypes.MAGIC);
-
-        // 创建 DamageSource
-        DamageSource damageSource = new DamageSource(magicDamageTypeHolder,player,player);
-        entity.hurt(damageSource,18);
+//        entity.hurt(damageSource,18);
+        entity.hurt(DaoFaDamageSource.source(player, ChargeDamageTypes.DAO_HEAVY), 10);
     }
 
     private boolean removeWaterBreadthFirstSearch(Level level, BlockPos blockPos) {

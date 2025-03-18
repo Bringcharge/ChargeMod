@@ -2,15 +2,8 @@ package com.charge.chargemod.item;
 
 
 import com.charge.chargemod.entity.ChargeBladeExtendEntity;
-import com.charge.chargemod.entity.ChargeCangFengDaggerEntity;
-import com.charge.chargemod.entity.ChargeCopperCoinEntity;
 import com.charge.chargemod.entity.ChargeDaggerEntity;
-import com.charge.chargemod.instructions.manager.Instruction;
-import com.charge.chargemod.instructions.manager.InstructionsManager;
 import com.charge.chargemod.instructions.manager.InstructionsModel;
-import com.charge.chargemod.particle.ChargeModParticleType;
-import com.charge.chargemod.particle.SwordBladeParticleType;
-import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
@@ -20,8 +13,6 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
-import net.minecraft.world.entity.projectile.Arrow;
-import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.ArrowItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;

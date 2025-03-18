@@ -1,8 +1,8 @@
 package com.charge.chargemod.event;
 
 import com.charge.chargemod.ChargeModItemRegistry;
+import com.charge.chargemod.particle.ChargeBaseParticleProvider;
 import com.charge.chargemod.particle.ChargeModParticleType;
-import com.charge.chargemod.particle.SwordBladeParticleProvider;
 import com.charge.chargemod.render.ChargeDaggerEntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRenderers;
@@ -30,7 +30,8 @@ public class ChargeModClientEvent {
 
     @SubscribeEvent
     public static void onParticleFactoryRegistration(RegisterParticleProvidersEvent event) {
-        event.registerSpriteSet(ChargeModParticleType.SWORD_BLADE_PARTICLE_TYPE.get(), SwordBladeParticleProvider::new);
+        event.registerSpriteSet(ChargeModParticleType.SWORD_BLADE_PARTICLE_TYPE.get(), ChargeBaseParticleProvider::new);    //注册的粒子
+        event.registerSpriteSet(ChargeModParticleType.SWORD_MASK_PARTICLE_TYPE.get(), ChargeBaseParticleProvider::new);
     }
 
 
