@@ -25,7 +25,7 @@ public class KongFangSword extends ChargeBaseSword{
             float f2 = Mth.cos(f1);
             float f3 = Mth.sin(f1);
             Vec3 xz_vec = new Vec3(f3, 0, f2).normalize();
-            Vec3 left = toVec.cross(xz_vec).normalize();
+            Vec3 left = toVec.cross(xz_vec).normalize();//其实不能算真正的左，可能是右侧，取决于look的位置
 
             Vec3 toVecLeft = toVec.add(left.scale(0.5));    //向左30度
             Vec3 toVecRight = toVec.add(left.scale(-0.5));    //向左30度

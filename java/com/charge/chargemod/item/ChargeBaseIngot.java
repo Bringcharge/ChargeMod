@@ -133,7 +133,7 @@ public class ChargeBaseIngot extends Item {
 //                            this.flash(entityLiving,e);
 //                        });
 
-                        abstractarrowentity.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, f * 9.0F, 1.0F);
+                        abstractarrowentity.shoot(player.getLookAngle(), 0.5f);
                         if (f == 1.0F) {
 //                            abstractarrowentity.setIsCritical(true);    //暴击粒子？
                         }
