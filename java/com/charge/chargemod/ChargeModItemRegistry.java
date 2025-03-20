@@ -2,6 +2,8 @@ package com.charge.chargemod;
 
 import com.charge.chargemod.block.*;
 import com.charge.chargemod.entity.*;
+import com.charge.chargemod.item.Armor.ModArmorMaterials;
+import com.charge.chargemod.item.Armor.PaperHead;
 import com.charge.chargemod.item.ChargeBaseIngot;
 import com.charge.chargemod.item.ChargeBaseToken;
 import com.charge.chargemod.item.ChargeBow;
@@ -10,6 +12,7 @@ import com.charge.chargemod.item.pellet.ChargeBiGuPellet;
 import com.charge.chargemod.item.sword.*;
 import com.charge.chargemod.item.talisman.PushBackTalisman;
 import com.charge.chargemod.item.talisman.ShieldTalisman;
+import com.charge.chargemod.item.talisman.SkullStealTalisman;
 import com.charge.chargemod.lingqi.PlayerLingQi;
 import com.charge.chargemod.lingqi.PlayerLingQiInterface;
 import net.minecraft.client.model.geom.ModelLayerLocation;
@@ -17,10 +20,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.CreativeModeTabs;
-import net.minecraft.world.item.Item;
+import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -156,6 +156,9 @@ public class ChargeModItemRegistry {
     //灵石矿item
     public static final RegistryObject<Item> CHARGE_LING_SHI_ORE_ITEM = ITEMS.register("charge_ling_shi_ore", () -> new BlockItem(CHARGE_LING_SHI_ORE.get(), new Item.Properties()));
 
+    //纸头，不可获取
+    public static final RegistryObject<Item> PAPER_HEAD = ITEMS.register("paper_head", () -> new PaperHead(ModArmorMaterials.PAPER, ArmorItem.Type.HELMET, (new Item.Properties())));
+
     //基本令牌，不知道会不会有高级令牌
     public static final RegistryObject<Item> CHARGE_BASE_TOKEN = ITEMS.register("charge_base_token", () -> new ChargeBaseToken());
 
@@ -194,7 +197,8 @@ public class ChargeModItemRegistry {
     public static final RegistryObject<Item> PUSH_BACK_TALISMAN = ITEMS.register("push_back_talisman", () -> new PushBackTalisman());
     //坚盾符
     public static final RegistryObject<Item> SHIELD_TALISMAN = ITEMS.register("shield_talisman", () -> new ShieldTalisman());
-
+    //换头符
+    public static final RegistryObject<Item> SKULL_STEAL_TALISMAN = ITEMS.register("skull_steal_talisman", () -> new SkullStealTalisman());
     //mod物品列表
     public static final RegistryObject<CreativeModeTab> EXAMPLE_TAB = CREATIVE_MODE_TABS.register("charge_tab", () -> CreativeModeTab.builder()
             .withTabsBefore(CreativeModeTabs.COMBAT)
@@ -209,6 +213,9 @@ public class ChargeModItemRegistry {
                 output.accept(chargeAlchemyStoveBlockItem.get());
                 output.accept(CHARGE_BASE_TOKEN.get());
                 output.accept(CHARGE_BIGU_PELLET.get());
+
+                //TODO：删掉
+                output.accept(PAPER_HEAD.get());
                 //剑
                 output.accept(KONG_FANG_SWORD.get());
                 output.accept(FU_YAO_SWORD.get());
@@ -226,6 +233,7 @@ public class ChargeModItemRegistry {
                 //符
                 output.accept(PUSH_BACK_TALISMAN.get());
                 output.accept(SHIELD_TALISMAN.get());
+                output.accept(SKULL_STEAL_TALISMAN.get());
             }).build());
 
     public static final RegistryObject<EntityType<FakeVillager>> FAKE_VILLAGER = ENTITY_TYPES.register("fake_villager",
