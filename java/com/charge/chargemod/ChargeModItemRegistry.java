@@ -8,6 +8,8 @@ import com.charge.chargemod.item.ChargeBow;
 import com.charge.chargemod.item.ChargeLingShi;
 import com.charge.chargemod.item.pellet.ChargeBiGuPellet;
 import com.charge.chargemod.item.sword.*;
+import com.charge.chargemod.item.talisman.PushBackTalisman;
+import com.charge.chargemod.item.talisman.ShieldTalisman;
 import com.charge.chargemod.lingqi.PlayerLingQi;
 import com.charge.chargemod.lingqi.PlayerLingQiInterface;
 import net.minecraft.client.model.geom.ModelLayerLocation;
@@ -187,6 +189,12 @@ public class ChargeModItemRegistry {
     //仙剑——无相剑
     public static final RegistryObject<Item> WU_XIANG_SWORD = ITEMS.register("wu_xiang_sword", () -> new WuXiangSword());
 
+    //符咒
+    //击退符
+    public static final RegistryObject<Item> PUSH_BACK_TALISMAN = ITEMS.register("push_back_talisman", () -> new PushBackTalisman());
+    //坚盾符
+    public static final RegistryObject<Item> SHIELD_TALISMAN = ITEMS.register("shield_talisman", () -> new ShieldTalisman());
+
     //mod物品列表
     public static final RegistryObject<CreativeModeTab> EXAMPLE_TAB = CREATIVE_MODE_TABS.register("charge_tab", () -> CreativeModeTab.builder()
             .withTabsBefore(CreativeModeTabs.COMBAT)
@@ -215,6 +223,9 @@ public class ChargeModItemRegistry {
                 output.accept(THE_REAL_SWORD.get());
                 output.accept(THE_FAKE_SWORD.get());
                 output.accept(WU_XIANG_SWORD.get());
+                //符
+                output.accept(PUSH_BACK_TALISMAN.get());
+                output.accept(SHIELD_TALISMAN.get());
             }).build());
 
     public static final RegistryObject<EntityType<FakeVillager>> FAKE_VILLAGER = ENTITY_TYPES.register("fake_villager",
