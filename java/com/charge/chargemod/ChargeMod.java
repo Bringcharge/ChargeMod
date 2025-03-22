@@ -1,5 +1,6 @@
 package com.charge.chargemod;
 
+import com.charge.chargemod.effect.ModEffects;
 import com.charge.chargemod.entity.ChargeDaggerEntity;
 import com.charge.chargemod.entity.FakeVillager;
 import com.charge.chargemod.entityModel.ChargeBladeExtendModel;
@@ -81,6 +82,8 @@ public class ChargeMod
         //注册block entity列表
         ChargeModItemRegistry.BLOCK_ENTITIES.register(modEventBus);
         ChargeModParticleType.PARTICLE_TYPES.register(modEventBus);
+        //特殊效果注册器
+        ModEffects.MOD_EFFECTS.register(modEventBus);
         // Register ourselves for server and other game events we are interested in
 //        MinecraftForge.EVENT_BUS.register(this);
 

@@ -10,6 +10,7 @@ import com.charge.chargemod.item.ChargeBow;
 import com.charge.chargemod.item.ChargeLingShi;
 import com.charge.chargemod.item.pellet.ChargeBiGuPellet;
 import com.charge.chargemod.item.sword.*;
+import com.charge.chargemod.item.talisman.HoldLifeTalisman;
 import com.charge.chargemod.item.talisman.PushBackTalisman;
 import com.charge.chargemod.item.talisman.ShieldTalisman;
 import com.charge.chargemod.item.talisman.SkullStealTalisman;
@@ -199,6 +200,8 @@ public class ChargeModItemRegistry {
     public static final RegistryObject<Item> SHIELD_TALISMAN = ITEMS.register("shield_talisman", () -> new ShieldTalisman());
     //换头符
     public static final RegistryObject<Item> SKULL_STEAL_TALISMAN = ITEMS.register("skull_steal_talisman", () -> new SkullStealTalisman());
+    //换头符
+    public static final RegistryObject<Item> HOLD_LIFE_TALISMAN = ITEMS.register("hold_life_talisman", () -> new HoldLifeTalisman());
     //mod物品列表
     public static final RegistryObject<CreativeModeTab> EXAMPLE_TAB = CREATIVE_MODE_TABS.register("charge_tab", () -> CreativeModeTab.builder()
             .withTabsBefore(CreativeModeTabs.COMBAT)
@@ -214,8 +217,7 @@ public class ChargeModItemRegistry {
                 output.accept(CHARGE_BASE_TOKEN.get());
                 output.accept(CHARGE_BIGU_PELLET.get());
 
-                //TODO：删掉
-                output.accept(PAPER_HEAD.get());
+//                output.accept(PAPER_HEAD.get());
                 //剑
                 output.accept(KONG_FANG_SWORD.get());
                 output.accept(FU_YAO_SWORD.get());
@@ -234,6 +236,7 @@ public class ChargeModItemRegistry {
                 output.accept(PUSH_BACK_TALISMAN.get());
                 output.accept(SHIELD_TALISMAN.get());
                 output.accept(SKULL_STEAL_TALISMAN.get());
+                output.accept(HOLD_LIFE_TALISMAN.get());
             }).build());
 
     public static final RegistryObject<EntityType<FakeVillager>> FAKE_VILLAGER = ENTITY_TYPES.register("fake_villager",
