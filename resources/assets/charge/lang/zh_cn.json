@@ -1,0 +1,26 @@
+{
+  "itemGroup.charge.charge_tab": "论侠修仙",
+  "item.charge.charge_base_token": "令牌",
+
+  "block.charge.charge_altar_block": "载物台",
+  "block.charge.charge_base_block": "法台基石",
+  "block.charge.charge_alchemy_stove_block": "八卦炉",
+
+  "item.charge.kong_fang_sword": "孔方",
+  "item.charge.fu_yao_sword": "扶摇",
+  "item.charge.water_split_sword": "断水",
+  "item.charge.ember_sword": "余烬",
+  "item.charge.zhong_zhong_gu_sword": "冢中骨",
+  "item.charge.cang_feng_sword": "藏锋万里",
+  "item.charge.no_cang_feng_sword": "锋万里",
+  "describe.charge.cang_feng_count_enough": "武器已经磨砺出锋芒",
+  "describe.charge.cang_feng_describe": "杀心不起，藏锋万里",
+  "describe.charge.feng_wan_li_describe": "杀心起，锋万里",
+  "item.charge.yu_feng_yu_sword": "欲风雨",
+  "item.charge.bai_cao_ling_sword": "百草零",
+  "item.charge.may_cold_sword": "愿天寒",
+  "item.charge.earth_beat_sword": "地动",
+  "item.charge.the_real_sword": "真",
+  "item.charge.the_fake_sword": "假",
+  "item.charge.wu_xiang_sword": "无相"
+}

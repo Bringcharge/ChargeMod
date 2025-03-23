@@ -53,7 +53,7 @@ public class CangFengSword extends ChargeBaseSword{
 
             // 如果达到阈值
             if (AttackCount == KILL_THRESHOLD) {
-                player.sendSystemMessage(Component.literal("武器已经磨砺出锋芒"));
+                player.sendSystemMessage(Component.translatable("describe.charge.cang_feng_count_enough"));
                 setState(stack, true);
             }
         }
@@ -110,9 +110,9 @@ public class CangFengSword extends ChargeBaseSword{
         super.appendHoverText(stack, level, tooltip, flag);
         boolean flagState = getState(stack);
         if (flagState) {
-            tooltip.add(Component.literal("杀心起，锋万里").withStyle(ChatFormatting.BLUE));
+            tooltip.add(Component.translatable("describe.charge.feng_wan_li_describe").withStyle(ChatFormatting.BLUE));
         } else {
-            tooltip.add(Component.literal("杀心不起，藏锋万里").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.translatable("describe.charge.cang_feng_describe").withStyle(ChatFormatting.GRAY));
         }
     }
 
@@ -120,9 +120,9 @@ public class CangFengSword extends ChargeBaseSword{
     public Component getName(ItemStack stack) {
         boolean flag = getState(stack);
         if (flag) {
-            return Component.literal("锋万里").withStyle(ChatFormatting.GOLD);
+            return Component.translatable("item.charge.cang_feng_sword").withStyle(ChatFormatting.GOLD);
         } else {
-            return Component.literal("藏锋万里").withStyle(ChatFormatting.WHITE);
+            return Component.translatable("item.charge.no_cang_feng_sword").withStyle(ChatFormatting.WHITE);
         }
     }
 

@@ -18,6 +18,7 @@ import com.charge.chargemod.lingqi.PlayerLingQi;
 import com.charge.chargemod.lingqi.PlayerLingQiInterface;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
@@ -190,20 +191,31 @@ public class ChargeModItemRegistry {
     public static final RegistryObject<Item> THE_REAL_SWORD = ITEMS.register("the_real_sword", () -> new TheRealSword());
     //高级剑——假
     public static final RegistryObject<Item> THE_FAKE_SWORD = ITEMS.register("the_fake_sword", () -> new TheFakeSword());
-    //仙剑——无相剑
+    //高级剑——寻因
+    //仙剑——无相
     public static final RegistryObject<Item> WU_XIANG_SWORD = ITEMS.register("wu_xiang_sword", () -> new WuXiangSword());
+    //仙剑——求逍遥
+    //仙剑——获果
 
     //符咒
-    //击退符
+    //退魔符
     public static final RegistryObject<Item> PUSH_BACK_TALISMAN = ITEMS.register("push_back_talisman", () -> new PushBackTalisman());
-    //坚盾符
+    //御劫符
     public static final RegistryObject<Item> SHIELD_TALISMAN = ITEMS.register("shield_talisman", () -> new ShieldTalisman());
-    //换头符
+    //换颅符
     public static final RegistryObject<Item> SKULL_STEAL_TALISMAN = ITEMS.register("skull_steal_talisman", () -> new SkullStealTalisman());
-    //换头符
+    //延死符
     public static final RegistryObject<Item> HOLD_LIFE_TALISMAN = ITEMS.register("hold_life_talisman", () -> new HoldLifeTalisman());
+    //回生符
+    //祈雨符
+
+    //仙符 求不得
+    //仙符 解不出
+    //仙符 想不通
+    //仙符 算不对
     //mod物品列表
     public static final RegistryObject<CreativeModeTab> EXAMPLE_TAB = CREATIVE_MODE_TABS.register("charge_tab", () -> CreativeModeTab.builder()
+            .title(Component.translatable("itemGroup." + MODID + ".charge_tab"))
             .withTabsBefore(CreativeModeTabs.COMBAT)
             .icon(() -> chargeBaseIngot.get().getDefaultInstance())
             .displayItems((parameters, output) -> {
