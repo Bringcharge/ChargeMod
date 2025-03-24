@@ -114,7 +114,7 @@ public class ChargeMod
         event.registerEntityRenderer(ChargeModItemRegistry.CHARGE_BLADE_EXTEND_ENTITY_TYPE.get(), ChargeBladeExtendEntityRenderer::new);
         event.registerBlockEntityRenderer(ChargeModItemRegistry.CHARGE_ALTAR_ENTITY.get(), ChargeAltarRender::new);
         event.registerBlockEntityRenderer(ChargeModItemRegistry.CHARGE_ALCHEMY_STOVE_ENTITY.get(), ChargeAlchemyStoveRender::new);
-
+        event.registerBlockEntityRenderer(ChargeModItemRegistry.CHARGE_ALCHEMY_ANVIL_ENTITY.get(), ChargeAlchemyAnvilRender::new);
     }
 
     //注册能力

@@ -21,7 +21,7 @@ public class ChargeAlchemyStoveHelper {
         ItemStack s7 = list.get(6);//离 火
         ItemStack s8 = list.get(7);//兑 泽（金）
 
-        if (
+        if (    //测试物品
                 s1.is(Items.EGG) &&
                 s5.is(Items.BREAD) &&
                 ItemStacksIsEmpty(s2,s3,s4,s6,s7,s8)

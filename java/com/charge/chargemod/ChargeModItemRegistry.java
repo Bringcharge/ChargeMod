@@ -97,9 +97,22 @@ public class ChargeModItemRegistry {
     //八卦炉blockEntityType
     public static final RegistryObject<BlockEntityType<ChargeAlchemyStoveBlockEntity>> CHARGE_ALCHEMY_STOVE_ENTITY = BLOCK_ENTITIES.register("charge_alchemy_stove_block", () ->
             BlockEntityType.Builder.of(ChargeAlchemyStoveBlockEntity::new, CHARGE_ALCHEMY_STOVE_BLOCK.get()).build(null));
-    //祭坛item
+    //八卦炉item
     public static final RegistryObject<Item> chargeAlchemyStoveBlockItem = ITEMS.register("charge_alchemy_stove_block", () -> new BlockItem(CHARGE_ALCHEMY_STOVE_BLOCK.get(), new Item.Properties()));
-
+    //炼器铁砧
+    public static final RegistryObject<Block> CHARGE_ALCHEMY_ANVIL_BLOCK = BLOCKS.register("charge_alchemy_anvil_block", () -> {
+        return new ChargeAlchemyAnvilBlock(BlockBehaviour.Properties.of()
+                .mapColor(MapColor.COLOR_BLUE) //地图颜色
+                .strength(1.0f, 50.0f) //硬度，石头是1.5 & 爆炸抗性，黑曜石是50
+                .lightLevel(state -> 15)
+                .sound(SoundType.STONE)
+                .noOcclusion()
+        );}); //光照等级
+    //炼器铁砧blockEntityType
+    public static final RegistryObject<BlockEntityType<ChargeAlchemyAnvilBlockEntity>> CHARGE_ALCHEMY_ANVIL_ENTITY = BLOCK_ENTITIES.register("charge_alchemy_anvil_block", () ->
+            BlockEntityType.Builder.of(ChargeAlchemyAnvilBlockEntity::new, CHARGE_ALCHEMY_ANVIL_BLOCK.get()).build(null));
+    //炼器铁砧item
+    public static final RegistryObject<Item> chargeAlchemyAnvilBlockItem = ITEMS.register("charge_alchemy_anvil_block", () -> new BlockItem(CHARGE_ALCHEMY_ANVIL_BLOCK.get(), new Item.Properties()));
 
 
     //飞刀layer
@@ -225,6 +238,7 @@ public class ChargeModItemRegistry {
                 output.accept(chargeLingShi.get());
                 output.accept(chargeLingShi.get());
                 output.accept(chargeBaseBlockItem.get());
+                output.accept(chargeAlchemyAnvilBlockItem.get());
                 output.accept(chargeAlchemyStoveBlockItem.get());
                 output.accept(CHARGE_BASE_TOKEN.get());
                 output.accept(CHARGE_BIGU_PELLET.get());
