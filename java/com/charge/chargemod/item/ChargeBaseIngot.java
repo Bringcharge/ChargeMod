@@ -1,9 +1,14 @@
 package com.charge.chargemod.item;
 
 
+import com.charge.chargemod.ChargeModItemRegistry;
 import com.charge.chargemod.entity.ChargeBladeExtendEntity;
 import com.charge.chargemod.entity.ChargeDaggerEntity;
+import com.charge.chargemod.entity.calamity.CalamityLightning;
+import com.charge.chargemod.entity.calamity.CalamitySanShi;
+import com.charge.chargemod.entity.calamity.CalamityZombie;
 import com.charge.chargemod.instructions.manager.InstructionsModel;
+import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
@@ -29,37 +34,37 @@ public class ChargeBaseIngot extends Item {
         super(new Item.Properties());
     }
     //普通物品单击右键
-    @Override
-    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
-        ItemStack stack = player.getItemInHand(hand);
-        InstructionsModel model = new InstructionsModel();
-        model.user = player;
-        model.holder = stack;
-
-        releaseUsing(stack, level, player, 10);   //临时射箭代码
-//        Instruction ins = new Instruction();
-//        ins.str = "F002#V103#V101#DI4#{Fif#B001#E201#{F004#E101#E201#}{F003#E101#V201#}}";    大概是一个射箭然后射中了会触发if判断的东西
-//        ins.str = "F004#E101#E301#V103#V101#E101#"; //视野看到的单位，交换位置
-//        InstructionsManager.functionWithString(ins, model);    //命令字符串
-
-//          这个是单机的粒子渲染逻辑
-//        if (level.isClientSide) {
-//            //addParticle(ParticleOptions particleData, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed);
-//            Vec3 eyePosition = player.getEyePosition(1.0F);
-//            Vec3 lookVector = player.getLookAngle();
-//            Vec3 vec_to = lookVector.add(eyePosition);
-//            level.addParticle(ChargeModParticleType.SWORD_BLADE_PARTICLE_TYPE.get(), vec_to.x, vec_to.y, vec_to.z,  0,0,0);
-//        }
-
-        return InteractionResultHolder.success(stack);
-        //如果消耗的话做下面这个
-//        if (!level.isClientSide) {
-//            // 在服务端执行逻辑
-//            player.sendSystemMessage(Component.literal("Item consumed!")); // 发送消息给玩家
-//            stack.shrink(1); // 消耗一个物品
-//        }
-//        return InteractionResultHolder.consume(stack); // 返回消耗结果
-    }
+//    @Override
+//    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
+//        ItemStack stack = player.getItemInHand(hand);
+//        InstructionsModel model = new InstructionsModel();
+//        model.user = player;
+//        model.holder = stack;
+//
+//        releaseUsing(stack, level, player, 10);   //临时射箭代码
+////        Instruction ins = new Instruction();
+////        ins.str = "F002#V103#V101#DI4#{Fif#B001#E201#{F004#E101#E201#}{F003#E101#V201#}}";    大概是一个射箭然后射中了会触发if判断的东西
+////        ins.str = "F004#E101#E301#V103#V101#E101#"; //视野看到的单位，交换位置
+////        InstructionsManager.functionWithString(ins, model);    //命令字符串
+//
+////          这个是单机的粒子渲染逻辑
+////        if (level.isClientSide) {
+////            //addParticle(ParticleOptions particleData, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed);
+////            Vec3 eyePosition = player.getEyePosition(1.0F);
+////            Vec3 lookVector = player.getLookAngle();
+////            Vec3 vec_to = lookVector.add(eyePosition);
+////            level.addParticle(ChargeModParticleType.SWORD_BLADE_PARTICLE_TYPE.get(), vec_to.x, vec_to.y, vec_to.z,  0,0,0);
+////        }
+//
+//        return InteractionResultHolder.success(stack);
+//        //如果消耗的话做下面这个
+////        if (!level.isClientSide) {
+////            // 在服务端执行逻辑
+////            player.sendSystemMessage(Component.literal("Item consumed!")); // 发送消息给玩家
+////            stack.shrink(1); // 消耗一个物品
+////        }
+////        return InteractionResultHolder.consume(stack); // 返回消耗结果
+//    }
     //以下是临时测试
 
     private int delayTick;
@@ -163,5 +168,39 @@ public class ChargeBaseIngot extends Item {
                 }
             }
         }
+    }
+
+    @Override
+    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {   //渡劫demo
+
+//        player.addEffect(new MobEffectInstance(MobEffects.ABSORPTION, 30, 1));
+
+//        CalamitySanShi sanShi = new CalamitySanShi(ChargeModItemRegistry.CALAMITY_SANSHI.get(), level);
+//        CalamityZombie topZ = new CalamityZombie(ChargeModItemRegistry.CALAMITY_ZOMBIE.get(), level);
+//        CalamityZombie centerZ = new CalamityZombie(ChargeModItemRegistry.CALAMITY_ZOMBIE.get(), level);
+//        CalamityZombie bottomZ = new CalamityZombie(ChargeModItemRegistry.CALAMITY_ZOMBIE.get(), level);
+//        sanShi.zombieTop = topZ;
+//        sanShi.zombieCenter = centerZ;
+//        sanShi.zombieBottom = bottomZ;
+//        sanShi.owner = player;
+//        topZ.owner = sanShi;
+//        centerZ.owner = sanShi;
+//        bottomZ.owner = sanShi;
+//        sanShi.setPos(player.position());
+//        topZ.setPos(player.position());
+//        centerZ.setPos(player.position());
+//        bottomZ.setPos(player.position());
+//        level.addFreshEntity(sanShi);
+//        level.addFreshEntity(topZ);
+//        level.addFreshEntity(centerZ);
+//        level.addFreshEntity(bottomZ);
+        if (!level.isClientSide) {
+            CalamityLightning sanShi = new CalamityLightning(ChargeModItemRegistry.CALAMITY_LIGHTNING.get(), level);
+            sanShi.start();
+            sanShi.owner = player;
+            player.sendSystemMessage(Component.literal("劫云正在凝聚"));
+            level.addFreshEntity(sanShi);
+        }
+        return super.use(level,player,hand);
     }
 }

@@ -2,6 +2,9 @@ package com.charge.chargemod;
 
 import com.charge.chargemod.block.*;
 import com.charge.chargemod.entity.*;
+import com.charge.chargemod.entity.calamity.CalamityLightning;
+import com.charge.chargemod.entity.calamity.CalamitySanShi;
+import com.charge.chargemod.entity.calamity.CalamityZombie;
 import com.charge.chargemod.item.Armor.ModArmorMaterials;
 import com.charge.chargemod.item.Armor.PaperHead;
 import com.charge.chargemod.item.ChargeBaseIngot;
@@ -220,6 +223,7 @@ public class ChargeModItemRegistry {
     //延死符
     public static final RegistryObject<Item> HOLD_LIFE_TALISMAN = ITEMS.register("hold_life_talisman", () -> new HoldLifeTalisman());
     //回生符
+    //仙游符
     //祈雨符
 
     //仙符 求不得
@@ -269,6 +273,18 @@ public class ChargeModItemRegistry {
             () -> EntityType.Builder.of(FakeVillager::new, MobCategory.CREATURE)
                     .sized(0.6F, 1.95F) // 设置实体大小
                     .build("fake_villager"));
+    public static final RegistryObject<EntityType<CalamityZombie>> CALAMITY_ZOMBIE = ENTITY_TYPES.register("calamity_zombie",
+            () -> EntityType.Builder.of(CalamityZombie::new, MobCategory.CREATURE)
+                    .sized(0.6F, 1.95F) // 设置实体大小
+                    .build("calamity_zombie"));
+    public static final RegistryObject<EntityType<CalamitySanShi>> CALAMITY_SANSHI = ENTITY_TYPES.register("calamity_sanshi",
+            () -> EntityType.Builder.of(CalamitySanShi::new, MobCategory.MISC)
+                    .sized(0.5F, 0.5F) // 设置实体大小
+                    .build("calamity_sanshi"));
+    public static final RegistryObject<EntityType<CalamityLightning>> CALAMITY_LIGHTNING = ENTITY_TYPES.register("calamity_lightning",
+            () -> EntityType.Builder.of(CalamityLightning::new, MobCategory.CREATURE)
+                    .sized(0.6F, 1.95F) // 设置实体大小
+                    .build("calamity_lightning"));
 
 
 }

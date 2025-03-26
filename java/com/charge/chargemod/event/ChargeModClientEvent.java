@@ -4,10 +4,7 @@ import com.charge.chargemod.ChargeModItemRegistry;
 import com.charge.chargemod.particle.ChargeBaseParticleProvider;
 import com.charge.chargemod.particle.ChargeModParticleType;
 import com.charge.chargemod.render.ChargeDaggerEntityRenderer;
-import net.minecraft.client.renderer.entity.EntityRenderer;
-import net.minecraft.client.renderer.entity.EntityRenderers;
-import net.minecraft.client.renderer.entity.VillagerRenderer;
-import net.minecraft.client.renderer.entity.ZombieRenderer;
+import net.minecraft.client.renderer.entity.*;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
@@ -43,6 +40,9 @@ public class ChargeModClientEvent {
                 return tag.getBoolean("CangFeng") ? 1 : 0;
             });
             EntityRenderers.register(ChargeModItemRegistry.FAKE_VILLAGER.get(), VillagerRenderer::new);
+            EntityRenderers.register(ChargeModItemRegistry.CALAMITY_ZOMBIE.get(), ZombieRenderer::new);
+            EntityRenderers.register(ChargeModItemRegistry.CALAMITY_SANSHI.get(), NoopRenderer::new);
+            EntityRenderers.register(ChargeModItemRegistry.CALAMITY_LIGHTNING.get(), NoopRenderer::new);
         });
 
     }
