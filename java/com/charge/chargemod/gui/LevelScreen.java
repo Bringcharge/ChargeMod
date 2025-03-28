@@ -1,6 +1,5 @@
 package com.charge.chargemod.gui;
 
-import com.example.examplemod.ExampleMod;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 

@@ -5,12 +5,9 @@ import com.charge.chargemod.entity.*;
 import com.charge.chargemod.entity.calamity.CalamityLightning;
 import com.charge.chargemod.entity.calamity.CalamitySanShi;
 import com.charge.chargemod.entity.calamity.CalamityZombie;
+import com.charge.chargemod.item.*;
 import com.charge.chargemod.item.Armor.ModArmorMaterials;
 import com.charge.chargemod.item.Armor.PaperHead;
-import com.charge.chargemod.item.ChargeBaseIngot;
-import com.charge.chargemod.item.ChargeBaseToken;
-import com.charge.chargemod.item.ChargeBow;
-import com.charge.chargemod.item.ChargeLingShi;
 import com.charge.chargemod.item.pellet.ChargeBiGuPellet;
 import com.charge.chargemod.item.sword.*;
 import com.charge.chargemod.item.talisman.HoldLifeTalisman;
@@ -176,12 +173,16 @@ public class ChargeModItemRegistry {
 
     //纸头，不可获取
     public static final RegistryObject<Item> PAPER_HEAD = ITEMS.register("paper_head", () -> new PaperHead(ModArmorMaterials.PAPER, ArmorItem.Type.HELMET, (new Item.Properties())));
-
+    //说明书，天书
+    public static final RegistryObject<Item>  CHARGE_GUIDE_BOOK = ITEMS.register("charge_guide_book_item", () -> new ChargeGuideBookItem());
     //基本令牌，不知道会不会有高级令牌
     public static final RegistryObject<Item> CHARGE_BASE_TOKEN = ITEMS.register("charge_base_token", () -> new ChargeBaseToken());
 
+
     //辟谷丹的建模
     public static final RegistryObject<Item> CHARGE_BIGU_PELLET = ITEMS.register("charge_bigu_pellet", () -> new ChargeBiGuPellet());
+
+    //普通剑——寻因
     //金剑——孔方
     public static final RegistryObject<Item> KONG_FANG_SWORD = ITEMS.register("kong_fang_sword", () -> new KongFangSword());
     //木剑——扶摇
@@ -207,11 +208,11 @@ public class ChargeModItemRegistry {
     public static final RegistryObject<Item> THE_REAL_SWORD = ITEMS.register("the_real_sword", () -> new TheRealSword());
     //高级剑——假
     public static final RegistryObject<Item> THE_FAKE_SWORD = ITEMS.register("the_fake_sword", () -> new TheFakeSword());
-    //高级剑——寻因
+    //高级剑——塑果
     //仙剑——无相
     public static final RegistryObject<Item> WU_XIANG_SWORD = ITEMS.register("wu_xiang_sword", () -> new WuXiangSword());
     //仙剑——求逍遥
-    //仙剑——获果
+    //仙剑——乱因果
 
     //符咒
     //退魔符
@@ -236,7 +237,8 @@ public class ChargeModItemRegistry {
             .withTabsBefore(CreativeModeTabs.COMBAT)
             .icon(() -> chargeBaseIngot.get().getDefaultInstance())
             .displayItems((parameters, output) -> {
-                output.accept(chargeBaseIngot.get()); // Add the example item to the tab. For your own tabs, this method is preferred over the event
+                output.accept(chargeBaseIngot.get()); // Add the example item to the tab. For your own tabs, this method is preferred over the event\
+                output.accept(CHARGE_GUIDE_BOOK.get());
                 output.accept(chargeBow.get());
                 output.accept(chargeAltarBlockItem.get());
                 output.accept(chargeLingShi.get());

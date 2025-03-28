@@ -1,5 +1,5 @@
 package com.charge.chargemod.gui;
-import com.example.examplemod.ExampleMod;
+import com.charge.chargemod.ChargeModItemRegistry;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.gui.GuiGraphics;
@@ -26,7 +26,7 @@ public class ChargeBaseScreen extends Screen {
     public ResourceLocation rightImage;
 
 
-    private static final ResourceLocation BOOK_TEXTURE = new ResourceLocation(ExampleMod.MODID,"textures/gui/book.png");
+    private static final ResourceLocation BOOK_TEXTURE = new ResourceLocation(ChargeModItemRegistry.MODID,"textures/gui/book.png");
 
     public ChargeBaseScreen(Component title) {
         super(title);
