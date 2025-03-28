@@ -20,6 +20,7 @@ import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.client.event.RegisterColorHandlersEvent;
 
+//换颅符
 public class SkullStealTalisman extends ChargeBaseTalisman {
 
     @Override

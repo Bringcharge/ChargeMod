@@ -18,7 +18,7 @@ import net.minecraft.world.phys.Vec3;
 
 import java.util.List;
 
-//击退周遭怪物的符，灵击符
+//退魔符
 public class PushBackTalisman extends ChargeBaseTalisman {
 
 

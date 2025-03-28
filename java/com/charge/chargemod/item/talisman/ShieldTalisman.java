@@ -9,7 +9,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
-//伤害吸收的符，
+//御劫符
 public class ShieldTalisman extends ChargeBaseTalisman {
 
 
