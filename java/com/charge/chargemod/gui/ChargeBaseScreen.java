@@ -25,6 +25,16 @@ public class ChargeBaseScreen extends Screen {
     public List<FormattedCharSequence> rightTextList;
     public ResourceLocation rightImage;
 
+    public boolean showCrafting = false;
+    public ResourceLocation topItem;
+    public ResourceLocation topLeftItem;
+    public ResourceLocation topRightItem;
+    public ResourceLocation leftItem;
+    public ResourceLocation rightItem;
+    public ResourceLocation bottomLeftItem;
+    public ResourceLocation bottomRightItem;
+    public ResourceLocation bottomItem;
+    public ResourceLocation centerItem;
 
     private static final ResourceLocation BOOK_TEXTURE = new ResourceLocation(ChargeModItemRegistry.MODID,"textures/gui/book.png");
 
@@ -87,7 +97,37 @@ public class ChargeBaseScreen extends Screen {
                 }
             }
         } else {    //如果有右侧图片
-            this.addRenderableWidget(new ImageWidget(rightPageStartPosX + 10, rightPageStartPosY,64,64,rightImage));
+
+            ImageWidget rightImageWidget = new ImageWidget(rightPageStartPosX + 10, rightPageStartPosY,64,64,rightImage);
+            if (showCrafting) rightImageWidget.setAlpha(0.3f);
+            this.addRenderableWidget(rightImageWidget);
+            if (showCrafting) { //展示合成表
+
+                if (topLeftItem != null) {  //左上角
+                    this.addRenderableWidget(new ImageWidget(rightPageStartPosX + 10, rightPageStartPosY,16,16,topLeftItem));
+                }
+                if (topItem != null) {
+                    this.addRenderableWidget(new ImageWidget(rightPageStartPosX + 10 + 16 + 8, rightPageStartPosY,16,16,topItem));
+                }
+                if (topRightItem != null) {
+                    this.addRenderableWidget(new ImageWidget(rightPageStartPosX + 10 + 32 + 16, rightPageStartPosY,16,16,topRightItem));
+                }
+                if (leftItem != null) { //左侧
+                    this.addRenderableWidget(new ImageWidget(rightPageStartPosX + 10, rightPageStartPosY + 16 + 8,16,16,leftItem));
+                }
+                if (rightItem != null) {
+                    this.addRenderableWidget(new ImageWidget(rightPageStartPosX + 10 + 32 + 16, rightPageStartPosY + 16 + 8,16,16,rightItem));
+                }
+                if (bottomLeftItem != null) { //左下角
+                    this.addRenderableWidget(new ImageWidget(rightPageStartPosX + 10, rightPageStartPosY + 32 + 16,16,16,bottomLeftItem));
+                }
+                if (bottomItem != null) { //下
+                    this.addRenderableWidget(new ImageWidget(rightPageStartPosX + 10 + 16 + 8, rightPageStartPosY + 32 + 16,16,16,bottomItem));
+                }
+                if (bottomRightItem != null) { //下右
+                    this.addRenderableWidget(new ImageWidget(rightPageStartPosX + 10 + 32 + 16, rightPageStartPosY + 32 + 16,16,16,bottomRightItem));
+                }
+            }
             if (rightTextList != null) {
                 for (int i = 0; i < rightTextList.size(); i++) {
                     guiGraphics.drawString(

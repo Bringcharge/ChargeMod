@@ -1,5 +1,6 @@
 package com.charge.chargemod.gui;
 
+import com.charge.chargemod.gui.swords.ZhongZhongGuScreen;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.common.MinecraftForge;
 
@@ -16,6 +17,8 @@ public class GuideCenter implements GuidePageDelegate { //多页码索引
     public void init() {    //初始化
         addScreen(new ManualScreen());
         addScreen(new LingShiScreen());
+        addScreen(new LianQiScreen());
+        addScreen(new ZhongZhongGuScreen());
     }
 
     private void addScreen(ChargeBaseScreen screen) {   //方便重复添加的函数
