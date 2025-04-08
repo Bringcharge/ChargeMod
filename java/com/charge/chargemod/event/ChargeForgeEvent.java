@@ -1,6 +1,8 @@
 package com.charge.chargemod.event;
 
 import com.charge.chargemod.ChargeModItemRegistry;
+import com.charge.chargemod.damage.ChargeDamageTypes;
+import com.charge.chargemod.damage.DaoFaDamageSource;
 import com.charge.chargemod.item.talisman.HoldLifeTalisman;
 import com.charge.chargemod.lingqi.PlayerLingQi;
 import com.charge.chargemod.network.ChargeNetwork;
@@ -10,6 +12,7 @@ import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -64,12 +67,37 @@ public class ChargeForgeEvent{
 
     @SubscribeEvent
     public static void onLivingDamage(LivingDamageEvent event) {
+
+        if (event.getEntity() instanceof Player) {
+            if (event.getSource().is(DamageTypes.GENERIC_KILL)) {   //如果是即死命令，那就不处理了
+                return;
+            }
+            Player player = (Player) event.getEntity();
+            List<MobEffectInstance> effects = player.getActiveEffects().stream().toList();
+
+            for (MobEffectInstance mobEffectInstance : effects) {       //判断是否有buff
+                MobEffect effect = mobEffectInstance.getEffect();
+                if (effect.getDescriptionId().contains("counter_effect")) {
+
+                    Entity entity = event.getSource().getEntity();  //获取伤害源头
+                    if (entity instanceof LivingEntity) {
+                        LivingEntity livingEntity = (LivingEntity) entity;
+                        ChargePacketSender.sendMovementMessageToClient((ServerPlayer) player, (float) livingEntity.position().x,(float)livingEntity.position().y,(float)livingEntity.position().z);
+                        livingEntity.hurt(DaoFaDamageSource.source(player, ChargeDamageTypes.DAO_HEAVY), 10);
+                    }
+                    player.removeEffect(effect);    //移除反击buff
+                    event.setCanceled(true);
+                    return;
+                }
+            }
+        }
+
+        //吊命
         if (event.getEntity() instanceof Player && event.getEntity().getHealth() <= event.getAmount()) {
 
             if (event.getSource().is(DamageTypes.GENERIC_KILL)) {   //如果是即死命令，那就不处理了
                 return;
             }
-
             Player player = (Player) event.getEntity();
             List<MobEffectInstance> effects = player.getActiveEffects().stream().toList();
             boolean flag = false;

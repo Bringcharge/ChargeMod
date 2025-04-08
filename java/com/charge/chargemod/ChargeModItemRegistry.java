@@ -182,7 +182,7 @@ public class ChargeModItemRegistry {
     //辟谷丹的建模
     public static final RegistryObject<Item> CHARGE_BIGU_PELLET = ITEMS.register("charge_bigu_pellet", () -> new ChargeBiGuPellet());
 
-    //普通剑——寻因
+
     //金剑——孔方
     public static final RegistryObject<Item> KONG_FANG_SWORD = ITEMS.register("kong_fang_sword", () -> new KongFangSword());
     //木剑——扶摇
@@ -193,6 +193,8 @@ public class ChargeModItemRegistry {
     public static final RegistryObject<Item> EMBER_SWORD = ITEMS.register("ember_sword", () -> new EmberSword());
     //土剑——冢中骨
     public static final RegistryObject<Item> ZHONG_ZHONG_GU_SWORD = ITEMS.register("zhong_zhong_gu_sword", () -> new ZhongZhongGuSword());
+    //普通剑——寻因
+    public static final RegistryObject<Item> XUN_YIN_SWORD = ITEMS.register("xun_yin_sword", () -> new XunYinSword());
 
     //金剑高级——藏锋万里
     public static final RegistryObject<Item> CANG_FENG = ITEMS.register("cang_feng_sword", () -> new CangFengSword());
@@ -256,6 +258,8 @@ public class ChargeModItemRegistry {
                 output.accept(WATER_SPLIT_SWORD.get());
                 output.accept(EMBER_SWORD.get());
                 output.accept(ZHONG_ZHONG_GU_SWORD.get());
+                output.accept(XUN_YIN_SWORD.get());
+                //高级剑
                 output.accept(CANG_FENG.get());
                 output.accept(YU_FENG_YU.get());
                 output.accept(BAI_CAO_LING.get());
