@@ -8,12 +8,14 @@ import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
 import it.unimi.dsi.fastutil.longs.LongOpenHashSet;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Position;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtUtils;
 import net.minecraft.network.protocol.game.ClientboundGameEventPacket;
+import net.minecraft.network.protocol.game.ClientboundMoveEntityPacket;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -45,6 +47,7 @@ import javax.annotation.Nullable;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class ChargeBladeExtendEntity extends Projectile {
 
@@ -194,64 +197,83 @@ public class ChargeBladeExtendEntity extends Projectile {
             for (Vec3 checkPosition : checkPoints) {
                 //获取第一个block的hit事件
                 Vec3 checkEndPoint = checkPosition.add(deltaMovement);
-                HitResult hitresult = this.level().clip(new ClipContext(checkPosition, checkEndPoint, ClipContext.Block.OUTLINE, ClipContext.Fluid.NONE, this));//使用边缘来计算，避免没有碰撞体积
+                BlockPos hitPos = BlockPos.containing(checkEndPoint);
                 //打到方块上，先判断之前有没有打中entity？
-                if (hitresult.getType() != HitResult.Type.MISS) {
-                    checkEndPoint = hitresult.getLocation();
-                    BlockPos pos = ((BlockHitResult) hitresult).getBlockPos();
-                    if (this.ignoredBlock == null) { //被伤害过的就记录
-                        this.ignoredBlock = new LongOpenHashSet();
+
+                BlockPos pos = BlockPos.containing(checkEndPoint);
+                if (this.ignoredBlock == null) { //被伤害过的就记录
+                    this.ignoredBlock = new LongOpenHashSet();
+                }
+                if (!ignoredBlock.contains(pos.asLong())) { //如果没有
+                    BlockState state = level().getBlockState(pos);
+                    if (!state.is(Blocks.AIR)) {
+                        onHitBlock(pos);
                     }
-                    if (!ignoredBlock.contains(pos.asLong())) { //如果没有
-                        this.onHit(hitresult);  //理论上应该导到hitBlock
-                    }
-                    this.ignoredBlock.add(pos.asLong());
+                }
+                this.ignoredBlock.add(pos.asLong());
+            }
+
+            double max_x = firstPos.x;
+            double min_x = firstPos.x;
+            double max_y = firstPos.y;
+            double min_y = firstPos.y;
+            double max_z = firstPos.z;
+            double min_z = firstPos.z;
+            for (Vec3 checkPosition : checkPoints) {
+                max_x = Math.max(max_x, checkPosition.x);
+                max_y = Math.max(max_y, checkPosition.y);
+                max_z = Math.max(max_z, checkPosition.z);
+                min_x = Math.min(min_x, checkPosition.x);
+                min_y = Math.min(min_y, checkPosition.y);
+                min_z = Math.min(min_z, checkPosition.z);
+            }
+
+            AABB area = new AABB(max_x + 2, max_y + 2, max_z + 2, min_x - 2, min_y - 2, min_z - 2);
+            List<Entity> list = level().getEntities(this, area, (entity -> {
+                return  entity instanceof LivingEntity && canHitEntity(entity);
+            }));
+
+            for (Entity entity : list) {
+                Entity entity1 = this.getOwner();
+                if (entity instanceof Player && entity1 instanceof Player && !((Player) entity1).canHarmPlayer((Player) entity)) {  //不是自己，不能伤害队友
+                    continue;
                 }
 
-                while (!this.isRemoved()) { //这个while是保证在箭没有消失的情况下击穿多个生物？
-                    EntityHitResult entityhitresult = this.findHitEntity(checkPosition, checkEndPoint);
-                    if (entityhitresult != null) {
-                        hitresult = entityhitresult;
-                    }
-
-                    if (hitresult != null && hitresult.getType() == HitResult.Type.ENTITY) {    //队友判定，player击中队友不处理
-                        Entity entity = ((EntityHitResult) hitresult).getEntity();
-                        Entity entity1 = this.getOwner();
-                        if (entity instanceof Player && entity1 instanceof Player && !((Player) entity1).canHarmPlayer((Player) entity)) {
-                            hitresult = null;
-                            entityhitresult = null;
-                        }
-                    }
-
-                    if (hitresult != null && hitresult.getType() != HitResult.Type.MISS && !flag) {
-                        switch (net.minecraftforge.event.ForgeEventFactory.onProjectileImpactResult(this, hitresult)) { //支持无伤害的设置，目前没看到调用
-                            case SKIP_ENTITY:
-                                if (hitresult.getType() != HitResult.Type.ENTITY) { // If there is no entity, we just return default behaviour
-                                    this.onHit(hitresult);
-                                    break;
-                                }
-                                ignoredEntities.add(entityhitresult.getEntity().getId());
-                                entityhitresult = null; // Don't process any further
-                                break;
-                            case STOP_AT_CURRENT_NO_DAMAGE:
-                                entityhitresult = null; // Don't process any further
-                                break;
-                            case STOP_AT_CURRENT:
-                                this.setPierceLevel((byte) 0);
-                            case DEFAULT:
-                                this.onHit(hitresult);
-                                break;
-                        }
-                    }
-
-                    if (entityhitresult == null || this.getPierceLevel() <= 0) {
-                        break;
-                    }
-
-                    hitresult = null;
-                }
+                this.onHitEntity(entity);
+                ignoredEntities.add(entity.getId());
+            }
+//                while (!this.isRemoved()) { //这个while是保证在箭没有消失的情况下击穿多个生物？
+//
+//
+//                    if (hitresult != null && hitresult.getType() != HitResult.Type.MISS && !flag) {
+//                        switch (net.minecraftforge.event.ForgeEventFactory.onProjectileImpactResult(this, hitresult)) { //支持无伤害的设置，目前没看到调用
+//                            case SKIP_ENTITY:
+//                                if (hitresult.getType() != HitResult.Type.ENTITY) { // If there is no entity, we just return default behaviour
+//                                    this.onHit(hitresult);
+//                                    break;
+//                                }
+//                                ignoredEntities.add(entityhitresult.getEntity().getId());
+//                                entityhitresult = null; // Don't process any further
+//                                break;
+//                            case STOP_AT_CURRENT_NO_DAMAGE:
+//                                entityhitresult = null; // Don't process any further
+//                                break;
+//                            case STOP_AT_CURRENT:
+//                                this.setPierceLevel((byte) 0);
+//                            case DEFAULT:
+//                                this.onHit(hitresult);
+//                                break;
+//                        }
+//                    }
+//
+//                    if (entityhitresult == null || this.getPierceLevel() <= 0) {
+//                        break;
+//                    }
+//
+//                    hitresult = null;
+//                }
             }//for在这里结束
-        }
+
         if (this.isRemoved())
             return;
 
@@ -289,16 +311,16 @@ public class ChargeBladeExtendEntity extends Projectile {
     }
 
 
-    @Override
-    protected void onHit(HitResult hitResult) { //简化版的onhit，没有增加event
-        HitResult.Type hitresult$type = hitResult.getType();
-        if (hitresult$type == HitResult.Type.ENTITY) {
-            this.onHitEntity((EntityHitResult)hitResult);
-        } else if (hitresult$type == HitResult.Type.BLOCK) {
-            BlockHitResult blockhitresult = (BlockHitResult)hitResult;
-            this.onHitBlock(blockhitresult);
-        }
-    }
+//    @Override
+//    protected void onHit(HitResult hitResult) { //简化版的onhit，没有增加event
+//        HitResult.Type hitresult$type = hitResult.getType();
+//        if (hitresult$type == HitResult.Type.ENTITY) {
+////            this.onHitEntity((EntityHitResult)hitResult);
+//        } else if (hitresult$type == HitResult.Type.BLOCK) {
+//            BlockHitResult blockhitresult = (BlockHitResult)hitResult;
+////            this.onHitBlock(blockhitresult);
+//        }
+//    }
 
     private boolean shouldFall() {
         return false;
@@ -325,13 +347,21 @@ public class ChargeBladeExtendEntity extends Projectile {
     }
 
 
-    protected void onHitBlock(BlockHitResult result) {
-        BlockState state = level().getBlockState(result.getBlockPos());
+    protected void onHitBlock(BlockPos pos) {
+        BlockState state = level().getBlockState(pos);
         Level level = this.level();
         if (!level.isClientSide() && !state.is(Blocks.BEDROCK)) {  //直接破坏掉方块
-            level.destroyBlock(result.getBlockPos(), true, getOwner()); //保留掉落物
+            level.destroyBlock(pos, true, getOwner()); //保留掉落物
         }
     }
+
+//    protected void onHitBlock(BlockHitResult result) {
+//        BlockState state = level().getBlockState(result.getBlockPos());
+//        Level level = this.level();
+//        if (!level.isClientSide() && !state.is(Blocks.BEDROCK)) {  //直接破坏掉方块
+//            level.destroyBlock(result.getBlockPos(), true, getOwner()); //保留掉落物
+//        }
+//    }
 
     protected SoundEvent getDefaultHitGroundSoundEvent() {
         return SoundEvents.ARROW_HIT;
@@ -340,20 +370,20 @@ public class ChargeBladeExtendEntity extends Projectile {
     protected void doPostHurtEffects(LivingEntity p_36744_) {
     }
 
-    @Nullable
-    protected EntityHitResult findHitEntity(Vec3 p_36758_, Vec3 p_36759_) {
-        Vec3 deltaMovement = this.getDeltaMovement();
-        float rotateY = this.getYRot();    //视角在水平面上的弧度
-        float f1 = -rotateY * ((float)Math.PI / 180F);
-        float f2 = Mth.cos(f1);
-        float f3 = Mth.sin(f1);
-        Vec3 xz_vec = new Vec3(deltaMovement.x, 0, deltaMovement.z).normalize();
-        Vec3 oneSide = deltaMovement.cross(xz_vec).normalize();  //其中的一侧，如果视野在水平线上的话是左侧
-        if(oneSide.equals(Vec3.ZERO)) {  //平视，导致向量叉乘是0
-            oneSide = new Vec3(f2, 0 , -f3).normalize(); //进行逆时针旋转90，变成左侧
-        }
-        return ProjectileUtil.getEntityHitResult(this.level(), this, p_36758_, p_36759_, this.getBoundingBox().expandTowards(oneSide).inflate(1.0D).expandTowards(oneSide).inflate(1.0D).expandTowards(deltaMovement).inflate(1.0D), this::canHitEntity);
-    }
+//    @Nullable
+//    protected EntityHitResult findHitEntity(Vec3 p_36758_, Vec3 p_36759_) {
+//        Vec3 deltaMovement = this.getDeltaMovement();
+//        float rotateY = this.getYRot();    //视角在水平面上的弧度
+//        float f1 = -rotateY * ((float)Math.PI / 180F);
+//        float f2 = Mth.cos(f1);
+//        float f3 = Mth.sin(f1);
+//        Vec3 xz_vec = new Vec3(deltaMovement.x, 0, deltaMovement.z).normalize();
+//        Vec3 oneSide = deltaMovement.cross(xz_vec).normalize();  //其中的一侧，如果视野在水平线上的话是左侧
+//        if(oneSide.equals(Vec3.ZERO)) {  //平视，导致向量叉乘是0
+//            oneSide = new Vec3(f2, 0 , -f3).normalize(); //进行逆时针旋转90，变成左侧
+//        }
+//        return ProjectileUtil.getEntityHitResult(this.level(), this, p_36758_, p_36759_, this.getBoundingBox().expandTowards(oneSide).inflate(1.0D).expandTowards(oneSide).inflate(1.0D).expandTowards(deltaMovement).inflate(1.0D), this::canHitEntity);
+//    }
 
     protected boolean canHitEntity(Entity p_36743_) {
         return super.canHitEntity(p_36743_) && (this.piercingIgnoreEntityIds == null || !this.piercingIgnoreEntityIds.contains(p_36743_.getId())) && !this.ignoredEntities.contains(p_36743_.getId());
@@ -494,9 +524,7 @@ public class ChargeBladeExtendEntity extends Projectile {
         return ItemStack.EMPTY;
     }
 
-    @Override
-    protected void onHitEntity(EntityHitResult p_36757_) {
-        Entity entity = p_36757_.getEntity();
+    protected void onHitEntity(Entity  entity) {
         float f = (float)this.getDeltaMovement().length();
         int i = 7;  //跟直接伤害有关
 
@@ -544,6 +572,56 @@ public class ChargeBladeExtendEntity extends Projectile {
 
     }
 
+//    @Override
+//    protected void onHitEntity(EntityHitResult p_36757_) {
+//        Entity entity = p_36757_.getEntity();
+//        float f = (float)this.getDeltaMovement().length();
+//        int i = 7;  //跟直接伤害有关
+//
+//        Entity entity1 = this.getOwner();
+//        DamageSource damagesource;
+//        if (entity1 == null) {
+//            damagesource = DaoFaDamageSource.source(this, this, ChargeDamageTypes.DAO_REAL);
+//        } else {
+//            damagesource = DaoFaDamageSource.source(entity1, this, ChargeDamageTypes.DAO_REAL);
+//        }
+//
+//
+//        if (this.piercingIgnoreEntityIds == null) { //被伤害过的就记录
+//            this.piercingIgnoreEntityIds = new IntOpenHashSet(32);
+//        }
+//        this.piercingIgnoreEntityIds.add(entity.getId());
+//
+//
+//        //不处理末影人
+//        if (entity.hurt(damagesource, (float)i)) {
+//
+//            if (entity instanceof LivingEntity) {
+//                LivingEntity livingentity = (LivingEntity)entity;
+//                if (!this.level().isClientSide && this.getPierceLevel() <= 0) {
+//                    livingentity.setArrowCount(livingentity.getArrowCount() + 1);
+//                }
+//
+//                //去掉反弹
+//
+//                if (!this.level().isClientSide && entity1 instanceof LivingEntity) {
+//                    EnchantmentHelper.doPostHurtEffects(livingentity, entity1);
+//                    EnchantmentHelper.doPostDamageEffects((LivingEntity)entity1, livingentity);
+//                }
+//
+//                this.doPostHurtEffects(livingentity);
+//                if (entity1 != null && livingentity != entity1 && livingentity instanceof Player && entity1 instanceof ServerPlayer && !this.isSilent()) {
+//                    ((ServerPlayer)entity1).connection.send(new ClientboundGameEventPacket(ClientboundGameEventPacket.ARROW_HIT_PLAYER, 0.0F));
+//                }
+//
+//                //十字弩击杀成就相关代码删掉
+//            }
+//            //音效还是使用原版的弓箭音效吧，没有看到什么更好的
+//            this.playSound(getDefaultHitGroundSoundEvent(), 1.0F, 1.2F / (this.random.nextFloat() * 0.2F + 0.9F));
+//        }
+//
+//    }
+
     //数据存储和删除实体
     protected void tickDespawn() {
         ++this.discardTick;
@@ -553,5 +631,17 @@ public class ChargeBladeExtendEntity extends Projectile {
 
     }
 
+    public double PointDistanceToLine(Vec3 point, Vec3 line1, Vec3 line2) { //点到线段的距离
+        Vec3 lineVec = line1.vectorTo(line2);   //正向线大小
+        double dot1 = lineVec.dot(point.vectorTo(line2));   //p->line2 和 line1->line2
+        double dot2 = lineVec.reverse().dot(point.vectorTo(line1)); //p->line1 和 line2->line1
+
+        if(dot1 > 0 && dot2 > 0) {  //两个锐角，说明点到线段的垂线在线段内
+            return dot1 / (line1.length());   //算出高
+        } else {    //有一个不是锐角，垂足在线段外，按照线段距离算
+            return Math.min(line1.distanceTo(point), line2.distanceTo(point));  //两个到端点的距离取最短
+        }
+
+    }
 
 }
