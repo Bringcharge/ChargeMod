@@ -211,6 +211,7 @@ public class ChargeModItemRegistry {
     //高级剑——假
     public static final RegistryObject<Item> THE_FAKE_SWORD = ITEMS.register("the_fake_sword", () -> new TheFakeSword());
     //高级剑——塑果
+    public static final RegistryObject<Item> SU_GUO_SWORD = ITEMS.register("su_guo_sword", () -> new SuGuoSword());
     //仙剑——无相
     public static final RegistryObject<Item> WU_XIANG_SWORD = ITEMS.register("wu_xiang_sword", () -> new WuXiangSword());
     //仙剑——求逍遥
@@ -267,6 +268,7 @@ public class ChargeModItemRegistry {
                 output.accept(EARTH_BEAT.get());
                 output.accept(THE_REAL_SWORD.get());
                 output.accept(THE_FAKE_SWORD.get());
+                output.accept(SU_GUO_SWORD.get());
                 output.accept(WU_XIANG_SWORD.get());
                 //符
                 output.accept(PUSH_BACK_TALISMAN.get());

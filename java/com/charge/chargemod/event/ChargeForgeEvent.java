@@ -14,12 +14,14 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.monster.EnderMan;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
+import net.minecraftforge.event.entity.EntityTeleportEvent;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -65,6 +67,22 @@ public class ChargeForgeEvent{
         }
     }
 
+    //末影人传送事件
+    @SubscribeEvent
+    public static void onEnderManPortEvent(EntityTeleportEvent event) {
+        if (event.getEntity() instanceof EnderMan) {
+            EnderMan enderMan = (EnderMan)event.getEntity();
+            List<MobEffectInstance> effects = enderMan.getActiveEffects().stream().toList();
+            for (MobEffectInstance mobEffectInstance : effects) {
+                MobEffect effect = mobEffectInstance.getEffect();
+                if (effect.getDescriptionId().contains("silent_effect")) {
+                    event.setCanceled(true);
+                }
+            }
+        }
+    }
+
+    //受伤事件
     @SubscribeEvent
     public static void onLivingDamage(LivingDamageEvent event) {
 

@@ -11,6 +11,7 @@
   "item.charge.water_split_sword": "断水",
   "item.charge.ember_sword": "余烬",
   "item.charge.zhong_zhong_gu_sword": "冢中骨",
+  "item.charge.xun_yin_sword": "寻因",
   "item.charge.cang_feng_sword": "藏锋万里",
   "item.charge.no_cang_feng_sword": "锋万里",
   "describe.charge.cang_feng_count_enough": "武器已经磨砺出锋芒",
@@ -22,5 +23,6 @@
   "item.charge.earth_beat_sword": "地动",
   "item.charge.the_real_sword": "真",
   "item.charge.the_fake_sword": "假",
+  "item.charge.su_guo_sword": "塑果",
   "item.charge.wu_xiang_sword": "无相"
 }
