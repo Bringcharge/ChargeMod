@@ -114,6 +114,21 @@ public class ChargeModItemRegistry {
     //炼器铁砧item
     public static final RegistryObject<Item> chargeAlchemyAnvilBlockItem = ITEMS.register("charge_alchemy_anvil_block", () -> new BlockItem(CHARGE_ALCHEMY_ANVIL_BLOCK.get(), new Item.Properties()));
 
+    //传送阵
+    public static final RegistryObject<Block> CHARGE_TELEPORT_BLOCK = BLOCKS.register("charge_teleport_block", () -> {
+        return new ChargeTeleportBlock(BlockBehaviour.Properties.of()
+                .mapColor(MapColor.COLOR_BLUE) //地图颜色
+                .strength(1.0f, 50.0f) //硬度，石头是1.5 & 爆炸抗性，黑曜石是50
+                .lightLevel(state -> 15)
+                .sound(SoundType.STONE)
+                .noOcclusion()
+        );}); //光照等级
+    //传送阵blockEntityType
+    public static final RegistryObject<BlockEntityType<ChargeTeleportBlockEntity>> CHARGE_TELEPORT_ENTITY = BLOCK_ENTITIES.register("charge_teleport_block", () ->
+            BlockEntityType.Builder.of(ChargeTeleportBlockEntity::new, CHARGE_TELEPORT_BLOCK.get()).build(null));
+    //传送阵item
+    public static final RegistryObject<Item> chargeTeleportBlockItem = ITEMS.register("charge_teleport_block", () -> new BlockItem(CHARGE_TELEPORT_BLOCK.get(), new Item.Properties()));
+
 
     //飞刀layer
     public static final ModelLayerLocation CHARGE_DAGGER_LAYER = new ModelLayerLocation(new ResourceLocation(ChargeModItemRegistry.MODID, "charge_dagger"), "main");
@@ -215,6 +230,7 @@ public class ChargeModItemRegistry {
     //仙剑——无相
     public static final RegistryObject<Item> WU_XIANG_SWORD = ITEMS.register("wu_xiang_sword", () -> new WuXiangSword());
     //仙剑——求逍遥
+    public static final RegistryObject<Item> QIU_XIAO_YAO_SWORD = ITEMS.register("qiu_xiao_yao_sword", () -> new QiuXiaoYaoSword());
     //仙剑——乱因果
 
     //符咒
@@ -270,11 +286,15 @@ public class ChargeModItemRegistry {
                 output.accept(THE_FAKE_SWORD.get());
                 output.accept(SU_GUO_SWORD.get());
                 output.accept(WU_XIANG_SWORD.get());
+                output.accept(QIU_XIAO_YAO_SWORD.get());
                 //符
                 output.accept(PUSH_BACK_TALISMAN.get());
                 output.accept(SHIELD_TALISMAN.get());
                 output.accept(SKULL_STEAL_TALISMAN.get());
                 output.accept(HOLD_LIFE_TALISMAN.get());
+                //丹
+                //阵
+                output.accept(chargeTeleportBlockItem.get());   //传送阵
             }).build());
 
     public static final RegistryObject<EntityType<FakeVillager>> FAKE_VILLAGER = ENTITY_TYPES.register("fake_villager",
