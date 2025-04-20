@@ -6,7 +6,7 @@
   "block.charge.charge_base_block": "法台基石",
   "block.charge.charge_alchemy_stove_block": "八卦炉",
   "block.charge.charge_alchemy_anvil_block": "炼器砧",
-  "block.charge_teleport_block":"传送阵",
+  "block.charge.charge_teleport_block":"传送阵",
 
   "item.charge.kong_fang_sword": "孔方",
   "item.charge.fu_yao_sword": "扶摇",
@@ -27,5 +27,5 @@
   "item.charge.the_fake_sword": "假",
   "item.charge.su_guo_sword": "塑果",
   "item.charge.wu_xiang_sword": "无相",
-  "item.qiu_xiao_yao_sword": "求逍遥"
+  "item.charge.qiu_xiao_yao_sword": "求逍遥"
 }
