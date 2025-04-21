@@ -3,14 +3,15 @@ package com.charge.chargemod.particle;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.ParticleRenderType;
 import net.minecraft.client.particle.TextureSheetParticle;
+import net.minecraft.world.entity.LightningBolt;
 import org.joml.Vector3d;
-import org.joml.Vector4i;
 
-public class SwordBladeParticle extends TextureSheetParticle {
+public class ChargeBaseParticle extends TextureSheetParticle {  //自定义粒子的基类
     // 除了父类要求的参数,这里我们还增加了几个参数,例如速度，颜色，大小等
     // 方便我们自定义我们自己的粒子效果,
     // 我们使用vector4i表示颜色
-    public SwordBladeParticle(ClientLevel pLevel, double pX, double pY, double pZ, Vector3d speed) {
+
+    public ChargeBaseParticle(ClientLevel pLevel, double pX, double pY, double pZ, Vector3d speed, int lifeTimeTick, float QuadSize) {
         super(pLevel, pX, pY, pZ, speed.x,speed.y,speed.z);
         this.lifetime = 100; // 这是粒子的存在的时间
         this.xd = speed.x; // 这里的是x,y,z方向的速度
@@ -18,10 +19,13 @@ public class SwordBladeParticle extends TextureSheetParticle {
         this.zd = speed.z; // 我们并不希望这样做,就重新赋值
 
         this.setAlpha(1); // opengl中的颜色标准值是0-1,所以这里标准化
-        final float PARTICLE_SCALE_FOR_ONE_METRE = 0.5F; // 这是我们自定义的粒子大小,单位是米
-        this.quadSize = PARTICLE_SCALE_FOR_ONE_METRE;// 放大的倍数
+        this.quadSize = QuadSize;// 放大的倍数
         this.hasPhysics = true; // 粒子是否可以被碰撞
-        this.lifetime = 3;  //设置粒子生命周期
+        this.lifetime = lifeTimeTick;  //设置粒子生命周期
+        // 在粒子初始化时设置，子类去设置这些参数
+//        this.roll = 0; // 初始角度
+//        this.oRoll = 0; // 上一帧角度?
+//        this.rollSpeed = (float) (Math.PI / 2 / 20); // 90°在20帧内完成（1秒）
     }
     // 这里指明渲染是半透明
     @Override

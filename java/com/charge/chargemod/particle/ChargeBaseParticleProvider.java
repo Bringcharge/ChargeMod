@@ -1,5 +1,7 @@
 package com.charge.chargemod.particle;
 
+import com.charge.chargemod.particle.particleList.SwordBladeParticle;
+import com.charge.chargemod.particle.particleList.SwordMaskParticle;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.ParticleProvider;
@@ -18,8 +20,9 @@ public class ChargeBaseParticleProvider implements ParticleProvider<ChargeBasePa
     // 创建粒子
     @Nullable
     @Override
+    //生成粒子函数是被调用的。
     public Particle createParticle(ChargeBaseParticleType pType, ClientLevel pLevel, double pX, double pY, double pZ, double pXSpeed, double pYSpeed, double pZSpeed) {
-        if (pType.getType().equals("sword_mask")) {//根据传入的type不同，构建不同的粒子效果
+        if (pType.getType().equals(ChargeModParticleType.SWORD_MASK)) {//根据传入的type不同，构建不同的粒子效果
             SwordMaskParticle swordMaskParticle = new SwordMaskParticle(pLevel, pX, pY, pZ, pType.getSpeed());
             swordMaskParticle.pickSprite(this.sprites);
             return swordMaskParticle;

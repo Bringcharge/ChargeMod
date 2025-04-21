@@ -1,10 +1,12 @@
 package com.charge.chargemod.gui;
 import com.charge.chargemod.block.ChargeTeleportBlockEntity;
+import com.charge.chargemod.network.ChargePacketSender;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.client.gui.components.ImageWidget;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Vec3i;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -95,7 +97,8 @@ public class TeleportEditScreen extends Screen {
             int x = Integer.parseInt(editBox_x.getValue());
             int y = Integer.parseInt(editBox_y.getValue());
             int z = Integer.parseInt(editBox_z.getValue());
-            entity.setTargetVec(new Vec3i(x, y, z));
+            BlockPos pos = entity.getBlockPos();
+            ChargePacketSender.sendTeleportBlockMessageToServer(pos.getX(), pos.getY(), pos.getZ(), x, y, z);
         }
     }
 }
