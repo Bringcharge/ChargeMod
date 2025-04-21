@@ -1,6 +1,7 @@
 package com.charge.chargemod.block;
 
 import com.charge.chargemod.ChargeModItemRegistry;
+import com.charge.chargemod.gui.TeleportEditScreen;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Vec3i;
@@ -44,29 +45,12 @@ public class ChargeTeleportBlock extends Block implements EntityBlock {
                     player.teleportTo(vec3i.getX(), vec3i.getY(), vec3i.getZ());
                 }
             } else {
-//                TeleportEditScreen screen = new TeleportEditScreen(Component.translatable("坐标定制"), pedestal);
-//                Minecraft.getInstance().setScreen(screen);  //添加页面
-
+                TeleportEditScreen screen = new TeleportEditScreen(Component.translatable("坐标定制"), pedestal);
+                Minecraft.getInstance().setScreen(screen);  //添加页面
             }
         }
 
         return InteractionResult.sidedSuccess(level.isClientSide);
     }
 
-
-    //被破坏时掉落物的情况
-    public void onRemove(BlockState state, Level level, BlockPos blockPos, BlockState state2, boolean flag) {
-        if (!state.is(state2.getBlock())) {
-            BlockEntity blockentity = level.getBlockEntity(blockPos);
-            if (blockentity instanceof ChargeTeleportBlockEntity) {
-                if (level instanceof ServerLevel) {
-                    Containers.dropItemStack(level, blockPos.getX(), blockPos.getY(), blockPos.getZ(), ((ChargeTeleportBlockEntity) blockentity).getItem());//获取内容物并掉落
-                }
-                //跟红石信号有关，可以不调用
-//                level.updateNeighbourForOutputSignal(blockPos, this);
-            }
-
-            super.onRemove(state, level, blockPos, state2, flag);
-        }
-    }
 }

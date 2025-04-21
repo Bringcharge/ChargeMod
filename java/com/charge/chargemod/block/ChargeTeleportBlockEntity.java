@@ -10,28 +10,13 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 
-//炼器铁砧
+//传送阵
 public class ChargeTeleportBlockEntity extends BlockEntity {
-    private ItemStack item = ItemStack.EMPTY;
     private Vec3i targetVec = null;
 
     public ChargeTeleportBlockEntity(BlockPos pos, BlockState state) {
 //        super(BlockEntityType.BELL,pos,state);
         super(ChargeModItemRegistry.CHARGE_TELEPORT_ENTITY.get(), pos, state);
-    }
-
-
-
-    public ItemStack getItem() {
-        return item;
-    }
-
-    public void setItem(ItemStack item) {
-        this.item = item;
-        setChanged(); // 标记方块实体为已更改
-        if (level != null) {
-            level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), 3); // 更新客户端
-        }
     }
 
     public Vec3i getTargetVec() {

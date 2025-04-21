@@ -18,9 +18,7 @@ public class CalamityLightning extends Entity {
     private static final EntityDataAccessor<Byte> ID_FLAGS = SynchedEntityData.defineId(CalamityLightning.class, EntityDataSerializers.BYTE);
     private static final EntityDataAccessor<Byte> PIERCE_LEVEL = SynchedEntityData.defineId(CalamityLightning.class, EntityDataSerializers.BYTE);
 
-    public CalamityZombie zombieTop;
-    public CalamityZombie zombieCenter;
-    public CalamityZombie zombieBottom;
+
     private int lifeTime;
     private final int maxLifeTime = 20  * 225 + 20 * 5; //持续225s + 5s演出
     public Player owner;

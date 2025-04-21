@@ -1,6 +1,7 @@
-package com.charge.chargemod.lingqi;
+package com.charge.chargemod.network.packet;
 
 import com.charge.chargemod.ChargeModItemRegistry;
+import com.charge.chargemod.lingqi.PlayerLingQiHelper;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;

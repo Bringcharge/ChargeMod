@@ -1,7 +1,7 @@
 package com.charge.chargemod.network;
 
-import com.charge.chargemod.lingqi.PlayerLingQiToClientPacket;
-import com.charge.chargemod.lingqi.PlayerLingQiToServerPacket;
+import com.charge.chargemod.network.packet.PlayerLingQiToClientPacket;
+import com.charge.chargemod.network.packet.PlayerLingQiToServerPacket;
 import com.charge.chargemod.network.packet.PlayerMovementPacket;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.network.PacketDistributor;
