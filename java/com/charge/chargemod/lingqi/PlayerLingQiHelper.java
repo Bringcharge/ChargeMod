@@ -28,4 +28,21 @@ public class PlayerLingQiHelper {
         LazyOptional<PlayerLingQi> optional = player.getCapability(ChargeModItemRegistry.PLAYER_LING_QI);
         optional.ifPresent(playerLingQi -> playerLingQi.setLingQi(lingqi));
     }
+
+    public static int getMaxLingQi(Player player) {
+        LazyOptional<PlayerLingQi> optional = player.getCapability(ChargeModItemRegistry.PLAYER_LING_QI);
+        return optional.map(PlayerLingQi::getMaxLingQi).orElse(0);
+    }
+
+    public static void crossingCalamity(Player player, int type) {
+        LazyOptional<PlayerLingQi> optional = player.getCapability(ChargeModItemRegistry.PLAYER_LING_QI);
+
+        if (type == 1) {
+            optional.ifPresent(PlayerLingQi::gotLingQiInside);
+        } else if (type == 2) {
+            optional.ifPresent(PlayerLingQi::SlaySanShi);
+        } else if (type == 3) {
+            optional.ifPresent(PlayerLingQi::LightningCalamity);
+        }
+    }
 }

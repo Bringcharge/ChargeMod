@@ -1,5 +1,7 @@
 package com.charge.chargemod.entity.calamity;
 
+import com.charge.chargemod.lingqi.PlayerLingQiHelper;
+import com.charge.chargemod.network.ChargePacketSender;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -10,6 +12,7 @@ import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -39,8 +42,13 @@ public class CalamitySanShi extends Entity {
     public void killOneMore() {
         killCount++;
         if (killCount == 3) {   //三尸已斩
-            //TODO:添加渡劫成功的提示并且增加player蓝条
             owner.sendSystemMessage(Component.literal("渡劫完成"));
+            if (!level().isClientSide) {
+                if (owner instanceof ServerPlayer) {
+                    PlayerLingQiHelper.crossingCalamity(owner, 2);
+                    ChargePacketSender.sendCrossCalamityMessageToClient((ServerPlayer)owner, 2);
+                }
+            }
             discard();
         }
     }
@@ -52,7 +60,6 @@ public class CalamitySanShi extends Entity {
         if (!this.level().isClientSide) {
 
             if (lifeTime <= 0) {    //时间到了就消失
-                //TODO：发送渡劫失败的提示
                 zombieTop.timeEnd();
                 zombieCenter.timeEnd();
                 zombieBottom.timeEnd();

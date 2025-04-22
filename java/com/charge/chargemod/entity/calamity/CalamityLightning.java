@@ -1,11 +1,14 @@
 package com.charge.chargemod.entity.calamity;
 
+import com.charge.chargemod.lingqi.PlayerLingQiHelper;
+import com.charge.chargemod.network.ChargePacketSender;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LightningBolt;
@@ -82,6 +85,12 @@ public class CalamityLightning extends Entity {
 
             if (lifeTime > maxLifeTime) {   //结束了
                 owner.sendSystemMessage(Component.literal("渡劫成功"));
+                if (!level().isClientSide) {
+                    if (owner instanceof ServerPlayer) {
+                        PlayerLingQiHelper.crossingCalamity(owner, 3);
+                        ChargePacketSender.sendCrossCalamityMessageToClient((ServerPlayer)owner, 3);
+                    }
+                }
                 discard();
                 return;
             }

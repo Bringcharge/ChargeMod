@@ -44,7 +44,16 @@ public class ChargeForgeEvent{
             if (tickCount % 10 == 0) {
                 LazyOptional<PlayerLingQi> optional = event.player.getCapability(ChargeModItemRegistry.PLAYER_LING_QI);
                 optional.ifPresent(playerLingQi -> {
-                    //TODO:肯能要加入聚灵阵之类的东西
+
+                    List<MobEffectInstance> effects = event.player.getActiveEffects().stream().toList();    //确认是否有灵气buff
+                    for (MobEffectInstance mobEffectInstance : effects) {       //判断是否有buff
+                        MobEffect effect = mobEffectInstance.getEffect();
+                        if (effect.getDescriptionId().contains("ling_qi_increase")) {
+                            int amp = mobEffectInstance.getAmplifier();    //buff等级
+                            playerLingQi.addLingQi(amp * 2);
+                            break;
+                        }
+                    }
                     playerLingQi.addLingQi(1);
                     ChargePacketSender.sendLingqiMessageToClient((ServerPlayer) event.player, playerLingQi.getLingQi());
 //                event.player.sendSystemMessage(Component.literal("Subtracted Thirst"));

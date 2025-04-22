@@ -1,9 +1,6 @@
 package com.charge.chargemod.network;
 
-import com.charge.chargemod.network.packet.PlayerLingQiToClientPacket;
-import com.charge.chargemod.network.packet.PlayerLingQiToServerPacket;
-import com.charge.chargemod.network.packet.PlayerMovementPacket;
-import com.charge.chargemod.network.packet.PlayerTeleportBlockToServerPacket;
+import com.charge.chargemod.network.packet.*;
 import com.charge.chargemod.network.packet.particle.ParticleCreateToClientPacket;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.network.PacketDistributor;
@@ -16,6 +13,10 @@ public class ChargePacketSender {
 
     public static void sendLingqiMessageToClient(ServerPlayer player, int lingqi) {
         PlayerLingQiToClientPacket packet = new PlayerLingQiToClientPacket(lingqi);
+        ChargeNetwork.CHANNEL.send(PacketDistributor.PLAYER.with(() -> player), packet);
+    }
+    public static void sendCrossCalamityMessageToClient(ServerPlayer player, int type) {
+        PlayerCrossCalamityToClientPacket packet = new PlayerCrossCalamityToClientPacket(type);
         ChargeNetwork.CHANNEL.send(PacketDistributor.PLAYER.with(() -> player), packet);
     }
 
