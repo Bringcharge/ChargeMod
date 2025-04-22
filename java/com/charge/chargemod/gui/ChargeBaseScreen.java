@@ -127,6 +127,9 @@ public class ChargeBaseScreen extends Screen {
                 if (bottomRightItem != null) { //下右
                     this.addRenderableWidget(new ImageWidget(rightPageStartPosX + 10 + 32 + 16, rightPageStartPosY + 32 + 16,16,16,bottomRightItem));
                 }
+                if (centerItem != null) { //中间
+                    this.addRenderableWidget(new ImageWidget(rightPageStartPosX + 10 + 16 + 8, rightPageStartPosY + 16 + 16,8,16,centerItem));
+                }
             }
             if (rightTextList != null) {
                 for (int i = 0; i < rightTextList.size(); i++) {
