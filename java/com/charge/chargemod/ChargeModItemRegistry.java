@@ -129,6 +129,17 @@ public class ChargeModItemRegistry {
     //传送阵item
     public static final RegistryObject<Item> chargeTeleportBlockItem = ITEMS.register("charge_teleport_block", () -> new BlockItem(CHARGE_TELEPORT_BLOCK.get(), new Item.Properties()));
 
+//    //tick响应block
+//    public static final RegistryObject<Block> CHARGE_TICK_BLOCK = BLOCKS.register("charge_tick_block", () -> {
+//        return new ChargeTickBlock(BlockBehaviour.Properties.of()
+//                .mapColor(MapColor.COLOR_PINK) //地图颜色
+//                .strength(1.0f, 50.0f) //硬度，石头是1.5 & 爆炸抗性，黑曜石是50
+//                .sound(SoundType.STONE)
+//        );}); //光照等级
+    //tick的entityType
+    public static final RegistryObject<BlockEntityType<ChargeTickBlockEntity>> CHARGE_TICK_ENTITY = BLOCK_ENTITIES.register("charge_tick_block", () ->
+            BlockEntityType.Builder.of(ChargeTickBlockEntity::new, CHARGE_TELEPORT_BLOCK.get()).build(null));
+
 
     //飞刀layer
     public static final ModelLayerLocation CHARGE_DAGGER_LAYER = new ModelLayerLocation(new ResourceLocation(ChargeModItemRegistry.MODID, "charge_dagger"), "main");
