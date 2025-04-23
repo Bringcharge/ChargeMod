@@ -1,0 +1,68 @@
+package com.charge.chargemod.item.pellet;
+
+import com.charge.chargemod.ChargeModItemRegistry;
+import com.charge.chargemod.entity.calamity.CalamityLightning;
+import com.charge.chargemod.entity.calamity.CalamitySanShi;
+import com.charge.chargemod.entity.calamity.CalamityZombie;
+import com.charge.chargemod.lingqi.PlayerLingQiHelper;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.food.FoodProperties;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+
+//成仙丹
+public class ChargeLightningPellet extends Item {
+
+    public ChargeLightningPellet() {
+        super(new Properties().food(
+                new FoodProperties.Builder()
+                .saturationMod(0)  //这个值越高，食物就越能减少饥饿条下降的速度。在这里，饱和度被设置为 10
+                .nutrition(0)  //营养值决定了食物能恢复多少饥饿值
+                .effect(()-> new MobEffectInstance(MobEffects.WITHER,3*20,1),1)
+                .effect(()-> new MobEffectInstance(MobEffects.DARKNESS,3*20,1),1)
+                .effect(()-> new MobEffectInstance(MobEffects.CONFUSION,3*20,1),1)
+                .alwaysEat()
+                .fast()
+                .build()
+        ));
+    }
+
+    @Override
+    public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity entity) {
+        if (entity instanceof Player) {
+            Player player = (Player)entity;
+            int calamityNumber = PlayerLingQiHelper.getMaxCalamity(player);
+            if (calamityNumber < 3 && !level.isClientSide) {   //条件符合，召唤三尸
+                CalamityLightning calamityLightning = new CalamityLightning(ChargeModItemRegistry.CALAMITY_LIGHTNING.get(), level);
+                calamityLightning.start();
+                calamityLightning.owner = player;
+                player.sendSystemMessage(Component.literal("劫云正在凝聚"));
+                level.addFreshEntity(calamityLightning);
+
+            }
+        }
+        return super.finishUsingItem(stack, level, entity); //能吃的
+    }
+
+//    @Override
+//    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
+//        ItemStack stack = player.getItemInHand(hand);
+//        InstructionsModel model = new InstructionsModel();
+//        model.user = player;
+//        model.holder = this;
+//        releaseUsing(stack, level, player, 10);
+//        return InteractionResultHolder.success(stack);
+//        //如果消耗的话做下面这个
+////        if (!level.isClientSide) {
+////            // 在服务端执行逻辑
+////            player.sendSystemMessage(Component.literal("Item consumed!")); // 发送消息给玩家
+////            stack.shrink(1); // 消耗一个物品
+////        }
+////        return InteractionResultHolder.consume(stack); // 返回消耗结果
+//    }
+}

@@ -34,6 +34,11 @@ public class PlayerLingQiHelper {
         return optional.map(PlayerLingQi::getMaxLingQi).orElse(0);
     }
 
+    public static int getMaxCalamity(Player player) {
+        LazyOptional<PlayerLingQi> optional = player.getCapability(ChargeModItemRegistry.PLAYER_LING_QI);
+        return optional.map(PlayerLingQi::getCalamityNumber).orElse(0);
+    }
+
     public static void crossingCalamity(Player player, int type) {
         LazyOptional<PlayerLingQi> optional = player.getCapability(ChargeModItemRegistry.PLAYER_LING_QI);
 

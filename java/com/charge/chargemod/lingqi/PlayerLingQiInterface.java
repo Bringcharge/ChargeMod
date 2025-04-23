@@ -5,6 +5,7 @@ public interface PlayerLingQiInterface {
     void gotLingQiInside();
     void SlaySanShi();
     void LightningCalamity();
+    int getCalamityNumber();
 
     int getMaxLingQi(); //获取最大灵气
     int getLingQi(); // 获取灵气值

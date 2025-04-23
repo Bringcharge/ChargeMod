@@ -35,6 +35,22 @@ public class PlayerLingQi implements PlayerLingQiInterface {
         this.lingqi = Math.max(lingqi - consume, MIN_LINGQI);
     }
 
+    //当前阶段
+    @Override
+    public int getCalamityNumber() {
+        if (lightning) {
+            return 3;
+        }
+        if (slay_san_shi) {
+            return 2;
+        }
+        if (got_ling_qi) {
+            return 1;
+        };
+        return 0;
+    }
+
+    //灵气上限
     @Override
     public int getMaxLingQi() {
         if (lightning) {

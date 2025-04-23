@@ -14,11 +14,11 @@ import net.minecraft.world.level.Level;
 //辟谷丹
 public class ChargeBiGuPellet extends Item {
 
-    //普通物品单击右键
+    //构造参数
     private static final FoodProperties FOOD_PROPERTIES = new FoodProperties.Builder()
             .saturationMod(10)  //这个值越高，食物就越能减少饥饿条下降的速度。在这里，饱和度被设置为 10
             .nutrition(20)  //营养值决定了食物能恢复多少饥饿值
-//            .effect(()-> new MobEffectInstance(MobEffects.POISON,3*20,1),1)
+            .effect(()-> new MobEffectInstance(MobEffects.SATURATION,30*20,1),1)
             .alwaysEat()
             .fast()
             .build();
