@@ -1,3 +1,15 @@
 {
-  "parent": "charge:block/charge_altar_block"
+  "parent": "charge:block/charge_altar_block",
+  "display": {
+    "gui": {
+      "rotation": [30, 45, 0],
+      "translation": [0, 0, 0],
+      "scale": [0.725, 0.725, 0.725]
+    },
+    "ground": {
+      "rotation": [0, 0, 0],
+      "translation": [0, 3, 0],
+      "scale": [0.35, 0.35, 0.35]
+    }
+  }
 }
