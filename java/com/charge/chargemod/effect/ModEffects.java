@@ -20,6 +20,8 @@ public class ModEffects {
     public static final Supplier<MobEffect> COUNTER_EFFECT = register("counter_effect", ()->new CounterEffect(MobEffectCategory.BENEFICIAL, 16262179));
     public static final Supplier<MobEffect> SILENT_EFFECT = register("silent_effect", ()->new SilentEffect(MobEffectCategory.HARMFUL, 16262179));
     public static final Supplier<MobEffect> LING_QI_INCREASE = register("ling_qi_increase", ()->new LingQiIncreaseEffect(MobEffectCategory.BENEFICIAL, 16262179));
+    public static final Supplier<MobEffect> SUAN_BU_DUI_EFFECT = register("suan_bu_dui_effect", ()->new SuanBuDuiEffect(MobEffectCategory.BENEFICIAL, 16262179));
+
 
     public static <T extends MobEffect> RegistryObject<T> register(String name, Supplier<T> effect){
         return MOD_EFFECTS.register(name, effect);

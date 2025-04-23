@@ -32,6 +32,7 @@ import org.checkerframework.common.returnsreceiver.qual.This;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 
 @Mod.EventBusSubscriber(modid = ChargeModItemRegistry.MODID,bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class ChargeForgeEvent{
@@ -95,6 +96,7 @@ public class ChargeForgeEvent{
     @SubscribeEvent
     public static void onLivingDamage(LivingDamageEvent event) {
 
+        //反击
         if (event.getEntity() instanceof Player) {
             if (event.getSource().is(DamageTypes.GENERIC_KILL)) {   //如果是即死命令，那就不处理了
                 return;
@@ -104,7 +106,7 @@ public class ChargeForgeEvent{
 
             for (MobEffectInstance mobEffectInstance : effects) {       //判断是否有buff
                 MobEffect effect = mobEffectInstance.getEffect();
-                if (effect.getDescriptionId().contains("counter_effect")) {
+                if (effect.getDescriptionId().contains("counter_effect")) { //反击
 
                     Entity entity = event.getSource().getEntity();  //获取伤害源头
                     if (entity instanceof LivingEntity) {
@@ -115,6 +117,12 @@ public class ChargeForgeEvent{
                     player.removeEffect(effect);    //移除反击buff
                     event.setCanceled(true);
                     return;
+                }
+                if (effect.getDescriptionId().contains("suan_bu_dui_effect")) { //算不准
+                    float amount = event.getAmount();
+                    Random random = new Random();
+                    float discount = random.nextFloat(amount);
+                    event.setAmount(amount - discount); //其实减法和直接用随机数区别不大，先保留一个减法，说不定后期有改动
                 }
             }
         }
