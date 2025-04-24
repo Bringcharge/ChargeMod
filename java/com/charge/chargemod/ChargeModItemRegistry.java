@@ -10,10 +10,7 @@ import com.charge.chargemod.item.Armor.ModArmorMaterials;
 import com.charge.chargemod.item.Armor.PaperHead;
 import com.charge.chargemod.item.pellet.ChargeBiGuPellet;
 import com.charge.chargemod.item.sword.*;
-import com.charge.chargemod.item.talisman.HoldLifeTalisman;
-import com.charge.chargemod.item.talisman.PushBackTalisman;
-import com.charge.chargemod.item.talisman.ShieldTalisman;
-import com.charge.chargemod.item.talisman.SkullStealTalisman;
+import com.charge.chargemod.item.talisman.*;
 import com.charge.chargemod.lingqi.PlayerLingQi;
 import com.charge.chargemod.lingqi.PlayerLingQiInterface;
 import net.minecraft.client.model.geom.ModelLayerLocation;
@@ -254,13 +251,24 @@ public class ChargeModItemRegistry {
     //延死符
     public static final RegistryObject<Item> HOLD_LIFE_TALISMAN = ITEMS.register("hold_life_talisman", () -> new HoldLifeTalisman());
     //回生符
+    public static final RegistryObject<Item> RELIVE_TALISMAN = ITEMS.register("relive_talisman", () -> new ReliveTalisman());
     //仙游符
+    public static final RegistryObject<Item> FLY_TALISMAN = ITEMS.register("fly_talisman", () -> new FlyTalisman());
     //祈雨符
-
+    public static final RegistryObject<Item> RAIN_TALISMAN = ITEMS.register("rain_talisman", () -> new RainTalisman());
+    //请神符
+    public static final RegistryObject<Item> INVITE_GOD_TALISMAN = ITEMS.register("invite_god_talisman", () -> new InviteGodTalisman());
     //仙符 求不得
+    public static final RegistryObject<Item> QIU_BU_DE_TALISMAN = ITEMS.register("qiu_bu_de_talisman", () -> new QiuBuDeTalisman());
     //仙符 解不出
+    public static final RegistryObject<Item> JIE_BU_CHU_TALISMAN = ITEMS.register("jie_bu_chu_talisman", () -> new JieBuChuTalisman());
     //仙符 想不通
+    public static final RegistryObject<Item> XIANG_BU_TONG_TALISMAN = ITEMS.register("xiang_bu_tong_talisman", () -> new XiangBuTongTalisman());
     //仙符 算不对
+    public static final RegistryObject<Item> SUAN_BU_DUI_TALISMAN = ITEMS.register("suan_bu_dui_talisman", () -> new SuanBuDuiTalisman());
+    //仙符 迷惘
+    public static final RegistryObject<Item> MAZE_TALISMAN = ITEMS.register("maze_talisman", () -> new MazeTalisman());
+
     //mod物品列表
     public static final RegistryObject<CreativeModeTab> EXAMPLE_TAB = CREATIVE_MODE_TABS.register("charge_tab", () -> CreativeModeTab.builder()
             .title(Component.translatable("itemGroup." + MODID + ".charge_tab"))
@@ -298,11 +306,21 @@ public class ChargeModItemRegistry {
                 output.accept(SU_GUO_SWORD.get());
                 output.accept(WU_XIANG_SWORD.get());
                 output.accept(QIU_XIAO_YAO_SWORD.get());
+
                 //符
                 output.accept(PUSH_BACK_TALISMAN.get());
                 output.accept(SHIELD_TALISMAN.get());
                 output.accept(SKULL_STEAL_TALISMAN.get());
                 output.accept(HOLD_LIFE_TALISMAN.get());
+                output.accept(RELIVE_TALISMAN.get());
+                output.accept(FLY_TALISMAN.get());
+                output.accept(RAIN_TALISMAN.get());
+                output.accept(INVITE_GOD_TALISMAN.get());
+                output.accept(QIU_BU_DE_TALISMAN.get());
+                output.accept(JIE_BU_CHU_TALISMAN.get());
+                output.accept(XIANG_BU_TONG_TALISMAN.get());
+                output.accept(SUAN_BU_DUI_TALISMAN.get());
+                output.accept(MAZE_TALISMAN.get());
                 //丹
                 //阵
                 output.accept(chargeTeleportBlockItem.get());   //传送阵
