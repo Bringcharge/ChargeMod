@@ -339,7 +339,7 @@ public class ChargeModItemRegistry {
                     .sized(0.5F, 0.5F) // 设置实体大小
                     .build("calamity_sanshi"));
     public static final RegistryObject<EntityType<CalamityLightning>> CALAMITY_LIGHTNING = ENTITY_TYPES.register("calamity_lightning",
-            () -> EntityType.Builder.of(CalamityLightning::new, MobCategory.CREATURE)
+            () -> EntityType.Builder.of(CalamityLightning::new, MobCategory.MISC)
                     .sized(0.6F, 1.95F) // 设置实体大小
                     .build("calamity_lightning"));
 
