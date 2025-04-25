@@ -138,6 +138,8 @@ public class ChargeModItemRegistry {
             BlockEntityType.Builder.of(ChargeTickBlockEntity::new, CHARGE_TELEPORT_BLOCK.get()).build(null));
 
 
+    //下面是entity
+
     //飞刀layer
     public static final ModelLayerLocation CHARGE_DAGGER_LAYER = new ModelLayerLocation(new ResourceLocation(ChargeModItemRegistry.MODID, "charge_dagger"), "main");
     //飞刀自定义entityType
@@ -287,14 +289,14 @@ public class ChargeModItemRegistry {
     public static final RegistryObject<CreativeModeTab> EXAMPLE_TAB = CREATIVE_MODE_TABS.register("charge_tab", () -> CreativeModeTab.builder()
             .title(Component.translatable("itemGroup." + MODID + ".charge_tab"))
             .withTabsBefore(CreativeModeTabs.COMBAT)
-            .icon(() -> chargeBaseIngot.get().getDefaultInstance())
+            .icon(() -> CHARGE_GUIDE_BOOK.get().getDefaultInstance())
             .displayItems((parameters, output) -> {
                 output.accept(chargeBaseIngot.get()); // Add the example item to the tab. For your own tabs, this method is preferred over the event\
                 output.accept(CHARGE_GUIDE_BOOK.get());
                 output.accept(chargeBow.get());
                 output.accept(chargeAltarBlockItem.get());
                 output.accept(chargeLingShi.get());
-                output.accept(chargeLingShi.get());
+                output.accept(CHARGE_LING_SHI_ORE_ITEM.get());
                 output.accept(chargeBaseBlockItem.get());
                 output.accept(chargeAlchemyAnvilBlockItem.get());
                 output.accept(chargeAlchemyStoveBlockItem.get());

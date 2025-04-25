@@ -1,12 +1,26 @@
 {
   "itemGroup.charge.charge_tab": "论侠修仙",
   "item.charge.charge_base_token": "令牌",
+  "item.charge.charge_guide_book_item": "天书",
+  "item.charge.paper_head": "纸头",
+  "item.charge.charge_ling_shi": "灵石",
 
   "block.charge.charge_altar_block": "载物台",
   "block.charge.charge_base_block": "法台基石",
   "block.charge.charge_alchemy_stove_block": "八卦炉",
   "block.charge.charge_alchemy_anvil_block": "炼器砧",
   "block.charge.charge_teleport_block":"传送阵",
+  "block.charge.charge_ling_shi_ore": "灵石矿",
+
+  "item.charge.charge_bigu_pellet": "辟谷丹",
+  "item.charge.charge_hong_yun_pellet": "鸿运齐天丹",
+  "item.charge.charge_health_pellet": "大还丹",
+  "item.charge.charge_power_pellet": "生力丹",
+  "item.charge.charge_po_wan_fa_pellet": "破万法丹",
+  "item.charge.charge_wan_wu_sheng_pellet": "万物生丹",
+  "item.charge.charge_san_shi_pellet": "三尸劫丹",
+  "item.charge.charge_deng_xian_pellet": "登仙丹",
+
 
   "item.charge.kong_fang_sword": "孔方",
   "item.charge.fu_yao_sword": "扶摇",
@@ -27,5 +41,19 @@
   "item.charge.the_fake_sword": "假",
   "item.charge.su_guo_sword": "塑果",
   "item.charge.wu_xiang_sword": "无相",
-  "item.charge.qiu_xiao_yao_sword": "求逍遥"
+  "item.charge.qiu_xiao_yao_sword": "求逍遥",
+
+  "item.charge.push_back_talisman": "退魔符",
+  "item.charge.shield_talisman": "御劫符",
+  "item.charge.skull_steal_talisman": "换颅符",
+  "item.charge.hold_life_talisman": "延死符",
+  "item.charge.relive_talisman": "回生符",
+  "item.charge.fly_talisman": "仙游符",
+  "item.charge.rain_talisman": "祈雨符",
+  "item.charge.invite_god_talisman": "请神符",
+  "item.charge.qiu_bu_de_talisman": "仙符 求不得",
+  "item.charge.JIE_BU_CHU_TALISMAN": "仙符 解不出",
+  "item.charge.xiang_bu_tong_talisman": "仙符 想不通",
+  "item.charge.suan_bu_dui_talisman": "仙符 算不对",
+  "item.charge.maze_talisman": "仙符 迷惘"
 }
