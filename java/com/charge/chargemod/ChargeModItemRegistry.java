@@ -204,10 +204,10 @@ public class ChargeModItemRegistry {
 
     //辟谷丹
     public static final RegistryObject<Item> CHARGE_BIGU_PELLET = ITEMS.register("charge_bigu_pellet", () -> new ChargeBiGuPellet());
-    //大还丹
-    public static final RegistryObject<Item> CHARGE_HEALTH_PELLET = ITEMS.register("charge_health_pellet", () -> new ChargeHealthPellet());
     //鸿运齐天丹
     public static final RegistryObject<Item> CHARGE_HONG_YUN_PELLET = ITEMS.register("charge_hong_yun_pellet", () -> new ChargeHongYunPellet());
+    //大还丹
+    public static final RegistryObject<Item> CHARGE_HEALTH_PELLET = ITEMS.register("charge_health_pellet", () -> new ChargeHealthPellet());
     //生力丹
     public static final RegistryObject<Item> CHARGE_POWER_PELLET = ITEMS.register("charge_power_pellet", () -> new ChargePowerPellet());
     //破万法丹
@@ -298,6 +298,10 @@ public class ChargeModItemRegistry {
 
                 //丹药
                 output.accept(CHARGE_BIGU_PELLET.get());
+                output.accept(CHARGE_HONG_YUN_PELLET.get());
+                output.accept(CHARGE_HEALTH_PELLET.get());
+                output.accept(CHARGE_POWER_PELLET.get());
+                output.accept(CHARGE_PO_WAN_FA_PELLET.get());
                 output.accept(CHARGE_WAN_WU_SHENG_PELLET.get());
 
 
@@ -335,7 +339,7 @@ public class ChargeModItemRegistry {
                 output.accept(XIANG_BU_TONG_TALISMAN.get());
                 output.accept(SUAN_BU_DUI_TALISMAN.get());
                 output.accept(MAZE_TALISMAN.get());
-                //丹
+
                 //阵
                 output.accept(chargeTeleportBlockItem.get());   //传送阵
             }).build());
