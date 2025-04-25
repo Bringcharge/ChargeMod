@@ -214,6 +214,10 @@ public class ChargeModItemRegistry {
     public static final RegistryObject<Item> CHARGE_PO_WAN_FA_PELLET = ITEMS.register("charge_po_wan_fa_pellet", () -> new ChargePoWanFaPellet());
     //万物生丹
     public static final RegistryObject<Item> CHARGE_WAN_WU_SHENG_PELLET = ITEMS.register("charge_wan_wu_sheng_pellet", () -> new ChargeWanWuShengPellet());
+    //三尸丹
+    public static final RegistryObject<Item> CHARGE_SAN_SHI_PELLET = ITEMS.register("charge_san_shi_pellet", () -> new ChargeSanShiPellet());
+    //登仙丹
+    public static final RegistryObject<Item> CHARGE_DENG_XIAN_PELLET = ITEMS.register("charge_deng_xian_pellet", () -> new ChargeLightningPellet());
 
 
     //金剑——孔方
@@ -303,7 +307,8 @@ public class ChargeModItemRegistry {
                 output.accept(CHARGE_POWER_PELLET.get());
                 output.accept(CHARGE_PO_WAN_FA_PELLET.get());
                 output.accept(CHARGE_WAN_WU_SHENG_PELLET.get());
-
+                output.accept(CHARGE_SAN_SHI_PELLET.get());
+                output.accept(CHARGE_DENG_XIAN_PELLET.get());
 
 //                output.accept(PAPER_HEAD.get());
                 //剑
