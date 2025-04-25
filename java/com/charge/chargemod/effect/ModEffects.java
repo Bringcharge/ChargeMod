@@ -16,12 +16,12 @@ public class ModEffects {
     // 应该是用十进制表示的16进制吧，大家自己试试
     public static final Supplier<MobEffect> EXAMPLE_EFFECT = register("example_effect", ()->new ExampleEffect(MobEffectCategory.BENEFICIAL, 16262179));
     public static final Supplier<MobEffect> HOLD_LIFE_EFFECT = register("hold_life_effect", ()->new HoldLifeEffect(MobEffectCategory.BENEFICIAL, 16262179));
-    public static final Supplier<MobEffect> FLY_EFFECT = register("fly_effect", ()->new FlyEffect(MobEffectCategory.BENEFICIAL, 16262179));
-    public static final Supplier<MobEffect> COUNTER_EFFECT = register("counter_effect", ()->new CounterEffect(MobEffectCategory.BENEFICIAL, 16262179));
-    public static final Supplier<MobEffect> SILENT_EFFECT = register("silent_effect", ()->new SilentEffect(MobEffectCategory.HARMFUL, 16262179));
-    public static final Supplier<MobEffect> LING_QI_INCREASE = register("ling_qi_increase", ()->new LingQiIncreaseEffect(MobEffectCategory.BENEFICIAL, 16262179));
-    public static final Supplier<MobEffect> SUAN_BU_DUI_EFFECT = register("suan_bu_dui_effect", ()->new SuanBuDuiEffect(MobEffectCategory.BENEFICIAL, 16262179));
-    public static final Supplier<MobEffect> WAN_WU_SHENG_EFFECT = register("wan_wu_sheng_effect", ()->new WanWuShengEffect(MobEffectCategory.BENEFICIAL, 16262179));
+    public static final Supplier<MobEffect> FLY_EFFECT = register("fly_effect", ()->new FlyEffect(MobEffectCategory.BENEFICIAL, 0x9C9D9B));
+    public static final Supplier<MobEffect> COUNTER_EFFECT = register("counter_effect", ()->new CounterEffect(MobEffectCategory.BENEFICIAL, 0x469000));
+    public static final Supplier<MobEffect> SILENT_EFFECT = register("silent_effect", ()->new SilentEffect(MobEffectCategory.HARMFUL, 0xFB9868));
+    public static final Supplier<MobEffect> LING_QI_INCREASE = register("ling_qi_increase", ()->new LingQiIncreaseEffect(MobEffectCategory.BENEFICIAL, 0x24B2F1));
+    public static final Supplier<MobEffect> SUAN_BU_DUI_EFFECT = register("suan_bu_dui_effect", ()->new SuanBuDuiEffect(MobEffectCategory.BENEFICIAL, 0x1C6485));
+    public static final Supplier<MobEffect> WAN_WU_SHENG_EFFECT = register("wan_wu_sheng_effect", ()->new WanWuShengEffect(MobEffectCategory.BENEFICIAL, 0xF46248));
 
 
 
