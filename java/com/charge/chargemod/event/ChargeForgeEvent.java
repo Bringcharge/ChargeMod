@@ -7,17 +7,21 @@ import com.charge.chargemod.item.talisman.HoldLifeTalisman;
 import com.charge.chargemod.lingqi.PlayerLingQi;
 import com.charge.chargemod.network.ChargeNetwork;
 import com.charge.chargemod.network.ChargePacketSender;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.entity.AgeableMob;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.monster.EnderMan;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.phys.AABB;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
@@ -40,7 +44,7 @@ public class ChargeForgeEvent{
 
     @SubscribeEvent
     public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
-        if(event.side == LogicalSide.SERVER) {
+        if(event.side == LogicalSide.SERVER) {  //灵气恢复
             tickCount++;
             if (tickCount % 10 == 0) {
                 LazyOptional<PlayerLingQi> optional = event.player.getCapability(ChargeModItemRegistry.PLAYER_LING_QI);
@@ -62,7 +66,66 @@ public class ChargeForgeEvent{
                 });
             }
         }
+
+        if (event.side == LogicalSide.SERVER) { // 只在 tick 开始时检查
+            if (tickCount % 10 == 0) { // 每 10 tick 检测一次
+                Player player = event.player;
+                boolean flag = false;
+
+                List<MobEffectInstance> effects = player.getActiveEffects().stream().toList();
+                for (MobEffectInstance mobEffectInstance : effects) {       //判断是否有buff
+                    MobEffect effect = mobEffectInstance.getEffect();
+                    if (effect.getDescriptionId().contains("wan_wu_sheng_effect")) { //万物生
+                        flag = true;
+                    }
+                }
+
+                if (flag) { //有buff的情况下
+                    AABB playerBoundingBox = player.getBoundingBox(); // 获取玩家的碰撞箱
+                    // 获取玩家周围的所有实体
+                    List<Entity> entities = player.level().getEntities(player, playerBoundingBox.inflate(1.0));
+
+                    for (Entity entity : entities) {
+                        if (entity instanceof Animal && !(entity instanceof Player)) {
+                            Animal animal = (Animal) entity;
+                            // 检查碰撞箱是否重叠
+                            if (animal.canFallInLove() && playerBoundingBox.intersects(entity.getBoundingBox())) {    //玩家与生物发生碰撞
+
+                                animal.setInLove(player);
+                                animal.spawnChildFromBreeding((ServerLevel) player.level(), animal);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
     }
+
+//    @SubscribeEvent
+//    public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
+//        if (event.phase == TickEvent.Phase.START) { // 只在 tick 开始时检查
+//            tickCounter++;
+//            if (tickCounter % 10 == 0) { // 每 10 tick 检测一次
+//                Player player = event.player;
+//                AABB playerBoundingBox = player.getBoundingBox(); // 获取玩家的碰撞箱
+//
+//                // 获取玩家周围的所有实体
+//                List<Entity> entities = player.level().getEntities(player, playerBoundingBox.inflate(1.0));
+//
+//                for (Entity entity : entities) {
+//                    if (entity instanceof LivingEntity && !(entity instanceof Player)) {
+//                        LivingEntity livingEntity = (LivingEntity) entity;
+//                        // 检查碰撞箱是否重叠
+//                        if (playerBoundingBox.intersects(entity.getBoundingBox())) {
+//                            System.out.println("玩家 " + player.getName().getString() + " 与 " + livingEntity.getName().getString() + " 发生碰撞！");
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//    }
+
     // 当玩家刚刚加入世界时候同步数据
     @SubscribeEvent
     public static void onPlayerJoinWorld(EntityJoinLevelEvent event) {

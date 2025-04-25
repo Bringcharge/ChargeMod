@@ -8,7 +8,7 @@ import com.charge.chargemod.entity.calamity.CalamityZombie;
 import com.charge.chargemod.item.*;
 import com.charge.chargemod.item.Armor.ModArmorMaterials;
 import com.charge.chargemod.item.Armor.PaperHead;
-import com.charge.chargemod.item.pellet.ChargeBiGuPellet;
+import com.charge.chargemod.item.pellet.*;
 import com.charge.chargemod.item.sword.*;
 import com.charge.chargemod.item.talisman.*;
 import com.charge.chargemod.lingqi.PlayerLingQi;
@@ -202,8 +202,18 @@ public class ChargeModItemRegistry {
     public static final RegistryObject<Item> CHARGE_BASE_TOKEN = ITEMS.register("charge_base_token", () -> new ChargeBaseToken());
 
 
-    //辟谷丹的建模
+    //辟谷丹
     public static final RegistryObject<Item> CHARGE_BIGU_PELLET = ITEMS.register("charge_bigu_pellet", () -> new ChargeBiGuPellet());
+    //大还丹
+    public static final RegistryObject<Item> CHARGE_HEALTH_PELLET = ITEMS.register("charge_health_pellet", () -> new ChargeHealthPellet());
+    //鸿运齐天丹
+    public static final RegistryObject<Item> CHARGE_HONG_YUN_PELLET = ITEMS.register("charge_hong_yun_pellet", () -> new ChargeHongYunPellet());
+    //生力丹
+    public static final RegistryObject<Item> CHARGE_POWER_PELLET = ITEMS.register("charge_power_pellet", () -> new ChargePowerPellet());
+    //破万法丹
+    public static final RegistryObject<Item> CHARGE_PO_WAN_FA_PELLET = ITEMS.register("charge_po_wan_fa_pellet", () -> new ChargePoWanFaPellet());
+    //万物生丹
+    public static final RegistryObject<Item> CHARGE_WAN_WU_SHENG_PELLET = ITEMS.register("charge_wan_wu_sheng_pellet", () -> new ChargeWanWuShengPellet());
 
 
     //金剑——孔方
@@ -285,7 +295,11 @@ public class ChargeModItemRegistry {
                 output.accept(chargeAlchemyAnvilBlockItem.get());
                 output.accept(chargeAlchemyStoveBlockItem.get());
                 output.accept(CHARGE_BASE_TOKEN.get());
+
+                //丹药
                 output.accept(CHARGE_BIGU_PELLET.get());
+                output.accept(CHARGE_WAN_WU_SHENG_PELLET.get());
+
 
 //                output.accept(PAPER_HEAD.get());
                 //剑
