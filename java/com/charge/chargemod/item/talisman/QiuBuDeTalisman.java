@@ -11,10 +11,13 @@ import net.minecraft.world.entity.FlyingMob;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.goal.*;
+import net.minecraft.world.entity.boss.enderdragon.EnderDragon;
+import net.minecraft.world.entity.boss.wither.WitherBoss;
 import net.minecraft.world.entity.monster.Creeper;
 import net.minecraft.world.entity.monster.Skeleton;
 import net.minecraft.world.entity.monster.Slime;
 import net.minecraft.world.entity.monster.Zombie;
+import net.minecraft.world.entity.monster.warden.Warden;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -40,48 +43,17 @@ public class QiuBuDeTalisman extends ChargeBaseTalisman {
 
         for (Entity entity : entityList) {  //制作混乱
             Mob mob = (Mob) entity;
-
+            if (mob instanceof WitherBoss || mob instanceof EnderDragon) {
+                continue;
+            }
             List<WrappedGoal> list = mob.targetSelector.getAvailableGoals().stream().toList();
             for (WrappedGoal wrappedGoal : list) {  //找不到攻击的，直接移除了
                 mob.targetSelector.removeGoal(wrappedGoal.getGoal());
             }
-
-//            if (entity instanceof Creeper) {    //如果是creeper吃了buff，修改ai
-//                Creeper creeper = (Creeper) entity;
-//                List<WrappedGoal> list = creeper.goalSelector.getAvailableGoals().stream().toList();
-//                for (WrappedGoal wrappedGoal : list) {
-//                    if (wrappedGoal.getGoal() instanceof SwellGoal) {
-//                        creeper.goalSelector.removeGoal(wrappedGoal.getGoal());
-//                        break;
-//                    }
-//                }
-//            }
-//            if (entity instanceof Zombie) {
-//                Zombie zombie = (Zombie) entity;
-//                List<WrappedGoal> list = zombie.goalSelector.getAvailableGoals().stream().toList();
-//                for (WrappedGoal wrappedGoal : list) {
-//                    if (wrappedGoal.getGoal() instanceof ZombieAttackGoal) {
-//                        zombie.goalSelector.removeGoal(wrappedGoal.getGoal());
-//                        break;
-//                    }
-//                }
-//            }
-//            if (entity instanceof Skeleton) {
-//                Skeleton skeleton = (Skeleton) entity;
-//                List<WrappedGoal> list = skeleton.goalSelector.getAvailableGoals().stream().toList();
-//                for (WrappedGoal wrappedGoal : list) {
-//                    if (wrappedGoal.getGoal() instanceof RangedBowAttackGoal || wrappedGoal.getGoal() instanceof MeleeAttackGoal) {
-//                        skeleton.goalSelector.removeGoal(wrappedGoal.getGoal());
-//                    }
-//                }
-//            }
-//            if (entity instanceof Slime || entity instanceof FlyingMob) {
-//                Mob slime = (Mob) entity;
-//                List<WrappedGoal> list = slime.goalSelector.getAvailableGoals().stream().toList();
-//                for (WrappedGoal wrappedGoal : list) {  //找不到攻击的，直接移除了
-//                    slime.goalSelector.removeGoal(wrappedGoal.getGoal());
-//                }
-//            }
+            if (mob instanceof Warden) {
+                Warden warden = (Warden)mob;
+                warden.clearAnger(player);
+            }
 
         }
         return super.use(level,player,hand);

@@ -195,7 +195,8 @@ public class ChargeModItemRegistry {
     });
     //灵石矿item
     public static final RegistryObject<Item> CHARGE_LING_SHI_ORE_ITEM = ITEMS.register("charge_ling_shi_ore", () -> new BlockItem(CHARGE_LING_SHI_ORE.get(), new Item.Properties()));
-
+    //符纸
+    public static final RegistryObject<Item> TALISMAN_PAPER_ITEM = ITEMS.register("charge_talisman_paper", () -> new ChargeTalismanPaper());
     //纸头，不可获取
     public static final RegistryObject<Item> PAPER_HEAD = ITEMS.register("paper_head", () -> new PaperHead(ModArmorMaterials.PAPER, ArmorItem.Type.HELMET, (new Item.Properties())));
     //说明书，天书
@@ -297,6 +298,7 @@ public class ChargeModItemRegistry {
                 output.accept(chargeAltarBlockItem.get());
                 output.accept(chargeLingShi.get());
                 output.accept(CHARGE_LING_SHI_ORE_ITEM.get());
+                output.accept(TALISMAN_PAPER_ITEM.get());
                 output.accept(chargeBaseBlockItem.get());
                 output.accept(chargeAlchemyAnvilBlockItem.get());
                 output.accept(chargeAlchemyStoveBlockItem.get());

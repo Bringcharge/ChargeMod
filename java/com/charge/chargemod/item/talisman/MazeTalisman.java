@@ -5,6 +5,9 @@ import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.goal.WrappedGoal;
+import net.minecraft.world.entity.boss.enderdragon.EnderDragon;
+import net.minecraft.world.entity.boss.wither.WitherBoss;
+import net.minecraft.world.entity.monster.warden.Warden;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -30,12 +33,17 @@ public class MazeTalisman extends ChargeBaseTalisman {
 
         for (Entity entity : entityList) {  //制作混乱
             Mob mob = (Mob) entity;
-
+            if (entity instanceof WitherBoss || entity instanceof EnderDragon) {
+                continue;
+            }
             List<WrappedGoal> list = mob.goalSelector.getAvailableGoals().stream().toList();
             for (WrappedGoal wrappedGoal : list) {  //找不到攻击的，直接移除了
                 mob.goalSelector.removeGoal(wrappedGoal.getGoal());
             }
-
+            if (mob instanceof Warden) {
+                Warden warden = (Warden)mob;
+                warden.clearAnger(player);
+            }
 //            if (entity instanceof Creeper) {    //如果是creeper吃了buff，修改ai
 //                Creeper creeper = (Creeper) entity;
 //                List<WrappedGoal> list = creeper.goalSelector.getAvailableGoals().stream().toList();
