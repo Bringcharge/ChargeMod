@@ -42,7 +42,7 @@ public class MazeTalisman extends ChargeBaseTalisman {
             }
             if (mob instanceof Warden) {
                 Warden warden = (Warden)mob;
-                warden.clearAnger(player);
+                warden.getBrain().clearMemories();
             }
 //            if (entity instanceof Creeper) {    //如果是creeper吃了buff，修改ai
 //                Creeper creeper = (Creeper) entity;
