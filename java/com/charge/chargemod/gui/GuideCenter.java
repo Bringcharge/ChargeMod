@@ -1,6 +1,7 @@
 package com.charge.chargemod.gui;
 
 import com.charge.chargemod.gui.swords.ZhongZhongGuScreen;
+import com.charge.chargemod.gui.talisman.PushBackTalismanScreen;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.common.MinecraftForge;
 
@@ -19,6 +20,7 @@ public class GuideCenter implements GuidePageDelegate { //多页码索引
         addScreen(new LingShiScreen());
         addScreen(new LianQiScreen());
         addScreen(new ZhongZhongGuScreen());
+        addScreen(new PushBackTalismanScreen());
     }
 
     private void addScreen(ChargeBaseScreen screen) {   //方便重复添加的函数
