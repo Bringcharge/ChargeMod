@@ -4,6 +4,7 @@ import com.charge.chargemod.ChargeModItemRegistry;
 import com.charge.chargemod.gui.ChargeBaseScreen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Items;
 
 public class FuYaoScreen extends ChargeBaseScreen {
 
@@ -15,13 +16,13 @@ public class FuYaoScreen extends ChargeBaseScreen {
         rightImage = new ResourceLocation(ChargeModItemRegistry.MODID,"textures/gui/hou_tian_ba_gua_craft.png");
         showCrafting = true;
         // 乾天, 兑泽（金）, 离火, 震雷（木）, 巽风（木）, 坎水, 艮山（土）, 坤地
-        topLeftItem = new ResourceLocation("textures/block/azalea_leaves.png");
+        topLeftItem = Items.ACACIA_LEAVES;// new ResourceLocation("textures/block/azalea_leaves.png");
         leftItem = null;
         bottomItem = null;
-        rightItem = new ResourceLocation("textures/item/sugar_cane.png");
-        bottomRightItem = new ResourceLocation("textures/item/paper.png");
+        rightItem = Items.SUGAR_CANE;// new ResourceLocation("textures/item/sugar_cane.png");
+        bottomRightItem = Items.PAPER; // new ResourceLocation("textures/item/paper.png");
         topItem = null;
-        topRightItem = new ResourceLocation("textures/item/stick.png");
+        topRightItem = Items.STICK;// new ResourceLocation("textures/item/stick.png");
         bottomLeftItem = null;
         rightStringLocal = "使用了橡树树叶，甘蔗，纸，木棍。按照上图合成即可。";
     }

@@ -42,8 +42,8 @@ public class ChargeAlchemyAnvilHelper {
             return new ItemStack(ChargeModItemRegistry.FU_YAO_SWORD.get(),1);
         }
 
-        if (    //余烬
-                s1.is(Items.WATER_BUCKET ) &&
+        if (    //断流
+                s1.is(Items.BUCKET) &&
                         s3.is(Items.CHARCOAL) &&
                         s6.is(Items.SALMON) &&
                         s8.is(Items.STICK) &&
@@ -52,7 +52,7 @@ public class ChargeAlchemyAnvilHelper {
             return new ItemStack(ChargeModItemRegistry.EMBER_SWORD.get(),1);
         }
 
-        if (    //断流
+        if (    //余烬
                 s3.is(Items.MAGMA_BLOCK ) &&
                         s4.is(Items.COAL) &&
                         s5.is(ItemTags.LOGS) && //原木

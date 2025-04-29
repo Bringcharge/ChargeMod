@@ -4,6 +4,7 @@ import com.charge.chargemod.ChargeModItemRegistry;
 import com.charge.chargemod.gui.ChargeBaseScreen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Items;
 
 public class XunYinScreen extends ChargeBaseScreen {
 
@@ -16,13 +17,13 @@ public class XunYinScreen extends ChargeBaseScreen {
         showCrafting = true;
         // 乾天, 兑泽（金）, 离火, 震雷（木）, 巽风（木）, 坎水, 艮山（土）, 坤地
         topLeftItem = null;
-        leftItem = new ResourceLocation("textures/item/gold_ingot.png");
-        bottomItem = new ResourceLocation("textures/item/charcoal.png");
-        rightItem = new ResourceLocation("textures/item/copper_ingot.png");
+        leftItem = Items.GOLD_INGOT; // new ResourceLocation("textures/item/gold_ingot.png");
+        bottomItem = Items.CHARCOAL; // new ResourceLocation("textures/item/charcoal.png");
+        rightItem = Items.COPPER_INGOT; //new ResourceLocation("textures/item/copper_ingot.png");
         bottomRightItem = null;
-        topItem = new ResourceLocation("textures/item/water_bucket.png");
-        topRightItem = new ResourceLocation("textures/block/dirt.png");
-        bottomLeftItem = new ResourceLocation("textures/block/cobblestone.png");
+        topItem = Items.WATER_BUCKET; //new ResourceLocation("textures/item/water_bucket.png");
+        topRightItem = Items.DIRT; //new ResourceLocation("textures/block/dirt.png");
+        bottomLeftItem = Items.COBBLESTONE; //new ResourceLocation("textures/block/cobblestone.png");
         rightStringLocal = "使用了金锭，木炭，铜锭，水桶，泥土，圆石。按照上图合成即可。";
     }
 

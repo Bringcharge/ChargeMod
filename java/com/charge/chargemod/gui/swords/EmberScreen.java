@@ -4,6 +4,7 @@ import com.charge.chargemod.ChargeModItemRegistry;
 import com.charge.chargemod.gui.ChargeBaseScreen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Items;
 
 public class EmberScreen extends ChargeBaseScreen {
 
@@ -17,13 +18,13 @@ public class EmberScreen extends ChargeBaseScreen {
         // 乾天, 兑泽（金）, 离火, 震雷（木）, 巽风（木）, 坎水, 艮山（土）, 坤地
         topLeftItem = null;
         leftItem = null;
-        bottomItem = new ResourceLocation("textures/block/magma.png");
-        rightItem = new ResourceLocation("textures/item/coal.png");
-        bottomRightItem = new ResourceLocation("textures/block/oak_log_top.png");;
+        bottomItem = Items.MAGMA_BLOCK; //new ResourceLocation("textures/block/magma.png");
+        rightItem = Items.COAL; // new ResourceLocation("textures/item/coal.png");
+        bottomRightItem = Items.ACACIA_LOG; // new ResourceLocation("textures/block/oak_log_top.png");;
         topItem = null;
-        topRightItem = new ResourceLocation("textures/item/flint.png");
+        topRightItem = Items.FLINT; //new ResourceLocation("textures/item/flint.png");
         bottomLeftItem = null;
-        rightStringLocal = "使用了岩浆块，煤炭，橡木圆木，燧石。按照上图合成即可。";
+        rightStringLocal = "使用了岩浆块，煤炭，原木，燧石。按照上图合成即可。";
     }
 
 }

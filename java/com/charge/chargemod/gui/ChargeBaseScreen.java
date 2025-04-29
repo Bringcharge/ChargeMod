@@ -2,14 +2,22 @@ package com.charge.chargemod.gui;
 import com.charge.chargemod.ChargeModItemRegistry;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.client.gui.components.ImageWidget;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.renderer.block.BlockRenderDispatcher;
+import net.minecraft.client.renderer.texture.OverlayTexture;
+import net.minecraft.client.resources.model.BakedModel;
+import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.FormattedCharSequence;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.Block;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,15 +34,15 @@ public class ChargeBaseScreen extends Screen {
     public ResourceLocation rightImage;
 
     public boolean showCrafting = false;
-    public ResourceLocation topItem;
-    public ResourceLocation topLeftItem;
-    public ResourceLocation topRightItem;
-    public ResourceLocation leftItem;
-    public ResourceLocation rightItem;
-    public ResourceLocation bottomLeftItem;
-    public ResourceLocation bottomRightItem;
-    public ResourceLocation bottomItem;
-    public ResourceLocation centerItem;
+    public Item topItem;
+    public Item topLeftItem;
+    public Item topRightItem;
+    public Item leftItem;
+    public Item rightItem;
+    public Item bottomLeftItem;
+    public Item bottomRightItem;
+    public Item bottomItem;
+    public Item centerItem;
 
     private static final ResourceLocation BOOK_TEXTURE = new ResourceLocation(ChargeModItemRegistry.MODID,"textures/gui/book.png");
 
@@ -104,31 +112,31 @@ public class ChargeBaseScreen extends Screen {
             if (showCrafting) { //展示合成表
 
                 if (topLeftItem != null) {  //左上角
-                    this.addRenderableWidget(new ImageWidget(rightPageStartPosX + 10, rightPageStartPosY,16,16,topLeftItem));
+                    guiGraphics.renderFakeItem(new ItemStack(topLeftItem), rightPageStartPosX + 10, rightPageStartPosY);
                 }
                 if (topItem != null) {
-                    this.addRenderableWidget(new ImageWidget(rightPageStartPosX + 10 + 16 + 8, rightPageStartPosY,16,16,topItem));
+                    guiGraphics.renderFakeItem(new ItemStack(topItem), rightPageStartPosX + 10 + 16 + 8, rightPageStartPosY);
                 }
                 if (topRightItem != null) {
-                    this.addRenderableWidget(new ImageWidget(rightPageStartPosX + 10 + 32 + 16, rightPageStartPosY,16,16,topRightItem));
+                    guiGraphics.renderFakeItem(new ItemStack(topRightItem), rightPageStartPosX + 10 + 32 + 16, rightPageStartPosY);
                 }
                 if (leftItem != null) { //左侧
-                    this.addRenderableWidget(new ImageWidget(rightPageStartPosX + 10, rightPageStartPosY + 16 + 8,16,16,leftItem));
+                    guiGraphics.renderFakeItem(new ItemStack(leftItem), rightPageStartPosX + 10, rightPageStartPosY + 16 + 8);
                 }
                 if (rightItem != null) {
-                    this.addRenderableWidget(new ImageWidget(rightPageStartPosX + 10 + 32 + 16, rightPageStartPosY + 16 + 8,16,16,rightItem));
+                    guiGraphics.renderFakeItem(new ItemStack(rightItem), rightPageStartPosX + 10 + 32 + 16, rightPageStartPosY + 16 + 8);
                 }
                 if (bottomLeftItem != null) { //左下角
-                    this.addRenderableWidget(new ImageWidget(rightPageStartPosX + 10, rightPageStartPosY + 32 + 16,16,16,bottomLeftItem));
+                    guiGraphics.renderFakeItem(new ItemStack(bottomLeftItem), rightPageStartPosX + 10, rightPageStartPosY + 32 + 16);
                 }
                 if (bottomItem != null) { //下
-                    this.addRenderableWidget(new ImageWidget(rightPageStartPosX + 10 + 16 + 8, rightPageStartPosY + 32 + 16,16,16,bottomItem));
+                    guiGraphics.renderFakeItem(new ItemStack(bottomItem), rightPageStartPosX + 10 + 16 + 8, rightPageStartPosY + 32 + 16);
                 }
                 if (bottomRightItem != null) { //下右
-                    this.addRenderableWidget(new ImageWidget(rightPageStartPosX + 10 + 32 + 16, rightPageStartPosY + 32 + 16,16,16,bottomRightItem));
+                    guiGraphics.renderFakeItem(new ItemStack(bottomRightItem), rightPageStartPosX + 10 + 32 + 16, rightPageStartPosY + 32 + 16);
                 }
                 if (centerItem != null) { //中间
-                    this.addRenderableWidget(new ImageWidget(rightPageStartPosX + 10 + 16 + 8, rightPageStartPosY + 16 + 16,8,16,centerItem));
+                    guiGraphics.renderFakeItem(new ItemStack(centerItem), rightPageStartPosX + 10 + 16 + 8, rightPageStartPosY + 16 + 18);
                 }
             }
             if (rightTextList != null) {
@@ -145,6 +153,28 @@ public class ChargeBaseScreen extends Screen {
             }
         }
         super.render(guiGraphics, mouseX, mouseY, partialTick);
+    }
+
+    public static void renderBlockInGUI(GuiGraphics guiGraphics, BlockPos pos, Block block, int x, int y, int size) {
+        BlockRenderDispatcher dispatcher = Minecraft.getInstance().getBlockRenderer();
+        BakedModel model = dispatcher.getBlockModel(block.defaultBlockState());
+
+        // 设置渲染参数
+        PoseStack poseStack = guiGraphics.pose();
+        poseStack.pushPose();
+        poseStack.translate(x, y, 100); // z=100 确保在GUI层上方
+        poseStack.scale(size, size, size);
+
+        // 渲染方块模型
+        dispatcher.renderSingleBlock(
+                block.defaultBlockState(),
+                poseStack,
+                guiGraphics.bufferSource(),
+                0xF000F0, // 完全亮度
+                OverlayTexture.NO_OVERLAY
+        );
+
+        poseStack.popPose();
     }
 
     public void leftText(String str, int wordWidth) {

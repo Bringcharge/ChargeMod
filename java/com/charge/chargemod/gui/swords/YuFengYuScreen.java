@@ -4,6 +4,7 @@ import com.charge.chargemod.ChargeModItemRegistry;
 import com.charge.chargemod.gui.ChargeBaseScreen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Items;
 
 public class YuFengYuScreen extends ChargeBaseScreen {
 
@@ -15,14 +16,14 @@ public class YuFengYuScreen extends ChargeBaseScreen {
         rightImage = new ResourceLocation(ChargeModItemRegistry.MODID,"textures/gui/hou_tian_ba_gua_craft.png");
         showCrafting = true;
         // 乾天, 兑泽（金）, 离火, 震雷（木）, 巽风（木）, 坎水, 艮山（土）, 坤地
-        topLeftItem = new ResourceLocation("textures/block/lily_pad.png");
-        leftItem = new ResourceLocation("textures/block/lightning_rod.png");
-        bottomItem = new ResourceLocation("textures/item/flint_and_steel.png");
-        rightItem = new ResourceLocation("textures/item/bamboo.png");
-        bottomRightItem = new ResourceLocation("textures/item/cocoa_beans.png");;
-        topItem = new ResourceLocation("textures/item/pufferfish.png");
-        topRightItem = new ResourceLocation("textures/item/amethyst_shard.png");
-        bottomLeftItem = new ResourceLocation("textures/block/nether_wart_block.png");
+        topLeftItem = Items.LILY_PAD;// new ResourceLocation("textures/block/lily_pad.png");
+        leftItem = Items.LIGHTNING_ROD;// new ResourceLocation("textures/block/lightning_rod.png");
+        bottomItem = Items.FLINT_AND_STEEL;// new ResourceLocation("textures/item/flint_and_steel.png");
+        rightItem = Items.BAMBOO;// new ResourceLocation("textures/item/bamboo.png");
+        bottomRightItem = Items.COCOA_BEANS;// new ResourceLocation("textures/item/cocoa_beans.png");;
+        topItem = Items.PUFFERFISH;// new ResourceLocation("textures/item/pufferfish.png");
+        topRightItem = Items.AMETHYST_SHARD; // new ResourceLocation("textures/item/amethyst_shard.png");
+        bottomLeftItem = Items.NETHER_WART_BLOCK; // new ResourceLocation("textures/block/nether_wart_block.png");
         rightStringLocal = "使用了莲叶，避雷针，打火石，竹子，可可豆，河豚，紫水晶，地狱疣块。按照上图合成。合成中使用了竹子作为主材，使剑威能浩大，必要时也可以当作雷霆的特殊用途使用。";
     }
 

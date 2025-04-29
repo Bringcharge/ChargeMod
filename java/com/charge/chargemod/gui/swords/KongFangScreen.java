@@ -4,6 +4,7 @@ import com.charge.chargemod.ChargeModItemRegistry;
 import com.charge.chargemod.gui.ChargeBaseScreen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Items;
 
 public class KongFangScreen extends ChargeBaseScreen {
 
@@ -15,15 +16,15 @@ public class KongFangScreen extends ChargeBaseScreen {
         rightImage = new ResourceLocation(ChargeModItemRegistry.MODID,"textures/gui/hou_tian_ba_gua_craft.png");
         showCrafting = true;
         // 乾天, 兑泽（金）, 离火, 震雷（木）, 巽风（木）, 坎水, 艮山（土）, 坤地
-        topLeftItem = new ResourceLocation("textures/item/copper_ingot.png");
-        leftItem = new ResourceLocation("textures/item/copper_ingot.png");
-        bottomItem = new ResourceLocation("textures/item/red_dye.png");
+        topLeftItem = Items.COPPER_INGOT;// new ResourceLocation("textures/item/copper_ingot.png");
+        leftItem = Items.COPPER_INGOT;// new ResourceLocation("textures/item/copper_ingot.png");
+        bottomItem = Items.RED_DYE;// new ResourceLocation("textures/item/red_dye.png");
         rightItem = null;
-        bottomRightItem = new ResourceLocation("textures/item/string.png");
+        bottomRightItem = Items.STRING; //new ResourceLocation("textures/item/string.png");
         topItem = null;
         topRightItem = null;
         bottomLeftItem = null;
-        rightStringLocal = "使用了铜锭，铜锭，红色染料，铁矿石。按照上图合成即可。";
+        rightStringLocal = "使用了铜锭，铜锭，红色染料，线。按照上图合成即可。";
     }
 
 }

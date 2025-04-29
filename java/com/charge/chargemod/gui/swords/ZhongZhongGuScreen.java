@@ -4,6 +4,8 @@ import com.charge.chargemod.ChargeModItemRegistry;
 import com.charge.chargemod.gui.ChargeBaseScreen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 
 public class ZhongZhongGuScreen extends ChargeBaseScreen {
 
@@ -15,14 +17,14 @@ public class ZhongZhongGuScreen extends ChargeBaseScreen {
         rightImage = new ResourceLocation(ChargeModItemRegistry.MODID,"textures/gui/hou_tian_ba_gua_craft.png");
         showCrafting = true;
         // 乾天, 兑泽（金）, 离火, 震雷（木）, 巽风（木）, 坎水, 艮山（土）, 坤地
-        topLeftItem = new ResourceLocation("textures/item/bone.png");
-        leftItem = new ResourceLocation("textures/item/copper_ingot.png");
+        topLeftItem = Items.BONE;// new ResourceLocation("textures/item/bone.png");
+        leftItem = Items.COPPER_INGOT;// new ResourceLocation("textures/item/copper_ingot.png");
         bottomItem = null;
         rightItem = null;
         bottomRightItem = null;
         topItem = null;
-        topRightItem = new ResourceLocation("textures/block/stone.png");
-        bottomLeftItem = new ResourceLocation("textures/block/iron_ore.png");
+        topRightItem = Items.STONE;// new ResourceLocation("textures/block/stone.png");
+        bottomLeftItem = Items.IRON_ORE;// new ResourceLocation("textures/block/iron_ore.png");
         rightStringLocal = "使用了骨头，铜锭，石头，铁矿石。按照上图合成即可。";
     }
 
