@@ -20,7 +20,7 @@ public class RealSwordScreen extends ChargeBaseScreen {
         bottomItem = new ResourceLocation("textures/block/netherrack.png");
         rightItem = new ResourceLocation("textures/block/sunflower_front.png");
         bottomRightItem = new ResourceLocation("textures/item/compass_03.png");
-        topItem = new ResourceLocation("textures/item/prismarine_crystals.png");;
+        topItem = new ResourceLocation("textures/item/prismarine_shard.png");;
         topRightItem = new ResourceLocation("textures/block/diamond_block.png");
         bottomLeftItem = new ResourceLocation("textures/item/potion.png");
         rightStringLocal = "使用金块，镶金黑石，地狱岩，向日葵，指南针，海晶石，钻石块，夜视药水合成，真实虽好，可剑求真也就意味着威力受限于真实，对比起同品级的剑而已不善杀伐。";

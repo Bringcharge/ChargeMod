@@ -197,20 +197,21 @@ public class ChargeBladeExtendEntity extends Projectile {
             for (Vec3 checkPosition : checkPoints) {
                 //获取第一个block的hit事件
                 Vec3 checkEndPoint = checkPosition.add(deltaMovement);
-                BlockPos hitPos = BlockPos.containing(checkEndPoint);
-                //打到方块上，先判断之前有没有打中entity？
 
-                BlockPos pos = BlockPos.containing(checkEndPoint);
-                if (this.ignoredBlock == null) { //被伤害过的就记录
-                    this.ignoredBlock = new LongOpenHashSet();
-                }
-                if (!ignoredBlock.contains(pos.asLong())) { //如果没有
-                    BlockState state = level().getBlockState(pos);
-                    if (!state.is(Blocks.AIR)) {
-                        onHitBlock(pos);
+                BlockPos pos = BlockPos.containing(checkEndPoint).below();
+                for (int i = 0; i < 3; i++) {
+                    if (this.ignoredBlock == null) { //被伤害过的就记录
+                        this.ignoredBlock = new LongOpenHashSet();
                     }
+                    if (!ignoredBlock.contains(pos.asLong())) { //如果没有
+                        BlockState state = level().getBlockState(pos);
+                        if (!state.is(Blocks.AIR)) {
+                            onHitBlock(pos);
+                        }
+                    }
+                    this.ignoredBlock.add(pos.asLong());
+                    pos = pos.above();
                 }
-                this.ignoredBlock.add(pos.asLong());
             }
 
             double max_x = firstPos.x;
@@ -239,6 +240,9 @@ public class ChargeBladeExtendEntity extends Projectile {
                     continue;
                 }
 
+                Vec3 linePoint1 = checkPoints.get(4);
+                Vec3 linePoint2 = checkPoints.get(15);
+                if (PointDistanceToLine(entity.position(), linePoint1, linePoint2) < 3)
                 this.onHitEntity(entity);
                 ignoredEntities.add(entity.getId());
             }

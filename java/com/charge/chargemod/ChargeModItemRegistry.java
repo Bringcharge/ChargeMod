@@ -257,6 +257,7 @@ public class ChargeModItemRegistry {
     //仙剑——求逍遥
     public static final RegistryObject<Item> QIU_XIAO_YAO_SWORD = ITEMS.register("qiu_xiao_yao_sword", () -> new QiuXiaoYaoSword());
     //仙剑——乱因果
+    public static final RegistryObject<Item> LUAN_YIN_GUO_SWORD = ITEMS.register("luan_yin_guo_sword", () -> new LuanYinGuoSword());
 
     //符咒
     //退魔符
@@ -331,8 +332,9 @@ public class ChargeModItemRegistry {
                 output.accept(THE_REAL_SWORD.get());
                 output.accept(THE_FAKE_SWORD.get());
                 output.accept(SU_GUO_SWORD.get());
-                output.accept(WU_XIANG_SWORD.get());
                 output.accept(QIU_XIAO_YAO_SWORD.get());
+                output.accept(WU_XIANG_SWORD.get());
+                output.accept(LUAN_YIN_GUO_SWORD.get());
 
                 //符
                 output.accept(PUSH_BACK_TALISMAN.get());
