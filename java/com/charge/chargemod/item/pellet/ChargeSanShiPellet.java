@@ -17,7 +17,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
-//成仙丹
+//三尸丹
 public class ChargeSanShiPellet extends Item {
 
     public ChargeSanShiPellet() {

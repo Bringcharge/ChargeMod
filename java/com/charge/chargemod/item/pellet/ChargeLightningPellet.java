@@ -15,7 +15,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
-//成仙丹
+//登仙丹
 public class ChargeLightningPellet extends Item {
 
     public ChargeLightningPellet() {

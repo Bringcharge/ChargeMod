@@ -6,7 +6,7 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.Item;
 
-//鸿运齐天丹
+//万物生丹
 public class ChargeWanWuShengPellet extends Item {
 
     //构造参数
