@@ -214,6 +214,19 @@ public class ChargeAlchemyStoveHelper {
             return new ItemStack(ChargeModItemRegistry.CHARGE_PO_WAN_FA_PELLET.get(),1);
         }
 
+        if (    //聚灵丹
+                s1.is(ChargeModItemRegistry.chargeLingShi.get()) &&
+                        s2.is(ChargeModItemRegistry.chargeLingShi.get()) &&
+                        s3.is(ChargeModItemRegistry.chargeLingShi.get()) &&
+                        s4.is(Items.POTATO) &&
+                        s5.is(Items.POTATO) &&
+                        s6.is(ChargeModItemRegistry.chargeLingShi.get()) &&
+                        s7.is(ChargeModItemRegistry.chargeLingShi.get()) &&
+                        s8.is(ChargeModItemRegistry.chargeLingShi.get())
+        ) {
+            return new ItemStack(ChargeModItemRegistry.CHARGE_JU_LING_PELLET.get(),1);
+        }
+
         if (    //万物生丹
                 s2.is(Items.BONE) &&
                         s3.is(Items.ROTTEN_FLESH) &&
