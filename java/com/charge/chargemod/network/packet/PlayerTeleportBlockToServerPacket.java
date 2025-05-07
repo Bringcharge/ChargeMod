@@ -1,16 +1,11 @@
 package com.charge.chargemod.network.packet;
 
-import com.charge.chargemod.ChargeModItemRegistry;
-import com.charge.chargemod.block.ChargeTeleportBlockEntity;
-import com.charge.chargemod.lingqi.PlayerLingQiHelper;
+import com.charge.chargemod.block.array.ChargeTeleportBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Vec3i;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.network.NetworkEvent;
 

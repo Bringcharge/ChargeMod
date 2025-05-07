@@ -1,4 +1,4 @@
-package com.charge.chargemod.block;
+package com.charge.chargemod.block.array;
 
 import com.charge.chargemod.ChargeModItemRegistry;
 import com.charge.chargemod.gui.TeleportEditScreen;
@@ -6,8 +6,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Vec3i;
 import net.minecraft.network.chat.Component;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;

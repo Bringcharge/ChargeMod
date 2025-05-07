@@ -1,6 +1,7 @@
 package com.charge.chargemod;
 
 import com.charge.chargemod.block.*;
+import com.charge.chargemod.block.array.*;
 import com.charge.chargemod.entity.*;
 import com.charge.chargemod.entity.calamity.CalamityLightning;
 import com.charge.chargemod.entity.calamity.CalamitySanShi;
@@ -12,7 +13,6 @@ import com.charge.chargemod.item.pellet.*;
 import com.charge.chargemod.item.sword.*;
 import com.charge.chargemod.item.talisman.*;
 import com.charge.chargemod.lingqi.PlayerLingQi;
-import com.charge.chargemod.lingqi.PlayerLingQiInterface;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
@@ -124,18 +124,43 @@ public class ChargeModItemRegistry {
     public static final RegistryObject<BlockEntityType<ChargeTeleportBlockEntity>> CHARGE_TELEPORT_ENTITY = BLOCK_ENTITIES.register("charge_teleport_block", () ->
             BlockEntityType.Builder.of(ChargeTeleportBlockEntity::new, CHARGE_TELEPORT_BLOCK.get()).build(null));
     //传送阵item
-    public static final RegistryObject<Item> chargeTeleportBlockItem = ITEMS.register("charge_teleport_block", () -> new BlockItem(CHARGE_TELEPORT_BLOCK.get(), new Item.Properties()));
+    public static final RegistryObject<Item> CHARGE_TELEPORT_BLOCK_ITEM = ITEMS.register("charge_teleport_block", () -> new BlockItem(CHARGE_TELEPORT_BLOCK.get(), new Item.Properties()));
 
-//    //tick响应block
-//    public static final RegistryObject<Block> CHARGE_TICK_BLOCK = BLOCKS.register("charge_tick_block", () -> {
-//        return new ChargeTickBlock(BlockBehaviour.Properties.of()
-//                .mapColor(MapColor.COLOR_PINK) //地图颜色
-//                .strength(1.0f, 50.0f) //硬度，石头是1.5 & 爆炸抗性，黑曜石是50
-//                .sound(SoundType.STONE)
-//        );}); //光照等级
+
+    //tickBlock
+    public static final RegistryObject<Block> CHARGE_TICK_BLOCK = BLOCKS.register("charge_tick_block", () -> {
+        return new ChargeTickBaseBlock(BlockBehaviour.Properties.of()
+                .mapColor(MapColor.COLOR_BLUE) //地图颜色
+                .strength(1.0f, 50.0f) //硬度，石头是1.5 & 爆炸抗性，黑曜石是50
+        );}); //光照等级
     //tick的entityType
     public static final RegistryObject<BlockEntityType<ChargeTickBlockEntity>> CHARGE_TICK_ENTITY = BLOCK_ENTITIES.register("charge_tick_block", () ->
-            BlockEntityType.Builder.of(ChargeTickBlockEntity::new, CHARGE_TELEPORT_BLOCK.get()).build(null));
+            BlockEntityType.Builder.of(ChargeTickBlockEntity::new, CHARGE_TICK_BLOCK.get()).build(null));
+    //聚灵阵
+    public static final RegistryObject<Block> CHARGE_JU_LING_BLOCK = BLOCKS.register("charge_ju_ling_block", () -> {
+        return new ChargeJuLingBlock(BlockBehaviour.Properties.of()
+                .mapColor(MapColor.COLOR_BLUE) //地图颜色
+                .strength(1.0f, 50.0f) //硬度，石头是1.5 & 爆炸抗性，黑曜石是50
+                .lightLevel(state -> 15)
+                .sound(SoundType.STONE)
+                .noOcclusion()
+        );}); //光照等级
+
+    //聚灵阵item
+    public static final RegistryObject<Item> CHARGE_JU_LING_BLOCK_ITEM = ITEMS.register("charge_ju_ling_block", () -> new BlockItem(CHARGE_JU_LING_BLOCK.get(), new Item.Properties()));
+
+    //镇妖塔
+    public static final RegistryObject<Block> CHARGE_ZHEN_YAO_BLOCK = BLOCKS.register("charge_zhen_yao_block", () -> {
+        return new ChargeJuLingBlock(BlockBehaviour.Properties.of()
+                .mapColor(MapColor.COLOR_BLUE) //地图颜色
+                .strength(1.0f, 50.0f) //硬度，石头是1.5 & 爆炸抗性，黑曜石是50
+                .lightLevel(state -> 15)
+                .sound(SoundType.STONE)
+                .noOcclusion()
+        );}); //光照等级
+
+    //镇妖塔item
+    public static final RegistryObject<Item> CHARGE_ZHEN_YAO_BLOCK_ITEM = ITEMS.register("charge_zhen_yao_block", () -> new BlockItem(CHARGE_ZHEN_YAO_BLOCK.get(), new Item.Properties()));
 
 
     //下面是entity
@@ -195,6 +220,17 @@ public class ChargeModItemRegistry {
     });
     //灵石矿item
     public static final RegistryObject<Item> CHARGE_LING_SHI_ORE_ITEM = ITEMS.register("charge_ling_shi_ore", () -> new BlockItem(CHARGE_LING_SHI_ORE.get(), new Item.Properties()));
+
+    //阵旗
+    public static final RegistryObject<Block> CHARGE_ARRAY_FLAG = BLOCKS.register("charge_array_flag", () -> {
+        return new ChargeLingShiOre(BlockBehaviour.Properties.of()
+                .destroyTime(2.5f)
+                .explosionResistance(20)
+                .sound(SoundType.STONE)
+        );
+    });
+    public static final RegistryObject<Item> CHARGE_ARRAY_FLAG_ITEM = ITEMS.register("charge_array_flag", () -> new BlockItem(CHARGE_ARRAY_FLAG.get(), new Item.Properties()));
+
     //符纸
     public static final RegistryObject<Item> TALISMAN_PAPER_ITEM = ITEMS.register("charge_talisman_paper", () -> new ChargeTalismanPaper());
     //纸头，不可获取
@@ -306,6 +342,9 @@ public class ChargeModItemRegistry {
                 output.accept(chargeAlchemyAnvilBlockItem.get());
                 output.accept(chargeAlchemyStoveBlockItem.get());
                 output.accept(CHARGE_BASE_TOKEN.get());
+                output.accept(CHARGE_ARRAY_FLAG_ITEM.get());    //阵旗
+                output.accept(CHARGE_JU_LING_BLOCK_ITEM.get()); //聚灵
+                output.accept(CHARGE_ZHEN_YAO_BLOCK_ITEM.get()); //镇妖
 
                 //丹药
                 output.accept(CHARGE_BIGU_PELLET.get());
@@ -355,7 +394,7 @@ public class ChargeModItemRegistry {
                 output.accept(MAZE_TALISMAN.get());
 
                 //阵
-                output.accept(chargeTeleportBlockItem.get());   //传送阵
+                output.accept(CHARGE_TELEPORT_BLOCK_ITEM.get());   //传送阵
             }).build());
 
     public static final RegistryObject<EntityType<FakeVillager>> FAKE_VILLAGER = ENTITY_TYPES.register("fake_villager",
