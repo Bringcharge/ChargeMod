@@ -14,7 +14,7 @@ public class FlyTalismanScreen extends ChargeBaseScreen {
         super(title);
         leftStringLocal = "仙游符，可以短暂的如同创世神一样，于空中随意飞行。\n" +
                 "这方世界法力压制太过严重，飞行的时间有限，它无法连续使用，且没有抵御摔落的额外能力，使用符时请牢记剩余时间。";
-        rightImage = new ResourceLocation(ChargeModItemRegistry.MODID,"textures/gui/xian_tian_ba_gua_craft.png");
+        rightImage = new ResourceLocation(ChargeModItemRegistry.MODID,"textures/gui/hou_tian_ba_gua_craft.png");
         showCrafting = true;
         // 乾天, 兑泽（金）, 离火, 震雷（木）, 巽风（木）, 坎水, 艮山（土）, 坤地
         topLeftItem = ChargeModItemRegistry.TALISMAN_PAPER_ITEM.get();

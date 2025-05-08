@@ -13,7 +13,7 @@ public class JuLingPelletScreen extends ChargeBaseScreen {
         super(title);
         leftStringLocal = "聚灵丹，吃下去后可以短时间内增加灵力的回复速度。\n" +
                 "这里的聚灵指的是将灵石内部的灵力聚集，快速给使用者提供力量。出于人性化考量，加入土豆以调和味道和口感，让它吃起来不像是硬邦邦的压缩灵石。";
-        rightImage = new ResourceLocation(ChargeModItemRegistry.MODID,"textures/gui/xian_tian_ba_gua_craft.png");
+        rightImage = new ResourceLocation(ChargeModItemRegistry.MODID,"textures/gui/hou_tian_ba_gua_craft.png");
         showCrafting = true;
         // 乾天, 兑泽（金）, 离火, 震雷（木）, 巽风（木）, 坎水, 艮山（土）, 坤地
         topLeftItem = ChargeModItemRegistry.chargeLingShi.get();

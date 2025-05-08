@@ -14,7 +14,7 @@ public class SkullStealTalismanScreen extends ChargeBaseScreen {
         super(title);
         leftStringLocal = "换颅符，偷偷改换生物的头颅，将对方的头颅换成纸人头颅，并盗取对面原本头颅。\n" +
                 "取敌方首级如探囊取物，只是取了对面不会死亡，还有反击的余地让这符略显尴尬。";
-        rightImage = new ResourceLocation(ChargeModItemRegistry.MODID,"textures/gui/xian_tian_ba_gua_craft.png");
+        rightImage = new ResourceLocation(ChargeModItemRegistry.MODID,"textures/gui/hou_tian_ba_gua_craft.png");
         showCrafting = true;
         // 乾天, 兑泽（金）, 离火, 震雷（木）, 巽风（木）, 坎水, 艮山（土）, 坤地
         topLeftItem = ChargeModItemRegistry.TALISMAN_PAPER_ITEM.get();

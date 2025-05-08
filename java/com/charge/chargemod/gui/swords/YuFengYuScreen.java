@@ -13,7 +13,7 @@ public class YuFengYuScreen extends ChargeBaseScreen {
         super(title);
         leftStringLocal = "欲风雨，五行属木。雷响八方，见风知雨，剑蕴含了强大的木属性力量，能唤天雷，驱邪缚魅。\n" +
                 "这把剑的雷霆带着天威，不分敌我，范围内都会受到雷电伤害，雷霆虽强但却无法掉落经验，掉落物也既有可能被雷霆摧毁，切记切记。";
-        rightImage = new ResourceLocation(ChargeModItemRegistry.MODID,"textures/gui/hou_tian_ba_gua_craft.png");
+        rightImage = new ResourceLocation(ChargeModItemRegistry.MODID,"textures/gui/xian_tian_ba_gua_craft.png");
         showCrafting = true;
         // 乾天, 兑泽（金）, 离火, 震雷（木）, 巽风（木）, 坎水, 艮山（土）, 坤地
         topLeftItem = Items.LILY_PAD;// new ResourceLocation("textures/block/lily_pad.png");

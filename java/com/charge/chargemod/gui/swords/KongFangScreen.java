@@ -13,7 +13,7 @@ public class KongFangScreen extends ChargeBaseScreen {
         super(title);
         leftStringLocal = "孔方，五行属金的铜钱剑。修行本应离不开钱财，这方世界钱财居然也失去了作用，这把剑用灵力可以发出铜钱攻击敌人\n" +
                 "铜钱不算锋利，一次能发射3枚，对付一些远程怪物算是勉强够用。用铜钱打人，也算得上是挥金如土，潇洒半生了吧。";
-        rightImage = new ResourceLocation(ChargeModItemRegistry.MODID,"textures/gui/hou_tian_ba_gua_craft.png");
+        rightImage = new ResourceLocation(ChargeModItemRegistry.MODID,"textures/gui/xian_tian_ba_gua_craft.png");
         showCrafting = true;
         // 乾天, 兑泽（金）, 离火, 震雷（木）, 巽风（木）, 坎水, 艮山（土）, 坤地
         topLeftItem = Items.COPPER_INGOT;// new ResourceLocation("textures/item/copper_ingot.png");

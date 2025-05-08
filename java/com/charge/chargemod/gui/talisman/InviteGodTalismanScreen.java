@@ -13,7 +13,7 @@ public class InviteGodTalismanScreen extends ChargeBaseScreen {
         super(title);
         leftStringLocal = "请神符，蹲下使用该符可以标记一个生物，可在异地使用符，产生请神仪式，若仪式结束后，生物仍站在召唤仪式附近，则会传送到使用符的道友附近\n" +
                 "说是请神，实际上更接近于请人，这就是大道相通。目前仅能用于同一维度。";
-        rightImage = new ResourceLocation(ChargeModItemRegistry.MODID,"textures/gui/xian_tian_ba_gua_craft.png");
+        rightImage = new ResourceLocation(ChargeModItemRegistry.MODID,"textures/gui/hou_tian_ba_gua_craft.png");
         showCrafting = true;
         // 乾天, 兑泽（金）, 离火, 震雷（木）, 巽风（木）, 坎水, 艮山（土）, 坤地
         topLeftItem = ChargeModItemRegistry.TALISMAN_PAPER_ITEM.get();

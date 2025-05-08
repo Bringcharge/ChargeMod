@@ -13,7 +13,7 @@ public class PoWanFaPelletScreen extends ChargeBaseScreen {
         super(title);
         leftStringLocal = "破万法丹，吃下去后可以消除自身不良状态，保留增益。\n" +
                 "万法皆由道，以道破万法。牛奶会让所有的状态消失，此丹药则可避免此尴尬，而且收纳方便，随身携带量大，属实是斗法不二之选。";
-        rightImage = new ResourceLocation(ChargeModItemRegistry.MODID,"textures/gui/xian_tian_ba_gua_craft.png");
+        rightImage = new ResourceLocation(ChargeModItemRegistry.MODID,"textures/gui/hou_tian_ba_gua_craft.png");
         showCrafting = true;
         // 乾天, 兑泽（金）, 离火, 震雷（木）, 巽风（木）, 坎水, 艮山（土）, 坤地
         topLeftItem = null;

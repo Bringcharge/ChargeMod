@@ -13,7 +13,7 @@ public class ReliveTalismanScreen extends ChargeBaseScreen {
         super(title);
         leftStringLocal = "回生符，从这个世界的无限轮回之中领悟出的符，在副手持有生物的肉或一些特殊战利品，可以再次生成生物。\n" +
                 "世界上并不存在真正的起死回生，如果你断掉的手重新长出了身体，你觉得那身体还是你吗？";
-        rightImage = new ResourceLocation(ChargeModItemRegistry.MODID,"textures/gui/xian_tian_ba_gua_craft.png");
+        rightImage = new ResourceLocation(ChargeModItemRegistry.MODID,"textures/gui/hou_tian_ba_gua_craft.png");
         showCrafting = true;
         // 乾天, 兑泽（金）, 离火, 震雷（木）, 巽风（木）, 坎水, 艮山（土）, 坤地
         topLeftItem = ChargeModItemRegistry.TALISMAN_PAPER_ITEM.get();

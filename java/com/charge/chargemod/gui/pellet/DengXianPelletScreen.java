@@ -13,7 +13,7 @@ public class DengXianPelletScreen extends ChargeBaseScreen {
         super(title);
         leftStringLocal = "登仙丹，调用体内灵力让仙体力量发挥到极限，到达真仙的高度，还会引动天罚雷劫。\n" +
                 "丹方选取了世间稀有之物，凑齐便代表已经游历这方世界，借用世界之力推动体内灵力达到巅峰。引来的雷劫一旦开始，便无法停止，需谨慎使用。";
-        rightImage = new ResourceLocation(ChargeModItemRegistry.MODID,"textures/gui/xian_tian_ba_gua_craft.png");
+        rightImage = new ResourceLocation(ChargeModItemRegistry.MODID,"textures/gui/hou_tian_ba_gua_craft.png");
         showCrafting = true;
         // 乾天, 兑泽（金）, 离火, 震雷（木）, 巽风（木）, 坎水, 艮山（土）, 坤地
         topLeftItem = ChargeModItemRegistry.CHARGE_PO_WAN_FA_PELLET.get();

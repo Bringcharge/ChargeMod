@@ -13,7 +13,7 @@ public class HealthPelletScreen extends ChargeBaseScreen {
         super(title);
         leftStringLocal = "大还丹，吃下去后可以快速恢复大量生命值。\n" +
                 "没有灵芝，就用蘑菇将就讲究。没有人参，就用胡萝卜将就将就。至于丹药药效嘛……也将就将就。";
-        rightImage = new ResourceLocation(ChargeModItemRegistry.MODID,"textures/gui/xian_tian_ba_gua_craft.png");
+        rightImage = new ResourceLocation(ChargeModItemRegistry.MODID,"textures/gui/hou_tian_ba_gua_craft.png");
         showCrafting = true;
         // 乾天, 兑泽（金）, 离火, 震雷（木）, 巽风（木）, 坎水, 艮山（土）, 坤地
         topLeftItem = null;

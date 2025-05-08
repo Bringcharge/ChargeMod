@@ -13,7 +13,7 @@ public class XunYinScreen extends ChargeBaseScreen {
         super(title);
         leftStringLocal = "寻因，因果剑之一。消耗灵力有1秒的时间，可以对看破伤害的成因，若有人在此期间加害于你，会对其造成伤害，并移动到它所处位置。\n" +
                 "因果，无因毅无果。万物皆系于这两字之上，寻因也仅仅是找到了其中一个开头，这段因又何尝不是另一个因的果。";
-        rightImage = new ResourceLocation(ChargeModItemRegistry.MODID,"textures/gui/hou_tian_ba_gua_craft.png");
+        rightImage = new ResourceLocation(ChargeModItemRegistry.MODID,"textures/gui/xian_tian_ba_gua_craft.png");
         showCrafting = true;
         // 乾天, 兑泽（金）, 离火, 震雷（木）, 巽风（木）, 坎水, 艮山（土）, 坤地
         topLeftItem = null;

@@ -13,7 +13,7 @@ public class PushBackTalismanScreen extends ChargeBaseScreen {
         super(title);
         leftStringLocal = "退魔符，释放出符内巨大灵力，将周围的生物弹飞。\n" +
                 "弹飞的伤害不高，但是生物落地会有伤害。可惜使用的瞬间没有无敌判定，不能当成凹来使用。";
-        rightImage = new ResourceLocation(ChargeModItemRegistry.MODID,"textures/gui/xian_tian_ba_gua_craft.png");
+        rightImage = new ResourceLocation(ChargeModItemRegistry.MODID,"textures/gui/hou_tian_ba_gua_craft.png");
         showCrafting = true;
         // 乾天, 兑泽（金）, 离火, 震雷（木）, 巽风（木）, 坎水, 艮山（土）, 坤地
         topLeftItem = ChargeModItemRegistry.TALISMAN_PAPER_ITEM.get();

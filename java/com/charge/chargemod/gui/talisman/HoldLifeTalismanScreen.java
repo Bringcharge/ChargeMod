@@ -13,7 +13,7 @@ public class HoldLifeTalismanScreen extends ChargeBaseScreen {
         super(title);
         leftStringLocal = "延死符，此符在使用者受到致命伤时，会从背包中自动触发，暂时延使用者的死亡。\n" +
                 "延死，只能拖延死亡的时间，当符的持续时间结束后，施术者就会不可避免的死亡。这短暂的时间可以保护身上的物资或是拼死一搏，渡劫时也许能有奇效。";
-        rightImage = new ResourceLocation(ChargeModItemRegistry.MODID,"textures/gui/xian_tian_ba_gua_craft.png");
+        rightImage = new ResourceLocation(ChargeModItemRegistry.MODID,"textures/gui/hou_tian_ba_gua_craft.png");
         showCrafting = true;
         // 乾天, 兑泽（金）, 离火, 震雷（木）, 巽风（木）, 坎水, 艮山（土）, 坤地
         topLeftItem = ChargeModItemRegistry.TALISMAN_PAPER_ITEM.get();

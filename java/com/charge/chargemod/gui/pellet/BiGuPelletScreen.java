@@ -13,7 +13,7 @@ public class BiGuPelletScreen extends ChargeBaseScreen {
         super(title);
         leftStringLocal = "辟谷丹，可以提供大量的饥饿值，又持续时间不错的饱腹效果。\n" +
                 "其实就是用灵气把各种食材压缩在一起，变成可以快速吃下的丹药罢了。比起辟谷丹，有条件的仙人还是更喜欢吃现做的食物。";
-        rightImage = new ResourceLocation(ChargeModItemRegistry.MODID,"textures/gui/xian_tian_ba_gua_craft.png");
+        rightImage = new ResourceLocation(ChargeModItemRegistry.MODID,"textures/gui/hou_tian_ba_gua_craft.png");
         showCrafting = true;
         // 乾天, 兑泽（金）, 离火, 震雷（木）, 巽风（木）, 坎水, 艮山（土）, 坤地
         topLeftItem = Items.GLISTERING_MELON_SLICE;

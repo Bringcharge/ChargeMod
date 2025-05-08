@@ -13,7 +13,7 @@ public class WanWuShengPelletScreen extends ChargeBaseScreen {
         super(title);
         leftStringLocal = "万物生丹，蕴含了生育力量的丹药，服用后能给周边的生物传递孕育生命的力量。\n" +
                 "由于丹药的选在较为保守，传递能量需要使用者用身体撞击附近的生物才会有效。丹药出于安全考虑，去除了对一些生物的效果，请不要进行危险的尝试。";
-        rightImage = new ResourceLocation(ChargeModItemRegistry.MODID,"textures/gui/xian_tian_ba_gua_craft.png");
+        rightImage = new ResourceLocation(ChargeModItemRegistry.MODID,"textures/gui/hou_tian_ba_gua_craft.png");
         showCrafting = true;
         // 乾天, 兑泽（金）, 离火, 震雷（木）, 巽风（木）, 坎水, 艮山（土）, 坤地
         topLeftItem = null;

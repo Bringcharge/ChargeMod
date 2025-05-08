@@ -13,7 +13,7 @@ public class QiuXiaoYaoScreen extends ChargeBaseScreen {
         super(title);
         leftStringLocal = "仙剑求逍遥，修仙之人大多都在追求无忧无虑逍遥自在的生活。这个世界既有了无线的寿命，逍遥长生也未必遥不可及。\n" +
                 "此剑跳脱五行之外，以凌厉的剑气伤害怪物。也可以斩开空间，短距离传送。";
-        rightImage = new ResourceLocation(ChargeModItemRegistry.MODID,"textures/gui/hou_tian_ba_gua_craft.png");
+        rightImage = new ResourceLocation(ChargeModItemRegistry.MODID,"textures/gui/xian_tian_ba_gua_craft.png");
         showCrafting = true;
         //乾天, 兑泽（金）, 离火, 震雷（木）, 巽风（木）, 坎水, 艮山（土）, 坤地
         topLeftItem = Items.PLAYER_HEAD;

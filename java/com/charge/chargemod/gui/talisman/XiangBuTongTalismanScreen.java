@@ -13,7 +13,7 @@ public class XiangBuTongTalismanScreen extends ChargeBaseScreen {
         super(title);
         leftStringLocal = "想不通，四大仙符之一，让周围生物相互攻击、逃跑、仇恨彼此。\n" +
                 "一日修炼，我问天：生命相互争斗，永无止境，此为天意？天不语，大地纷争依旧。数日后创造此符，此符也只是借用些许天道罢了。";
-        rightImage = new ResourceLocation(ChargeModItemRegistry.MODID,"textures/gui/xian_tian_ba_gua_craft.png");
+        rightImage = new ResourceLocation(ChargeModItemRegistry.MODID,"textures/gui/hou_tian_ba_gua_craft.png");
         showCrafting = true;
         // 乾天, 兑泽（金）, 离火, 震雷（木）, 巽风（木）, 坎水, 艮山（土）, 坤地
         topLeftItem = ChargeModItemRegistry.TALISMAN_PAPER_ITEM.get();

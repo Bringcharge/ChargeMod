@@ -13,7 +13,7 @@ public class EmberScreen extends ChargeBaseScreen {
         super(title);
         leftStringLocal = "余烬，五行属火。可以消耗灵力让怪物燃烧，若是已经燃烧的怪物则可以引发巨大的爆炸。\n" +
                 "如同燃烧后的炭火，仅剩微不足道的暗红，却也可能引燃正片森林，烧尽一切。";
-        rightImage = new ResourceLocation(ChargeModItemRegistry.MODID,"textures/gui/hou_tian_ba_gua_craft.png");
+        rightImage = new ResourceLocation(ChargeModItemRegistry.MODID,"textures/gui/xian_tian_ba_gua_craft.png");
         showCrafting = true;
         // 乾天, 兑泽（金）, 离火, 震雷（木）, 巽风（木）, 坎水, 艮山（土）, 坤地
         topLeftItem = null;

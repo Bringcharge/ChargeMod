@@ -13,7 +13,7 @@ public class FengWanLiScreen extends ChargeBaseScreen {
         super(title);
         leftStringLocal = "藏锋万里，五行属金。杀心不起，藏锋万里。这把剑汇聚了金的杀伐之力，使用者的竭力克制才能勉强压制住。\n" +
                 "这把剑渴望着杀戮，如同你渴望力量一般，当它亲自攻击了足够多的次数之后，便不再束手束脚，剑的名字和技能也会发生变化。";
-        rightImage = new ResourceLocation(ChargeModItemRegistry.MODID,"textures/gui/hou_tian_ba_gua_craft.png");
+        rightImage = new ResourceLocation(ChargeModItemRegistry.MODID,"textures/gui/xian_tian_ba_gua_craft.png");
         showCrafting = true;
         // 乾天, 兑泽（金）, 离火, 震雷（木）, 巽风（木）, 坎水, 艮山（土）, 坤地
         topLeftItem = Items.IRON_SWORD;// new ResourceLocation("textures/item/iron_sword.png");

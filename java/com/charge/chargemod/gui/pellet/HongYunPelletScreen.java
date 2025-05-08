@@ -13,7 +13,7 @@ public class HongYunPelletScreen extends ChargeBaseScreen {
         super(title);
         leftStringLocal = "鸿运齐天丹，吃下去后可以短时间内大幅增加气运。\n" +
                 "一开始我惊讶于这方世界气运如此好获得，后来才发现这世界所谓的幸运只影响钓鱼，而不是真正的气运。";
-        rightImage = new ResourceLocation(ChargeModItemRegistry.MODID,"textures/gui/xian_tian_ba_gua_craft.png");
+        rightImage = new ResourceLocation(ChargeModItemRegistry.MODID,"textures/gui/hou_tian_ba_gua_craft.png");
         showCrafting = true;
         // 乾天, 兑泽（金）, 离火, 震雷（木）, 巽风（木）, 坎水, 艮山（土）, 坤地
         topLeftItem = Items.LAPIS_LAZULI;

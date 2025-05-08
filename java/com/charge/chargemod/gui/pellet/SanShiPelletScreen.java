@@ -13,7 +13,7 @@ public class SanShiPelletScreen extends ChargeBaseScreen {
         super(title);
         leftStringLocal = "服用后，会经历短暂的不适，并且唤出自身的三尸。\n" +
                 "成仙的法子有很多，尸解成仙，五气朝元，功德圆满……这些在这方世界太过困难，不若选择斩三尸成仙。";
-        rightImage = new ResourceLocation(ChargeModItemRegistry.MODID,"textures/gui/xian_tian_ba_gua_craft.png");
+        rightImage = new ResourceLocation(ChargeModItemRegistry.MODID,"textures/gui/hou_tian_ba_gua_craft.png");
         showCrafting = true;
         // 乾天, 兑泽（金）, 离火, 震雷（木）, 巽风（木）, 坎水, 艮山（土）, 坤地
         topLeftItem = ChargeModItemRegistry.CHARGE_WAN_WU_SHENG_PELLET.get();

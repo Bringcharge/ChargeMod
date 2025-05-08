@@ -13,7 +13,7 @@ public class PowerPelletScreen extends ChargeBaseScreen {
         super(title);
         leftStringLocal = "生力丹，吃下去后可以大幅度提升身体强度。\n" +
                 "每次炼丹都会有人问，能不能炼制那种吃了之后就能活力无限，精力旺盛的丹药。生力丹在这方面遥遥领先。如果客人问的是生育方面……还有别的丹药。";
-        rightImage = new ResourceLocation(ChargeModItemRegistry.MODID,"textures/gui/xian_tian_ba_gua_craft.png");
+        rightImage = new ResourceLocation(ChargeModItemRegistry.MODID,"textures/gui/hou_tian_ba_gua_craft.png");
         showCrafting = true;
         // 乾天, 兑泽（金）, 离火, 震雷（木）, 巽风（木）, 坎水, 艮山（土）, 坤地
         topLeftItem = null;

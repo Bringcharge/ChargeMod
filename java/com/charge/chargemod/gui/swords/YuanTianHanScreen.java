@@ -13,7 +13,7 @@ public class YuanTianHanScreen extends ChargeBaseScreen {
         super(title);
         leftStringLocal = "愿天寒，五行火之精。凝聚了大量火焰元素的剑，使用灵力可以向前方释放三昧真火，灼烧生灵。\n" +
                 "剑上的火焰太过强大且纯粹，剑势如同滔天火海倾泻而下，也许只有在冰天雪地之中挥舞此剑，才勉强能感到一丝凉意。";
-        rightImage = new ResourceLocation(ChargeModItemRegistry.MODID,"textures/gui/hou_tian_ba_gua_craft.png");
+        rightImage = new ResourceLocation(ChargeModItemRegistry.MODID,"textures/gui/xian_tian_ba_gua_craft.png");
         showCrafting = true;
         //
         topLeftItem = Items.MAGMA_CREAM; // new ResourceLocation("textures/item/magma_cream.png");
