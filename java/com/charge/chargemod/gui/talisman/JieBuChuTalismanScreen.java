@@ -17,14 +17,14 @@ public class JieBuChuTalismanScreen extends ChargeBaseScreen {
         rightImage = new ResourceLocation(ChargeModItemRegistry.MODID,"textures/gui/xian_tian_ba_gua_craft.png");
         showCrafting = true;
         // 乾天, 兑泽（金）, 离火, 震雷（木）, 巽风（木）, 坎水, 艮山（土）, 坤地
-        bottomItem = ChargeModItemRegistry.TALISMAN_PAPER_ITEM.get();
-        bottomRightItem = Items.SOUL_SAND;
-        rightItem = Items.SLIME_BALL;
-        topRightItem = Items.ROTTEN_FLESH;
-        bottomLeftItem = Items.NETHER_WART;
-        leftItem = Items.ENDER_PEARL;
-        topLeftItem = null;
-        topItem = null;
+        topLeftItem = ChargeModItemRegistry.TALISMAN_PAPER_ITEM.get();
+        leftItem = Items.SOUL_SAND;
+        bottomItem = Items.SLIME_BALL;
+        rightItem = Items.ROTTEN_FLESH;
+        bottomRightItem = Items.NETHER_WART;
+        topItem = Items.ENDER_PEARL;
+        topRightItem = null;
+        bottomLeftItem = null;
         rightStringLocal = "使用了符纸，灵魂沙，粘液球，腐肉，地狱疣，末影珍珠。按照上图合成，此符蕴含着大道碎片。";
     }
 

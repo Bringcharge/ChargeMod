@@ -16,14 +16,14 @@ public class PushBackTalismanScreen extends ChargeBaseScreen {
         rightImage = new ResourceLocation(ChargeModItemRegistry.MODID,"textures/gui/xian_tian_ba_gua_craft.png");
         showCrafting = true;
         // 乾天, 兑泽（金）, 离火, 震雷（木）, 巽风（木）, 坎水, 艮山（土）, 坤地
-        bottomItem = ChargeModItemRegistry.TALISMAN_PAPER_ITEM.get();
-        bottomRightItem = Items.IRON_NUGGET;
-        rightItem = Items.GUNPOWDER;
+        topLeftItem = ChargeModItemRegistry.TALISMAN_PAPER_ITEM.get();
+        leftItem = Items.IRON_NUGGET;
+        bottomItem = Items.GUNPOWDER;
+        rightItem = null;
+        bottomRightItem = null;
+        topItem =null;
         topRightItem = null;
-        bottomLeftItem = null;
-        leftItem =null;
-        topLeftItem = null;
-        topItem = Items.NETHERRACK;
+        bottomLeftItem = Items.NETHERRACK;
         rightStringLocal = "使用了符纸，铁粒，火药，地狱岩。按照上图合成，不必担心存储，这符不会因为含有火药而爆炸。";
     }
 

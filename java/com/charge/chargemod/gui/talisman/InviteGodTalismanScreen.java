@@ -16,14 +16,14 @@ public class InviteGodTalismanScreen extends ChargeBaseScreen {
         rightImage = new ResourceLocation(ChargeModItemRegistry.MODID,"textures/gui/xian_tian_ba_gua_craft.png");
         showCrafting = true;
         // 乾天, 兑泽（金）, 离火, 震雷（木）, 巽风（木）, 坎水, 艮山（土）, 坤地
-        bottomItem = ChargeModItemRegistry.TALISMAN_PAPER_ITEM.get();
-        bottomRightItem = Items.ENDER_PEARL;
-        rightItem = Items.COMPASS;
-        topRightItem = Items.ENDER_PEARL;
-        bottomLeftItem = Items.ENDER_EYE;
-        leftItem = null;
-        topLeftItem = null;
-        topItem = Items.CLOCK;
+        topLeftItem = ChargeModItemRegistry.TALISMAN_PAPER_ITEM.get();
+        leftItem = Items.ENDER_PEARL;
+        bottomItem = Items.COMPASS;
+        rightItem = Items.ENDER_PEARL;
+        bottomRightItem = Items.ENDER_EYE;
+        topItem = null;
+        topRightItem = null;
+        bottomLeftItem = Items.CLOCK;
         rightStringLocal = "使用了符纸，末影珍珠，指南针，末影珍珠，末影之眼，时钟，按照上图合成。请神嘛，最好还是礼貌一些。";
     }
 

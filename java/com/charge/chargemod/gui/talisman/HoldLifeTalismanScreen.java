@@ -16,14 +16,14 @@ public class HoldLifeTalismanScreen extends ChargeBaseScreen {
         rightImage = new ResourceLocation(ChargeModItemRegistry.MODID,"textures/gui/xian_tian_ba_gua_craft.png");
         showCrafting = true;
         // 乾天, 兑泽（金）, 离火, 震雷（木）, 巽风（木）, 坎水, 艮山（土）, 坤地
-        bottomItem = ChargeModItemRegistry.TALISMAN_PAPER_ITEM.get();
-        bottomRightItem = Items.LAPIS_LAZULI;
-        rightItem = Items.SOUL_SAND;
-        topRightItem = Items.WARPED_STEM;
-        bottomLeftItem = null;
-        leftItem = Items.GHAST_TEAR;
-        topLeftItem = null;
-        topItem = Items.ROTTEN_FLESH;
+        topLeftItem = ChargeModItemRegistry.TALISMAN_PAPER_ITEM.get();
+        leftItem = Items.LAPIS_LAZULI;
+        bottomItem = Items.SOUL_SAND;
+        rightItem = Items.WARPED_STEM;
+        bottomRightItem = null;
+        topItem = Items.GHAST_TEAR;
+        topRightItem = null;
+        bottomLeftItem = Items.ROTTEN_FLESH;
         rightStringLocal = "使用了符纸，青金石，灵魂沙，诡异菌柄，恶魂泪，腐肉。按照上图合成，这符也可以主动使用，这无异于自杀。";
     }
 

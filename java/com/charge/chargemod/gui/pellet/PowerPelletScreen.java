@@ -16,15 +16,15 @@ public class PowerPelletScreen extends ChargeBaseScreen {
         rightImage = new ResourceLocation(ChargeModItemRegistry.MODID,"textures/gui/xian_tian_ba_gua_craft.png");
         showCrafting = true;
         // 乾天, 兑泽（金）, 离火, 震雷（木）, 巽风（木）, 坎水, 艮山（土）, 坤地
-        bottomItem = null;
-        bottomRightItem = Items.GLOWSTONE_DUST;
-        rightItem = Items.REDSTONE;
-        topRightItem = Items.IRON_INGOT;
-        bottomLeftItem = Items.BLAZE_POWDER;
-        leftItem = Items.HONEYCOMB;
         topLeftItem = null;
-        topItem = null;
-        rightStringLocal = "使用了萤石粉，红石，铁锭，烈焰粉，蜜脾。按照上图合成，特别标注，这丹药管的是身强体壮，生育需求请往后翻页。";
+        leftItem = Items.GLOWSTONE_DUST;
+        bottomItem = Items.REDSTONE;
+        rightItem = Items.IRON_INGOT;
+        bottomRightItem = Items.BLAZE_POWDER;
+        topItem = Items.HONEYCOMB;
+        topRightItem = null;
+        bottomLeftItem = Items.MAGMA_CREAM;
+        rightStringLocal = "使用了萤石粉，红石，铁锭，烈焰粉，蜜脾，岩浆膏。按照上图合成，特别标注，这丹药管的是身强体壮，生育需求请往后翻页。";
     }
 
 }

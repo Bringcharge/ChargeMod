@@ -17,14 +17,14 @@ public class FlyTalismanScreen extends ChargeBaseScreen {
         rightImage = new ResourceLocation(ChargeModItemRegistry.MODID,"textures/gui/xian_tian_ba_gua_craft.png");
         showCrafting = true;
         // 乾天, 兑泽（金）, 离火, 震雷（木）, 巽风（木）, 坎水, 艮山（土）, 坤地
-        bottomItem = ChargeModItemRegistry.TALISMAN_PAPER_ITEM.get();
-        bottomRightItem = null;
-        rightItem = Items.PHANTOM_MEMBRANE;
+        topLeftItem = ChargeModItemRegistry.TALISMAN_PAPER_ITEM.get();
+        leftItem = null;
+        bottomItem = Items.PHANTOM_MEMBRANE;
+        rightItem = null;
+        bottomRightItem = Items.BAMBOO;
+        topItem = Items.FEATHER;
         topRightItem = null;
-        bottomLeftItem = Items.BAMBOO;
-        leftItem = Items.FEATHER;
-        topLeftItem = null;
-        topItem = Items.COCOA_BEANS;
+        bottomLeftItem = Items.COCOA_BEANS;
         rightStringLocal = "使用了符纸，幻翼膜，竹子，羽毛，可可豆。按照上图合成，短暂一瞬获得神的力量，这也是修仙的一大浪漫。";
     }
 

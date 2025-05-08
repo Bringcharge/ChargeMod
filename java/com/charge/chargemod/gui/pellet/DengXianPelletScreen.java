@@ -16,14 +16,14 @@ public class DengXianPelletScreen extends ChargeBaseScreen {
         rightImage = new ResourceLocation(ChargeModItemRegistry.MODID,"textures/gui/xian_tian_ba_gua_craft.png");
         showCrafting = true;
         // 乾天, 兑泽（金）, 离火, 震雷（木）, 巽风（木）, 坎水, 艮山（土）, 坤地
-        bottomItem = ChargeModItemRegistry.CHARGE_PO_WAN_FA_PELLET.get();
-        bottomRightItem = Items.LIGHTNING_ROD;
-        rightItem = Items.BELL;
-        topRightItem = Items.CHAIN;
-        bottomLeftItem = Items.ANCIENT_DEBRIS;
-        leftItem = Items.TRIDENT;
-        topLeftItem = Items.DIAMOND_ORE;
-        topItem = Items.NETHER_STAR;
+        topLeftItem = ChargeModItemRegistry.CHARGE_PO_WAN_FA_PELLET.get();
+        leftItem = Items.LIGHTNING_ROD;
+        bottomItem = Items.BELL;
+        rightItem = Items.CHAIN;
+        bottomRightItem = Items.ANCIENT_DEBRIS;
+        topItem = Items.TRIDENT;
+        topRightItem = Items.DIAMOND_ORE;
+        bottomLeftItem = Items.NETHER_STAR;
         rightStringLocal = "使用了破万法丹，避雷针，钟，锁链，远古残骸，三叉戟，钻石矿石，下界之星。按照上图合成。雷劫威能强大，需多寻些保命之物\n" +
                 "且天道狡诈，有些雷会长久不散。这雷劫……命也，命也。";
     }

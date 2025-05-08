@@ -16,14 +16,14 @@ public class SanShiPelletScreen extends ChargeBaseScreen {
         rightImage = new ResourceLocation(ChargeModItemRegistry.MODID,"textures/gui/xian_tian_ba_gua_craft.png");
         showCrafting = true;
         // 乾天, 兑泽（金）, 离火, 震雷（木）, 巽风（木）, 坎水, 艮山（土）, 坤地
-        bottomItem = ChargeModItemRegistry.CHARGE_WAN_WU_SHENG_PELLET.get();
-        bottomRightItem = Items.POISONOUS_POTATO;
-        rightItem = ChargeModItemRegistry.CHARGE_BIGU_PELLET.get();
+        topLeftItem = ChargeModItemRegistry.CHARGE_WAN_WU_SHENG_PELLET.get();
+        leftItem = Items.POISONOUS_POTATO;
+        bottomItem = ChargeModItemRegistry.CHARGE_BIGU_PELLET.get();
+        rightItem = null;
+        bottomRightItem = Items.PUFFERFISH;
+        topItem = Items.HONEY_BOTTLE;
         topRightItem = null;
-        bottomLeftItem = Items.PUFFERFISH;
-        leftItem = Items.HONEY_BOTTLE;
-        topLeftItem = null;
-        topItem = null;
+        bottomLeftItem = null;
         rightStringLocal = "使用了万物生丹，毒马铃薯，辟谷丹，河豚，蜂蜜。按照上图合成。成仙不易，大道无情。";
     }
 

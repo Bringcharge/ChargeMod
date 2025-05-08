@@ -16,14 +16,14 @@ public class ReliveTalismanScreen extends ChargeBaseScreen {
         rightImage = new ResourceLocation(ChargeModItemRegistry.MODID,"textures/gui/xian_tian_ba_gua_craft.png");
         showCrafting = true;
         // 乾天, 兑泽（金）, 离火, 震雷（木）, 巽风（木）, 坎水, 艮山（土）, 坤地
-        bottomItem = ChargeModItemRegistry.TALISMAN_PAPER_ITEM.get();
-        bottomRightItem = Items.GHAST_TEAR;
-        rightItem = Items.SOUL_SOIL;
-        topRightItem = Items.RED_MUSHROOM;
-        bottomLeftItem = null;
-        leftItem = null;
-        topLeftItem = Items.MYCELIUM;
-        topItem = Items.BONE_MEAL;
+        topLeftItem = ChargeModItemRegistry.TALISMAN_PAPER_ITEM.get();
+        leftItem = Items.GHAST_TEAR;
+        bottomItem = Items.SOUL_SOIL;
+        rightItem = Items.RED_MUSHROOM;
+        bottomRightItem = null;
+        topItem = null;
+        topRightItem = Items.MYCELIUM;
+        bottomLeftItem = Items.BONE_MEAL;
         rightStringLocal = "使用了符纸，恶魂之泪，灵魂土，红蘑菇，菌丝，骨粉。按照上图合成，至于为什么蜂蜜瓶能产生蜂蜜，老朽也不清楚。";
     }
 

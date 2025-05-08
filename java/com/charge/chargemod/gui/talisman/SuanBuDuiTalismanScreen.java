@@ -16,14 +16,14 @@ public class SuanBuDuiTalismanScreen extends ChargeBaseScreen {
         rightImage = new ResourceLocation(ChargeModItemRegistry.MODID,"textures/gui/xian_tian_ba_gua_craft.png");
         showCrafting = true;
         // 乾天, 兑泽（金）, 离火, 震雷（木）, 巽风（木）, 坎水, 艮山（土）, 坤地
-        bottomItem = ChargeModItemRegistry.TALISMAN_PAPER_ITEM.get();
-        bottomRightItem = Items.GOLDEN_APPLE;
-        rightItem = null;
-        topRightItem = Items.GLISTERING_MELON_SLICE;
-        bottomLeftItem = Items.GOLDEN_CARROT;
-        leftItem = Items.PUMPKIN;
-        topLeftItem = null;
-        topItem = Items.HAY_BLOCK;
+        topLeftItem = ChargeModItemRegistry.TALISMAN_PAPER_ITEM.get();
+        leftItem = Items.GOLDEN_APPLE;
+        bottomItem = null;
+        rightItem = Items.GLISTERING_MELON_SLICE;
+        bottomRightItem = Items.GOLDEN_CARROT;
+        topItem = Items.PUMPKIN;
+        topRightItem = null;
+        bottomLeftItem = Items.HAY_BLOCK;
         rightStringLocal = "使用了符纸，金苹果，闪耀西瓜，金胡萝卜，南瓜，干草块。按照上图合成，此符蕴含着大道碎片。";
     }
 

@@ -16,14 +16,14 @@ public class WanWuShengPelletScreen extends ChargeBaseScreen {
         rightImage = new ResourceLocation(ChargeModItemRegistry.MODID,"textures/gui/xian_tian_ba_gua_craft.png");
         showCrafting = true;
         // 乾天, 兑泽（金）, 离火, 震雷（木）, 巽风（木）, 坎水, 艮山（土）, 坤地
-        bottomItem = null;
-        bottomRightItem = Items.BONE;
-        rightItem = Items.ROTTEN_FLESH;
-        topRightItem = Items.FERMENTED_SPIDER_EYE;
-        bottomLeftItem = Items.SLIME_BALL;
-        leftItem = Items.LEATHER;
-        topLeftItem = Items.GUNPOWDER;
-        topItem = null;
+        topLeftItem = null;
+        leftItem = Items.BONE;
+        bottomItem = Items.ROTTEN_FLESH;
+        rightItem = Items.FERMENTED_SPIDER_EYE;
+        bottomRightItem = Items.SLIME_BALL;
+        topItem = Items.LEATHER;
+        topRightItem = Items.GUNPOWDER;
+        bottomLeftItem = null;
         rightStringLocal = "使用了骨头，腐肉，发酵蜘蛛眼，粘液球，皮革，火药。按照上图合成，用异变血肉精华合成丹药，连道祖看了都忍不住发出桀桀的笑声。";
     }
 

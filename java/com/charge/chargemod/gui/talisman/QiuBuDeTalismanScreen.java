@@ -16,14 +16,14 @@ public class QiuBuDeTalismanScreen extends ChargeBaseScreen {
         rightImage = new ResourceLocation(ChargeModItemRegistry.MODID,"textures/gui/xian_tian_ba_gua_craft.png");
         showCrafting = true;
         // 乾天, 兑泽（金）, 离火, 震雷（木）, 巽风（木）, 坎水, 艮山（土）, 坤地
-        bottomItem = ChargeModItemRegistry.TALISMAN_PAPER_ITEM.get();
-        bottomRightItem = Items.MAGMA_CREAM;
-        rightItem = Items.BLAZE_ROD;
-        topRightItem = Items.SOUL_CAMPFIRE;
-        bottomLeftItem = null;
-        leftItem = null;
-        topLeftItem = Items.SLIME_BALL;
+        topLeftItem = ChargeModItemRegistry.TALISMAN_PAPER_ITEM.get();
+        leftItem = Items.MAGMA_CREAM;
+        bottomItem = Items.BLAZE_ROD;
+        rightItem = Items.SOUL_CAMPFIRE;
+        bottomRightItem = null;
         topItem = null;
+        topRightItem = Items.SLIME_BALL;
+        bottomLeftItem = null;
         rightStringLocal = "使用了符纸，岩浆膏，烈焰棒，灵魂营火，粘液球。按照上图合成，此符蕴含着大道碎片。";
     }
 

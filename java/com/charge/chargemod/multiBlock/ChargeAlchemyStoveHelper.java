@@ -16,14 +16,14 @@ import java.util.Objects;
 public class ChargeAlchemyStoveHelper {
     public static ItemStack outputWithItemList(List<ItemStack> list) {   //输入1~8的item，输出产物
 
-        ItemStack s1 = list.get(0);//乾 天
-        ItemStack s2 = list.get(7);//兑 泽（金）
-        ItemStack s3 = list.get(6);//离 火
-        ItemStack s4 = list.get(5);//震 雷
-        ItemStack s5 = list.get(1);//巽 风
-        ItemStack s6 = list.get(2);//坎 水
-        ItemStack s7 = list.get(3);//艮 山
-        ItemStack s8 = list.get(4);//坤 地
+        ItemStack s1 = list.get(3);//乾 天
+        ItemStack s2 = list.get(2);//兑 泽（金）
+        ItemStack s3 = list.get(0);//离 火
+        ItemStack s4 = list.get(6);//震 雷
+        ItemStack s5 = list.get(7);//巽 风
+        ItemStack s6 = list.get(4);//坎 水
+        ItemStack s7 = list.get(5);//艮 山
+        ItemStack s8 = list.get(1);//坤 地
 
         if (    //退魔符
                 s1.is(ChargeModItemRegistry.TALISMAN_PAPER_ITEM.get()) &&
@@ -167,7 +167,7 @@ public class ChargeAlchemyStoveHelper {
                         s3.is(Items.BEETROOT) &&
                         s5.is(Items.GLOW_BERRIES) &&
                         s6.is(Items.POTION) && (PotionUtils.getPotion(s6) == Potions.WATER) &&
-                        ItemStacksIsEmpty(s3, s7, s8)
+                        ItemStacksIsEmpty(s4, s7, s8)
         ) {
             return new ItemStack(ChargeModItemRegistry.CHARGE_BIGU_PELLET.get(),1);
         }

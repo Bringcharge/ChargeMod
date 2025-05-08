@@ -16,14 +16,14 @@ public class HealthPelletScreen extends ChargeBaseScreen {
         rightImage = new ResourceLocation(ChargeModItemRegistry.MODID,"textures/gui/xian_tian_ba_gua_craft.png");
         showCrafting = true;
         // 乾天, 兑泽（金）, 离火, 震雷（木）, 巽风（木）, 坎水, 艮山（土）, 坤地
-        bottomItem = null;
-        bottomRightItem = Items.RED_MUSHROOM;
-        rightItem = null;
-        topRightItem = Items.CACTUS;
-        bottomLeftItem = Items.SPIDER_EYE;
-        leftItem = Items.NETHER_WART;
         topLeftItem = null;
-        topItem = null;
+        leftItem = Items.RED_MUSHROOM;
+        bottomItem = null;
+        rightItem = Items.CARROT;
+        bottomRightItem = Items.SPIDER_EYE;
+        topItem = Items.NETHER_WART;
+        topRightItem = null;
+        bottomLeftItem = null;
         rightStringLocal = "使用了红蘑菇，胡萝卜，蜘蛛眼，地狱疣。按照上图合成，连这配方都能有效，世界真是离谱。";
     }
 

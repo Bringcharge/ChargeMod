@@ -16,14 +16,14 @@ public class PoWanFaPelletScreen extends ChargeBaseScreen {
         rightImage = new ResourceLocation(ChargeModItemRegistry.MODID,"textures/gui/xian_tian_ba_gua_craft.png");
         showCrafting = true;
         // 乾天, 兑泽（金）, 离火, 震雷（木）, 巽风（木）, 坎水, 艮山（土）, 坤地
-        bottomItem = null;
-        bottomRightItem = Items.GOLDEN_CARROT;
-        rightItem = Items.WOODEN_SWORD;
-        topRightItem = null;
+        topLeftItem = null;
+        leftItem = Items.GOLDEN_CARROT;
+        bottomItem = Items.WOODEN_SWORD;
+        rightItem = null;
+        bottomRightItem = null;
+        topItem = ChargeModItemRegistry.TALISMAN_PAPER_ITEM.get();
+        topRightItem = Items.GLISTERING_MELON_SLICE;
         bottomLeftItem = null;
-        leftItem = ChargeModItemRegistry.TALISMAN_PAPER_ITEM.get();
-        topLeftItem = Items.GLISTERING_MELON_SLICE;
-        topItem = null;
         rightStringLocal = "使用了金萝卜，木剑，符纸，金西瓜。按照上图合成，破万法是给自己用的丹药，给敌人并不能破除它的增益。";
     }
 

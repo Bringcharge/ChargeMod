@@ -16,14 +16,14 @@ public class XiangBuTongTalismanScreen extends ChargeBaseScreen {
         rightImage = new ResourceLocation(ChargeModItemRegistry.MODID,"textures/gui/xian_tian_ba_gua_craft.png");
         showCrafting = true;
         // 乾天, 兑泽（金）, 离火, 震雷（木）, 巽风（木）, 坎水, 艮山（土）, 坤地
-        bottomItem = ChargeModItemRegistry.TALISMAN_PAPER_ITEM.get();
+        topLeftItem = ChargeModItemRegistry.TALISMAN_PAPER_ITEM.get();
+        leftItem = null;
+        bottomItem = Items.ENDER_EYE;
+        rightItem = Items.WHITE_BANNER;
         bottomRightItem = null;
-        rightItem = Items.ENDER_EYE;
-        topRightItem = Items.WHITE_BANNER;
+        topItem = Items.MAGMA_CREAM;
+        topRightItem = Items.KELP;
         bottomLeftItem = null;
-        leftItem = Items.MAGMA_CREAM;
-        topLeftItem = Items.KELP;
-        topItem = null;
         rightStringLocal = "使用了符纸，末影之眼，旗帜，岩浆膏，海带。按照上图合成，此符蕴含着大道碎片。";
     }
 

@@ -16,14 +16,14 @@ public class BiGuPelletScreen extends ChargeBaseScreen {
         rightImage = new ResourceLocation(ChargeModItemRegistry.MODID,"textures/gui/xian_tian_ba_gua_craft.png");
         showCrafting = true;
         // 乾天, 兑泽（金）, 离火, 震雷（木）, 巽风（木）, 坎水, 艮山（土）, 坤地
-        bottomItem = Items.GLISTERING_MELON_SLICE;
-        bottomRightItem = Items.SUGAR;
-        rightItem = Items.BEETROOT;
+        topLeftItem = Items.GLISTERING_MELON_SLICE;
+        leftItem = Items.SUGAR;
+        bottomItem = Items.BEETROOT;
+        rightItem = null;
+        bottomRightItem = Items.GLOW_BERRIES;
+        topItem = Items.POTION;
         topRightItem = null;
-        bottomLeftItem = Items.GLOW_BERRIES;
-        leftItem = Items.POTION;
-        topLeftItem = null;
-        topItem = null;
+        bottomLeftItem = null;
         rightStringLocal = "使用了金西瓜，糖，甜菜根，发光浆果，水瓶。按照上图合成，炼制麻烦，费时费力，若非出远门一般不考虑。";
     }
 

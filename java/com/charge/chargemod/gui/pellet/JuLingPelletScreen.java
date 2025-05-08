@@ -16,14 +16,14 @@ public class JuLingPelletScreen extends ChargeBaseScreen {
         rightImage = new ResourceLocation(ChargeModItemRegistry.MODID,"textures/gui/xian_tian_ba_gua_craft.png");
         showCrafting = true;
         // 乾天, 兑泽（金）, 离火, 震雷（木）, 巽风（木）, 坎水, 艮山（土）, 坤地
-        bottomItem = ChargeModItemRegistry.chargeLingShi.get();
-        bottomRightItem = ChargeModItemRegistry.chargeLingShi.get();
-        rightItem = ChargeModItemRegistry.chargeLingShi.get();
-        topRightItem = Items.POTATO;
-        bottomLeftItem = Items.POTATO;
-        leftItem = ChargeModItemRegistry.chargeLingShi.get();
         topLeftItem = ChargeModItemRegistry.chargeLingShi.get();
+        leftItem = ChargeModItemRegistry.chargeLingShi.get();
+        bottomItem = ChargeModItemRegistry.chargeLingShi.get();
+        rightItem = Items.POTATO;
+        bottomRightItem = Items.POTATO;
         topItem = ChargeModItemRegistry.chargeLingShi.get();
+        topRightItem = ChargeModItemRegistry.chargeLingShi.get();
+        bottomLeftItem = ChargeModItemRegistry.chargeLingShi.get();
         rightStringLocal = "使用了4个灵石和2个土豆。按照上图合成，这可不是土豆炖灵石，至少功能上要更强大一些。";
     }
 

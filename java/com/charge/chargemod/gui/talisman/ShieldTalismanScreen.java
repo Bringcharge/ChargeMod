@@ -16,14 +16,14 @@ public class ShieldTalismanScreen extends ChargeBaseScreen {
         rightImage = new ResourceLocation(ChargeModItemRegistry.MODID,"textures/gui/xian_tian_ba_gua_craft.png");
         showCrafting = true;
         // 乾天, 兑泽（金）, 离火, 震雷（木）, 巽风（木）, 坎水, 艮山（土）, 坤地
-        bottomItem = ChargeModItemRegistry.TALISMAN_PAPER_ITEM.get();
-        bottomRightItem = Items.IRON_INGOT;
-        rightItem = null;
-        topRightItem = Items.OAK_PLANKS;
+        topLeftItem = ChargeModItemRegistry.TALISMAN_PAPER_ITEM.get();
+        leftItem = Items.IRON_INGOT;
+        bottomItem = null;
+        rightItem = Items.OAK_PLANKS;
+        bottomRightItem = null;
+        topItem =null;
+        topRightItem = Items.COBBLESTONE;
         bottomLeftItem = null;
-        leftItem =null;
-        topLeftItem = Items.COBBLESTONE;
-        topItem = null;
         rightStringLocal = "使用了符纸，铁锭，任意木板，圆石。按照上图合成，这只是暂时的，盾牌依旧是可靠的战友。";
     }
 

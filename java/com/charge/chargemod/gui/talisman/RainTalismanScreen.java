@@ -16,14 +16,14 @@ public class RainTalismanScreen extends ChargeBaseScreen {
         rightImage = new ResourceLocation(ChargeModItemRegistry.MODID,"textures/gui/xian_tian_ba_gua_craft.png");
         showCrafting = true;
         // 乾天, 兑泽（金）, 离火, 震雷（木）, 巽风（木）, 坎水, 艮山（土）, 坤地
-        bottomItem = ChargeModItemRegistry.TALISMAN_PAPER_ITEM.get();
-        bottomRightItem = Items.BEEF;
-        rightItem = Items.MUTTON;
-        topRightItem = Items.PORKCHOP;
-        bottomLeftItem = null;
-        leftItem = null;
-        topLeftItem = null;
+        topLeftItem = ChargeModItemRegistry.TALISMAN_PAPER_ITEM.get();
+        leftItem = Items.BEEF;
+        bottomItem = Items.MUTTON;
+        rightItem = Items.PORKCHOP;
+        bottomRightItem = null;
         topItem = null;
+        topRightItem = null;
+        bottomLeftItem = null;
         rightStringLocal = "使用了符纸，生牛肉，生羊肉，生猪肉，按照上图合成。三牲祭祀，祈求下雨，这比起术法更接近于另一个世界的习俗吧。";
     }
 
