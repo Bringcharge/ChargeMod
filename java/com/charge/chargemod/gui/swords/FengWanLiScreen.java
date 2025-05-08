@@ -16,14 +16,14 @@ public class FengWanLiScreen extends ChargeBaseScreen {
         rightImage = new ResourceLocation(ChargeModItemRegistry.MODID,"textures/gui/xian_tian_ba_gua_craft.png");
         showCrafting = true;
         // 乾天, 兑泽（金）, 离火, 震雷（木）, 巽风（木）, 坎水, 艮山（土）, 坤地
-        topLeftItem = Items.IRON_SWORD;// new ResourceLocation("textures/item/iron_sword.png");
-        leftItem = Items.GOLDEN_SWORD; //new ResourceLocation("textures/item/golden_sword.png");
-        bottomItem = Items.FLINT; //new ResourceLocation("textures/item/flint.png");
-        rightItem = Items.NETHER_WART;// new ResourceLocation("textures/item/nether_wart.png");
-        bottomRightItem = Items.LILAC; //new ResourceLocation("textures/block/lilac_top.png");;
-        topItem = Items.AMETHYST_SHARD;// new ResourceLocation("textures/item/amethyst_shard.png");
-        topRightItem = Items.QUARTZ; // new ResourceLocation("textures/item/quartz.png");
-        bottomLeftItem = Items.SUNFLOWER;//new ResourceLocation("textures/block/sunflower_front.png");
+        bottomItem = Items.IRON_SWORD;// new ResourceLocation("textures/item/iron_sword.png");
+        bottomRightItem = Items.GOLDEN_SWORD; //new ResourceLocation("textures/item/golden_sword.png");
+        rightItem = Items.FLINT; //new ResourceLocation("textures/item/flint.png");
+        topRightItem = Items.NETHER_WART;// new ResourceLocation("textures/item/nether_wart.png");
+        bottomLeftItem = Items.LILAC; //new ResourceLocation("textures/block/lilac_top.png");;
+        leftItem = Items.AMETHYST_SHARD;// new ResourceLocation("textures/item/amethyst_shard.png");
+        topLeftItem = Items.QUARTZ; // new ResourceLocation("textures/item/quartz.png");
+        topItem = Items.SUNFLOWER;//new ResourceLocation("textures/block/sunflower_front.png");
         rightStringLocal = "使用了铁剑，金剑，燧石，地狱疣，丁香花，紫水晶，石英，向日葵。按照上图合成。使用这把剑毅是在磨砺用剑人的心，让用剑人与剑同意锋利。";
     }
 

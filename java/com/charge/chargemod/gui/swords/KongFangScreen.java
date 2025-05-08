@@ -16,14 +16,14 @@ public class KongFangScreen extends ChargeBaseScreen {
         rightImage = new ResourceLocation(ChargeModItemRegistry.MODID,"textures/gui/xian_tian_ba_gua_craft.png");
         showCrafting = true;
         // 乾天, 兑泽（金）, 离火, 震雷（木）, 巽风（木）, 坎水, 艮山（土）, 坤地
-        topLeftItem = Items.COPPER_INGOT;// new ResourceLocation("textures/item/copper_ingot.png");
-        leftItem = Items.COPPER_INGOT;// new ResourceLocation("textures/item/copper_ingot.png");
-        bottomItem = Items.RED_DYE;// new ResourceLocation("textures/item/red_dye.png");
-        rightItem = null;
-        bottomRightItem = Items.STRING; //new ResourceLocation("textures/item/string.png");
-        topItem = null;
+        bottomItem = Items.COPPER_INGOT;// new ResourceLocation("textures/item/copper_ingot.png");
+        bottomRightItem = Items.COPPER_INGOT;// new ResourceLocation("textures/item/copper_ingot.png");
+        rightItem = Items.RED_DYE;// new ResourceLocation("textures/item/red_dye.png");
         topRightItem = null;
-        bottomLeftItem = null;
+        bottomLeftItem = Items.STRING; //new ResourceLocation("textures/item/string.png");
+        leftItem = null;
+        topLeftItem = null;
+        topItem = null;
         rightStringLocal = "使用了铜锭，铜锭，红色染料，线。按照上图合成即可。";
     }
 

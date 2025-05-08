@@ -16,14 +16,14 @@ public class QiuXiaoYaoScreen extends ChargeBaseScreen {
         rightImage = new ResourceLocation(ChargeModItemRegistry.MODID,"textures/gui/xian_tian_ba_gua_craft.png");
         showCrafting = true;
         //乾天, 兑泽（金）, 离火, 震雷（木）, 巽风（木）, 坎水, 艮山（土）, 坤地
-        topLeftItem = Items.PLAYER_HEAD;
-        leftItem = Items.GRASS;
-        bottomItem = Items.CHORUS_FRUIT;
-        rightItem = Items.ENDER_PEARL;
-        bottomRightItem = Items.BLAZE_POWDER;
-        topItem = Items.PUFFERFISH;
-        topRightItem = Items.OBSIDIAN;
-        bottomLeftItem = Items.WITHER_SKELETON_SKULL;
+        bottomItem = Items.PLAYER_HEAD;
+        bottomRightItem = Items.GRASS;
+        rightItem = Items.CHORUS_FRUIT;
+        topRightItem = Items.ENDER_PEARL;
+        bottomLeftItem = Items.BLAZE_POWDER;
+        leftItem = Items.PUFFERFISH;
+        topLeftItem = Items.OBSIDIAN;
+        topItem = Items.WITHER_SKELETON_SKULL;
         rightStringLocal = "使用玩家头颅，草，紫颂果，末影珍珠，烈焰粉，河豚，黑曜石，凋零骷髅头合成，能瞬间移动和快速斩杀怪物，颇有几分逍遥之意，只是这玩家头颅难以获取，要费一番功夫。";
     }
 

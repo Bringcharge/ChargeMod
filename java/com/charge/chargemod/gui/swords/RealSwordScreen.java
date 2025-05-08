@@ -16,14 +16,14 @@ public class RealSwordScreen extends ChargeBaseScreen {
         rightImage = new ResourceLocation(ChargeModItemRegistry.MODID,"textures/gui/xian_tian_ba_gua_craft.png");
         showCrafting = true;
         //乾天, 兑泽（金）, 离火, 震雷（木）, 巽风（木）, 坎水, 艮山（土）, 坤地
-        topLeftItem = Items.GOLD_BLOCK; // new ResourceLocation("textures/block/gold_block.png");
-        leftItem = Items.GILDED_BLACKSTONE;//new ResourceLocation("textures/block/gilded_blackstone.png");
-        bottomItem = Items.NETHERRACK; // new ResourceLocation("textures/block/netherrack.png");
-        rightItem = Items.SUNFLOWER; //new ResourceLocation("textures/block/sunflower_front.png");
-        bottomRightItem = Items.COMPASS; //new ResourceLocation("textures/item/compass_03.png");
-        topItem = Items.PRISMARINE_SHARD; // new ResourceLocation("textures/item/prismarine_shard.png");;
-        topRightItem = Items.DIAMOND_BLOCK; //new ResourceLocation("textures/block/diamond_block.png");
-        bottomLeftItem = Items.POTION; // new ResourceLocation("textures/item/potion.png");
+        bottomItem = Items.GOLD_BLOCK; // new ResourceLocation("textures/block/gold_block.png");
+        bottomRightItem = Items.GILDED_BLACKSTONE;//new ResourceLocation("textures/block/gilded_blackstone.png");
+        rightItem = Items.NETHERRACK; // new ResourceLocation("textures/block/netherrack.png");
+        topRightItem = Items.SUNFLOWER; //new ResourceLocation("textures/block/sunflower_front.png");
+        bottomLeftItem = Items.COMPASS; //new ResourceLocation("textures/item/compass_03.png");
+        leftItem = Items.PRISMARINE_SHARD; // new ResourceLocation("textures/item/prismarine_shard.png");;
+        topLeftItem = Items.DIAMOND_BLOCK; //new ResourceLocation("textures/block/diamond_block.png");
+        topItem = Items.POTION; // new ResourceLocation("textures/item/potion.png");
         rightStringLocal = "使用金块，镶金黑石，地狱岩，向日葵，指南针，海晶石，钻石块，夜视药水合成，真实虽好，可剑求真也就意味着威力受限于真实，对比起同品级的剑而已不善杀伐。";
     }
 

@@ -16,14 +16,14 @@ public class FuYaoScreen extends ChargeBaseScreen {
         rightImage = new ResourceLocation(ChargeModItemRegistry.MODID,"textures/gui/xian_tian_ba_gua_craft.png");
         showCrafting = true;
         // 乾天, 兑泽（金）, 离火, 震雷（木）, 巽风（木）, 坎水, 艮山（土）, 坤地
-        topLeftItem = Items.ACACIA_LEAVES;// new ResourceLocation("textures/block/azalea_leaves.png");
+        bottomItem = Items.ACACIA_LEAVES;// new ResourceLocation("textures/block/azalea_leaves.png");
+        bottomRightItem = null;
+        rightItem = null;
+        topRightItem = Items.SUGAR_CANE;// new ResourceLocation("textures/item/sugar_cane.png");
+        bottomLeftItem = Items.PAPER; // new ResourceLocation("textures/item/paper.png");
         leftItem = null;
-        bottomItem = null;
-        rightItem = Items.SUGAR_CANE;// new ResourceLocation("textures/item/sugar_cane.png");
-        bottomRightItem = Items.PAPER; // new ResourceLocation("textures/item/paper.png");
+        topLeftItem = Items.STICK;// new ResourceLocation("textures/item/stick.png");
         topItem = null;
-        topRightItem = Items.STICK;// new ResourceLocation("textures/item/stick.png");
-        bottomLeftItem = null;
         rightStringLocal = "使用了橡树树叶，甘蔗，纸，木棍。按照上图合成即可。";
     }
 

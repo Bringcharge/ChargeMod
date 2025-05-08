@@ -16,14 +16,14 @@ public class EmberScreen extends ChargeBaseScreen {
         rightImage = new ResourceLocation(ChargeModItemRegistry.MODID,"textures/gui/xian_tian_ba_gua_craft.png");
         showCrafting = true;
         // 乾天, 兑泽（金）, 离火, 震雷（木）, 巽风（木）, 坎水, 艮山（土）, 坤地
-        topLeftItem = null;
+        bottomItem = null;
+        bottomRightItem = null;
+        rightItem = Items.MAGMA_BLOCK; //new ResourceLocation("textures/block/magma.png");
+        topRightItem = Items.COAL; // new ResourceLocation("textures/item/coal.png");
+        bottomLeftItem = Items.ACACIA_LOG; // new ResourceLocation("textures/block/oak_log_top.png");;
         leftItem = null;
-        bottomItem = Items.MAGMA_BLOCK; //new ResourceLocation("textures/block/magma.png");
-        rightItem = Items.COAL; // new ResourceLocation("textures/item/coal.png");
-        bottomRightItem = Items.ACACIA_LOG; // new ResourceLocation("textures/block/oak_log_top.png");;
+        topLeftItem = Items.FLINT; //new ResourceLocation("textures/item/flint.png");
         topItem = null;
-        topRightItem = Items.FLINT; //new ResourceLocation("textures/item/flint.png");
-        bottomLeftItem = null;
         rightStringLocal = "使用了岩浆块，煤炭，原木，燧石。按照上图合成即可。";
     }
 

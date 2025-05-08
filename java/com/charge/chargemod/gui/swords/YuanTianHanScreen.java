@@ -16,14 +16,14 @@ public class YuanTianHanScreen extends ChargeBaseScreen {
         rightImage = new ResourceLocation(ChargeModItemRegistry.MODID,"textures/gui/xian_tian_ba_gua_craft.png");
         showCrafting = true;
         //
-        topLeftItem = Items.MAGMA_CREAM; // new ResourceLocation("textures/item/magma_cream.png");
-        leftItem = Items.GOLD_BLOCK; // new ResourceLocation("textures/block/gold_block.png");
-        bottomItem = Items.LAVA_BUCKET; // new ResourceLocation("textures/item/lava_bucket.png");
-        rightItem = Items.GUNPOWDER;// new ResourceLocation("textures/item/gunpowder.png");
-        bottomRightItem = Items.BLAZE_ROD; //new ResourceLocation("textures/item/blaze_rod.png");
-        topItem = Items.MAGMA_BLOCK; //new ResourceLocation("textures/block/magma.png");;
-        topRightItem = Items.NETHERRACK; // new ResourceLocation("textures/block/netherrack.png");
-        bottomLeftItem = Items.SOUL_SAND; // new ResourceLocation("textures/block/soul_sand.png");
+        bottomItem = Items.MAGMA_CREAM; // new ResourceLocation("textures/item/magma_cream.png");
+        bottomRightItem = Items.GOLD_BLOCK; // new ResourceLocation("textures/block/gold_block.png");
+        rightItem = Items.LAVA_BUCKET; // new ResourceLocation("textures/item/lava_bucket.png");
+        topRightItem = Items.GUNPOWDER;// new ResourceLocation("textures/item/gunpowder.png");
+        bottomLeftItem = Items.BLAZE_ROD; //new ResourceLocation("textures/item/blaze_rod.png");
+        leftItem = Items.MAGMA_BLOCK; //new ResourceLocation("textures/block/magma.png");;
+        topLeftItem = Items.NETHERRACK; // new ResourceLocation("textures/block/netherrack.png");
+        topItem = Items.SOUL_SAND; // new ResourceLocation("textures/block/soul_sand.png");
         rightStringLocal = "使用岩浆膏，金块，岩浆桶，火药，烈焰棒，岩浆块，地狱岩，灵魂沙合成，三昧真火原本也可以冶炼矿物和木材，后因将房屋炼成精碳，遂改良。";
     }
 

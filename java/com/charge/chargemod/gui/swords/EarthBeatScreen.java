@@ -16,14 +16,14 @@ public class EarthBeatScreen extends ChargeBaseScreen {
         rightImage = new ResourceLocation(ChargeModItemRegistry.MODID,"textures/gui/xian_tian_ba_gua_craft.png");
         showCrafting = true;
         //
-        topLeftItem = Items.SLIME_BALL; // new ResourceLocation("textures/item/slime_ball.png");
-        leftItem = Items.REDSTONE_BLOCK;// new ResourceLocation("textures/block/redstone_block.png");
-        bottomItem = Items.MAGMA_BLOCK; // new ResourceLocation("textures/block/magma.png");
-        rightItem = Items.GRASS_BLOCK;// new ResourceLocation("textures/block/grass_block_side.png");
-        bottomRightItem = Items.SAND; // new ResourceLocation("textures/block/sand.png");
-        topItem = Items.NETHERITE_BLOCK; // new ResourceLocation("textures/block/nether_wart_block.png");
-        topRightItem = Items.STONE; // new ResourceLocation("textures/block/stone.png");
-        bottomLeftItem = Items.DIAMOND_PICKAXE; // new ResourceLocation("textures/item/diamond_pickaxe.png");
+        bottomItem = Items.SLIME_BALL; // new ResourceLocation("textures/item/slime_ball.png");
+        bottomRightItem = Items.REDSTONE_BLOCK;// new ResourceLocation("textures/block/redstone_block.png");
+        rightItem = Items.MAGMA_BLOCK; // new ResourceLocation("textures/block/magma.png");
+        topRightItem = Items.GRASS_BLOCK;// new ResourceLocation("textures/block/grass_block_side.png");
+        bottomLeftItem = Items.SAND; // new ResourceLocation("textures/block/sand.png");
+        leftItem = Items.NETHER_WART_BLOCK; // new ResourceLocation("textures/block/nether_wart_block.png");
+        topLeftItem = Items.STONE; // new ResourceLocation("textures/block/stone.png");
+        topItem = Items.DIAMOND_PICKAXE; // new ResourceLocation("textures/item/diamond_pickaxe.png");
         rightStringLocal = "使用黏液球，红石块，岩浆块，草方块，沙子，地狱疣块，石头，钻石镐合成，可以将其他道友也抛至高空，好用，也需慎用。";
     }
 

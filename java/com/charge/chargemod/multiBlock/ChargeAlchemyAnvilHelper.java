@@ -83,7 +83,7 @@ public class ChargeAlchemyAnvilHelper {
                         s8.is(Items.COBBLESTONE) &&
                         ItemStacksIsEmpty(s1, s5)
         ) {
-            return new ItemStack(ChargeModItemRegistry.WATER_SPLIT_SWORD.get(),1);
+            return new ItemStack(ChargeModItemRegistry.XUN_YIN_SWORD.get(),1);
         }
 
         if (    //锋万里
@@ -140,7 +140,7 @@ public class ChargeAlchemyAnvilHelper {
         if (    //地动
                 s1.is(Items.SLIME_BALL) &&
                         s2.is(Items.REDSTONE_BLOCK) &&
-                        s3.is(Items.MAGMA_CREAM) &&
+                        s3.is(Items.MAGMA_BLOCK) &&
                         s4.is(Items.GRASS_BLOCK) &&
                         s5.is(Items.SAND) &&
                         s6.is(Items.NETHER_WART_BLOCK) &&
@@ -178,7 +178,7 @@ public class ChargeAlchemyAnvilHelper {
 
         if (    //塑果
                 s1.is(Items.CLOCK) &&
-                        s2.is(ItemTags.SMELTS_TO_GLASS) &&
+                        s2.is(Items.GLASS) &&
                         s3.is(Items.SAND) &&
                         s4.is(Items.APPLE) &&
                         s5.is(Items.CACTUS) &&

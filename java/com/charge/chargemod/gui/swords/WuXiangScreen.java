@@ -16,14 +16,14 @@ public class WuXiangScreen extends ChargeBaseScreen {
         rightImage = new ResourceLocation(ChargeModItemRegistry.MODID,"textures/gui/xian_tian_ba_gua_craft.png");
         showCrafting = true;
         //乾天, 兑泽（金）, 离火, 震雷（木）, 巽风（木）, 坎水, 艮山（土）, 坤地
-        topLeftItem = ChargeModItemRegistry.THE_REAL_SWORD.get();
-        leftItem = Items.GOLDEN_SWORD;
-        bottomItem = Items.IRON_SWORD;
-        rightItem = Items.WOODEN_SWORD;
-        bottomRightItem = Items.DIAMOND_SWORD;
-        topItem = Items.NETHERITE_SWORD;
-        topRightItem = Items.STONE_SWORD;
-        bottomLeftItem = ChargeModItemRegistry.THE_FAKE_SWORD.get();
+        bottomItem = ChargeModItemRegistry.THE_REAL_SWORD.get();
+        bottomRightItem = Items.GOLDEN_SWORD;
+        rightItem = Items.IRON_SWORD;
+        topRightItem = Items.WOODEN_SWORD;
+        bottomLeftItem = Items.DIAMOND_SWORD;
+        leftItem = Items.NETHERITE_SWORD;
+        topLeftItem = Items.STONE_SWORD;
+        topItem = ChargeModItemRegistry.THE_FAKE_SWORD.get();
         rightStringLocal = "使用真，金剑，铁剑，木剑，钻石剑，下届合金剑，石剑，假合成。剑之万相，合为无相。";
     }
 

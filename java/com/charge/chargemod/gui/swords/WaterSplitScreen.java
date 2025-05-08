@@ -16,14 +16,14 @@ public class WaterSplitScreen extends ChargeBaseScreen {
         rightImage = new ResourceLocation(ChargeModItemRegistry.MODID,"textures/gui/xian_tian_ba_gua_craft.png");
         showCrafting = true;
         // 乾天, 兑泽（金）, 离火, 震雷（木）, 巽风（木）, 坎水, 艮山（土）, 坤地
-        topLeftItem = Items.BUCKET;//new ResourceLocation("textures/item/bucket.png");
-        leftItem = null;
-        bottomItem = Items.CHARCOAL; // new ResourceLocation("textures/item/charcoal.png");
-        rightItem = null;
+        bottomItem = Items.BUCKET;//new ResourceLocation("textures/item/bucket.png");
         bottomRightItem = null;
-        topItem = Items.SALMON; //new ResourceLocation("textures/item/salmon.png");;
+        rightItem = Items.CHARCOAL; // new ResourceLocation("textures/item/charcoal.png");
         topRightItem = null;
-        bottomLeftItem = Items. STICK; //new ResourceLocation("textures/item/stick.png");
+        bottomLeftItem = null;
+        leftItem = Items.SALMON; //new ResourceLocation("textures/item/salmon.png");;
+        topLeftItem = null;
+        topItem = Items. STICK; //new ResourceLocation("textures/item/stick.png");
         rightStringLocal = "使用了水桶，煤炭，鲑鱼，木棍。按照上图合成即可。";
     }
 

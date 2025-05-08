@@ -16,14 +16,14 @@ public class LuanYinGuoScreen extends ChargeBaseScreen {
         rightImage = new ResourceLocation(ChargeModItemRegistry.MODID,"textures/gui/xian_tian_ba_gua_craft.png");
         showCrafting = true;
         //乾天, 兑泽（金）, 离火, 震雷（木）, 巽风（木）, 坎水, 艮山（土）, 坤地
-        topLeftItem = Items.GOLD_BLOCK;
-        leftItem = Items.END_STONE;
-        bottomItem = Items.CACTUS;
-        rightItem = Items.END_ROD;
-        bottomRightItem = Items.PHANTOM_MEMBRANE;
-        topItem = Items.AMETHYST_BLOCK;
-        topRightItem = Items.REDSTONE_BLOCK;
-        bottomLeftItem = Items.LODESTONE;
+        bottomItem = Items.GOLD_BLOCK;
+        bottomRightItem = Items.END_STONE;
+        rightItem = Items.CACTUS;
+        topRightItem = Items.END_ROD;
+        bottomLeftItem = Items.PHANTOM_MEMBRANE;
+        leftItem = Items.AMETHYST_BLOCK;
+        topLeftItem = Items.REDSTONE_BLOCK;
+        topItem = Items.LODESTONE;
         rightStringLocal = "使用金块，末地石，仙人掌，末地烛，幻翼膜，水晶块，红石块，磁石合成，因果纠纷乱了，经验也自然不会如同平常一般增加，这也许更符合修仙修己之道。";
     }
 

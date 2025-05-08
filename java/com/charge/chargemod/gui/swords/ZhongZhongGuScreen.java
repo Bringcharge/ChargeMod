@@ -17,14 +17,14 @@ public class ZhongZhongGuScreen extends ChargeBaseScreen {
         rightImage = new ResourceLocation(ChargeModItemRegistry.MODID,"textures/gui/xian_tian_ba_gua_craft.png");
         showCrafting = true;
         // 乾天, 兑泽（金）, 离火, 震雷（木）, 巽风（木）, 坎水, 艮山（土）, 坤地
-        topLeftItem = Items.BONE;// new ResourceLocation("textures/item/bone.png");
-        leftItem = Items.COPPER_INGOT;// new ResourceLocation("textures/item/copper_ingot.png");
-        bottomItem = null;
+        bottomItem = Items.BONE;// new ResourceLocation("textures/item/bone.png");
+        bottomRightItem = Items.COPPER_INGOT;// new ResourceLocation("textures/item/copper_ingot.png");
         rightItem = null;
-        bottomRightItem = null;
-        topItem = null;
-        topRightItem = Items.STONE;// new ResourceLocation("textures/block/stone.png");
-        bottomLeftItem = Items.IRON_ORE;// new ResourceLocation("textures/block/iron_ore.png");
+        topRightItem = null;
+        bottomLeftItem = null;
+        leftItem = null;
+        topLeftItem = Items.STONE;// new ResourceLocation("textures/block/stone.png");
+        topItem = Items.IRON_ORE;// new ResourceLocation("textures/block/iron_ore.png");
         rightStringLocal = "使用了骨头，铜锭，石头，铁矿石。按照上图合成即可。";
     }
 

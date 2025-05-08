@@ -16,15 +16,15 @@ public class FakeSwordScreen extends ChargeBaseScreen {
         rightImage = new ResourceLocation(ChargeModItemRegistry.MODID,"textures/gui/xian_tian_ba_gua_craft.png");
         showCrafting = true;
         //
-        topLeftItem = Items.IRON_BLOCK;//new ResourceLocation("textures/block/iron_block.png");
-        leftItem = Items.MOSSY_COBBLESTONE;// new ResourceLocation("textures/block/mossy_cobblestone.png");
-        bottomItem = Items.SOUL_SAND; //new ResourceLocation("textures/block/soul_sand.png");
-        rightItem = Items.LILY_PAD; new ResourceLocation("textures/block/lily_pad.png");
-        bottomRightItem = Items.CLOCK; new ResourceLocation("textures/item/clock_05.png");
-        topItem = Items.KELP; // new ResourceLocation("textures/item/kelp.png");;
-        topRightItem = Items.AMETHYST_BLOCK; // new ResourceLocation("textures/block/amethyst_block.png");
-        bottomLeftItem = Items.POTION;// new ResourceLocation("textures/item/potion.png");
-        rightStringLocal = "使用铁块，苔石，灵魂沙，莲叶，时钟，海带，紫水晶块，剧毒药水合成，假的毕竟是假的，只是此剑力量有限，不足以让一些归于虚无。";
+        bottomItem = Items.IRON_BLOCK;//new ResourceLocation("textures/block/iron_block.png");
+        bottomRightItem = Items.MOSSY_COBBLESTONE;// new ResourceLocation("textures/block/mossy_cobblestone.png");
+        rightItem = Items.SOUL_SAND; //new ResourceLocation("textures/block/soul_sand.png");
+        topRightItem = Items.LILY_PAD; new ResourceLocation("textures/block/lily_pad.png");
+        bottomLeftItem = Items.CLOCK; new ResourceLocation("textures/item/clock_05.png");
+        leftItem = Items.KELP; // new ResourceLocation("textures/item/kelp.png");;
+        topLeftItem = Items.AMETHYST_BLOCK; // new ResourceLocation("textures/block/amethyst_block.png");
+        topItem = Items.POTION;// new ResourceLocation("textures/item/potion.png");
+        rightStringLocal = "使用铁块，苔石，灵魂沙，莲叶，时钟，海带，紫水晶块，剧毒药水(中毒II)合成，假的毕竟是假的，只是此剑力量有限，不足以让一些归于虚无。";
     }
 
 }
