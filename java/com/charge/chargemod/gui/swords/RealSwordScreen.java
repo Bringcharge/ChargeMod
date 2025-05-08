@@ -13,7 +13,7 @@ public class RealSwordScreen extends ChargeBaseScreen {
         super(title);
         leftStringLocal = "真，具有真实力量的剑。修真一词本就是寻找大道真实一面，剑随心动，达到此等境界时候此剑也可以去伪存真。\n" +
                 "怪物身上的装备武器大多都是幻化而成，却有着真实的效果。此剑消耗灵力可以凝虚为实，让哪些装备化为真实而为你所用。";
-        rightImage = new ResourceLocation(ChargeModItemRegistry.MODID,"textures/block/test_ore_block.png");
+        rightImage = new ResourceLocation(ChargeModItemRegistry.MODID,"textures/gui/hou_tian_ba_gua_craft.png");
         showCrafting = true;
         //乾天, 兑泽（金）, 离火, 震雷（木）, 巽风（木）, 坎水, 艮山（土）, 坤地
         topLeftItem = Items.GOLD_BLOCK; // new ResourceLocation("textures/block/gold_block.png");

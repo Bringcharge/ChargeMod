@@ -6,10 +6,10 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Items;
 
-public class JuLingTalismanScreen extends ChargeBaseScreen {
+public class JuLingPelletScreen extends ChargeBaseScreen {
 
     private static final Component title = Component.translatable("聚灵丹");
-    public JuLingTalismanScreen() {
+    public JuLingPelletScreen() {
         super(title);
         leftStringLocal = "聚灵丹，吃下去后可以短时间内增加灵力的回复速度。\n" +
                 "这里的聚灵指的是将灵石内部的灵力聚集，快速给使用者提供力量。出于人性化考量，加入土豆以调和味道和口感，让它吃起来不像是硬邦邦的压缩灵石。";

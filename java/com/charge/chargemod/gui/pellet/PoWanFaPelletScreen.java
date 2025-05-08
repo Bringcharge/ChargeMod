@@ -6,10 +6,10 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Items;
 
-public class PoWanFaTalismanScreen extends ChargeBaseScreen {
+public class PoWanFaPelletScreen extends ChargeBaseScreen {
 
     private static final Component title = Component.translatable("破万法丹");
-    public PoWanFaTalismanScreen() {
+    public PoWanFaPelletScreen() {
         super(title);
         leftStringLocal = "破万法丹，吃下去后可以消除自身不良状态，保留增益。\n" +
                 "万法皆由道，以道破万法。牛奶会让所有的状态消失，此丹药则可避免此尴尬，而且收纳方便，随身携带量大，属实是斗法不二之选。";

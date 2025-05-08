@@ -6,10 +6,10 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Items;
 
-public class HongYunTalismanScreen extends ChargeBaseScreen {
+public class HongYunPelletScreen extends ChargeBaseScreen {
 
     private static final Component title = Component.translatable("鸿运齐天丹");
-    public HongYunTalismanScreen() {
+    public HongYunPelletScreen() {
         super(title);
         leftStringLocal = "鸿运齐天丹，吃下去后可以短时间内大幅增加气运。\n" +
                 "一开始我惊讶于这方世界气运如此好获得，后来才发现这世界所谓的幸运只影响钓鱼，而不是真正的气运。";

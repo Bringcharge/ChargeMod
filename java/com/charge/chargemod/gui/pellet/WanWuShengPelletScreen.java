@@ -6,10 +6,10 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Items;
 
-public class WanWuShengTalismanScreen extends ChargeBaseScreen {
+public class WanWuShengPelletScreen extends ChargeBaseScreen {
 
     private static final Component title = Component.translatable("万物生丹");
-    public WanWuShengTalismanScreen() {
+    public WanWuShengPelletScreen() {
         super(title);
         leftStringLocal = "万物生丹，蕴含了生育力量的丹药，服用后能给周边的生物传递孕育生命的力量。\n" +
                 "由于丹药的选在较为保守，传递能量需要使用者用身体撞击附近的生物才会有效。丹药出于安全考虑，去除了对一些生物的效果，请不要进行危险的尝试。";

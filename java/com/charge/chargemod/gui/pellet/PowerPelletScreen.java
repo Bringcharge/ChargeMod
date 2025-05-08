@@ -6,10 +6,10 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Items;
 
-public class PowerTalismanScreen extends ChargeBaseScreen {
+public class PowerPelletScreen extends ChargeBaseScreen {
 
     private static final Component title = Component.translatable("生力丹");
-    public PowerTalismanScreen() {
+    public PowerPelletScreen() {
         super(title);
         leftStringLocal = "生力丹，吃下去后可以大幅度提升身体强度。\n" +
                 "每次炼丹都会有人问，能不能炼制那种吃了之后就能活力无限，精力旺盛的丹药。生力丹在这方面遥遥领先。如果客人问的是生育方面……还有别的丹药。";

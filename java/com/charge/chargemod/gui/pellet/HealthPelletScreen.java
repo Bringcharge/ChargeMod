@@ -6,10 +6,10 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Items;
 
-public class HealthTalismanScreen extends ChargeBaseScreen {
+public class HealthPelletScreen extends ChargeBaseScreen {
 
     private static final Component title = Component.translatable("大还丹");
-    public HealthTalismanScreen() {
+    public HealthPelletScreen() {
         super(title);
         leftStringLocal = "大还丹，吃下去后可以快速恢复大量生命值。\n" +
                 "没有灵芝，就用蘑菇将就讲究。没有人参，就用胡萝卜将就将就。至于丹药药效嘛……也将就将就。";

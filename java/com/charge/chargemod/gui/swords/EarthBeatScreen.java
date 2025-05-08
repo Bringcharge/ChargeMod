@@ -13,7 +13,7 @@ public class EarthBeatScreen extends ChargeBaseScreen {
         super(title);
         leftStringLocal = "地动，五行土之精。某日观地龙翻身，落入深谷，听大地深处轰鸣之声有感而创。\n" +
                 "大地雄浑，蓬勃有力，其能厚积而薄发。灵力注入后，可以使大地震动，将周围的生物瞬间击飞到空中，在密闭空间内杀伤不大，注意田地。";
-        rightImage = new ResourceLocation(ChargeModItemRegistry.MODID,"textures/block/test_ore_block.png");
+        rightImage = new ResourceLocation(ChargeModItemRegistry.MODID,"textures/gui/hou_tian_ba_gua_craft.png");
         showCrafting = true;
         //
         topLeftItem = Items.SLIME_BALL; // new ResourceLocation("textures/item/slime_ball.png");

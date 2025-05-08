@@ -13,7 +13,7 @@ public class FakeSwordScreen extends ChargeBaseScreen {
         super(title);
         leftStringLocal = "假，具有虚假力量的剑。真假互为事物两面，没有虚假也就没有真实。这剑具有化实为虚的功能，也可临时创造出一些虚假的奇迹。\n" +
                 "怪物身上的装备武器大多都是幻化而成，消耗灵力，该剑能使怪物手中之物彻底虚假消失。也可使僵尸村民虚假的成为村民。";
-        rightImage = new ResourceLocation(ChargeModItemRegistry.MODID,"textures/block/test_ore_block.png");
+        rightImage = new ResourceLocation(ChargeModItemRegistry.MODID,"textures/gui/hou_tian_ba_gua_craft.png");
         showCrafting = true;
         //
         topLeftItem = Items.IRON_BLOCK;//new ResourceLocation("textures/block/iron_block.png");

@@ -6,10 +6,10 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Items;
 
-public class BiGuTalismanScreen extends ChargeBaseScreen {
+public class BiGuPelletScreen extends ChargeBaseScreen {
 
     private static final Component title = Component.translatable("辟谷丹");
-    public BiGuTalismanScreen() {
+    public BiGuPelletScreen() {
         super(title);
         leftStringLocal = "辟谷丹，可以提供大量的饥饿值，又持续时间不错的饱腹效果。\n" +
                 "其实就是用灵气把各种食材压缩在一起，变成可以快速吃下的丹药罢了。比起辟谷丹，有条件的仙人还是更喜欢吃现做的食物。";

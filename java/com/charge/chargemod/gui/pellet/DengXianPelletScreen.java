@@ -6,10 +6,10 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Items;
 
-public class DengXianTalismanScreen extends ChargeBaseScreen {
+public class DengXianPelletScreen extends ChargeBaseScreen {
 
     private static final Component title = Component.translatable("登仙丹");
-    public DengXianTalismanScreen() {
+    public DengXianPelletScreen() {
         super(title);
         leftStringLocal = "登仙丹，调用体内灵力让仙体力量发挥到极限，到达真仙的高度，还会引动天罚雷劫。\n" +
                 "丹方选取了世间稀有之物，凑齐便代表已经游历这方世界，借用世界之力推动体内灵力达到巅峰。引来的雷劫一旦开始，便无法停止，需谨慎使用。";

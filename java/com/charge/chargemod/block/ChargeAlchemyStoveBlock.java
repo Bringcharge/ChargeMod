@@ -3,6 +3,7 @@ package com.charge.chargemod.block;
 import com.charge.chargemod.ChargeModItemRegistry;
 import com.charge.chargemod.multiBlock.ChargeAlchemyStoveHelper;
 import com.charge.chargemod.multiBlock.ChargeMultiBlockCheck;
+import com.charge.chargemod.multiBlock.HouTianBaGua;
 import com.charge.chargemod.multiBlock.XianTianBaGua;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
@@ -55,7 +56,7 @@ public class ChargeAlchemyStoveBlock extends Block implements EntityBlock {
                     player.getInventory().add(pedestalItem);
                     pedestal.setItem(ItemStack.EMPTY);
                 } else if (heldItem.is(ChargeModItemRegistry.CHARGE_BASE_TOKEN.get())) {  //空的炉子，检查手中令牌
-                    XianTianBaGua check = new XianTianBaGua();  //检测函数，可惜就是每次都要构建一遍，不想做成static
+                    HouTianBaGua check = new HouTianBaGua();  //检测函数，可惜就是每次都要构建一遍，不想做成static
                     BlockPos blockPos = check.isCompleted(level, pos);  //检查方块是否完整
 
                     if (blockPos == null) { //完整
@@ -76,7 +77,7 @@ public class ChargeAlchemyStoveBlock extends Block implements EntityBlock {
                         }
 
                     } else {  //不完整
-                        player.sendSystemMessage(Component.literal("多方快结构破损 x：" + blockPos.getX() + " y：" + blockPos.getY() + " z：" + blockPos.getY())
+                        player.sendSystemMessage(Component.literal("多方快结构破损 x：" + blockPos.getX() + " y：" + blockPos.getY() + " z：" + blockPos.getZ())
                                 .withStyle(ChatFormatting.AQUA));
                     }
 

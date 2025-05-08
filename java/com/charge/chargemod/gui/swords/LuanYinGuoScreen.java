@@ -13,7 +13,7 @@ public class LuanYinGuoScreen extends ChargeBaseScreen {
         super(title);
         leftStringLocal = "乱因果，时间因果众多，虽不能全部斩断，但是扰乱一个区域内的因果还是可以的。\n" +
                 "使用灵气可在一个范围内，扰乱所有的因果，对内部的生物产生大量无来源无视护甲、抗性伤害。";
-        rightImage = new ResourceLocation(ChargeModItemRegistry.MODID,"textures/block/test_ore_block.png");
+        rightImage = new ResourceLocation(ChargeModItemRegistry.MODID,"textures/gui/hou_tian_ba_gua_craft.png");
         showCrafting = true;
         //乾天, 兑泽（金）, 离火, 震雷（木）, 巽风（木）, 坎水, 艮山（土）, 坤地
         topLeftItem = Items.GOLD_BLOCK;

@@ -13,7 +13,7 @@ public class WuXiangScreen extends ChargeBaseScreen {
         super(title);
         leftStringLocal = "无相，“无我相，无人相，无众生相，无寿者相。当修行者能辨真假，众生表象不过一具皮囊，于你而言无异。\n" +
                 "这剑有斩断事物根本的能力，执剑人眼中已然无了众生之相，却依旧向其挥剑，这何尝不是一种着相呢？挥剑之后，生灵也只剩下森森白骨，最终化为尘土。";
-        rightImage = new ResourceLocation(ChargeModItemRegistry.MODID,"textures/block/test_ore_block.png");
+        rightImage = new ResourceLocation(ChargeModItemRegistry.MODID,"textures/gui/hou_tian_ba_gua_craft.png");
         showCrafting = true;
         //乾天, 兑泽（金）, 离火, 震雷（木）, 巽风（木）, 坎水, 艮山（土）, 坤地
         topLeftItem = ChargeModItemRegistry.THE_REAL_SWORD.get();

@@ -1,6 +1,7 @@
 package com.charge.chargemod.block;
 
 import com.charge.chargemod.ChargeModItemRegistry;
+import com.charge.chargemod.multiBlock.ChargeAlchemyAnvilHelper;
 import com.charge.chargemod.multiBlock.XianTianBaGua;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
@@ -59,15 +60,15 @@ public class ChargeAlchemyAnvilBlock extends Block implements EntityBlock {
                             ItemStack stack = ((ChargeAltarBlockEntity)(level.getBlockEntity(altarPos))).getItem();
                             list.add(stack);
                         }
-//                        ItemStack item = ChargeAlchemyAnvilHelper.outputWithItemList(list); //获取炼丹的结果，因为数量也在里面
-//                        if (!item.isEmpty()) {  //输出成功
-//                            pedestal.setItem(item); //直接设置在输出口
-//                            check.cleanAltar(level, pos);   //清空所有的祭坛
-//                            //TODO 增加粒子效果
-//                        }
+                        ItemStack item = ChargeAlchemyAnvilHelper.outputWithItemList(list); //获取炼丹的结果，因为数量也在里面
+                        if (!item.isEmpty()) {  //输出成功
+                            pedestal.setItem(item); //直接设置在输出口
+                            check.cleanAltar(level, pos);   //清空所有的祭坛
+                            //TODO 增加粒子效果
+                        }
 
                     } else {  //不完整
-                        player.sendSystemMessage(Component.literal("多方快结构破损 x：" + blockPos.getX() + " y：" + blockPos.getY() + " z：" + blockPos.getY())
+                        player.sendSystemMessage(Component.literal("多方快结构破损 x：" + blockPos.getX() + " y：" + blockPos.getY() + " z：" + blockPos.getZ())
                                 .withStyle(ChatFormatting.AQUA));
                     }
 
