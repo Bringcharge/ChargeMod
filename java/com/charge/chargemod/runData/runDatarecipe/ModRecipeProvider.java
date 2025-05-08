@@ -4,6 +4,7 @@ import com.charge.chargemod.ChargeModItemRegistry;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
 
 import java.util.concurrent.CompletableFuture;
@@ -20,7 +21,7 @@ public class ModRecipeProvider extends RecipeProvider {
     @Override
     protected void buildRecipes(Consumer<FinishedRecipe> consumer) {
         // 有序合成
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ChargeModItemRegistry.CHARGE_BASE_TOKEN.get())
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ChargeModItemRegistry.CHARGE_BASE_TOKEN.get())//基本令牌
                 .pattern("cac")
                 .pattern("cbc")
                 .pattern("cbc")
@@ -29,19 +30,36 @@ public class ModRecipeProvider extends RecipeProvider {
                 .define('c', Items.GOLD_INGOT)
                 .unlockedBy("has_charge_base_token", has(Items.GOLD_INGOT))
                 .save(consumer);
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ChargeModItemRegistry.TALISMAN_PAPER_ITEM.get())
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ChargeModItemRegistry.CHARGE_ARRAY_FLAG_ITEM.get())//阵旗
+                .pattern("c  ")
+                .pattern("b  ")
+                .pattern("a  ")
+                .define('a', ChargeModItemRegistry.chargeLingShi.get())
+                .define('b', Items.STICK)
+                .define('c', ItemTags.WOOL)
+                .unlockedBy("has_charge_ling_shi", has(ChargeModItemRegistry.chargeLingShi.get()))
+                .save(consumer);
+
+
+        // 无序合成
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ChargeModItemRegistry.CHARGE_BASE_BLOCK.get())  //祭坛基石
+                .requires(ChargeModItemRegistry.chargeLingShi.get(), 1)
+                .requires(Items.STONE, 1)
+                .unlockedBy("has_charge_ling_shi", has(ChargeModItemRegistry.chargeLingShi.get()))
+                .save(consumer);
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ChargeModItemRegistry.TALISMAN_PAPER_ITEM.get())  //符纸
                 .requires(Items.PAPER, 1)
                 .requires(Items.YELLOW_DYE, 1)
                 .unlockedBy("has_paper", has(Items.PAPER))
                 .save(consumer);
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ChargeModItemRegistry.MAZE_TALISMAN.get(), 8)
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ChargeModItemRegistry.MAZE_TALISMAN.get(), 8)//迷惘
                 .requires(ChargeModItemRegistry.XIANG_BU_TONG_TALISMAN.get(), 1)
                 .requires(ChargeModItemRegistry.JIE_BU_CHU_TALISMAN.get(), 1)
                 .requires(ChargeModItemRegistry.QIU_BU_DE_TALISMAN.get(), 1)
                 .requires(ChargeModItemRegistry.SUAN_BU_DUI_TALISMAN.get(), 1)
                 .unlockedBy("has_xiang_bu_tong", has(ChargeModItemRegistry.XIANG_BU_TONG_TALISMAN.get()))
                 .save(consumer);
-        // 无序合成
+
 //        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.MAGIC_INGOT.get())
 //                .requires(Items.IRON_INGOT, 3)
 //                .unlockedBy("has_iron_ingot", has(Items.IRON_INGOT))
