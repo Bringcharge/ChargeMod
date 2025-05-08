@@ -6,21 +6,21 @@ import net.minecraft.world.phys.Vec3;
 
 public class BooleanManager {
     //判断一个entity不是null
-    public static boolean entityNotNull (Entity entity, InstructionsModel model) {    //B001#
+    public static boolean entityNotNull (Entity entity, InstructionsModel model) {    //B001_
        return entity!=null;
     }
 
     //判断一个vector不是null
-    public static boolean vectorNotNull (Vec3 vec3d, InstructionsModel model) {    //B001#
+    public static boolean vectorNotNull (Vec3 vec3d, InstructionsModel model) {    //B001_
         return vec3d.normalize() != null;
     }
 
     //判断int相等
-    public static boolean integerEquation (int a1, int a2, InstructionsModel model) {    //B010#
+    public static boolean integerEquation (int a1, int a2, InstructionsModel model) {    //B010_
         return a1 == a2;
     }
 
-    public static boolean doubleEquation (double a1, double a2, InstructionsModel model) {    //B011#
+    public static boolean doubleEquation (double a1, double a2, InstructionsModel model) {    //B011_
         return Math.abs((float) (a1 - a2)) < 0.0001F;
     }
 }

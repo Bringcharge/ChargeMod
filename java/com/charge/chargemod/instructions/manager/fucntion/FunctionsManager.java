@@ -20,7 +20,7 @@ import net.minecraft.world.phys.Vec3;
 
 public class FunctionsManager {
     //落雷
-    public static void lightningDown (Vec3 targetPlace, InstructionsModel model) {    //F001#
+    public static void lightningDown (Vec3 targetPlace, InstructionsModel model) {    //F001_
         Level worldIn = model.user.level();
         if (worldIn != null && !worldIn.isClientSide() && worldIn instanceof ServerLevel) {
             LightningBolt lightning = new LightningBolt(EntityType.LIGHTNING_BOLT, worldIn);
@@ -30,7 +30,7 @@ public class FunctionsManager {
     }
 
     //射箭
-    public static void ShotArrow(Vec3 start, Vec3 direction, double speed, String blockInstructions, InstructionsModel model) { //F002#
+    public static void ShotArrow(Vec3 start, Vec3 direction, double speed, String blockInstructions, InstructionsModel model) { //F002_
         Level worldIn = model.user.level();
         if (!worldIn.isClientSide() && worldIn != null && worldIn instanceof ServerLevel) {
             ChargeArrow chargeArrow = new ChargeArrow(worldIn, start.x(), start.y(), start.z());
@@ -85,7 +85,7 @@ public class FunctionsManager {
     }
 
     //if函数
-    public static void logicIf(boolean condition, String thenCondition, String elseCondition,InstructionsModel model) { //Fif#
+    public static void logicIf(boolean condition, String thenCondition, String elseCondition,InstructionsModel model) { //Fif_
         InstructionsModel newModel = new InstructionsModel();
         newModel.copy(model);
         Instruction instruction = new Instruction();

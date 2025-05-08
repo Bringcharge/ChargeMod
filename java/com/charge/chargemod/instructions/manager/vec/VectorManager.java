@@ -11,29 +11,29 @@ import net.minecraft.world.phys.Vec3;
 
 public class VectorManager {
     //v00系列是处理
-    public static Vec3 vecRevert(Vec3 vec1, InstructionsModel model) { //V001# 取反
+    public static Vec3 vecRevert(Vec3 vec1, InstructionsModel model) { //V001_ 取反
         return vec1.reverse();
     }
 
-    public static Vec3 vecScale(Vec3 vec1, int int1, InstructionsModel model) {   //V002# 缩放
+    public static Vec3 vecScale(Vec3 vec1, int int1, InstructionsModel model) {   //V002_ 缩放
         return vec1.scale(int1);
     }
 
-    public static Vec3 vecNormalize(Vec3 vec1, InstructionsModel model) {     //V003# 标准向量
+    public static Vec3 vecNormalize(Vec3 vec1, InstructionsModel model) {     //V003_ 标准向量
         return  vec1.normalize();
     }
 
     //v01开始的是四则运算
-    public static Vec3 vecAdd(Vec3 vec1, Vec3 vec2, InstructionsModel model) {   //V011# 向量加法
+    public static Vec3 vecAdd(Vec3 vec1, Vec3 vec2, InstructionsModel model) {   //V011_ 向量加法
         return vec1.add(vec2);
     }
 
-    public static Vec3 vecDec(Vec3 vec1, Vec3 vec2, InstructionsModel model) {   //V012# 向量减法 虽然没什么意义的减法，提供一个工具罢了
+    public static Vec3 vecDec(Vec3 vec1, Vec3 vec2, InstructionsModel model) {   //V012_ 向量减法 虽然没什么意义的减法，提供一个工具罢了
         return  vec1.add(vec2.reverse());
     }
 
     //V02是阻挡射线
-    public static Vec3 vecRayToBlockPos(Vec3 vec1, Vec3 vec2, InstructionsModel model) {  //V020# 从vec1发出向量vec2的射线，看到的方块中心，太远了的话，就miss
+    public static Vec3 vecRayToBlockPos(Vec3 vec1, Vec3 vec2, InstructionsModel model) {  //V020_ 从vec1发出向量vec2的射线，看到的方块中心，太远了的话，就miss
         Level worldIn = model.user.level();
         if (worldIn != null && model.user != null) {
             if (vec2.length() < 50);
@@ -52,21 +52,21 @@ public class VectorManager {
     }
 
     //V1开始是跟玩家相关的操作
-    public static Vec3 vecPlayerLook(InstructionsModel model) {    //V101# 玩家视线
+    public static Vec3 vecPlayerLook(InstructionsModel model) {    //V101_ 玩家视线
         if (model.user != null) {
             return model.user.getLookAngle().normalize();
         }
         return null;
     }
 
-    public static Vec3 vecPlayerPos(InstructionsModel model) {     //V102# 玩家位置
+    public static Vec3 vecPlayerPos(InstructionsModel model) {     //V102_ 玩家位置
         if (model.user != null) {
             return model.user.getPosition(0.5f);
         }
         return null;
     }
 
-    public static Vec3 vecCameraPos(InstructionsModel model) {     //V103# 摄像机位置
+    public static Vec3 vecCameraPos(InstructionsModel model) {     //V103_ 摄像机位置
         if (model.user != null) {
             return model.user.getEyePosition();
         }
@@ -74,12 +74,12 @@ public class VectorManager {
     }
 
     //V2是一些回调系列的操作，还有其他的操作
-    public static Vec3 vecBlockTarget (InstructionsModel model) {  //V201# 回调函数附带的参数
+    public static Vec3 vecBlockTarget (InstructionsModel model) {  //V201_ 回调函数附带的参数
             return model.targetVec; //可能是空
     }
 
     // V3是一些跟entity有关的向量
-    public static Vec3 vecEntityPos (Entity entity, InstructionsModel model) { //V301# 实体位置
+    public static Vec3 vecEntityPos (Entity entity, InstructionsModel model) { //V301_ 实体位置
         if (entity != null) {
             return entity.getPosition(0.5f);
         }

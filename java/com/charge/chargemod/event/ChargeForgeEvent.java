@@ -3,6 +3,7 @@ package com.charge.chargemod.event;
 import com.charge.chargemod.ChargeModItemRegistry;
 import com.charge.chargemod.damage.ChargeDamageTypes;
 import com.charge.chargemod.damage.DaoFaDamageSource;
+import com.charge.chargemod.instructions.DaoCommand;
 import com.charge.chargemod.item.talisman.HoldLifeTalisman;
 import com.charge.chargemod.lingqi.PlayerLingQi;
 import com.charge.chargemod.network.ChargeNetwork;
@@ -23,6 +24,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.AABB;
 import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.EntityTeleportEvent;
@@ -41,6 +43,11 @@ import java.util.Random;
 @Mod.EventBusSubscriber(modid = ChargeModItemRegistry.MODID,bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class ChargeForgeEvent{
     public static long  tickCount = 0;
+
+    @SubscribeEvent
+    public static void onRegisterCommands(RegisterCommandsEvent event) {
+        DaoCommand.register(event.getDispatcher()); //直接注册命令参数
+    }
 
     @SubscribeEvent
     public static void onPlayerTick(TickEvent.PlayerTickEvent event) {

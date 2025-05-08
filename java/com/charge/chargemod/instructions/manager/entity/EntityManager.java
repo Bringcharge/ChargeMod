@@ -13,15 +13,15 @@ import net.minecraft.world.phys.Vec3;
 
 public class EntityManager {
     //user实体
-    public static Entity entityOfUser (InstructionsModel model) {    //E101#
+    public static Entity entityOfUser (InstructionsModel model) {    //E101_
         return model.user;
     }
     //从回调函数中取出实体
-    public static Entity entityBlockTarget (InstructionsModel model) {    //E201#
+    public static Entity entityBlockTarget (InstructionsModel model) {    //E201_
         return model.targetEntity;
     }
     //Entity入参视野上的entity
-    public static Entity entityLookTarget(Vec3 eyePosition, Vec3 lookVector, Entity entity, InstructionsModel model) {    //E301#
+    public static Entity entityLookTarget(Vec3 eyePosition, Vec3 lookVector, Entity entity, InstructionsModel model) {    //E301_
 
         double dis = lookVector.length();
 //        double reachDistance = Math.min(dis, 50); // 视线检测的最大距离

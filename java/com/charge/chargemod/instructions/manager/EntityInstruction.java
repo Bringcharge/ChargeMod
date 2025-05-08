@@ -10,7 +10,7 @@ public class EntityInstruction {
 
         String order = null;
         for (int i = 0; i<instruction.str.length(); i++) {
-            if (instruction.str.charAt(i) == '#') {
+            if (instruction.str.charAt(i) == '_') {
                 order = instruction.str.substring(0, i+1);    //拿出命令
                 if (i < instruction.str.length()) {
                     instruction.str = instruction.str.substring(i + 1); //设置新的值
@@ -18,15 +18,15 @@ public class EntityInstruction {
                 break;
             }
         }
-        if (order != null && order.equals("E101#")) { //施术者
+        if (order != null && order.equals("E101_")) { //施术者
             return EntityManager.entityOfUser(owner);
         }
 
-        if (order != null && order.equals("E201#")) {   //获取回调函数的entity
+        if (order != null && order.equals("E201_")) {   //获取回调函数的entity
             return EntityManager.entityBlockTarget(owner);
         }
 
-        if (order != null && order.equals("E301#")) {   //entity作为判定，从起点到终点的碰撞箱寻找碰到的livingEntity
+        if (order != null && order.equals("E301_")) {   //entity作为判定，从起点到终点的碰撞箱寻找碰到的livingEntity
             Vec3 p1 = InstructionsManager.vecWithString(instruction,owner);
             Vec3 p2 = InstructionsManager.vecWithString(instruction,owner);
             Entity p3 = InstructionsManager.entityWithString(instruction,owner);

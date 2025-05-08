@@ -5,7 +5,7 @@ public class IntegerInstruction {
 
         String order = null;
         for (int i = 0; i<instruction.str.length(); i++) {
-            if (instruction.str.charAt(i) == '#') {
+            if (instruction.str.charAt(i) == '_') {
                 order = instruction.str.substring(0, i+1);    //拿出命令
                 if (i < instruction.str.length()) {
                     instruction.str = instruction.str.substring(i + 1); //设置新的值
@@ -15,7 +15,7 @@ public class IntegerInstruction {
         }
 
         if (order != null && order.substring(0,2).equals("II")) {
-            String integer = order.substring(2,order.length()-1);   //去掉#命令符
+            String integer = order.substring(2,order.length()-1);   //去掉_命令符
             return Integer.parseInt(integer);
         }
 

@@ -11,7 +11,7 @@ public class FunctionInstruction {
 
         String order = null;
         for (int i = 0; i<instruction.str.length(); i++) {
-            if (instruction.str.charAt(i) == '#') {
+            if (instruction.str.charAt(i) == '_') {
                 order = instruction.str.substring(0, i+1);    //拿出命令
                 if (i < instruction.str.length()) {
                     instruction.str = instruction.str.substring(i + 1); //设置新的值
@@ -20,7 +20,7 @@ public class FunctionInstruction {
             }
         }
 
-        if (order != null && order.equals("F001#")) {   //落雷
+        if (order != null && order.equals("F001_")) {   //落雷
             Vec3 p1 = InstructionsManager.vecWithString(instruction,owner);
             if (p1 == null) {
                 return;
@@ -29,7 +29,7 @@ public class FunctionInstruction {
             return;
         }
 
-        if (order != null && order.equals("F002#")) {   //射箭
+        if (order != null && order.equals("F002_")) {   //射箭
             Vec3 p1 = InstructionsManager.vecWithString(instruction,owner);
             Vec3 p2 = InstructionsManager.vecWithString(instruction,owner);
             double p3 = InstructionsManager.doubleWithString(instruction,owner);
@@ -40,7 +40,7 @@ public class FunctionInstruction {
             FunctionsManager.ShotArrow(p1,p2,p3,p4,owner);
         }
 
-        if (order != null && order.equals("F003#")) {   //瞬移
+        if (order != null && order.equals("F003_")) {   //瞬移
             Entity p1 = InstructionsManager.entityWithString(instruction, owner);
             Vec3 p2 = InstructionsManager.vecWithString(instruction, owner);
             if (p1 instanceof LivingEntity) {
@@ -48,7 +48,7 @@ public class FunctionInstruction {
             }
         }
 
-        if (order != null && order.equals("F004#")) {   //交换
+        if (order != null && order.equals("F004_")) {   //交换
             Entity p1 = InstructionsManager.entityWithString(instruction, owner);
             Entity p2 = InstructionsManager.entityWithString(instruction, owner);
             if (p1 instanceof LivingEntity) {
@@ -56,7 +56,7 @@ public class FunctionInstruction {
             }
         }
 
-        if (order != null && order.equals("F005#")) {   //破坏方块
+        if (order != null && order.equals("F005_")) {   //破坏方块
             Vec3 p1 = InstructionsManager.vecWithString(instruction,owner);
             if (p1 == null) {
                 return;
@@ -64,7 +64,7 @@ public class FunctionInstruction {
             FunctionsManager.breakBlock(p1, owner);
         }
 
-        if (order != null && order.equals("Fif#")) {
+        if (order != null && order.equals("Fif_")) {
             boolean p1 = InstructionsManager.booleanWithString(instruction, owner);
             String p2 = InstructionsManager.instructionsBlock(instruction, owner);
             String p3 = InstructionsManager.instructionsBlock(instruction, owner);
