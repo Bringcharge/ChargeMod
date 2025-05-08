@@ -141,7 +141,7 @@ public class ChargeModItemRegistry {
         return new ChargeJuLingBlock(BlockBehaviour.Properties.of()
                 .mapColor(MapColor.COLOR_BLUE) //地图颜色
                 .strength(1.0f, 50.0f) //硬度，石头是1.5 & 爆炸抗性，黑曜石是50
-                .lightLevel(state -> 15)
+                .lightLevel(state -> state.getValue(ChargeZhenYaoBlock.ACTIVITY)? 15 : 3)
                 .sound(SoundType.STONE)
                 .noOcclusion()
         );}); //光照等级
@@ -151,10 +151,10 @@ public class ChargeModItemRegistry {
 
     //镇妖塔
     public static final RegistryObject<Block> CHARGE_ZHEN_YAO_BLOCK = BLOCKS.register("charge_zhen_yao_block", () -> {
-        return new ChargeJuLingBlock(BlockBehaviour.Properties.of()
+        return new ChargeZhenYaoBlock(BlockBehaviour.Properties.of()
                 .mapColor(MapColor.COLOR_BLUE) //地图颜色
                 .strength(1.0f, 50.0f) //硬度，石头是1.5 & 爆炸抗性，黑曜石是50
-                .lightLevel(state -> 15)
+                .lightLevel(state -> state.getValue(ChargeZhenYaoBlock.ACTIVITY)? 15 : 3)
                 .sound(SoundType.STONE)
                 .noOcclusion()
         );}); //光照等级
@@ -227,6 +227,7 @@ public class ChargeModItemRegistry {
                 .destroyTime(2.5f)
                 .explosionResistance(20)
                 .sound(SoundType.STONE)
+                .noOcclusion()
         );
     });
     public static final RegistryObject<Item> CHARGE_ARRAY_FLAG_ITEM = ITEMS.register("charge_array_flag", () -> new BlockItem(CHARGE_ARRAY_FLAG.get(), new Item.Properties()));

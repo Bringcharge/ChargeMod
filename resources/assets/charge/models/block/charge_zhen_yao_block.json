@@ -1,7 +1,7 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"0": "镇妖塔"
+		"0": "charge:block/charge_zhen_yao_block"
 	},
 	"elements": [
 		{

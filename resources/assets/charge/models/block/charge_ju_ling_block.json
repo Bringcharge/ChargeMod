@@ -2,8 +2,8 @@
 	"credit": "Made with Blockbench",
 	"texture_size": [64, 64],
 	"textures": {
-		"0": "聚灵阵",
-		"particle": "聚灵阵"
+		"0": "charge:block/charge_ju_ling_block",
+		"particle": "charge:block/charge_ju_ling_block"
 	},
 	"elements": [
 		{
