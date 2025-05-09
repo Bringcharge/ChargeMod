@@ -1,6 +1,8 @@
 package com.charge.chargemod.runData.loot;
 
+import com.charge.chargemod.ChargeMod;
 import com.charge.chargemod.ChargeModItemRegistry;
+import com.charge.chargemod.render.ChargeRenderHelper;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.Items;
@@ -23,7 +25,11 @@ public class ChargeBlockLootProvider extends BlockLootSubProvider {
 
     public static final Set<Block> BLOCK = Set.of(
             ChargeModItemRegistry.CHARGE_LING_SHI_ORE.get(),
-            ChargeModItemRegistry.CHARGE_ALTAR_BLOCK.get()  //祭坛的东西
+            ChargeModItemRegistry.CHARGE_ALTAR_BLOCK.get(),  //祭坛的东西
+            ChargeModItemRegistry.CHARGE_ALCHEMY_STOVE_BLOCK.get(), //八卦炉
+            ChargeModItemRegistry.CHARGE_ALCHEMY_ANVIL_BLOCK.get(), //砧
+            ChargeModItemRegistry.CHARGE_ARRAY_FLAG.get(),  //旗
+            ChargeModItemRegistry.CHARGE_BASE_BLOCK.get()   //基石
     );
 
     //方法中的第一个参数是一个空的集合，该集合是指免疫爆炸的方块列表，这里传入的是一个空。第二个参数照这样写即可。
@@ -33,9 +39,11 @@ public class ChargeBlockLootProvider extends BlockLootSubProvider {
 
     @Override
     protected void generate() {
-        this.add(ChargeModItemRegistry.CHARGE_ALTAR_BLOCK.get(),(block) ->  LootTable.lootTable().withPool(
-                this.applyExplosionCondition(block, LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(block).apply(CopyNameFunction.copyName(CopyNameFunction.NameSource.BLOCK_ENTITY))))));
-//        this.dropSelf(ChargeModItemRegistry.CHARGE_ALTAR_BLOCK.get());
+        dropEntityBlockSelf(ChargeModItemRegistry.CHARGE_ALTAR_BLOCK.get());
+        dropEntityBlockSelf(ChargeModItemRegistry.CHARGE_ALCHEMY_STOVE_BLOCK.get());
+        dropEntityBlockSelf(ChargeModItemRegistry.CHARGE_ALCHEMY_ANVIL_BLOCK.get());
+        dropSelf(ChargeModItemRegistry.CHARGE_ARRAY_FLAG.get());
+        dropSelf(ChargeModItemRegistry.CHARGE_BASE_BLOCK.get());
         this.add(ChargeModItemRegistry.CHARGE_LING_SHI_ORE.get(),
                 createSilkTouchDispatchTable(ChargeModItemRegistry.CHARGE_LING_SHI_ORE.get(),
                         this.applyExplosionDecay(ChargeModItemRegistry.CHARGE_LING_SHI_ORE.get(),   //第一个参数是本体，看是不是防爆
@@ -50,5 +58,9 @@ public class ChargeBlockLootProvider extends BlockLootSubProvider {
     @Override
     protected Iterable<Block> getKnownBlocks() {
         return BLOCK;
+    }
+    protected void dropEntityBlockSelf(Block p_251966_) {
+        this.add(p_251966_,(block) ->  LootTable.lootTable().withPool(
+                this.applyExplosionCondition(block, LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(block).apply(CopyNameFunction.copyName(CopyNameFunction.NameSource.BLOCK_ENTITY))))));
     }
 }
