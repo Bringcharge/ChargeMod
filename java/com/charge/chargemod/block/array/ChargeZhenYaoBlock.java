@@ -3,6 +3,7 @@ package com.charge.chargemod.block.array;
 import com.charge.chargemod.damage.ChargeDamageTypes;
 import com.charge.chargemod.damage.DaoFaDamageSource;
 import com.charge.chargemod.effect.ModEffects;
+import com.charge.chargemod.entity.ChargeArrow;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -18,6 +19,7 @@ import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.entity.projectile.ThrownTrident;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.EntityBlock;
@@ -26,11 +28,10 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.entity.EntityTypeTest;
-import net.minecraft.world.phys.AABB;
-import net.minecraft.world.phys.EntityHitResult;
-import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.phys.*;
 
 import java.util.List;
+import java.util.function.Consumer;
 
 public class ChargeZhenYaoBlock extends ChargeTickBaseBlock implements EntityBlock {
     //
@@ -41,6 +42,9 @@ public class ChargeZhenYaoBlock extends ChargeTickBaseBlock implements EntityBlo
     }
 
     public class ZhenYaoTrident extends ThrownTrident {
+
+        public Consumer<Entity> consumer;//回调
+
         public ZhenYaoTrident(EntityType<? extends ThrownTrident> p_37561_, Level p_37562_) {
             super(p_37561_, p_37562_);//EntityType.TRIDENT
         }
@@ -52,7 +56,9 @@ public class ChargeZhenYaoBlock extends ChargeTickBaseBlock implements EntityBlo
         @Override
         protected void onHitEntity(EntityHitResult p_37573_) {
             super.onHitEntity(p_37573_);
-            //TODO：增加回调
+            if (consumer!=null) {
+                consumer.accept(p_37573_.getEntity());
+            }
         }
     }
 
@@ -73,18 +79,36 @@ public class ChargeZhenYaoBlock extends ChargeTickBaseBlock implements EntityBlo
 
             if ((tick % 20 == 0 && state.getValue(ACTIVITY) )|| tick % (20 * 3) == 0) {   //tick数据符合条件
                 boolean checkPlayer = false; //检测成功标志
-                int halfWidth = 8;
+                int halfWidth = 15;
                 int halfHeight = 7;
 
-                Vec3 eyePosition = pos.getCenter();
-                Vec3 bottomWestSouth = eyePosition.add(-halfWidth, -halfHeight, halfWidth);
-                Vec3 topEastNorth = eyePosition.add(halfWidth, halfHeight, -halfWidth);
+                Vec3 centerVec = pos.getCenter();
+                Vec3 bottomWestSouth = centerVec.add(-halfWidth, -halfHeight, halfWidth);
+                Vec3 topEastNorth = centerVec.add(halfWidth, halfHeight, -halfWidth);
                 AABB searchArea = new AABB(bottomWestSouth, topEastNorth);
                 List<Entity> entityList = level.getEntities((Entity)null, searchArea, entity -> entity instanceof LivingEntity);
                 for (Entity entity : entityList) {
+                    Vec3 eyePosition = entity.getEyePosition(1.0F);
+                    Vec3 vec_to = centerVec;
+                    Vec3 dirVec = centerVec.vectorTo(eyePosition).normalize();  //方向单位向量
+                    //查看阻塞位置
+                    ClipContext context = new ClipContext(eyePosition, vec_to, ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, null);//前两个参数是起点和终点坐标
+                    BlockHitResult blockRayTraceResult = level.clip(context);
+                    if (blockRayTraceResult.getType() == HitResult.Type.MISS) { //视线畅通无阻
+                        checkPlayer = true; //找到了目标
+                        ZhenYaoTrident zhenYaoTrident = new ZhenYaoTrident(EntityType.TRIDENT,level);
+                        zhenYaoTrident.setPos(centerVec.add(dirVec));   //初始位置
+                        zhenYaoTrident.consumer = ((shootEntity)->{
+                            //参数注入
 
+                        });
+
+                        zhenYaoTrident.setDeltaMovement(dirVec.scale(3));
+                        level.addFreshEntity(zhenYaoTrident);
+                        break;  //退出for循环
+                    }
                 }
-                        checkPlayer = true;
+
 
                 level.setBlock(pos, state.setValue(ACTIVITY,checkPlayer), 3); //最后一个是flag
             }
