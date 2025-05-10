@@ -132,10 +132,15 @@ public class ChargeModItemRegistry {
         return new ChargeTickBaseBlock(BlockBehaviour.Properties.of()
                 .mapColor(MapColor.COLOR_BLUE) //地图颜色
                 .strength(1.0f, 50.0f) //硬度，石头是1.5 & 爆炸抗性，黑曜石是50
+                .sound(SoundType.STONE)
+                .noOcclusion()
         );}); //光照等级
+    public static final RegistryObject<Item> CHARGE_TICK_BLOCK_ITEM = ITEMS.register("charge_tick_block", () -> new BlockItem(CHARGE_TICK_BLOCK.get(), new Item.Properties()));
     //tick的entityType
     public static final RegistryObject<BlockEntityType<ChargeTickBlockEntity>> CHARGE_TICK_ENTITY = BLOCK_ENTITIES.register("charge_tick_block", () ->
             BlockEntityType.Builder.of(ChargeTickBlockEntity::new, CHARGE_TICK_BLOCK.get()).build(null));
+
+
     //聚灵阵
     public static final RegistryObject<Block> CHARGE_JU_LING_BLOCK = BLOCKS.register("charge_ju_ling_block", () -> {
         return new ChargeJuLingBlock(BlockBehaviour.Properties.of()
@@ -145,9 +150,12 @@ public class ChargeModItemRegistry {
                 .sound(SoundType.STONE)
                 .noOcclusion()
         );}); //光照等级
-
+    //聚灵阵entity
+    public static final RegistryObject<BlockEntityType<ChargeJuLingBlockEntity>> CHARGE_JU_LING_BLOCK_ENTITY = BLOCK_ENTITIES.register("charge_ju_ling_block", () ->
+            BlockEntityType.Builder.of(ChargeJuLingBlockEntity::new, CHARGE_JU_LING_BLOCK.get()).build(null));
     //聚灵阵item
     public static final RegistryObject<Item> CHARGE_JU_LING_BLOCK_ITEM = ITEMS.register("charge_ju_ling_block", () -> new BlockItem(CHARGE_JU_LING_BLOCK.get(), new Item.Properties()));
+
 
     //镇妖塔
     public static final RegistryObject<Block> CHARGE_ZHEN_YAO_BLOCK = BLOCKS.register("charge_zhen_yao_block", () -> {
@@ -158,10 +166,11 @@ public class ChargeModItemRegistry {
                 .sound(SoundType.STONE)
                 .noOcclusion()
         );}); //光照等级
-
+    //镇妖塔entityType
+    public static final RegistryObject<BlockEntityType<ChargeZhenYaoBlockEntity>> CHARGE_ZHEN_YAO_ENTITY = BLOCK_ENTITIES.register("charge_zhen_yao_block", () ->
+            BlockEntityType.Builder.of(ChargeZhenYaoBlockEntity::new, CHARGE_ZHEN_YAO_BLOCK.get()).build(null));
     //镇妖塔item
     public static final RegistryObject<Item> CHARGE_ZHEN_YAO_BLOCK_ITEM = ITEMS.register("charge_zhen_yao_block", () -> new BlockItem(CHARGE_ZHEN_YAO_BLOCK.get(), new Item.Properties()));
-
 
     //下面是entity
 
@@ -396,6 +405,7 @@ public class ChargeModItemRegistry {
 
                 //阵
                 output.accept(CHARGE_TELEPORT_BLOCK_ITEM.get());   //传送阵
+
             }).build());
 
     public static final RegistryObject<EntityType<FakeVillager>> FAKE_VILLAGER = ENTITY_TYPES.register("fake_villager",

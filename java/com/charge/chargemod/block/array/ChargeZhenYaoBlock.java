@@ -1,5 +1,6 @@
 package com.charge.chargemod.block.array;
 
+import com.charge.chargemod.ChargeModItemRegistry;
 import com.charge.chargemod.damage.ChargeDamageTypes;
 import com.charge.chargemod.damage.DaoFaDamageSource;
 import com.charge.chargemod.effect.ModEffects;
@@ -10,10 +11,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.FlyingMob;
-import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.entity.projectile.ThrownTrident;
@@ -24,11 +22,14 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.entity.EntityTypeTest;
 import net.minecraft.world.phys.*;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.function.Consumer;
@@ -65,19 +66,24 @@ public class ChargeZhenYaoBlock extends ChargeTickBaseBlock implements EntityBlo
 
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return new ChargeTickBlockEntity(pos, state);
+        return new ChargeZhenYaoBlockEntity(pos, state);
+    }
+
+    @Nullable
+    @Override
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> entityType) {
+        return level.isClientSide ? null : createTickerHelper(entityType, ChargeModItemRegistry.CHARGE_ZHEN_YAO_ENTITY.get(), ChargeZhenYaoBlockEntity::serverTick);
     }
 
     @Override
-    public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource randomSource) {
+    public void everyTick(BlockState state, Level level, BlockPos pos) {
 
-        super.tick(state, level, pos, randomSource);
         BlockEntity blockentity = level.getBlockEntity(pos);
         if (blockentity instanceof ChargeTickBlockEntity) {
             ChargeTickBlockEntity tickBlockEntity = (ChargeTickBlockEntity)blockentity;
             int tick = tickBlockEntity.getTick();
 
-            if ((tick % 20 == 0 && state.getValue(ACTIVITY) )|| tick % (20 * 3) == 0) {   //tick数据符合条件
+            if ((tick % (20 * 2) == 0 && state.getValue(ACTIVITY) )|| tick % (20 * 6) == 0) {   //tick数据符合条件
                 boolean checkPlayer = false; //检测成功标志
                 int halfWidth = 15;
                 int halfHeight = 7;
@@ -86,13 +92,13 @@ public class ChargeZhenYaoBlock extends ChargeTickBaseBlock implements EntityBlo
                 Vec3 bottomWestSouth = centerVec.add(-halfWidth, -halfHeight, halfWidth);
                 Vec3 topEastNorth = centerVec.add(halfWidth, halfHeight, -halfWidth);
                 AABB searchArea = new AABB(bottomWestSouth, topEastNorth);
-                List<Entity> entityList = level.getEntities((Entity)null, searchArea, entity -> entity instanceof LivingEntity);
+                List<Entity> entityList = level.getEntities((Entity)null, searchArea, entity -> entity instanceof Mob);
                 for (Entity entity : entityList) {
                     Vec3 eyePosition = entity.getEyePosition(1.0F);
                     Vec3 vec_to = centerVec;
                     Vec3 dirVec = centerVec.vectorTo(eyePosition).normalize();  //方向单位向量
                     //查看阻塞位置
-                    ClipContext context = new ClipContext(eyePosition, vec_to, ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, null);//前两个参数是起点和终点坐标
+                    ClipContext context = new ClipContext(eyePosition, vec_to.add(dirVec.scale(1.5)), ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, null);//前两个参数是起点和终点坐标
                     BlockHitResult blockRayTraceResult = level.clip(context);
                     if (blockRayTraceResult.getType() == HitResult.Type.MISS) { //视线畅通无阻
                         checkPlayer = true; //找到了目标

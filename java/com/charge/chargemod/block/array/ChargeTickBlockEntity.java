@@ -6,7 +6,10 @@ import net.minecraft.core.Vec3i;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 
 //tick响应的blockEntity，用于计数tick和修改state
@@ -14,6 +17,20 @@ public class ChargeTickBlockEntity extends BlockEntity {
     private Vec3i targetVec = null;
     private int tick;
     private int state;
+
+    public static void serverTick(Level level, BlockPos pos, BlockState state, ChargeTickBlockEntity blockEntity) {
+        if(level!=null && !level.isClientSide){
+            Block b = state.getBlock();
+            if (b instanceof ChargeTickBaseBlock) {
+                ((ChargeTickBaseBlock) b).everyTick(state, level, pos);
+            }
+        }
+    }
+
+
+    public ChargeTickBlockEntity(BlockEntityType<?> p_155228_, BlockPos p_155229_, BlockState p_155230_) {
+        super(p_155228_,p_155229_,p_155230_);
+    }
 
     public ChargeTickBlockEntity(BlockPos pos, BlockState state) {
 //        super(BlockEntityType.BELL,pos,state);
