@@ -172,6 +172,22 @@ public class ChargeModItemRegistry {
     //镇妖塔item
     public static final RegistryObject<Item> CHARGE_ZHEN_YAO_BLOCK_ITEM = ITEMS.register("charge_zhen_yao_block", () -> new BlockItem(CHARGE_ZHEN_YAO_BLOCK.get(), new Item.Properties()));
 
+    //铜钱阵
+    public static final RegistryObject<Block> CHARGE_TONG_QIAN_BLOCK = BLOCKS.register("charge_tong_qian_block", () -> {
+        return new ChargeTongQianBlock(BlockBehaviour.Properties.of()
+                .mapColor(MapColor.COLOR_BLUE) //地图颜色
+                .strength(1.0f, 50.0f) //硬度，石头是1.5 & 爆炸抗性，黑曜石是50
+                .lightLevel(state -> state.getValue(ChargeTongQianBlock.ACTIVITY)? 15 : 3)
+                .sound(SoundType.STONE)
+                .noOcclusion()
+        );}); //光照等级
+    //铜钱阵entityType
+    public static final RegistryObject<BlockEntityType<ChargeTongQianBlockEntity>> CHARGE_TONG_QIAN_BLOCK_ENTITY = BLOCK_ENTITIES.register("charge_tong_qian_block", () ->
+            BlockEntityType.Builder.of(ChargeTongQianBlockEntity::new, CHARGE_TONG_QIAN_BLOCK.get()).build(null));
+    //铜钱阵item
+    public static final RegistryObject<Item> CHARGE_TONG_QIAN_BLOCK_ITEM = ITEMS.register("charge_tong_qian_block", () -> new BlockItem(CHARGE_TONG_QIAN_BLOCK.get(), new Item.Properties()));
+
+
     //下面是entity
 
     //飞刀layer
@@ -353,8 +369,7 @@ public class ChargeModItemRegistry {
                 output.accept(chargeAlchemyStoveBlockItem.get());
                 output.accept(CHARGE_BASE_TOKEN.get());
                 output.accept(CHARGE_ARRAY_FLAG_ITEM.get());    //阵旗
-                output.accept(CHARGE_JU_LING_BLOCK_ITEM.get()); //聚灵
-                output.accept(CHARGE_ZHEN_YAO_BLOCK_ITEM.get()); //镇妖
+
 
                 //丹药
                 output.accept(CHARGE_BIGU_PELLET.get());
@@ -405,6 +420,9 @@ public class ChargeModItemRegistry {
 
                 //阵
                 output.accept(CHARGE_TELEPORT_BLOCK_ITEM.get());   //传送阵
+                output.accept(CHARGE_TONG_QIAN_BLOCK_ITEM.get());   //铜钱阵
+                output.accept(CHARGE_ZHEN_YAO_BLOCK_ITEM.get()); //镇妖
+                output.accept(CHARGE_JU_LING_BLOCK_ITEM.get()); //聚灵
 
             }).build());
 

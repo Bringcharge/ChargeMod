@@ -2,8 +2,8 @@
 	"credit": "Made with Blockbench",
 	"texture_size": [64, 64],
 	"textures": {
-		"0": "铜钱阵",
-		"particle": "铜钱阵"
+		"0": "charge:block/charge_tong_qian_block",
+		"particle": "charge:block/charge_tong_qian_block"
 	},
 	"elements": [
 		{
