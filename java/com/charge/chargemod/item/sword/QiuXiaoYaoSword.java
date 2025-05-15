@@ -2,8 +2,12 @@ package com.charge.chargemod.item.sword;
 
 import com.charge.chargemod.damage.ChargeDamageTypes;
 import com.charge.chargemod.damage.DaoFaDamageSource;
+import com.charge.chargemod.lingqi.PlayerLingQiHelper;
+import com.charge.chargemod.network.ChargePacketSender;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Position;
+import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
@@ -29,6 +33,16 @@ import java.util.List;
 public class QiuXiaoYaoSword extends ChargeBaseSword {
     @Override
     public boolean skillWithEntity(LivingEntity entity, Player player, InteractionHand hand) {
+        //灵气判断
+        if (!player.level().isClientSide) {
+            boolean canUse = PlayerLingQiHelper.consumeLingQi(player, 30);
+            if (!canUse) {
+                player.sendSystemMessage(Component.translatable("describe.charge.need_ling_li"));
+                return false;
+            } else {
+                ChargePacketSender.sendLingqiMessageToClient((ServerPlayer) player, PlayerLingQiHelper.getLingQi(player));
+            }
+        }
         Vec3 pos = entity.getPosition(1.f);
         List<Entity> list = player.level().getEntities(player, new AABB(pos.x() - 2.0D, pos.y() - 2.0D, pos.z() - 2.0D, pos.x() + 2.0D, pos.y() + 2.0D, pos.z() + 2.0D), (p_147140_) -> {
             return p_147140_.isAlive();
@@ -46,6 +60,16 @@ public class QiuXiaoYaoSword extends ChargeBaseSword {
     @Override
 
     public boolean skillWithBlock(BlockPos blockPos, Player player, InteractionHand hand) {
+        //灵气判断
+        if (!player.level().isClientSide) {
+            boolean canUse = PlayerLingQiHelper.consumeLingQi(player, 20);
+            if (!canUse) {
+                player.sendSystemMessage(Component.translatable("describe.charge.need_ling_li"));
+                return false;
+            } else {
+                ChargePacketSender.sendLingqiMessageToClient((ServerPlayer) player, PlayerLingQiHelper.getLingQi(player));
+            }
+        }
         Level level = player.level();
         Vec3 lookVec = player.getLookAngle();
         Vec3 vec32 = player.getEyePosition();

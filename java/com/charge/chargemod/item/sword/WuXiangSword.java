@@ -2,6 +2,10 @@ package com.charge.chargemod.item.sword;
 
 import com.charge.chargemod.entity.ChargeBladeExtendEntity;
 import com.charge.chargemod.entity.ChargeCopperCoinEntity;
+import com.charge.chargemod.lingqi.PlayerLingQiHelper;
+import com.charge.chargemod.network.ChargePacketSender;
+import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -23,6 +27,14 @@ public class WuXiangSword extends ChargeBaseSword{
     @Override
     public boolean skillWithNone(Player user, InteractionHand hand) { //右键什么都没有击中，最低的优先级
         if (!user.level().isClientSide) {
+            boolean canUse = PlayerLingQiHelper.consumeLingQi(user, 30);
+            if (!canUse) {
+                user.sendSystemMessage(Component.translatable("describe.charge.need_ling_li"));
+                return false;
+            } else {
+                ChargePacketSender.sendLingqiMessageToClient((ServerPlayer) user, PlayerLingQiHelper.getLingQi(user));
+            }
+
             Vec3 start = user.getEyePosition(1.0f);
             Vec3 toVec = user.getLookAngle();
             float rotateY = user.getYRot();    //视角在水平面上的弧度

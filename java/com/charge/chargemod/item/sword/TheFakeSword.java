@@ -1,11 +1,17 @@
 package com.charge.chargemod.item.sword;
 
 import com.charge.chargemod.ChargeModItemRegistry;
+import com.charge.chargemod.damage.ChargeDamageTypes;
+import com.charge.chargemod.damage.DaoFaDamageSource;
+import com.charge.chargemod.effect.ModEffects;
 import com.charge.chargemod.entity.FakeVillager;
+import com.charge.chargemod.lingqi.PlayerLingQiHelper;
+import com.charge.chargemod.network.ChargePacketSender;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.Vec3i;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.RandomSource;
@@ -25,6 +31,16 @@ import net.minecraft.world.phys.Vec3;
 public class TheFakeSword extends ChargeBaseSword{
     @Override
     public boolean skillWithEntity(LivingEntity entity, Player user, InteractionHand hand) { //右键击中了怪物的函数，最高优先级
+
+        if (!user.level().isClientSide) {
+            boolean canUse = PlayerLingQiHelper.consumeLingQi(user, 10);
+            if (!canUse) {
+                user.sendSystemMessage(Component.translatable("describe.charge.need_ling_li"));
+                return false;
+            } else {
+                ChargePacketSender.sendLingqiMessageToClient((ServerPlayer) user, PlayerLingQiHelper.getLingQi(user));
+            }
+        }
         Vec3 place = user.getPosition(1.0f);
         Vec3i position = new Vec3i((int)Math.floor(place.x),(int)Math.floor(place.y),(int)Math.floor(place.z));
         Level level = user.level();
@@ -34,7 +50,12 @@ public class TheFakeSword extends ChargeBaseSword{
                 entity.setItemSlot(EquipmentSlot.OFFHAND, ItemStack.EMPTY);
                 if (entity instanceof ZombieVillager && level instanceof ServerLevel) {
                     conversionZombieVillager((ServerLevel)level, (ZombieVillager)entity, user);
+                } else {    //如果不是能转换的
+                    entity.hurt(DaoFaDamageSource.source(user, ChargeDamageTypes.DAO_REAL), 10);
                 }
+            } else {
+                entity.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 20 * 10, 2));
+                entity.hurt(DaoFaDamageSource.source(user, ChargeDamageTypes.DAO_REAL), 10);
             }
         }
         return false;

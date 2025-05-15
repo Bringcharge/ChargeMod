@@ -3,7 +3,11 @@ package com.charge.chargemod.item.sword;
 import com.charge.chargemod.damage.ChargeDamageTypes;
 import com.charge.chargemod.damage.DaoFaDamageSource;
 import com.charge.chargemod.effect.ModEffects;
+import com.charge.chargemod.lingqi.PlayerLingQiHelper;
+import com.charge.chargemod.network.ChargePacketSender;
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
@@ -23,6 +27,14 @@ import java.util.List;
 public class LuanYinGuoSword extends ChargeBaseSword {
     @Override
     public boolean skillWithEntity(LivingEntity entity, Player player, InteractionHand hand) {
+        //灵气判断
+        boolean canUse = PlayerLingQiHelper.consumeLingQi(player, 50);
+        if (!canUse) {
+            player.sendSystemMessage(Component.translatable("describe.charge.need_ling_li"));
+            return false;
+        } else {
+            ChargePacketSender.sendLingqiMessageToClient((ServerPlayer) player, PlayerLingQiHelper.getLingQi(player));
+        }
         Vec3 pos = entity.getPosition(1.f);
         List<Entity> list = player.level().getEntities(player, new AABB(pos.x() - 2.0D, pos.y() - 2.0D, pos.z() - 2.0D, pos.x() + 2.0D, pos.y() + 2.0D, pos.z() + 2.0D), (p_147140_) -> {
             return p_147140_.isAlive();
@@ -31,7 +43,7 @@ public class LuanYinGuoSword extends ChargeBaseSword {
         for (Entity entity1:list) {
             if (entity1 instanceof LivingEntity) {
                 LivingEntity livingEntity = (LivingEntity) entity1;
-                livingEntity.hurt(DaoFaDamageSource.source(player, ChargeDamageTypes.DAO_REAL), 15);
+                livingEntity.hurt(DaoFaDamageSource.source(player, ChargeDamageTypes.DAO_REAL), 18);
                 livingEntity.addEffect(new MobEffectInstance(ModEffects.SILENT_EFFECT.get(), 20 * 10));
             }
         }

@@ -1,6 +1,10 @@
 package com.charge.chargemod.item.sword;
 
+import com.charge.chargemod.lingqi.PlayerLingQiHelper;
+import com.charge.chargemod.network.ChargePacketSender;
 import net.minecraft.core.Vec3i;
+import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -19,6 +23,14 @@ public class FuYaoSword extends ChargeBaseSword {
     @Override
     public boolean skillWithNone(Player player, InteractionHand hand) { //右键什么都没有击中，最低的优先级
         //这玩意不能限制服务端，玩家的移动一定要在客户端做
+    //灵气判断
+        boolean canUse = PlayerLingQiHelper.consumeLingQi(player, 5);
+        if (!canUse) {
+            player.sendSystemMessage(Component.translatable("describe.charge.need_ling_li"));
+            return false;
+        } else {
+            ChargePacketSender.sendLingqiMessageToClient((ServerPlayer) player, PlayerLingQiHelper.getLingQi(player));
+        }
         player.awardStat(Stats.ITEM_USED.get(this));
         int j = 4;
         float f7 = player.getYRot();

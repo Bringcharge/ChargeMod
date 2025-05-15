@@ -4,9 +4,13 @@ package com.charge.chargemod.item.sword;
 import com.charge.chargemod.damage.ChargeDamageTypes;
 import com.charge.chargemod.damage.DaoFaDamageSource;
 import com.charge.chargemod.effect.ModEffects;
+import com.charge.chargemod.lingqi.PlayerLingQiHelper;
+import com.charge.chargemod.network.ChargePacketSender;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Vec3i;
+import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.damagesource.DamageSource;
@@ -37,6 +41,15 @@ public class SuGuoSword extends ChargeBaseSword{
     @Override
     public boolean skillWithEntity(LivingEntity entity, Player player, InteractionHand hand) {
         Level level = player.level();
+        if (!player.level().isClientSide) {
+            boolean canUse = PlayerLingQiHelper.consumeLingQi(player, 10);
+            if (!canUse) {
+                player.sendSystemMessage(Component.translatable("describe.charge.need_ling_li"));
+                return false;
+            } else {
+                ChargePacketSender.sendLingqiMessageToClient((ServerPlayer) player, PlayerLingQiHelper.getLingQi(player));
+            }
+        }
         if (!level.isClientSide) { //首先是在服务端进行设置
             Vec3 place = player.getPosition(1.0f);
             Vec3i position = new Vec3i((int)Math.floor(place.x),(int)Math.floor(place.y),(int)Math.floor(place.z));

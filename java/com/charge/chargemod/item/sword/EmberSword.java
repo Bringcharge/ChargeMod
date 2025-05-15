@@ -2,6 +2,11 @@ package com.charge.chargemod.item.sword;
 
 import com.charge.chargemod.damage.ChargeDamageTypes;
 import com.charge.chargemod.damage.DaoFaDamageSource;
+import com.charge.chargemod.lingqi.PlayerLingQiHelper;
+import com.charge.chargemod.network.ChargePacketSender;
+import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.damagesource.DamageSource;
@@ -15,6 +20,15 @@ public class EmberSword extends ChargeBaseSword{
         Level level = user.level();
         if (entity != null) {
             if (!level.isClientSide) {
+                //灵气判断
+                boolean canUse = PlayerLingQiHelper.consumeLingQi(user, 7);
+                if (!canUse) {
+                    user.sendSystemMessage(Component.translatable("describe.charge.need_ling_li"));
+                    return false;
+                } else {
+                    ChargePacketSender.sendLingqiMessageToClient((ServerPlayer) user, PlayerLingQiHelper.getLingQi(user));
+                }
+
                 if (entity.getRemainingFireTicks() > 0) {
                     DamageSource damageSource = DaoFaDamageSource.source(user, ChargeDamageTypes.DAO_REAL);
                     //第三个参数是计算伤害的东西
@@ -23,6 +37,7 @@ public class EmberSword extends ChargeBaseSword{
                 } else {
                     entity.hurt(user.level().damageSources().lava(), 10);
                     entity.setSecondsOnFire(8);
+
                 }
                 return true;
             }

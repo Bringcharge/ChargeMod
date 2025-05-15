@@ -2,8 +2,12 @@ package com.charge.chargemod.item.sword;
 
 import com.charge.chargemod.entity.ChargeCangFengDaggerEntity;
 import com.charge.chargemod.entity.ChargeCopperCoinEntity;
+import com.charge.chargemod.lingqi.PlayerLingQiHelper;
+import com.charge.chargemod.network.ChargePacketSender;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Vec3i;
+import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
@@ -18,6 +22,14 @@ public class KongFangSword extends ChargeBaseSword{
     @Override
     public boolean skillWithNone(Player user, InteractionHand hand) { //右键什么都没有击中，最低的优先级
         if (!user.level().isClientSide) {
+            //灵气判断
+            boolean canUse = PlayerLingQiHelper.consumeLingQi(user, 3);
+            if (!canUse) {
+                user.sendSystemMessage(Component.translatable("describe.charge.need_ling_li"));
+                return false;
+            } else {
+                ChargePacketSender.sendLingqiMessageToClient((ServerPlayer) user, PlayerLingQiHelper.getLingQi(user));
+            }
             Vec3 start = user.getEyePosition(1.0f);
             Vec3 toVec = user.getLookAngle();
             float rotateY = user.getYRot();    //视角在水平面上的弧度

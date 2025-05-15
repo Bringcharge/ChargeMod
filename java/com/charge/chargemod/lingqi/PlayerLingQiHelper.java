@@ -10,7 +10,7 @@ public class PlayerLingQiHelper {
         optional.ifPresent(playerLingQi -> playerLingQi.addLingQi(lingqi));
     }
 
-    public static boolean consumeLingQi(Player player, int lingqi) {    //消耗灵气，如果不够则返回失败
+    public static boolean consumeLingQi(Player player, int lingqi) {    //消耗灵气，如果不够则返回false
         LazyOptional<PlayerLingQi> optional = player.getCapability(ChargeModItemRegistry.PLAYER_LING_QI);
         if (optional.map(PlayerLingQi::getLingQi).orElse(0) > lingqi) {
             optional.ifPresent(playerLingQi -> playerLingQi.consumeLingQi(lingqi));

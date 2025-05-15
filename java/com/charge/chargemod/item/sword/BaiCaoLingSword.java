@@ -2,7 +2,11 @@ package com.charge.chargemod.item.sword;
 
 import com.charge.chargemod.damage.ChargeDamageTypes;
 import com.charge.chargemod.damage.DaoFaDamageSource;
+import com.charge.chargemod.lingqi.PlayerLingQiHelper;
+import com.charge.chargemod.network.ChargePacketSender;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.damagesource.DamageSource;
@@ -35,6 +39,19 @@ public class BaiCaoLingSword extends ChargeBaseSword {
     public void onUseTick(Level level, LivingEntity user, ItemStack stack, int p_41431_) {
         super.onUseTick(level, user, stack, p_41431_);
         if (!user.level().isClientSide()) {
+            //灵气消耗
+            if (!level.isClientSide && user instanceof Player) {
+                Player player = (Player)user;
+                boolean canUse = PlayerLingQiHelper.consumeLingQi(player, 3);
+                if (!canUse) {
+                    player.sendSystemMessage(Component.translatable("describe.charge.need_ling_li"));
+                    return;
+                } else {
+                    ChargePacketSender.sendLingqiMessageToClient((ServerPlayer) player, PlayerLingQiHelper.getLingQi(player));
+
+                }
+            }
+
             int halfWidth = 8;
             int halfHeight = 7;
             int tickCount = getTickCount(stack);

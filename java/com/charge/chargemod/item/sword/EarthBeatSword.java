@@ -2,6 +2,10 @@ package com.charge.chargemod.item.sword;
 
 import com.charge.chargemod.damage.ChargeDamageTypes;
 import com.charge.chargemod.damage.DaoFaDamageSource;
+import com.charge.chargemod.lingqi.PlayerLingQiHelper;
+import com.charge.chargemod.network.ChargePacketSender;
+import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.damagesource.DamageSource;
@@ -21,6 +25,16 @@ public class EarthBeatSword extends ChargeBaseSword {
     public boolean skillWithNone(Player user, InteractionHand hand) { //右键什么都没有击中，最低的优先级
         Level level = user.level();
         if (!level.isClientSide()) {
+
+            //灵气判断
+            boolean canUse = PlayerLingQiHelper.consumeLingQi(user, 15);
+            if (!canUse) {
+                user.sendSystemMessage(Component.translatable("describe.charge.need_ling_li"));
+                return false;
+            } else {
+                ChargePacketSender.sendLingqiMessageToClient((ServerPlayer) user, PlayerLingQiHelper.getLingQi(user));
+            }
+
             int halfWidth = 8;
             int halfHeight = 7;
 

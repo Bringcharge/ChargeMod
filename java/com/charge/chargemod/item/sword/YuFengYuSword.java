@@ -1,8 +1,12 @@
 package com.charge.chargemod.item.sword;
 
+import com.charge.chargemod.lingqi.PlayerLingQiHelper;
+import com.charge.chargemod.network.ChargePacketSender;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Position;
 import net.minecraft.core.Vec3i;
+import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.*;
@@ -20,6 +24,15 @@ public class YuFengYuSword extends ChargeBaseSword{
         Level level = entity.level();
         if (!level.isClientSide) { //首先是在服务端进行设置
             if (entity != null) {
+
+                boolean canUse = PlayerLingQiHelper.consumeLingQi(user, 20);
+                if (!canUse) {
+                    user.sendSystemMessage(Component.translatable("describe.charge.need_ling_li"));
+                    return false;
+                } else {
+                    ChargePacketSender.sendLingqiMessageToClient((ServerPlayer) user, PlayerLingQiHelper.getLingQi(user));
+                }
+
                 Random random = new Random();
                 int number = random.nextInt(3,6);
                 for (int i = 0; i <number; i++) {
@@ -41,6 +54,14 @@ public class YuFengYuSword extends ChargeBaseSword{
         Level level = user.level();
         if (!level.isClientSide) { //首先是在服务端进行设置
             Vec3 position = blockPos.getCenter();
+
+            boolean canUse = PlayerLingQiHelper.consumeLingQi(user, 20);
+            if (!canUse) {
+                user.sendSystemMessage(Component.translatable("describe.charge.need_ling_li"));
+                return false;
+            } else {
+                ChargePacketSender.sendLingqiMessageToClient((ServerPlayer) user, PlayerLingQiHelper.getLingQi(user));
+            }
 
             Random random = new Random();
             int number = random.nextInt(3,6);

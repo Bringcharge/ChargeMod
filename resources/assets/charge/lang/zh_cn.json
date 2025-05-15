@@ -61,5 +61,8 @@
   "item.charge.JIE_BU_CHU_TALISMAN": "仙符 解不出",
   "item.charge.xiang_bu_tong_talisman": "仙符 想不通",
   "item.charge.suan_bu_dui_talisman": "仙符 算不对",
-  "item.charge.maze_talisman": "仙符 迷惘"
+  "item.charge.maze_talisman": "仙符 迷惘",
+
+
+  "describe.charge.need_ling_li": "灵力不足"
 }

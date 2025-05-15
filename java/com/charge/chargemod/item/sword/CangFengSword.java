@@ -1,10 +1,13 @@
 package com.charge.chargemod.item.sword;
 
 import com.charge.chargemod.entity.ChargeCangFengDaggerEntity;
+import com.charge.chargemod.lingqi.PlayerLingQiHelper;
+import com.charge.chargemod.network.ChargePacketSender;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -25,7 +28,7 @@ import java.util.Random;
 //藏锋
 public class CangFengSword extends ChargeBaseSword{
 
-    public final int KILL_THRESHOLD = 3;
+    public final int KILL_THRESHOLD = 99;
 
     private void createArrowEntity(Vec3 target3d, Level worldI,Entity owner) {
         Random random = new Random();
@@ -46,7 +49,7 @@ public class CangFengSword extends ChargeBaseSword{
         boolean flag = super.hurtEnemy(stack, target, attacker);
         if (attacker instanceof Player && !attacker.level().isClientSide && !getState(stack)) {
             Player player = (Player) attacker;
-            // 获取当前的斩杀数量
+            // 获取当前的攻击次数
             int AttackCount = getKillCount(stack);
             AttackCount++;
             setKillCount(stack, AttackCount);
@@ -65,6 +68,14 @@ public class CangFengSword extends ChargeBaseSword{
 
         if (!getState(user.getItemInHand(hand))) {   //如果没成为锋万里
             if (!user.level().isClientSide) {
+                Player player = user;
+                boolean canUse = PlayerLingQiHelper.consumeLingQi(player, 10);
+                if (!canUse) {
+                    player.sendSystemMessage(Component.translatable("describe.charge.need_ling_li"));
+                    return false;
+                } else {
+                    ChargePacketSender.sendLingqiMessageToClient((ServerPlayer) player, PlayerLingQiHelper.getLingQi(player));
+                }
                 createArrowEntity(entity.getEyePosition(1.0f), entity.level(), user);
             }
             return true;
@@ -91,6 +102,15 @@ public class CangFengSword extends ChargeBaseSword{
         List<Entity> list = user.level().getEntities(user, aabb, entity -> entity instanceof LivingEntity && entity != user);   //找寻范围内的单位，排除自己
         if (list.size() > 0) {  //有单位可以处理，后续增加扣蓝代码和
             if (!user.level().isClientSide) {   //判断服务端
+                //灵气判断
+                boolean canUse = PlayerLingQiHelper.consumeLingQi(user, 20);
+                if (!canUse) {
+                    user.sendSystemMessage(Component.translatable("describe.charge.need_ling_li"));
+                    return false;
+                } else {
+                    ChargePacketSender.sendLingqiMessageToClient((ServerPlayer) user, PlayerLingQiHelper.getLingQi(user));
+                }
+
                 for (Entity entity : list) {
                     for (int i = 0; i < 3; i++) {
                         createArrowEntity(entity.getEyePosition(1.f), user.level(), user);

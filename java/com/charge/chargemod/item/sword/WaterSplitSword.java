@@ -2,9 +2,13 @@ package com.charge.chargemod.item.sword;
 
 import com.charge.chargemod.damage.ChargeDamageTypes;
 import com.charge.chargemod.damage.DaoFaDamageSource;
+import com.charge.chargemod.lingqi.PlayerLingQiHelper;
+import com.charge.chargemod.network.ChargePacketSender;
 import net.minecraft.core.*;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.commands.DamageCommand;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.damagesource.DamageEffects;
@@ -28,7 +32,17 @@ public class WaterSplitSword  extends ChargeBaseSword {
     @Override
     public boolean skillWithEntity(LivingEntity entity, Player user, InteractionHand hand) { //右键击中了怪物的函数，最高优先级
         if (!user.level().isClientSide) {
+
+            boolean canUse = PlayerLingQiHelper.consumeLingQi(user, 5);
+            if (!canUse) {
+                user.sendSystemMessage(Component.translatable("describe.charge.need_ling_li"));
+                return false;
+            } else {
+                ChargePacketSender.sendLingqiMessageToClient((ServerPlayer) user, PlayerLingQiHelper.getLingQi(user));
+            }
+
             hurtEntity(entity, user);
+
         }
         return true;
     }
@@ -36,6 +50,15 @@ public class WaterSplitSword  extends ChargeBaseSword {
     @Override
     public boolean skillWithNone(Player user, InteractionHand hand) { //右键什么都没有击中，最低的优先级
         if (!user.level().isClientSide) {
+            if (!user.level().isClientSide) {
+                boolean canUse = PlayerLingQiHelper.consumeLingQi(user, 5);
+                if (!canUse) {
+                    user.sendSystemMessage(Component.translatable("describe.charge.need_ling_li"));
+                    return false;
+                } else {
+                    ChargePacketSender.sendLingqiMessageToClient((ServerPlayer) user, PlayerLingQiHelper.getLingQi(user));
+                }
+            }
             Vec3 place = user.getPosition(1.0f);
             Vec3i position = new Vec3i((int) Math.floor(place.x), (int) Math.floor(place.y), (int) Math.floor(place.z));
             BlockPos pos = new BlockPos(position);
