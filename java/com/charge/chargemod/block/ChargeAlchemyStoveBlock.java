@@ -1,14 +1,14 @@
 package com.charge.chargemod.block;
 
 import com.charge.chargemod.ChargeModItemRegistry;
-import com.charge.chargemod.multiBlock.ChargeAlchemyStoveHelper;
-import com.charge.chargemod.multiBlock.ChargeMultiBlockCheck;
-import com.charge.chargemod.multiBlock.HouTianBaGua;
-import com.charge.chargemod.multiBlock.XianTianBaGua;
+import com.charge.chargemod.lingqi.PlayerLingQiHelper;
+import com.charge.chargemod.multiBlock.*;
+import com.charge.chargemod.network.ChargePacketSender;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -69,8 +69,22 @@ public class ChargeAlchemyStoveBlock extends Block implements EntityBlock {
                             ItemStack stack = ((ChargeAltarBlockEntity)(level.getBlockEntity(altarPos))).getItem();
                             list.add(stack);
                         }
+
                         ItemStack item = ChargeAlchemyStoveHelper.outputWithItemList(list); //获取炼丹的结果，因为数量也在里面
-                        if (!item.isEmpty()) {  //输出成功
+
+                        int lingQiCost = ChargeAlchemyStoveHelper.getLingQiCost(item);
+
+                        if (!item.isEmpty()) {  //有对应的输出结果
+
+                            boolean canUse = PlayerLingQiHelper.consumeLingQi(player, lingQiCost);
+                            if (!canUse) {
+                                player.sendSystemMessage(Component.translatable("describe.charge.need_ling_li"));
+                                return InteractionResult.sidedSuccess(level.isClientSide);
+                            } else {
+                                ChargePacketSender.sendLingqiMessageToClient((ServerPlayer) player, PlayerLingQiHelper.getLingQi(player));
+
+                            }
+
                             pedestal.setItem(item); //直接设置在输出口
                             check.cleanAltar(level, pos);   //清空所有的祭坛
                             //TODO 增加粒子效果

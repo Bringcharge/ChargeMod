@@ -266,6 +266,59 @@ public class ChargeAlchemyStoveHelper {
         return ItemStack.EMPTY;
     }
 
+    public static int getLingQiCost(ItemStack itemStack) {
+        //初级
+        if (itemStack.is(ChargeModItemRegistry.PUSH_BACK_TALISMAN.get()) ||
+                itemStack.is(ChargeModItemRegistry.SHIELD_TALISMAN.get())
+        ) {
+            return 20;
+        }
+
+        //中级
+        if (itemStack.is(ChargeModItemRegistry.SKULL_STEAL_TALISMAN.get()) ||
+                itemStack.is(ChargeModItemRegistry.HOLD_LIFE_TALISMAN.get()) ||
+                itemStack.is(ChargeModItemRegistry.RELIVE_TALISMAN.get()) ||
+                itemStack.is(ChargeModItemRegistry.FLY_TALISMAN.get()) ||
+                itemStack.is(ChargeModItemRegistry.RAIN_TALISMAN.get()) ||
+                itemStack.is(ChargeModItemRegistry.INVITE_GOD_TALISMAN.get())
+        ) {
+            return 80;
+        }
+
+        //高级
+        if (itemStack.is(ChargeModItemRegistry.QIU_BU_DE_TALISMAN.get()) ||
+                itemStack.is(ChargeModItemRegistry.JIE_BU_CHU_TALISMAN.get()) ||
+                itemStack.is(ChargeModItemRegistry.XIANG_BU_TONG_TALISMAN.get()) ||
+                itemStack.is(ChargeModItemRegistry.SUAN_BU_DUI_TALISMAN.get())
+        ) {
+            return 150;
+        }
+
+        //初级
+        if (itemStack.is(ChargeModItemRegistry.CHARGE_BIGU_PELLET.get()) ||
+                itemStack.is(ChargeModItemRegistry.CHARGE_HONG_YUN_PELLET.get())
+        ) {
+            return 20;
+        }
+        //中级
+        if (itemStack.is(ChargeModItemRegistry.CHARGE_HEALTH_PELLET.get()) ||
+                itemStack.is(ChargeModItemRegistry.CHARGE_POWER_PELLET.get()) ||
+                itemStack.is(ChargeModItemRegistry.CHARGE_PO_WAN_FA_PELLET.get()) ||
+                itemStack.is(ChargeModItemRegistry.CHARGE_JU_LING_PELLET.get()) ||
+                itemStack.is(ChargeModItemRegistry.CHARGE_WAN_WU_SHENG_PELLET.get())
+        ) {
+            return 60;
+        }
+        //突破
+        if (itemStack.is(ChargeModItemRegistry.CHARGE_SAN_SHI_PELLET.get())) {
+            return 30;
+        }
+        if (itemStack.is(ChargeModItemRegistry.CHARGE_DENG_XIAN_PELLET.get())) {
+            return 100;
+        }
+        return 0;
+    }
+
 
     static boolean ItemStacksIsEmpty(ItemStack... input) {
         for (ItemStack o : input) { // implicit null check of 'input' array

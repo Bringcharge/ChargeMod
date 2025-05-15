@@ -231,6 +231,38 @@ public class ChargeAlchemyAnvilHelper {
         return ItemStack.EMPTY;
     }
 
+    public static int getLingQiCost(ItemStack itemStack) {
+        //初级
+        if (itemStack.is(ChargeModItemRegistry.KONG_FANG_SWORD.get()) ||
+                itemStack.is(ChargeModItemRegistry.FU_YAO_SWORD.get()) ||
+                itemStack.is(ChargeModItemRegistry.WATER_SPLIT_SWORD.get()) ||
+                itemStack.is(ChargeModItemRegistry.EMBER_SWORD.get()) ||
+                itemStack.is(ChargeModItemRegistry.ZHONG_ZHONG_GU_SWORD.get()) ||
+                itemStack.is(ChargeModItemRegistry.XUN_YIN_SWORD.get())
+        ) {
+            return 20;
+        }
+        //中级
+        if (itemStack.is(ChargeModItemRegistry.CANG_FENG.get()) ||
+                itemStack.is(ChargeModItemRegistry.YU_FENG_YU.get()) ||
+                itemStack.is(ChargeModItemRegistry.BAI_CAO_LING.get()) ||
+                itemStack.is(ChargeModItemRegistry.MAY_COLD.get()) ||
+                itemStack.is(ChargeModItemRegistry.EARTH_BEAT.get()) ||
+                itemStack.is(ChargeModItemRegistry.THE_REAL_SWORD.get()) ||
+                itemStack.is(ChargeModItemRegistry.THE_FAKE_SWORD.get()) ||
+                itemStack.is(ChargeModItemRegistry.SU_GUO_SWORD.get())
+        ) {
+            return 80;
+        }
+        //高级
+        if (itemStack.is(ChargeModItemRegistry.WU_XIANG_SWORD.get()) ||
+                itemStack.is(ChargeModItemRegistry.QIU_XIAO_YAO_SWORD.get()) ||
+                itemStack.is(ChargeModItemRegistry.LUAN_YIN_GUO_SWORD.get())
+        ) {
+            return 220;
+        }
+        return 0;
+    }
 
     static boolean ItemStacksIsEmpty(ItemStack... input) {
         for (ItemStack o : input) { // implicit null check of 'input' array
