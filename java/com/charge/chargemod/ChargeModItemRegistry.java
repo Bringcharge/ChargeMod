@@ -248,7 +248,7 @@ public class ChargeModItemRegistry {
 
     //阵旗
     public static final RegistryObject<Block> CHARGE_ARRAY_FLAG = BLOCKS.register("charge_array_flag", () -> {
-        return new ChargeLingShiOre(BlockBehaviour.Properties.of()
+        return new ChargeArrayFlagBlock(BlockBehaviour.Properties.of()
                 .destroyTime(2.5f)
                 .explosionResistance(20)
                 .sound(SoundType.STONE)
@@ -256,6 +256,18 @@ public class ChargeModItemRegistry {
         );
     });
     public static final RegistryObject<Item> CHARGE_ARRAY_FLAG_ITEM = ITEMS.register("charge_array_flag", () -> new BlockItem(CHARGE_ARRAY_FLAG.get(), new Item.Properties()));
+
+    //阵盘
+    public static final RegistryObject<Block> CHARGE_ARRAY_DISK_BLOCK = BLOCKS.register("charge_array_disk", () -> {
+        return new ChargeArrayDiskBlock(BlockBehaviour.Properties.of()
+                .destroyTime(2.5f)
+                .explosionResistance(20)
+                .sound(SoundType.STONE)
+                .noOcclusion()
+        );
+    });
+    public static final RegistryObject<Item> CHARGE_ARRAY_DISK_BLOCK_ITEM = ITEMS.register("charge_array_disk", () -> new BlockItem(CHARGE_ARRAY_DISK_BLOCK.get(), new Item.Properties()));
+
 
     //符纸
     public static final RegistryObject<Item> TALISMAN_PAPER_ITEM = ITEMS.register("charge_talisman_paper", () -> new ChargeTalismanPaper());
@@ -369,7 +381,7 @@ public class ChargeModItemRegistry {
                 output.accept(chargeAlchemyStoveBlockItem.get());
                 output.accept(CHARGE_BASE_TOKEN.get());
                 output.accept(CHARGE_ARRAY_FLAG_ITEM.get());    //阵旗
-
+                output.accept(CHARGE_ARRAY_DISK_BLOCK_ITEM.get());
 
                 //丹药
                 output.accept(CHARGE_BIGU_PELLET.get());
