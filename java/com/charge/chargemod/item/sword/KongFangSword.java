@@ -8,6 +8,8 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Vec3i;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
@@ -23,12 +25,19 @@ public class KongFangSword extends ChargeBaseSword{
     public boolean skillWithNone(Player user, InteractionHand hand) { //右键什么都没有击中，最低的优先级
         if (!user.level().isClientSide) {
             //灵气判断
-            boolean canUse = PlayerLingQiHelper.consumeLingQi(user, 3);
+            boolean canUse = PlayerLingQiHelper.consumeLingQi(user, 5);
             if (!canUse) {
                 user.sendSystemMessage(Component.translatable("describe.charge.need_ling_li"));
                 return false;
             } else {
                 ChargePacketSender.sendLingqiMessageToClient((ServerPlayer) user, PlayerLingQiHelper.getLingQi(user));
+                user.level().playSound(
+                        null,                     // 无特定来源实体（全局声音）
+                        BlockPos.containing(user.position()), // 声音位置
+                        SoundEvents.CHAIN_HIT, // 声音事件（原版或自定义）
+                        SoundSource.PLAYERS,       // 声音类别（BLOCKS, PLAYERS, AMBIENT 等）
+                        1.0F, 1.0F                // 音量、音高
+                );
             }
             Vec3 start = user.getEyePosition(1.0f);
             Vec3 toVec = user.getLookAngle();

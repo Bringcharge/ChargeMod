@@ -8,6 +8,8 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Position;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
@@ -34,12 +36,15 @@ public class QiuXiaoYaoSword extends ChargeBaseSword {
     @Override
     public boolean skillWithEntity(LivingEntity entity, Player player, InteractionHand hand) {
         //灵气判断
-        if (!player.level().isClientSide) {
-            boolean canUse = PlayerLingQiHelper.consumeLingQi(player, 30);
-            if (!canUse) {
+
+        boolean canUse = PlayerLingQiHelper.consumeLingQi(player, 30);
+        if (!canUse) {
+            if (!player.level().isClientSide) {
                 player.sendSystemMessage(Component.translatable("describe.charge.need_ling_li"));
-                return false;
-            } else {
+            }
+            return false;
+        } else {
+            if (!player.level().isClientSide) {
                 ChargePacketSender.sendLingqiMessageToClient((ServerPlayer) player, PlayerLingQiHelper.getLingQi(player));
             }
         }
@@ -61,12 +66,14 @@ public class QiuXiaoYaoSword extends ChargeBaseSword {
 
     public boolean skillWithBlock(BlockPos blockPos, Player player, InteractionHand hand) {
         //灵气判断
-        if (!player.level().isClientSide) {
-            boolean canUse = PlayerLingQiHelper.consumeLingQi(player, 20);
-            if (!canUse) {
+        boolean canUse = PlayerLingQiHelper.consumeLingQi(player, 30);
+        if (!canUse) {
+            if (!player.level().isClientSide) {
                 player.sendSystemMessage(Component.translatable("describe.charge.need_ling_li"));
-                return false;
-            } else {
+            }
+            return false;
+        } else {
+            if (!player.level().isClientSide) {
                 ChargePacketSender.sendLingqiMessageToClient((ServerPlayer) player, PlayerLingQiHelper.getLingQi(player));
             }
         }
@@ -85,6 +92,13 @@ public class QiuXiaoYaoSword extends ChargeBaseSword {
                 player.teleportTo(target.x, target.y - 1, target.z);
                 break;
             }
+            player.level().playSound(
+                    null,                     // 无特定来源实体（全局声音）
+                    BlockPos.containing(player.position()), // 声音位置
+                    SoundEvents.ENDERMAN_TELEPORT, // 声音事件（原版或自定义）
+                    SoundSource.PLAYERS,       // 声音类别（BLOCKS, PLAYERS, AMBIENT 等）
+                    1.0F, 1.0F                // 音量、音高
+            );
         }
         return true;
     }
@@ -96,6 +110,17 @@ public class QiuXiaoYaoSword extends ChargeBaseSword {
         Vec3 lookVec = player.getLookAngle();
         Vec3 vec32 = player.getEyePosition();
         Vec3 vec33 = vec32.add(lookVec.scale(20));
+        boolean canUse = PlayerLingQiHelper.consumeLingQi(player, 30);
+        if (!canUse) {
+            if (!player.level().isClientSide) {
+                player.sendSystemMessage(Component.translatable("describe.charge.need_ling_li"));
+            }
+            return false;
+        } else {
+            if (!player.level().isClientSide) {
+                ChargePacketSender.sendLingqiMessageToClient((ServerPlayer) player, PlayerLingQiHelper.getLingQi(player));
+            }
+        }
         BlockHitResult result = level.clip(new ClipContext(vec32, vec33, ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, player));
         if (result.getType() != HitResult.Type.MISS) {
             BlockPos pos = result.getBlockPos();

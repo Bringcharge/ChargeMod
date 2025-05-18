@@ -8,6 +8,8 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -42,6 +44,13 @@ public class CangFengSword extends ChargeBaseSword{
         arrow.setDeltaMovement(vectorToTarget.normalize().scale(1));
         arrow.setCritArrow(true);    //箭后面是否带有大量暴击粒子
         worldI.addFreshEntity(arrow);
+        worldI.playSound(
+                null,                     // 无特定来源实体（全局声音）
+                BlockPos.containing(target3d), // 声音位置
+                SoundEvents.CHAIN_HIT, // 声音事件（原版或自定义）
+                SoundSource.PLAYERS,       // 声音类别（BLOCKS, PLAYERS, AMBIENT 等）
+                1.0F, 1.0F                // 音量、音高
+        );
     }
 
     @Override
@@ -77,6 +86,7 @@ public class CangFengSword extends ChargeBaseSword{
                     ChargePacketSender.sendLingqiMessageToClient((ServerPlayer) player, PlayerLingQiHelper.getLingQi(player));
                 }
                 createArrowEntity(entity.getEyePosition(1.0f), entity.level(), user);
+
             }
             return true;
         }

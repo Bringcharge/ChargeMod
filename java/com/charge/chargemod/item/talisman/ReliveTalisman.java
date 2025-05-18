@@ -1,5 +1,8 @@
 package com.charge.chargemod.item.talisman;
 
+import net.minecraft.core.BlockPos;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.damagesource.DamageSource;
@@ -73,7 +76,16 @@ public class ReliveTalisman extends ChargeBaseTalisman {
                 if (stack.isEmpty()) {
                     player.getInventory().removeItem(stack);
                 }
+                level.playSound(
+                        null,                     // 无特定来源实体（全局声音）
+                        BlockPos.containing(player.position()), // 声音位置
+                        SoundEvents.EVOKER_PREPARE_SUMMON, // 声音事件（原版或自定义）
+                        SoundSource.PLAYERS,       // 声音类别（BLOCKS, PLAYERS, AMBIENT 等）
+                        1.0F, 1.0F                // 音量、音高
+                );
             }
+
+
         }
         return super.use(level,player,hand);
     }

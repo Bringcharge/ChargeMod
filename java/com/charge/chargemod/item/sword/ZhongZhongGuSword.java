@@ -9,6 +9,8 @@ import net.minecraft.core.Vec3i;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageType;
@@ -38,15 +40,23 @@ public class ZhongZhongGuSword  extends ChargeBaseSword {
                 return false;
             } else {
                 ChargePacketSender.sendLingqiMessageToClient((ServerPlayer) user, PlayerLingQiHelper.getLingQi(user));
+                level.playSound(
+                        null,                     // 无特定来源实体（全局声音）
+                        BlockPos.containing(user.position()), // 声音位置
+                        SoundEvents.BONE_BLOCK_PLACE, // 声音事件（原版或自定义）
+                        SoundSource.PLAYERS,       // 声音类别（BLOCKS, PLAYERS, AMBIENT 等）
+                        1.0F, 1.0F                // 音量、音高
+                );
+            }
+            if (entity != null) {
+                if (!(entity instanceof Player)) {
+                    Vec3 toPlayer = entity.getPosition(1.0f).vectorTo(user.getEyePosition()).normalize().scale(2.f);
+                    entity.push(toPlayer.x, toPlayer.y, toPlayer.z);
+                    entity.hurt(DaoFaDamageSource.source(user, ChargeDamageTypes.DAO_HEAVY), 10);
+                }
             }
         }
-        if (entity != null) {
-            if (!(entity instanceof Player)) {  //不是玩家的时候，爆掉它武器
-                Vec3 toPlayer = entity.getPosition(1.0f).vectorTo(user.getEyePosition()).normalize().scale(2.f);
-                entity.push(toPlayer.x, toPlayer.y, toPlayer.z);
-                entity.hurt(DaoFaDamageSource.source(user, ChargeDamageTypes.DAO_HEAVY), 10);
-            }
-        }
+
         return false;
     }
 

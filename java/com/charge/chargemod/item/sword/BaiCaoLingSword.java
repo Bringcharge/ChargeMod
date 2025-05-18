@@ -4,9 +4,12 @@ import com.charge.chargemod.damage.ChargeDamageTypes;
 import com.charge.chargemod.damage.DaoFaDamageSource;
 import com.charge.chargemod.lingqi.PlayerLingQiHelper;
 import com.charge.chargemod.network.ChargePacketSender;
+import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.damagesource.DamageSource;
@@ -40,16 +43,21 @@ public class BaiCaoLingSword extends ChargeBaseSword {
         super.onUseTick(level, user, stack, p_41431_);
         if (!user.level().isClientSide()) {
             //灵气消耗
-            if (!level.isClientSide && user instanceof Player) {
-                Player player = (Player)user;
-                boolean canUse = PlayerLingQiHelper.consumeLingQi(player, 3);
-                if (!canUse) {
-                    player.sendSystemMessage(Component.translatable("describe.charge.need_ling_li"));
-                    return;
-                } else {
-                    ChargePacketSender.sendLingqiMessageToClient((ServerPlayer) player, PlayerLingQiHelper.getLingQi(player));
 
-                }
+            Player player = (Player)user;
+            boolean canUse = PlayerLingQiHelper.consumeLingQi(player, 3);
+            if (!canUse) {
+                player.sendSystemMessage(Component.translatable("describe.charge.need_ling_li"));
+                return;
+            } else {
+                ChargePacketSender.sendLingqiMessageToClient((ServerPlayer) player, PlayerLingQiHelper.getLingQi(player));
+                level.playSound(
+                        user,                     // 无特定来源实体（全局声音）
+                        BlockPos.containing(user.position()), // 声音位置
+                        SoundEvents.CHAIN_HIT, // 声音事件（原版或自定义）
+                        SoundSource.PLAYERS,       // 声音类别（BLOCKS, PLAYERS, AMBIENT 等）
+                        1.0F, 1.0F                // 音量、音高
+                );
             }
 
             int halfWidth = 8;

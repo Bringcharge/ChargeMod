@@ -48,7 +48,7 @@ public class XiangBuTongTalisman extends ChargeBaseTalisman {
                 entity.hurt(damageSource, 5);
             }
             level.playSound(
-                    player,                     // 无特定来源实体（全局声音）
+                    null,                     // 无特定来源实体（全局声音）
                     BlockPos.containing(player.position()), // 声音位置
                     SoundEvents.BELL_BLOCK, // 声音事件（原版或自定义）
                     SoundSource.PLAYERS,       // 声音类别（BLOCKS, PLAYERS, AMBIENT 等）

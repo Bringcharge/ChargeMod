@@ -1,6 +1,9 @@
 package com.charge.chargemod.item.talisman;
 
 import com.charge.chargemod.ChargeModItemRegistry;
+import net.minecraft.core.BlockPos;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -68,6 +71,13 @@ public class SkullStealTalisman extends ChargeBaseTalisman {
                 //如果获取到了怪物的头
                 if (!stack.isEmpty()) {
                     player.getInventory().add(stack);
+                    level.playSound(
+                            null,                     // 无特定来源实体（全局声音）
+                            BlockPos.containing(player.position()), // 声音位置
+                            SoundEvents.EVOKER_CAST_SPELL, // 声音事件（原版或自定义）
+                            SoundSource.PLAYERS,       // 声音类别（BLOCKS, PLAYERS, AMBIENT 等）
+                            1.0F, 1.0F                // 音量、音高
+                    );
                 }
 
             }

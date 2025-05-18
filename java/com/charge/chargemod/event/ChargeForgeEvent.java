@@ -6,10 +6,14 @@ import com.charge.chargemod.damage.DaoFaDamageSource;
 import com.charge.chargemod.instructions.DaoCommand;
 import com.charge.chargemod.item.talisman.HoldLifeTalisman;
 import com.charge.chargemod.lingqi.PlayerLingQi;
+import com.charge.chargemod.lingqi.PlayerLingQiHelper;
 import com.charge.chargemod.network.ChargeNetwork;
 import com.charge.chargemod.network.ChargePacketSender;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.util.profiling.jfr.event.WorldLoadFinishedEvent;
 import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.effect.MobEffect;
@@ -23,6 +27,8 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.AABB;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.client.event.ClientPlayerNetworkEvent;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.TickEvent;
@@ -30,19 +36,53 @@ import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.EntityTeleportEvent;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent;
+import net.minecraftforge.event.level.LevelEvent;
+import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.LogicalSide;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.loading.FMLEnvironment;
 import net.minecraftforge.network.PacketDistributor;
 import org.checkerframework.common.returnsreceiver.qual.This;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
+import java.util.logging.Level;
 
 @Mod.EventBusSubscriber(modid = ChargeModItemRegistry.MODID,bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class ChargeForgeEvent{
     public static long  tickCount = 0;
+
+    @SubscribeEvent
+    public void onLevelLoad(WorldLoadFinishedEvent event) {
+        // 遍历所有在线玩家，同步数据
+        System.out.println("world load test");
+    }
+
+    @SubscribeEvent
+    public void onEntityJoinWorld(EntityJoinLevelEvent event) {
+        if (event.getEntity() instanceof ServerPlayer ) {
+            Player player = (Player)event.getEntity();
+            int type = PlayerLingQiHelper.getMaxCalamity(player);
+            ChargePacketSender.sendCrossCalamityMessageToClient((ServerPlayer)player, type);
+        }
+    }
+
+    @SubscribeEvent
+    public void onPlayerLogin(PlayerEvent.PlayerLoggedInEvent event) {
+        Player player = event.getEntity();
+
+        // 发送给客户端（联机模式走网络，单机模式直接调用）
+        if (player instanceof ServerPlayer) {
+            int type = PlayerLingQiHelper.getMaxCalamity(player);
+            ChargePacketSender.sendCrossCalamityMessageToClient((ServerPlayer)player, type);
+        } else if (FMLEnvironment.dist == Dist.CLIENT) {
+            int type = PlayerLingQiHelper.getMaxCalamity(player);
+            ChargePacketSender.sendCrossCalamityMessageToClient((ServerPlayer)player, type);
+        }
+    }
 
     @SubscribeEvent
     public static void onRegisterCommands(RegisterCommandsEvent event) {
