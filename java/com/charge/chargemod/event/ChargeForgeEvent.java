@@ -93,7 +93,14 @@ public class ChargeForgeEvent{
     public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
         if(event.side == LogicalSide.SERVER) {  //灵气恢复
             tickCount++;
-            if (tickCount % 10 == 0) {
+            if (tickCount % 200 == 0) {//10s发一次吧
+                LazyOptional<PlayerLingQi> optional = event.player.getCapability(ChargeModItemRegistry.PLAYER_LING_QI);
+                optional.ifPresent(playerLingQi -> {
+                    int type = playerLingQi.getCalamityNumber();
+                    ChargePacketSender.sendCrossCalamityMessageToClient((ServerPlayer) event.player, type);
+                });
+            }
+            if (tickCount % 20 == 0) {
                 LazyOptional<PlayerLingQi> optional = event.player.getCapability(ChargeModItemRegistry.PLAYER_LING_QI);
                 optional.ifPresent(playerLingQi -> {
                     List<MobEffectInstance> effects = event.player.getActiveEffects().stream().toList();    //确认是否有灵气buff
@@ -101,7 +108,7 @@ public class ChargeForgeEvent{
                         MobEffect effect = mobEffectInstance.getEffect();
                         if (effect.getDescriptionId().contains("ling_qi_increase")) {
                             int amp = mobEffectInstance.getAmplifier();    //buff等级
-                            playerLingQi.addLingQi(amp * 2);
+                            playerLingQi.addLingQi(amp * 3);
                             break;
                         }
                     }

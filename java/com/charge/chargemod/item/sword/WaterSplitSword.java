@@ -33,7 +33,7 @@ public class WaterSplitSword  extends ChargeBaseSword {
     public boolean skillWithEntity(LivingEntity entity, Player user, InteractionHand hand) { //右键击中了怪物的函数，最高优先级
         if (!user.level().isClientSide) {
 
-            boolean canUse = PlayerLingQiHelper.consumeLingQi(user, 5);
+            boolean canUse = PlayerLingQiHelper.consumeLingQi(user, 8);
             if (!canUse) {
                 user.sendSystemMessage(Component.translatable("describe.charge.need_ling_li"));
                 return false;

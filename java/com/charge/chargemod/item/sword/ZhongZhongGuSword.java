@@ -34,7 +34,7 @@ public class ZhongZhongGuSword  extends ChargeBaseSword {
         Vec3 place = user.getPosition(1.0f);
         Level level = user.level();
         if (!user.level().isClientSide) {
-            boolean canUse = PlayerLingQiHelper.consumeLingQi(user, 5);
+            boolean canUse = PlayerLingQiHelper.consumeLingQi(user, 8);
             if (!canUse) {
                 user.sendSystemMessage(Component.translatable("describe.charge.need_ling_li"));
                 return false;
@@ -65,7 +65,7 @@ public class ZhongZhongGuSword  extends ChargeBaseSword {
         Level level = user.level();
         if (!level.isClientSide) { //首先是在服务端进行设置
 
-            boolean canUse = PlayerLingQiHelper.consumeLingQi(user, 2);
+            boolean canUse = PlayerLingQiHelper.consumeLingQi(user, 5);
             if (!canUse) {
                 user.sendSystemMessage(Component.translatable("describe.charge.need_ling_li"));
                 return false;

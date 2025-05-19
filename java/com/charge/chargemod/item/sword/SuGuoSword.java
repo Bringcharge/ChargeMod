@@ -42,7 +42,7 @@ public class SuGuoSword extends ChargeBaseSword{
     public boolean skillWithEntity(LivingEntity entity, Player player, InteractionHand hand) {
         Level level = player.level();
         if (!player.level().isClientSide) {
-            boolean canUse = PlayerLingQiHelper.consumeLingQi(player, 10);
+            boolean canUse = PlayerLingQiHelper.consumeLingQi(player, 18);
             if (!canUse) {
                 player.sendSystemMessage(Component.translatable("describe.charge.need_ling_li"));
                 return false;

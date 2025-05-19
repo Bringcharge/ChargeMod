@@ -10,7 +10,7 @@ public class SwordMaskParticle extends ChargeBaseParticle { //继承父类
 
     public SwordMaskParticle(ClientLevel pLevel, double pX, double pY, double pZ, Vector3d speed) {
 
-        super(pLevel, pX, pY, pZ, speed,1,2.f);
+        super(pLevel, pX, pY, pZ, speed,1,2.5f);
     }
     // 这里指明渲染是半透明
     @Override

@@ -31,7 +31,7 @@ public class ChargeRenderHelper {   //
                     //addParticle(ParticleOptions particleData, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed);
                     Vec3 eyePosition = player.getEyePosition(1.0F);
                     Vec3 targetEyesPosition = event.getEntity().getEyePosition();
-                    Vec3 vec_to = targetEyesPosition.vectorTo(eyePosition).normalize();
+                    Vec3 vec_to = targetEyesPosition.vectorTo(eyePosition).normalize().scale(1.5);
                     Vec3 finalPos = targetEyesPosition.add(vec_to.scale(1.5));
                     level.addParticle(ChargeModParticleType.SWORD_MASK_PARTICLE_TYPE.get(), finalPos.x, finalPos.y, finalPos.z,  0,0,0);
                 }

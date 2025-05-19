@@ -13,6 +13,8 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -45,7 +47,7 @@ public class BaiCaoLingSword extends ChargeBaseSword {
             //灵气消耗
 
             Player player = (Player)user;
-            boolean canUse = PlayerLingQiHelper.consumeLingQi(player, 3);
+            boolean canUse = PlayerLingQiHelper.consumeLingQi(player, 1);
             if (!canUse) {
                 player.sendSystemMessage(Component.translatable("describe.charge.need_ling_li"));
                 return;
@@ -77,6 +79,8 @@ public class BaiCaoLingSword extends ChargeBaseSword {
                     } else {
                         entity.hurt(damageSource, 7);
                     }
+                    LivingEntity livingEntity = (LivingEntity)entity;
+                    livingEntity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 3, 3));
                     int frozen = entity.getTicksFrozen();
                     entity.setTicksFrozen(frozen + 40);
                 }

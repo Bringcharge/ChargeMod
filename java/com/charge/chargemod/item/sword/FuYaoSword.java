@@ -24,12 +24,16 @@ public class FuYaoSword extends ChargeBaseSword {
     public boolean skillWithNone(Player player, InteractionHand hand) { //右键什么都没有击中，最低的优先级
         //这玩意不能限制服务端，玩家的移动一定要在客户端做
     //灵气判断
-        boolean canUse = PlayerLingQiHelper.consumeLingQi(player, 5);
+        boolean canUse = PlayerLingQiHelper.consumeLingQi(player, 8);
         if (!canUse) {
-            player.sendSystemMessage(Component.translatable("describe.charge.need_ling_li"));
+            if (!player.level().isClientSide) {
+                player.sendSystemMessage(Component.translatable("describe.charge.need_ling_li"));
+            }
             return false;
         } else {
-            ChargePacketSender.sendLingqiMessageToClient((ServerPlayer) player, PlayerLingQiHelper.getLingQi(player));
+            if (!player.level().isClientSide) {
+                ChargePacketSender.sendLingqiMessageToClient((ServerPlayer) player, PlayerLingQiHelper.getLingQi(player));
+            }
         }
         player.awardStat(Stats.ITEM_USED.get(this));
         int j = 4;

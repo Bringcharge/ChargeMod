@@ -23,16 +23,19 @@ public class EmberSword extends ChargeBaseSword{
     public boolean skillWithEntity(LivingEntity entity, Player user, InteractionHand hand) { //右键击中了怪物的函数，最高优先级
         Level level = user.level();
         if (entity != null) {
-            if (!level.isClientSide) {
-                //灵气判断
-                boolean canUse = PlayerLingQiHelper.consumeLingQi(user, 7);
-                if (!canUse) {
+            //灵气判断
+            boolean canUse = PlayerLingQiHelper.consumeLingQi(user, 8);
+            if (!canUse) {
+                if (!user.level().isClientSide) {
                     user.sendSystemMessage(Component.translatable("describe.charge.need_ling_li"));
-                    return false;
-                } else {
+                }
+                return false;
+            } else {
+                if (!user.level().isClientSide) {
                     ChargePacketSender.sendLingqiMessageToClient((ServerPlayer) user, PlayerLingQiHelper.getLingQi(user));
                 }
-
+            }
+            if (!level.isClientSide) {
                 if (entity.getRemainingFireTicks() > 0) {
                     DamageSource damageSource = DaoFaDamageSource.source(user, ChargeDamageTypes.DAO_REAL);
                     //第三个参数是计算伤害的东西
@@ -43,12 +46,11 @@ public class EmberSword extends ChargeBaseSword{
                     entity.setSecondsOnFire(8);
 
                 }
-            } else {
                 Random random = new Random();
                 for (int i = 0; i < 8; i++) {
                     Vec3 center = entity.getEyePosition();
                     Vec3 to_vec = new Vec3(random.nextFloat(2)-1,random.nextFloat(2)-1,random.nextFloat(2)-1).normalize().scale(0.1);
-                    level.addParticle(ParticleTypes.FLAME, center.x, center.y, center.z , to_vec.x, to_vec.y, to_vec.z);
+                    level.addParticle(ParticleTypes.FLAME, true, center.x, center.y, center.z , to_vec.x, to_vec.y, to_vec.z);
                 }
             }
             return true;
