@@ -40,9 +40,37 @@ public class ModRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_charge_ling_shi", has(ChargeModItemRegistry.chargeLingShi.get()))
                 .save(consumer);
 
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ChargeModItemRegistry.CHARGE_ARRAY_DISK_BLOCK_ITEM.get())//阵盘
+                .pattern("c b")
+                .pattern(" a ")
+                .pattern("b c")
+                .define('a', Items.GOLD_INGOT)
+                .define('b', ChargeModItemRegistry.chargeBaseBlockItem.get())
+                .define('c', Items.BONE_MEAL)
+                .unlockedBy("has_charge_base_block", has(ChargeModItemRegistry.chargeBaseBlockItem.get()))
+                .save(consumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ChargeModItemRegistry.chargeAlchemyStoveBlockItem.get())//八卦炉
+                .pattern("cbc")
+                .pattern("bab")
+                .pattern("cbc")
+                .define('a', ChargeModItemRegistry.CHARGE_ARRAY_DISK_BLOCK_ITEM.get())
+                .define('b', Items.BAMBOO)
+                .define('c', Items.COPPER_INGOT)
+                .unlockedBy("has_charge_base_block", has(ChargeModItemRegistry.chargeBaseBlockItem.get()))
+                .save(consumer);
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ChargeModItemRegistry.chargeAlchemyAnvilBlockItem.get())//铁砧
+                .pattern("cbc")
+                .pattern("bab")
+                .pattern("cbc")
+                .define('a', ChargeModItemRegistry.CHARGE_ARRAY_DISK_BLOCK_ITEM.get())
+                .define('b', Items.IRON_INGOT)
+                .define('c', Items.COAL)
+                .unlockedBy("has_charge_base_block", has(ChargeModItemRegistry.chargeBaseBlockItem.get()))
+                .save(consumer);
 
         // 无序合成
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ChargeModItemRegistry.CHARGE_BASE_BLOCK.get())  //祭坛基石
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ChargeModItemRegistry.chargeBaseBlockItem.get())  //祭坛基石
                 .requires(ChargeModItemRegistry.chargeLingShi.get(), 1)
                 .requires(Items.STONE, 1)
                 .unlockedBy("has_charge_ling_shi", has(ChargeModItemRegistry.chargeLingShi.get()))

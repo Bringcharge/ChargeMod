@@ -19,6 +19,7 @@ public class GuideCenter implements GuidePageDelegate { //多页码索引
     public void init() {    //初始化
         addScreen(new ManualScreen());
         addScreen(new LingShiScreen());
+        addScreen(new LevelScreen());
         //丹药
         addScreen(new BiGuPelletScreen());//辟谷丹
         addScreen(new HongYunPelletScreen());//鸿运齐天丹

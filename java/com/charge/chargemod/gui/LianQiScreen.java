@@ -6,7 +6,7 @@ import net.minecraft.resources.ResourceLocation;
 
 public class LianQiScreen extends ChargeBaseScreen {
 
-    private static final Component title = Component.translatable("炼器");
+    private static final Component title = Component.translatable("炼器阵");
     public LianQiScreen() {
         super(title);
         leftStringLocal = "炼器，是聚万物之精，融为器物。使用的是后天八卦作为大阵，本想辅以灵火，神器……但这世界不需要锻打都能将铁锭打造成装甲，天地伟力就足以。\n" +

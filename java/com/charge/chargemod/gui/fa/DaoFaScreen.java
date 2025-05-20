@@ -1,6 +1,7 @@
-package com.charge.chargemod.gui;
+package com.charge.chargemod.gui.fa;
 
 import com.charge.chargemod.ChargeModItemRegistry;
+import com.charge.chargemod.gui.ChargeBaseScreen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 
