@@ -116,6 +116,7 @@ public class ChargeArrayHelper {
             level.destroyBlock(new BlockPos(x-1, y,z+1), false);
             level.destroyBlock(new BlockPos(x+1, y,z-1), false);
             level.destroyBlock(new BlockPos(x+1, y,z+1), false);
+            level.destroyBlock(new BlockPos(x,y+1,z), false);
         }
         level.destroyBlock(pos, false);
     }

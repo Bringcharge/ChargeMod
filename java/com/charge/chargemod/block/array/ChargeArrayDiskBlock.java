@@ -56,10 +56,9 @@ public class ChargeArrayDiskBlock extends Block implements EntityBlock {
                         ChargePacketSender.sendLingqiMessageToClient((ServerPlayer) player, PlayerLingQiHelper.getLingQi(player));
                     }
                     //这里需一些粒子效果
+                    ChargeArrayHelper.removeInputWithItem(stack, pos, level);   //破坏多的方块，一定要先执行，不然stack是会判空的
                     Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), stack); //生成凋落物
                     player.sendSystemMessage(Component.literal("阵法完成") .withStyle(ChatFormatting.AQUA));
-                    ChargeArrayHelper.removeInputWithItem(stack, pos, level);   //破坏多的方块
-
                 }
             }
         }
