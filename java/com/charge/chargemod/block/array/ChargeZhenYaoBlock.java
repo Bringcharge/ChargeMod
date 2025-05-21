@@ -97,6 +97,9 @@ public class ChargeZhenYaoBlock extends ChargeTickBaseBlock implements EntityBlo
                     Vec3 eyePosition = entity.getEyePosition(1.0F);
                     Vec3 vec_to = centerVec;
                     Vec3 dirVec = centerVec.vectorTo(eyePosition).normalize();  //方向单位向量
+                    if (Math.abs(eyePosition.y - centerVec.y) < 2) {    //在下方的不攻击
+                        continue;
+                    }
                     //查看阻塞位置
                     ClipContext context = new ClipContext(eyePosition, vec_to.add(dirVec.scale(1.5)), ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, null);//前两个参数是起点和终点坐标
                     BlockHitResult blockRayTraceResult = level.clip(context);
@@ -106,7 +109,7 @@ public class ChargeZhenYaoBlock extends ChargeTickBaseBlock implements EntityBlo
                         zhenYaoTrident.setPos(centerVec.add(dirVec));   //初始位置
                         zhenYaoTrident.consumer = ((shootEntity)->{
                             //参数注入
-
+                            shootEntity.teleportTo(centerVec.x, centerVec.y - 2, centerVec.z);
                         });
 
                         zhenYaoTrident.setDeltaMovement(dirVec.scale(3));

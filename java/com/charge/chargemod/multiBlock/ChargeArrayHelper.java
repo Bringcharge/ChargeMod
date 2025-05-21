@@ -91,7 +91,7 @@ public class ChargeArrayHelper {
                         checkBlockWithPos(x-1,y,z+1, ChargeModItemRegistry.CHARGE_ARRAY_FLAG.get(), level) &&
                         checkBlockWithPos(x+1,y,z-1, ChargeModItemRegistry.CHARGE_ARRAY_FLAG.get(), level) &&
                         checkBlockWithPos(x+1,y,z+1, ChargeModItemRegistry.CHARGE_ARRAY_FLAG.get(), level) &&
-                        checkBlockWithPos(x,y+1,z, Blocks.ICE, level)   //青金石
+                        checkBlockWithPos(x,y+1,z, Blocks.ICE, level)   //冰
         ) {
             return new ItemStack(ChargeModItemRegistry.CHARGE_TELEPORT_BLOCK_ITEM.get(),1);
         }

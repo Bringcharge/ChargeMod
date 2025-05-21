@@ -28,15 +28,15 @@ public class ModRecipeProvider extends RecipeProvider {
                 .define('a', Items.IRON_INGOT)
                 .define('b', Items.REDSTONE)
                 .define('c', Items.GOLD_INGOT)
-                .unlockedBy("has_charge_base_token", has(Items.GOLD_INGOT))
+                .unlockedBy("has_charge_gold_ingot", has(Items.GOLD_INGOT))
                 .save(consumer);
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ChargeModItemRegistry.CHARGE_ARRAY_FLAG_ITEM.get())//阵旗
                 .pattern("c  ")
                 .pattern("b  ")
                 .pattern("a  ")
-                .define('a', ChargeModItemRegistry.chargeLingShi.get())
-                .define('b', Items.STICK)
                 .define('c', ItemTags.WOOL)
+                .define('b', Items.STICK)
+                .define('a', ChargeModItemRegistry.chargeLingShi.get())
                 .unlockedBy("has_charge_ling_shi", has(ChargeModItemRegistry.chargeLingShi.get()))
                 .save(consumer);
 
@@ -48,6 +48,16 @@ public class ModRecipeProvider extends RecipeProvider {
                 .define('b', ChargeModItemRegistry.chargeBaseBlockItem.get())
                 .define('c', Items.BONE_MEAL)
                 .unlockedBy("has_charge_base_block", has(ChargeModItemRegistry.chargeBaseBlockItem.get()))
+                .save(consumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ChargeModItemRegistry.chargeAltarBlockItem.get())//祭坛
+                .pattern("aaa")
+                .pattern("b b")
+                .pattern("ccc")
+                .define('a', Items.BAMBOO)
+                .define('b', Items.STICK)
+                .define('c', Items.STONE)
+                .unlockedBy("has_bamboo", has(Items.BAMBOO))
                 .save(consumer);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ChargeModItemRegistry.chargeAlchemyStoveBlockItem.get())//八卦炉
