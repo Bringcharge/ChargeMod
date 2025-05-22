@@ -32,7 +32,7 @@ public class DaoCommand {
         model.user = source.getPlayer();
         model.holder = ItemStack.EMPTY;
         InstructionsManager.functionWithString(ins, model);    //命令字符串
-        source.sendSuccess(() -> Component.translatable("释放"), true);
+        source.sendSuccess(() -> Component.translatable("释放道法"), true);
     }
 
 }

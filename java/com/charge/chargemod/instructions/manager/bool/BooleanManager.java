@@ -11,7 +11,7 @@ public class BooleanManager {
     }
 
     //判断一个vector不是null
-    public static boolean vectorNotNull (Vec3 vec3d, InstructionsModel model) {    //B001_
+    public static boolean vectorNotNull (Vec3 vec3d, InstructionsModel model) {    //B002_
         return vec3d.normalize() != null;
     }
 

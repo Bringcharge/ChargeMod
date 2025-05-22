@@ -29,7 +29,7 @@ public class VecInstruction {
 
         if (order != null && order.equals("V002_")) {   //向量缩放
             Vec3 p1 = InstructionsManager.vecWithString(instruction,owner);
-            int p2 = InstructionsManager.integerWithString(instruction,owner);
+            double p2 = InstructionsManager.doubleWithString(instruction,owner);
             if (p1 == null) {
                 return  null;
             }

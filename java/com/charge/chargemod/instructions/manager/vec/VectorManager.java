@@ -15,8 +15,8 @@ public class VectorManager {
         return vec1.reverse();
     }
 
-    public static Vec3 vecScale(Vec3 vec1, int int1, InstructionsModel model) {   //V002_ 缩放
-        return vec1.scale(int1);
+    public static Vec3 vecScale(Vec3 vec1, double double1, InstructionsModel model) {   //V002_ 缩放
+        return vec1.scale(double1);
     }
 
     public static Vec3 vecNormalize(Vec3 vec1, InstructionsModel model) {     //V003_ 标准向量
