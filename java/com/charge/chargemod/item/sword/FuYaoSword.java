@@ -3,6 +3,7 @@ package com.charge.chargemod.item.sword;
 import com.charge.chargemod.lingqi.PlayerLingQiHelper;
 import com.charge.chargemod.network.ChargePacketSender;
 import net.minecraft.core.Vec3i;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
@@ -19,6 +20,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 
+import java.util.Random;
+
 public class FuYaoSword extends ChargeBaseSword {
     @Override
     public boolean skillWithNone(Player player, InteractionHand hand) { //右键什么都没有击中，最低的优先级
@@ -33,6 +36,13 @@ public class FuYaoSword extends ChargeBaseSword {
         } else {
             if (!player.level().isClientSide) {
                 ChargePacketSender.sendLingqiMessageToClient((ServerPlayer) player, PlayerLingQiHelper.getLingQi(player));
+            } else {
+                Random random = new Random();
+                for (int i = 0; i < 8; i++) {
+                    Vec3 center = player.getPosition(1.f);
+                    Vec3 to_vec = new Vec3(random.nextFloat(2)-1,0,random.nextFloat(2)-1).normalize().scale(0.1);
+                    player.level().addParticle(ParticleTypes.POOF, true, center.x, center.y + 0.5, center.z , to_vec.x, to_vec.y, to_vec.z);
+                }
             }
         }
         player.awardStat(Stats.ITEM_USED.get(this));

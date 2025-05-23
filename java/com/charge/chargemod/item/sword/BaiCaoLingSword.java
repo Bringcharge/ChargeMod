@@ -5,6 +5,7 @@ import com.charge.chargemod.damage.DaoFaDamageSource;
 import com.charge.chargemod.lingqi.PlayerLingQiHelper;
 import com.charge.chargemod.network.ChargePacketSender;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
@@ -24,6 +25,7 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 
 import java.util.List;
+import java.util.Random;
 
 public class BaiCaoLingSword extends ChargeBaseSword {
 
@@ -43,11 +45,18 @@ public class BaiCaoLingSword extends ChargeBaseSword {
     @Override
     public void onUseTick(Level level, LivingEntity user, ItemStack stack, int p_41431_) {
         super.onUseTick(level, user, stack, p_41431_);
+        Player player = (Player)user;
+        boolean canUse = PlayerLingQiHelper.consumeLingQi(player, 1);
+        if (canUse) {
+            Random random = new Random();
+            for (int i = 0; i < 5; i++) {
+                Vec3 center = player.getPosition(1.f);
+                Vec3 to_vec = new Vec3(random.nextFloat(2)-1,0,random.nextFloat(2)-1).normalize().scale(1);
+                level.addParticle(ParticleTypes.SPIT, true, center.x, center.y + 0.8, center.z , to_vec.x, to_vec.y, to_vec.z);
+            }
+        }
         if (!user.level().isClientSide()) {
             //灵气消耗
-
-            Player player = (Player)user;
-            boolean canUse = PlayerLingQiHelper.consumeLingQi(player, 1);
             if (!canUse) {
                 player.sendSystemMessage(Component.translatable("describe.charge.need_ling_li"));
                 return;

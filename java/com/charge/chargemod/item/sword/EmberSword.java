@@ -47,7 +47,7 @@ public class EmberSword extends ChargeBaseSword{
 
                 }
                 Random random = new Random();
-                for (int i = 0; i < 8; i++) {
+                for (int i = 0; i < 14; i++) {
                     Vec3 center = entity.getEyePosition();
                     Vec3 to_vec = new Vec3(random.nextFloat(2)-1,random.nextFloat(2)-1,random.nextFloat(2)-1).normalize().scale(0.1);
                     level.addParticle(ParticleTypes.FLAME, true, center.x, center.y, center.z , to_vec.x, to_vec.y, to_vec.z);

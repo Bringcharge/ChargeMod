@@ -6,6 +6,7 @@ import com.charge.chargemod.lingqi.PlayerLingQiHelper;
 import com.charge.chargemod.network.ChargePacketSender;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Vec3i;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
@@ -23,6 +24,7 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 
 import java.util.List;
+import java.util.Random;
 
 //其实这玩意叫愿天寒
 public class MayColdSword extends ChargeBaseSword {
@@ -46,14 +48,18 @@ public class MayColdSword extends ChargeBaseSword {
     public void onUseTick(Level level, LivingEntity user, ItemStack stack, int tick) {
         super.onUseTick(level, user, stack, tick);
 
-        if (!level.isClientSide && user instanceof Player) {
+        if (user instanceof Player) {
             Player player = (Player)user;
             boolean canUse = PlayerLingQiHelper.consumeLingQi(player, 1);
             if (!canUse) {
-                player.sendSystemMessage(Component.translatable("describe.charge.need_ling_li"));
+                if (!player.level().isClientSide) {
+                    player.sendSystemMessage(Component.translatable("describe.charge.need_ling_li"));
+                }
                 return;
             } else {
-                ChargePacketSender.sendLingqiMessageToClient((ServerPlayer) player, PlayerLingQiHelper.getLingQi(player));
+                if (!player.level().isClientSide) {
+                    ChargePacketSender.sendLingqiMessageToClient((ServerPlayer) player, PlayerLingQiHelper.getLingQi(player));
+                }
             }
             if (tick % 10 == 0) {
                 level.playSound(
@@ -75,23 +81,32 @@ public class MayColdSword extends ChargeBaseSword {
         AABB aabb = new AABB(topNorthEast, bottomNorthWest); //扫视的范围
 
         List<Entity> list = user.level().getEntities(user, aabb, entity -> {    //大概是找个大范围，然后从里面取了一个圆锥。用过滤函数处理的
-            Vec3 position = entity.getPosition(1.0f);
+            Vec3 position = entity.getPosition(1.0f).add(0,1,0);
             Vec3 toEntity = position.add(eyePosition.reverse());
             double dis = toEntity.length();
 
             double angel = Math.acos(toEntity.dot(lookVec) / (dis * lookVec.length()));
-            boolean flag = angel < (Math.PI / 4.0);
+            boolean flag = angel < (Math.PI / 4.0) && dis < 7;//90°
 
             return (entity instanceof LivingEntity && entity != user && flag);
         });   //找寻范围内的单位，排除自己
         if (list.size() > 0) {  //有单位可以处理，后续增加扣蓝代码和
             if (!user.level().isClientSide) {   //判断服务端
                 for (Entity entity : list) {
-                    for (int i = 0; i < 3; i++) {
-                        DamageSource damageSource = DaoFaDamageSource.source(user, ChargeDamageTypes.DAO_REAL);
-                        entity.hurt(damageSource, 2);
-                    }
+                    DamageSource damageSource = DaoFaDamageSource.source(user, ChargeDamageTypes.DAO_REAL);
+                    entity.hurt(damageSource, 2);
                 }
+            }
+        }
+        Random random = new Random();
+        for (double i = 0; i < 12; ) {
+            Vec3 toVec = new Vec3(lookVec.x + random.nextFloat(-2,2), lookVec.y + random.nextFloat(-2,2), lookVec.z + random.nextFloat(-2,2));
+            Vec3 toPos = eyePosition.add(toVec);
+            if (toPos.distanceTo(eyePosition.add(lookVec)) <= 1) {
+                i++;
+                double scale = 0.4 + random.nextFloat(0,0.2F);
+                Vec3 speed_toVec = toVec.normalize().scale(scale);
+                level.addParticle(ParticleTypes.SOUL_FIRE_FLAME, true,eyePosition.x,eyePosition.y,eyePosition.z , speed_toVec.x, speed_toVec.y, speed_toVec.z);
             }
         }
     }

@@ -6,6 +6,7 @@ import com.charge.chargemod.effect.ModEffects;
 import com.charge.chargemod.lingqi.PlayerLingQiHelper;
 import com.charge.chargemod.network.ChargePacketSender;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
@@ -30,10 +31,14 @@ public class LuanYinGuoSword extends ChargeBaseSword {
         //灵气判断
         boolean canUse = PlayerLingQiHelper.consumeLingQi(player, 50);
         if (!canUse) {
-            player.sendSystemMessage(Component.translatable("describe.charge.need_ling_li"));
+            if (!player.level().isClientSide) {
+                player.sendSystemMessage(Component.translatable("describe.charge.need_ling_li"));
+            }
             return false;
         } else {
-            ChargePacketSender.sendLingqiMessageToClient((ServerPlayer) player, PlayerLingQiHelper.getLingQi(player));
+            if (!player.level().isClientSide) {
+                ChargePacketSender.sendLingqiMessageToClient((ServerPlayer) player, PlayerLingQiHelper.getLingQi(player));
+            }
         }
         Vec3 pos = entity.getPosition(1.f);
         List<Entity> list = player.level().getEntities(player, new AABB(pos.x() - 2.0D, pos.y() - 2.0D, pos.z() - 2.0D, pos.x() + 2.0D, pos.y() + 2.0D, pos.z() + 2.0D), (p_147140_) -> {
@@ -47,6 +52,15 @@ public class LuanYinGuoSword extends ChargeBaseSword {
                 livingEntity.addEffect(new MobEffectInstance(ModEffects.SILENT_EFFECT.get(), 20 * 10));
             }
         }
+        double step = 0.2;
+        for (double i = pos.x() - 2.0D; i < pos.x() + 2.0D; i+=step) {
+            double j = pos.y() + 0.5D;
+            for (double k = pos.z() - 2.0D; k < pos.z() + 2.0D; k+=step) {
+                double offset_x = i - pos.x;
+                double offset_z = k - pos.z;
+                player.level().addParticle(ParticleTypes.WITCH, true,i, j, k , offset_x / 3.f, 0, offset_z / 3.f);
+            }
+        }
         return true;
     }
 
@@ -54,6 +68,18 @@ public class LuanYinGuoSword extends ChargeBaseSword {
 
     public boolean skillWithBlock(BlockPos blockPos, Player player, InteractionHand hand) {
         Vec3 pos = blockPos.getCenter();
+        //灵气判断
+        boolean canUse = PlayerLingQiHelper.consumeLingQi(player, 50);
+        if (!canUse) {
+            if (!player.level().isClientSide) {
+                player.sendSystemMessage(Component.translatable("describe.charge.need_ling_li"));
+            }
+            return false;
+        } else {
+            if (!player.level().isClientSide) {
+                ChargePacketSender.sendLingqiMessageToClient((ServerPlayer) player, PlayerLingQiHelper.getLingQi(player));
+            }
+        }
         List<Entity> list = player.level().getEntities(player, new AABB(pos.x() - 2.0D, pos.y() - 2.0D, pos.z() - 2.0D, pos.x() + 2.0D, pos.y() + 2.0D, pos.z() + 2.0D), (p_147140_) -> {
             return p_147140_.isAlive();
         }); //获取目标单位附近的单位
@@ -63,6 +89,15 @@ public class LuanYinGuoSword extends ChargeBaseSword {
                 LivingEntity livingEntity = (LivingEntity) entity1;
                 livingEntity.hurt(DaoFaDamageSource.source(player, ChargeDamageTypes.DAO_REAL), 15);
                 livingEntity.addEffect(new MobEffectInstance(ModEffects.SILENT_EFFECT.get(), 20 * 10));
+            }
+        }
+        double step = 0.5;
+        for (double i = pos.x() - 2.0D; i < pos.x() + 2.0D; i+=step) {
+            double j = pos.y() + 0.5D;
+            for (double k = pos.z() - 2.0D; k < pos.z() + 2.0D; k+=step) {
+                double offset_x = i - pos.x;
+                double offset_z = k - pos.z;
+                player.level().addParticle(ParticleTypes.WITCH, true,i, j, k , offset_x, 0, offset_z);
             }
         }
         return true;

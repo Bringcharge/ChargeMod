@@ -4,6 +4,7 @@ import com.charge.chargemod.damage.ChargeDamageTypes;
 import com.charge.chargemod.damage.DaoFaDamageSource;
 import com.charge.chargemod.lingqi.PlayerLingQiHelper;
 import com.charge.chargemod.network.ChargePacketSender;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
@@ -24,10 +25,26 @@ public class EarthBeatSword extends ChargeBaseSword {
     @Override
     public boolean skillWithNone(Player user, InteractionHand hand) { //右键什么都没有击中，最低的优先级
         Level level = user.level();
-        if (!level.isClientSide()) {
+        int halfWidth = 8;
+        int halfHeight = 7;
 
+        Vec3 eyePosition = user.getEyePosition(1.0F);
+        Vec3 bottomWestSouth = eyePosition.add(-halfWidth, -halfHeight, halfWidth);
+        Vec3 topEastNorth = eyePosition.add(halfWidth, halfHeight, -halfWidth);
+
+        boolean canUse = PlayerLingQiHelper.consumeLingQi(user, 15);
+        if (canUse) {
+            double step = 0.5;
+            for (double i = bottomWestSouth.x; i < topEastNorth.x; i+=step) {
+                double j = user.getPosition(1.f).y + 0.5;
+                for (double k = topEastNorth.z; k < bottomWestSouth.z; k+=step) {
+                    level.addParticle(ParticleTypes.LARGE_SMOKE, true,i, j, k , 0, 0.1, 0);
+                }
+
+            }
+        }
+        if (!level.isClientSide()) {
             //灵气判断
-            boolean canUse = PlayerLingQiHelper.consumeLingQi(user, 15);
             if (!canUse) {
                 user.sendSystemMessage(Component.translatable("describe.charge.need_ling_li"));
                 return false;
@@ -35,12 +52,7 @@ public class EarthBeatSword extends ChargeBaseSword {
                 ChargePacketSender.sendLingqiMessageToClient((ServerPlayer) user, PlayerLingQiHelper.getLingQi(user));
             }
 
-            int halfWidth = 8;
-            int halfHeight = 7;
 
-            Vec3 eyePosition = user.getEyePosition(1.0F);
-            Vec3 bottomWestSouth = eyePosition.add(-halfWidth, -halfHeight, halfWidth);
-            Vec3 topEastNorth = eyePosition.add(halfWidth, halfHeight, -halfWidth);
             AABB searchArea = new AABB(bottomWestSouth, topEastNorth);
             List<Entity> entityList = level.getEntities(user, searchArea, entity -> entity instanceof LivingEntity && entity != user);
             for (Entity entity : entityList) {
