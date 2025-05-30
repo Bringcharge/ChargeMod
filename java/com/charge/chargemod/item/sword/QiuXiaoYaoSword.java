@@ -4,9 +4,11 @@ import com.charge.chargemod.damage.ChargeDamageTypes;
 import com.charge.chargemod.damage.DaoFaDamageSource;
 import com.charge.chargemod.lingqi.PlayerLingQiHelper;
 import com.charge.chargemod.network.ChargePacketSender;
+import com.charge.chargemod.particle.ChargeModParticleType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Position;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -30,6 +32,7 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 import java.util.List;
+import java.util.Random;
 
 
 public class QiuXiaoYaoSword extends ChargeBaseSword {
@@ -46,6 +49,20 @@ public class QiuXiaoYaoSword extends ChargeBaseSword {
         } else {
             if (!player.level().isClientSide) {
                 ChargePacketSender.sendLingqiMessageToClient((ServerPlayer) player, PlayerLingQiHelper.getLingQi(player));
+                Random random = new Random();
+                int count = random.nextInt(2,5);
+                ChargePacketSender.sendParticleTypeToAllPlayer((ServerLevel) player.level(),
+                        entity.getX() ,
+                        entity.getY(),
+                        entity.getZ(),
+                        0, 0, 0, ChargeModParticleType.SWORD_BLADE);
+                for (int i = 0; i <count; i++) {
+                    ChargePacketSender.sendParticleTypeToAllPlayer((ServerLevel) player.level(),
+                            entity.getX() + random.nextFloat(-2.7f,2.7f),
+                            entity.getY() + 1 + random.nextFloat(-0.7f,0.7f),
+                            entity.getZ() + random.nextFloat(-2.7f,2.7f),
+                            0, 0, 0, ChargeModParticleType.SWORD_BLADE);
+                }
             }
         }
         Vec3 pos = entity.getPosition(1.f);

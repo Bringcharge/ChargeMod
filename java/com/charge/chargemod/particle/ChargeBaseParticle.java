@@ -23,7 +23,7 @@ public class ChargeBaseParticle extends TextureSheetParticle {  //自定义粒�
         this.hasPhysics = true; // 粒子是否可以被碰撞
         this.lifetime = lifeTimeTick;  //设置粒子生命周期
         // 在粒子初始化时设置，子类去设置这些参数
-//        this.roll = 0; // 初始角度
+//        this.roll = 0; // 当前角度
 //        this.oRoll = 0; // 上一帧角度?
 //        this.rollSpeed = (float) (Math.PI / 2 / 20); // 90°在20帧内完成（1秒）
     }
