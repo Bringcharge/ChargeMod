@@ -15,6 +15,7 @@ import com.charge.chargemod.render.*;
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.EntityRenderers;
+import net.minecraft.client.renderer.entity.NoopRenderer;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -112,7 +113,7 @@ public class ChargeMod
         event.registerEntityRenderer(ChargeModItemRegistry.CHARGE_CANG_FENG_DAGGER_ENTITY_TYPE.get(), ChargeCangFengDaggerEntityRenderer::new);
         event.registerEntityRenderer(ChargeModItemRegistry.CHARGE_DAGGER_ENTITY_TYPE.get(), ChargeDaggerEntityRenderer::new);
         event.registerEntityRenderer(ChargeModItemRegistry.COPPER_COIN_ENTITY_TYPE.get(), ChargeCopperCoinRenderer::new);
-        event.registerEntityRenderer(ChargeModItemRegistry.CHARGE_BLADE_EXTEND_ENTITY_TYPE.get(), ChargeBladeExtendEntityRenderer::new);
+        event.registerEntityRenderer(ChargeModItemRegistry.CHARGE_BLADE_EXTEND_ENTITY_TYPE.get(), NoopRenderer::new);
         event.registerBlockEntityRenderer(ChargeModItemRegistry.CHARGE_ALTAR_ENTITY.get(), ChargeAltarRender::new);
         event.registerBlockEntityRenderer(ChargeModItemRegistry.CHARGE_ALCHEMY_STOVE_ENTITY.get(), ChargeAlchemyStoveRender::new);
         event.registerBlockEntityRenderer(ChargeModItemRegistry.CHARGE_ALCHEMY_ANVIL_ENTITY.get(), ChargeAlchemyAnvilRender::new);

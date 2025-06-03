@@ -70,6 +70,10 @@ public class ChargeBaseParticleType extends ParticleType implements ParticleOpti
         this.type = type;
     }
 
+    public String type() {
+        return type;
+    }
+
     // 返回粒子的type等会我们注册
     @Override
     public ChargeBaseParticleType getType() {

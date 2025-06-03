@@ -9,6 +9,7 @@ import it.unimi.dsi.fastutil.longs.LongOpenHashSet;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Position;
+import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -48,6 +49,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 public class ChargeBladeExtendEntity extends Projectile {
 
@@ -102,6 +104,64 @@ public class ChargeBladeExtendEntity extends Projectile {
         this.setXRot((float)(Mth.atan2(vec3.y, d0) * (double)(180F / (float)Math.PI)));
         this.yRotO = this.getYRot();
         this.xRotO = this.getXRot();
+        if (this.level().isClientSide) {
+            //跟下面同步吧
+            Vec3 deltaMovement = vec3;
+            Vec3 nowPos = this.position();
+            float rotateY = this.getYRot();    //视角在水平面上的弧度
+            float f1 = -rotateY * ((float) Math.PI / 180F);
+            float f2 = Mth.cos(f1);
+            float f3 = Mth.sin(f1);
+            Vec3 xz_vec = new Vec3(deltaMovement.x, 0, deltaMovement.z).normalize();
+            Vec3 oneSide = deltaMovement.cross(xz_vec).normalize();  //其中的一侧，如果视野在水平线上的话是左侧
+            if (oneSide.equals(Vec3.ZERO)) {  //平视，导致向量叉乘是0
+                oneSide = new Vec3(f2, 0, -f3).normalize(); //进行逆时针旋转90，变成左侧
+            }
+            Vec3 forward = deltaMovement.normalize();
+            ArrayList<Vec3> checkPoints = new ArrayList<Vec3>();
+            Vec3 firstPos = nowPos.add(forward.scale(6.5)).add(oneSide.scale(0.5));   //第一个点，大概是中间左侧的最前面那个点
+            Vec3 upSide = forward.cross(oneSide).normalize();
+            checkPoints.add(firstPos);
+            checkPoints.add(firstPos.add(oneSide.scale(1.f)).add(forward.scale(-1.f))); //左侧
+            checkPoints.add(firstPos.add(oneSide.scale(2.f)).add(forward.scale(-1.f)));
+            checkPoints.add(firstPos.add(oneSide.scale(3.f)).add(forward.scale(-2.f)));
+            checkPoints.add(firstPos.add(oneSide.scale(4.f)).add(forward.scale(-2.f)));
+            checkPoints.add(firstPos.add(oneSide.scale(5.f)).add(forward.scale(-4.f)));
+            checkPoints.add(firstPos.add(oneSide.scale(6.f)).add(forward.scale(-4.f)));
+            checkPoints.add(firstPos.add(oneSide.scale(7.f)).add(forward.scale(-6.f)));
+            checkPoints.add(firstPos.add(oneSide.scale(8.f)).add(forward.scale(-6.f)));
+            checkPoints.add(firstPos.add(oneSide.scale(9.f)).add(forward.scale(-8.f)));
+            checkPoints.add(firstPos.add(oneSide.scale(10.f)).add(forward.scale(-8.f)));
+            checkPoints.add(firstPos.add(oneSide.scale(11.f)).add(forward.scale(-10.f)));
+            checkPoints.add(firstPos.add(oneSide.scale(-1.f)));                         //右侧
+            checkPoints.add(firstPos.add(oneSide.scale(-2.f)).add(forward.scale(-1.f)));
+            checkPoints.add(firstPos.add(oneSide.scale(-3.f)).add(forward.scale(-1.f)));
+            checkPoints.add(firstPos.add(oneSide.scale(-4.f)).add(forward.scale(-2.f)));
+            checkPoints.add(firstPos.add(oneSide.scale(-5.f)).add(forward.scale(-2.f)));
+            checkPoints.add(firstPos.add(oneSide.scale(-6.f)).add(forward.scale(-4.f)));
+            checkPoints.add(firstPos.add(oneSide.scale(-7.f)).add(forward.scale(-4.f)));
+            checkPoints.add(firstPos.add(oneSide.scale(-8.f)).add(forward.scale(-6.f)));
+            checkPoints.add(firstPos.add(oneSide.scale(-9.f)).add(forward.scale(-6.f)));
+            checkPoints.add(firstPos.add(oneSide.scale(-10.f)).add(forward.scale(-8.f)));
+            checkPoints.add(firstPos.add(oneSide.scale(-11.f)).add(forward.scale(-8.f)));
+            checkPoints.add(firstPos.add(oneSide.scale(-12.f)).add(forward.scale(-10.f)));
+            Random random = new Random();
+            for (Vec3 vec : checkPoints) {
+                ParticleOptions particleOptions = ParticleTypes.FLAME;
+                Vec3 point1 = vec.add(oneSide.scale(0.25f)).add(upSide.scale(0.25));
+                Vec3 point2 = vec.add(oneSide.scale(-0.25f)).add(upSide.scale(0.25));
+                Vec3 point3 = vec.add(oneSide.scale(0.25f)).add(upSide.scale(-0.25));
+                Vec3 point4 = vec.add(oneSide.scale(-0.25f)).add(upSide.scale(-0.25));
+                level().addParticle(particleOptions,true,point1.x,point1.y,point1.z,vec3.x,vec3.y,vec3.z);
+                level().addParticle(particleOptions,true,point2.x,point2.y,point2.z,vec3.x,vec3.y,vec3.z);
+                level().addParticle(particleOptions,true,point3.x,point3.y,point3.z,vec3.x,vec3.y,vec3.z);
+                level().addParticle(particleOptions,true,point4.x,point4.y,point4.z,vec3.x,vec3.y,vec3.z);
+                for (int i = 0; i < 5; i++) {
+                    Vec3 point = vec.add(oneSide.scale(random.nextFloat(-0.5f,0.5f))).add(upSide.scale(random.nextFloat(-0.5f,0.5f)));
+                    level().addParticle(particleOptions,true,point.x,point.y,point.z,vec3.x,vec3.y,vec3.z);
+                }
+            }
+        }
     }
 
     public void lerpTo(double x, double y, double z, float yRot, float xRot, int p_36733_, boolean p_36734_) {
@@ -193,7 +253,7 @@ public class ChargeBladeExtendEntity extends Projectile {
         checkPoints.add(firstPos.add(oneSide.scale(-11.f)).add(forward.scale(-8.f)));
         checkPoints.add(firstPos.add(oneSide.scale(-12.f)).add(forward.scale(-10.f)));
 
-        if(discardTick % 2 == 0) {
+        if(discardTick >= 0) {
             for (Vec3 checkPosition : checkPoints) {
                 //获取第一个block的hit事件
                 Vec3 checkEndPoint = checkPosition.add(deltaMovement);
@@ -530,7 +590,7 @@ public class ChargeBladeExtendEntity extends Projectile {
 
     protected void onHitEntity(Entity  entity) {
         float f = (float)this.getDeltaMovement().length();
-        int i = 7;  //跟直接伤害有关
+        int i = 27;  //跟直接伤害有关
 
         Entity entity1 = this.getOwner();
         DamageSource damagesource;
@@ -546,8 +606,6 @@ public class ChargeBladeExtendEntity extends Projectile {
         }
         this.piercingIgnoreEntityIds.add(entity.getId());
 
-
-        //不处理末影人
         if (entity.hurt(damagesource, (float)i)) {
 
             if (entity instanceof LivingEntity) {
@@ -629,7 +687,7 @@ public class ChargeBladeExtendEntity extends Projectile {
     //数据存储和删除实体
     protected void tickDespawn() {
         ++this.discardTick;
-        if (this.discardTick >= 20 * 5) {
+        if (this.discardTick >= 30) {
             this.discard();
         }
 
