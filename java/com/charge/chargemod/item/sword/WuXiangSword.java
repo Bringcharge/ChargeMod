@@ -1,7 +1,10 @@
 package com.charge.chargemod.item.sword;
 
+import com.charge.chargemod.ChargeModItemRegistry;
 import com.charge.chargemod.entity.ChargeBladeExtendEntity;
+import com.charge.chargemod.entity.ChargeCoolBladeEntity;
 import com.charge.chargemod.entity.ChargeCopperCoinEntity;
+import com.charge.chargemod.entity.calamity.CalamityLightning;
 import com.charge.chargemod.lingqi.PlayerLingQiHelper;
 import com.charge.chargemod.network.ChargePacketSender;
 import net.minecraft.network.chat.Component;
@@ -52,13 +55,23 @@ public class WuXiangSword extends ChargeBaseSword{
         return true;
     }
 
-    private void createArrowEntity(Vec3 arrowCreatePosition, Vec3 vectorToTarget, Level worldIn, Entity owner) {
+    private void createArrowEntity(Vec3 arrowCreatePosition, Vec3 vectorToTarget, Level worldIn, Player owner) {
         Random random = new Random();
 
-        ChargeBladeExtendEntity abstractarrowentity = new ChargeBladeExtendEntity(worldIn,(LivingEntity) owner);    //设置剑气
-        abstractarrowentity.shoot(owner.getLookAngle(), 0.5f);
-        abstractarrowentity.setOwner(owner);
-        worldIn.addFreshEntity(abstractarrowentity);
+//        ChargeBladeExtendEntity abstractarrowentity = new ChargeBladeExtendEntity(worldIn,(LivingEntity) owner);    //设置剑气
+//        abstractarrowentity.shoot(owner.getLookAngle(), 0.5f);
+//        abstractarrowentity.setOwner(owner);
+        if (!worldIn.isClientSide) {
+            ChargeCoolBladeEntity entity = new ChargeCoolBladeEntity(ChargeModItemRegistry.CHARGE_COOL_BLADE_ENTITY.get(), worldIn);
+            entity.setLevelAndPlayer(owner.level(), owner);
+            worldIn.addFreshEntity(entity);
+
+//            CalamityLightning calamityLightning = new CalamityLightning(ChargeModItemRegistry.CALAMITY_LIGHTNING.get(), worldIn);
+//            calamityLightning.start();
+//            calamityLightning.owner = owner;
+//            owner.sendSystemMessage(Component.literal("劫云正在凝聚"));
+//            worldIn.addFreshEntity(calamityLightning);
+        }
     }
 
 }

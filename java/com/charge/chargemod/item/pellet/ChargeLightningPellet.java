@@ -37,10 +37,11 @@ public class ChargeLightningPellet extends Item {
         if (entity instanceof Player) {
             Player player = (Player)entity;
             int calamityNumber = PlayerLingQiHelper.getMaxCalamity(player);
-            if (calamityNumber < 3 && !level.isClientSide) {   //条件符合，召唤三尸
+            if (calamityNumber < 3 && !level.isClientSide) {   //条件符合，开始雷劫
                 CalamityLightning calamityLightning = new CalamityLightning(ChargeModItemRegistry.CALAMITY_LIGHTNING.get(), level);
                 calamityLightning.start();
                 calamityLightning.owner = player;
+                calamityLightning.setPos(player.position());
                 player.sendSystemMessage(Component.literal("劫云正在凝聚"));
                 level.addFreshEntity(calamityLightning);
 

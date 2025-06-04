@@ -17,6 +17,7 @@ import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.item.*;
@@ -454,6 +455,10 @@ public class ChargeModItemRegistry {
             () -> EntityType.Builder.of(CalamityLightning::new, MobCategory.MISC)
                     .sized(0.6F, 1.95F) // 设置实体大小
                     .build("calamity_lightning"));
+    public static final RegistryObject<EntityType<ChargeCoolBladeEntity>> CHARGE_COOL_BLADE_ENTITY = ENTITY_TYPES.register("charge_cool_blade_entity",
+            () -> EntityType.Builder.of(ChargeCoolBladeEntity::new, MobCategory.MISC)
+                    .sized(0.6F, 1.95F) // 设置实体大小
+                    .build("charge_cool_blade_entity"));
 
 
 }

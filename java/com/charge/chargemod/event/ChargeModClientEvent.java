@@ -43,6 +43,7 @@ public class ChargeModClientEvent {
             EntityRenderers.register(ChargeModItemRegistry.CALAMITY_ZOMBIE.get(), ZombieRenderer::new);
             EntityRenderers.register(ChargeModItemRegistry.CALAMITY_SANSHI.get(), NoopRenderer::new);
             EntityRenderers.register(ChargeModItemRegistry.CALAMITY_LIGHTNING.get(), NoopRenderer::new);
+            EntityRenderers.register(ChargeModItemRegistry.CHARGE_COOL_BLADE_ENTITY.get(), NoopRenderer::new);
         });
 
     }

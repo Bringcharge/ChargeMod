@@ -50,6 +50,7 @@ public class ChargeSanShiPellet extends Item {
                 sanShi.zombieCenter = centerZ;
                 sanShi.zombieBottom = bottomZ;
                 sanShi.owner = player;
+                sanShi.setPos(player.position());
                 topZ.owner = sanShi;
                 centerZ.owner = sanShi;
                 bottomZ.owner = sanShi;
