@@ -9,7 +9,10 @@ import com.charge.chargemod.network.ChargePacketSender;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Vec3i;
+import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
@@ -59,8 +62,12 @@ public class SuGuoSword extends ChargeBaseSword{
                 DamageSource damageSource = DaoFaDamageSource.source(player, ChargeDamageTypes.DAO_REAL);
                 entity.hurt(damageSource,18);
                 entity.addEffect(new MobEffectInstance(ModEffects.SILENT_EFFECT.get(), 20 * 5));    //沉默
-
             }
+            ParticleOptions particleOptions = ParticleTypes.BUBBLE;
+            if (player.level() instanceof ServerLevel) {
+                ((ServerLevel) player.level()).sendParticles(particleOptions, entity.getX(), entity.getY() + 1, entity.getZ(), 7, 0.0D, 0.5D, 0.0D, 1.0D);//类型，xyz，count，speed_xyz,maxSpeed
+            }
+
         }
         return true;
     }

@@ -9,6 +9,8 @@ import com.charge.chargemod.lingqi.PlayerLingQiHelper;
 import com.charge.chargemod.network.ChargePacketSender;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.Vec3i;
+import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -40,23 +42,29 @@ public class TheFakeSword extends ChargeBaseSword{
             } else {
                 ChargePacketSender.sendLingqiMessageToClient((ServerPlayer) user, PlayerLingQiHelper.getLingQi(user));
             }
-        }
-        Vec3 place = user.getPosition(1.0f);
-        Vec3i position = new Vec3i((int)Math.floor(place.x),(int)Math.floor(place.y),(int)Math.floor(place.z));
-        Level level = user.level();
-        if (entity != null) {
-            if (!(entity instanceof Player)) {  //不是玩家的时候，爆掉它武器
-                entity.setItemSlot(EquipmentSlot.MAINHAND, ItemStack.EMPTY);
-                entity.setItemSlot(EquipmentSlot.OFFHAND, ItemStack.EMPTY);
-                if (entity instanceof ZombieVillager && level instanceof ServerLevel) {
-                    conversionZombieVillager((ServerLevel)level, (ZombieVillager)entity, user);
-                } else {    //如果不是能转换的
+
+            Vec3 place = user.getPosition(1.0f);
+            Vec3i position = new Vec3i((int) Math.floor(place.x), (int) Math.floor(place.y), (int) Math.floor(place.z));
+            Level level = user.level();
+            if (entity != null) {
+                if (!(entity instanceof Player)) {  //不是玩家的时候，爆掉它武器
+                    entity.setItemSlot(EquipmentSlot.MAINHAND, ItemStack.EMPTY);
+                    entity.setItemSlot(EquipmentSlot.OFFHAND, ItemStack.EMPTY);
+                    if (entity instanceof ZombieVillager && level instanceof ServerLevel) {
+                        conversionZombieVillager((ServerLevel) level, (ZombieVillager) entity, user);
+                    } else {    //如果不是能转换的
+                        entity.hurt(DaoFaDamageSource.source(user, ChargeDamageTypes.DAO_REAL), 10);
+                    }
+                } else {
+                    entity.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 20 * 10, 2));
                     entity.hurt(DaoFaDamageSource.source(user, ChargeDamageTypes.DAO_REAL), 10);
                 }
-            } else {
-                entity.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 20 * 10, 2));
-                entity.hurt(DaoFaDamageSource.source(user, ChargeDamageTypes.DAO_REAL), 10);
+                ParticleOptions particleOptions = ParticleTypes.LAVA;
+                if (entity.level() instanceof ServerLevel) {
+                    ((ServerLevel) entity.level()).sendParticles(particleOptions, entity.getX(), entity.getY() + 1, entity.getZ(), 7, 0.0D, 0.5D, 0.0D, 1.0D);//类型，xyz，count，speed_xyz,maxSpeed
+                }
             }
+
         }
         return false;
     }

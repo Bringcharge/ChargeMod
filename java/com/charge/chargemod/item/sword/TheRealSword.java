@@ -5,7 +5,10 @@ import com.charge.chargemod.damage.DaoFaDamageSource;
 import com.charge.chargemod.lingqi.PlayerLingQiHelper;
 import com.charge.chargemod.network.ChargePacketSender;
 import net.minecraft.core.Vec3i;
+import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
@@ -45,6 +48,10 @@ public class TheRealSword extends ChargeBaseSword{
                 }
                 //接下来打一个伤害，加点粒子差不多了
                 entity.hurt(DaoFaDamageSource.source(user, ChargeDamageTypes.DAO_REAL), 10);
+                ParticleOptions particleOptions = ParticleTypes.ASH;
+                if (entity.level() instanceof ServerLevel) {
+                    ((ServerLevel) entity.level()).sendParticles(particleOptions, entity.getX(), entity.getY() + 1, entity.getZ(), 7, 0.0D, 0.5D, 0.0D, 1.0D);//类型，xyz，count，speed_xyz,maxSpeed
+                }
             }
         }
         return true;
