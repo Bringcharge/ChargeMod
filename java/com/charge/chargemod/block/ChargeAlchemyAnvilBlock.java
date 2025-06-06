@@ -7,6 +7,9 @@ import com.charge.chargemod.multiBlock.XianTianBaGua;
 import com.charge.chargemod.network.ChargePacketSender;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Vec3i;
+import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -22,6 +25,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.Vec3;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -74,12 +78,23 @@ public class ChargeAlchemyAnvilBlock extends Block implements EntityBlock {
                                 return InteractionResult.sidedSuccess(level.isClientSide);
                             } else {
                                 ChargePacketSender.sendLingqiMessageToClient((ServerPlayer) player, PlayerLingQiHelper.getLingQi(player));
-
                             }
 
                             pedestal.setItem(item); //直接设置在输出口
                             check.cleanAltar(level, pos);   //清空所有的祭坛
-                            //TODO 增加粒子效果
+                            ParticleOptions particleOptions = ParticleTypes.FLASH;
+                            //粒子效果
+                            if (level instanceof ServerLevel) {
+                                ((ServerLevel) level).sendParticles(particleOptions, pos.getCenter().x, pos.getCenter().y, pos.getCenter().z, 1, 0.0D, 0D, 0.0D, 1.0D);//类型，xyz，count，speed_xyz,maxSpeed
+                                for (Vec3i v :check.baseBlock) {
+                                    Vec3 vec3 = Vec3.atCenterOf(v);
+                                    ((ServerLevel) level).sendParticles(ParticleTypes.WITCH, vec3.x, vec3.y+0.5f, vec3.z, 1, 0.0D, 0D, 0.0D, 1.0D);//类型，xyz，count，speed_xyz,maxSpeed
+                                }
+                                for (Vec3i v :check.altarBlock) {
+                                    Vec3 vec3 = Vec3.atCenterOf(v);
+                                    ((ServerLevel) level).sendParticles(ParticleTypes.LAVA, vec3.x, vec3.y, vec3.z, 1, 0.0D, 0D, 0.0D, 1.0D);//类型，xyz，count，speed_xyz,maxSpeed
+                                }
+                            }
                         }
 
                     } else {  //不完整
