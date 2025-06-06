@@ -48,7 +48,7 @@ public class TheRealSword extends ChargeBaseSword{
                 }
                 //接下来打一个伤害，加点粒子差不多了
                 entity.hurt(DaoFaDamageSource.source(user, ChargeDamageTypes.DAO_REAL), 10);
-                ParticleOptions particleOptions = ParticleTypes.ASH;
+                ParticleOptions particleOptions = ParticleTypes.FLASH;
                 if (entity.level() instanceof ServerLevel) {
                     ((ServerLevel) entity.level()).sendParticles(particleOptions, entity.getX(), entity.getY() + 1, entity.getZ(), 7, 0.0D, 0.5D, 0.0D, 1.0D);//类型，xyz，count，speed_xyz,maxSpeed
                 }

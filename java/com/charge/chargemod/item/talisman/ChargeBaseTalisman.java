@@ -30,7 +30,7 @@ public class ChargeBaseTalisman extends Item {
             player.getInventory().removeItem(stack);
         }
         if (!player.level().isClientSide) {
-            ParticleOptions particleOptions = ParticleTypes.FLAME;
+            ParticleOptions particleOptions = ParticleTypes.LAVA;
             if (player.level() instanceof ServerLevel) {
                 ((ServerLevel) player.level()).sendParticles(particleOptions, player.getX(), player.getY() + 1, player.getZ(), 7, 0.0D, 0.5D, 0.0D, 1.0D);//类型，xyz，count，speed_xyz,maxSpeed
             }

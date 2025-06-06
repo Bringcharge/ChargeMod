@@ -6,6 +6,8 @@ import com.charge.chargemod.lingqi.PlayerLingQiHelper;
 import com.charge.chargemod.network.ChargePacketSender;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Vec3i;
+import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -53,6 +55,10 @@ public class ZhongZhongGuSword  extends ChargeBaseSword {
                     Vec3 toPlayer = entity.getPosition(1.0f).vectorTo(user.getEyePosition()).normalize().scale(2.f);
                     entity.push(toPlayer.x, toPlayer.y, toPlayer.z);
                     entity.hurt(DaoFaDamageSource.source(user, ChargeDamageTypes.DAO_HEAVY), 10);
+                }
+                ParticleOptions particleOptions = ParticleTypes.LARGE_SMOKE;
+                if (entity.level() instanceof ServerLevel) {
+                    ((ServerLevel) entity.level()).sendParticles(particleOptions, entity.getX(), entity.getY() + 1, entity.getZ(), 7, 0.0D, 0.5D, 0.0D, 1.0D);//类型，xyz，count，speed_xyz,maxSpeed
                 }
             }
         }

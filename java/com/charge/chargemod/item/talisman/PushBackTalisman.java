@@ -2,6 +2,9 @@ package com.charge.chargemod.item.talisman;
 
 import com.charge.chargemod.damage.ChargeDamageTypes;
 import com.charge.chargemod.damage.DaoFaDamageSource;
+import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.damagesource.DamageSource;
@@ -42,7 +45,10 @@ public class PushBackTalisman extends ChargeBaseTalisman {
                     entity.push(forward.x * 6,forward.y * 6,forward.z * 6); //击飞单位
                 }
             }
-
+            ParticleOptions particleOptions = ParticleTypes.FLASH;
+            if (player.level() instanceof ServerLevel) {
+                ((ServerLevel) player.level()).sendParticles(particleOptions, player.getX(), player.getY() + 1, player.getZ(), 7, 0.0D, 0.5D, 0.0D, 1.0D);//类型，xyz，count，speed_xyz,maxSpeed
+            }
         }
         return super.use(level,player,hand);
     }

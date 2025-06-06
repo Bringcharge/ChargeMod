@@ -63,7 +63,7 @@ public class SuGuoSword extends ChargeBaseSword{
                 entity.hurt(damageSource,18);
                 entity.addEffect(new MobEffectInstance(ModEffects.SILENT_EFFECT.get(), 20 * 5));    //沉默
             }
-            ParticleOptions particleOptions = ParticleTypes.BUBBLE;
+            ParticleOptions particleOptions = ParticleTypes.SMOKE;
             if (player.level() instanceof ServerLevel) {
                 ((ServerLevel) player.level()).sendParticles(particleOptions, entity.getX(), entity.getY() + 1, entity.getZ(), 7, 0.0D, 0.5D, 0.0D, 1.0D);//类型，xyz，count，speed_xyz,maxSpeed
             }

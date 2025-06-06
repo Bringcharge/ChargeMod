@@ -5,9 +5,12 @@ import com.charge.chargemod.damage.DaoFaDamageSource;
 import com.charge.chargemod.lingqi.PlayerLingQiHelper;
 import com.charge.chargemod.network.ChargePacketSender;
 import net.minecraft.core.*;
+import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.commands.DamageCommand;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
@@ -63,6 +66,16 @@ public class WaterSplitSword  extends ChargeBaseSword {
             Vec3i position = new Vec3i((int) Math.floor(place.x), (int) Math.floor(place.y), (int) Math.floor(place.z));
             BlockPos pos = new BlockPos(position);
             removeWaterBreadthFirstSearch(user.level(), pos);   //找到玩家位置
+
+            ParticleOptions particleOptions = ParticleTypes.BUBBLE_POP;
+            if (user.level() instanceof ServerLevel) {
+                ((ServerLevel) user.level()).sendParticles(particleOptions, user.getX(), user.getY() + 1, user.getZ(), 1, 0.0D, 0.5D, 0.0D, 1.0D);//类型，xyz，count，speed_xyz,maxSpeed
+                ((ServerLevel) user.level()).sendParticles(particleOptions, user.getX()+1, user.getY() + 1, user.getZ(), 1, 0.0D, 0.5D, 0.0D, 1.0D);//类型，xyz，count，speed_xyz,maxSpeed
+                ((ServerLevel) user.level()).sendParticles(particleOptions, user.getX()-1, user.getY() + 1, user.getZ(), 1, 0.0D, 0.5D, 0.0D, 1.0D);//类型，xyz，count，speed_xyz,maxSpeed
+                ((ServerLevel) user.level()).sendParticles(particleOptions, user.getX(), user.getY() + 1, user.getZ()+1, 1, 0.0D, 0.5D, 0.0D, 1.0D);//类型，xyz，count，speed_xyz,maxSpeed
+                ((ServerLevel) user.level()).sendParticles(particleOptions, user.getX(), user.getY() + 1, user.getZ()-1, 1, 0.0D, 0.5D, 0.0D, 1.0D);//类型，xyz，count，speed_xyz,maxSpeed
+            }
+
         }
         return true;
     }
@@ -80,7 +93,15 @@ public class WaterSplitSword  extends ChargeBaseSword {
 //        DamageSource damageSource = new DamageSource(magicDamageTypeHolder,player,player);
 
 //        entity.hurt(damageSource,18);
-        entity.hurt(DaoFaDamageSource.source(player, ChargeDamageTypes.DAO_HEAVY), 10);
+
+        if (!player.level().isClientSide) {
+            entity.hurt(DaoFaDamageSource.source(player, ChargeDamageTypes.DAO_HEAVY), 10);
+            ParticleOptions particleOptions = ParticleTypes.RAIN;
+            if (entity.level() instanceof ServerLevel) {
+                ((ServerLevel) entity.level()).sendParticles(particleOptions, entity.getX(), entity.getY() + 1, entity.getZ(), 5, 0.0D, 0.5D, 0.0D, 1.0D);//类型，xyz，count，speed_xyz,maxSpeed
+            }
+        }
+
     }
 
     private boolean removeWaterBreadthFirstSearch(Level level, BlockPos blockPos) {

@@ -106,7 +106,7 @@ public class MayColdSword extends ChargeBaseSword {
                 i++;
                 double scale = 0.4 + random.nextFloat(0,0.2F);
                 Vec3 speed_toVec = toVec.normalize().scale(scale);
-                level.addParticle(ParticleTypes.SOUL_FIRE_FLAME, true,eyePosition.x,eyePosition.y,eyePosition.z , speed_toVec.x, speed_toVec.y, speed_toVec.z);
+                level.addParticle(ParticleTypes.SMOKE, true,eyePosition.x,eyePosition.y,eyePosition.z , speed_toVec.x, speed_toVec.y, speed_toVec.z);
             }
         }
     }
