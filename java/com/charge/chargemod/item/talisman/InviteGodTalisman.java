@@ -1,9 +1,16 @@
 package com.charge.chargemod.item.talisman;
 
+import com.charge.chargemod.lingqi.PlayerLingQiHelper;
+import com.charge.chargemod.network.ChargePacketSender;
+import com.charge.chargemod.particle.ChargeModParticleType;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -20,6 +27,7 @@ import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 
+import java.util.Random;
 import java.util.UUID;
 
 //请神符
@@ -44,7 +52,7 @@ public class InviteGodTalisman extends ChargeBaseTalisman {
                 LivingEntity entity = getPlayerView(player);    //获取前方entity
                 if (entity != null) {
                     setGodUUID(stack, entity.getUUID());    //设置uuid
-                    player.sendSystemMessage(Component.translatable("已获取uuid:" + entity.getName().toString()));
+                    player.sendSystemMessage(Component.literal("已绑定:" + entity.getName().toString()));
                     return InteractionResultHolder.success(stack);
                 }
 
@@ -70,19 +78,26 @@ public class InviteGodTalisman extends ChargeBaseTalisman {
     //松手之后
     @Override
     public void releaseUsing(ItemStack stack, Level level, LivingEntity player, int tick) {
-        if (tick > 5 * 20) {
+        if ((getUseDuration(stack) - tick) > 5 * 20) {
+//            player.sendSystemMessage(Component.literal("现在的tick是:" + tick));
             if (!level.isClientSide && level instanceof ServerLevel) {
                 ServerLevel serverLevel = (ServerLevel) level;
                 BlockPos pos = getInvitePos(stack);
                 Entity entity = serverLevel.getEntity(getGodUUID(stack));
-                if (entity.getPosition(1.0f).distanceTo(pos.getCenter()) < 3) { //距离合适
+                if (entity.getPosition(1.0f).add(0,1,0).distanceTo(pos.getCenter()) < 3) { //距离合适
                     entity.setPos(player.getPosition(1.f));
                 }
                 stack.shrink(1);//消耗一个物品
                 if (stack.isEmpty()) {
                     ((Player)player).getInventory().removeItem(stack);
                 }
-
+                level.playSound(
+                        null,                     // 无特定来源实体（全局声音）
+                        BlockPos.containing(player.position()), // 声音位置
+                        SoundEvents.BLAZE_BURN, // 声音事件（原版或自定义）
+                        SoundSource.PLAYERS,       // 声音类别（BLOCKS, PLAYERS, AMBIENT 等）
+                        1.0F, 1.0F                // 音量、音高
+                );
             }
         }
 
@@ -91,6 +106,30 @@ public class InviteGodTalisman extends ChargeBaseTalisman {
     @Override
     public void onUseTick(Level level, LivingEntity player, ItemStack stack, int tick) {
         super.onUseTick(level, player, stack, tick);
+        BlockPos pos = getInvitePos(stack);
+
+        if (tick % 10 == 0) {
+            if (level instanceof ServerLevel) {
+                Entity entity = ((ServerLevel)level).getEntity(getGodUUID(stack));
+                if (entity == null) {
+                    return;
+                }
+            }
+            if (!level.isClientSide) {
+                ChargePacketSender.sendParticleTypeToAllPlayer((ServerLevel) player.level(), pos.getX(), pos.getY() + 1, pos.getZ(),
+                    0, 0, 0, ChargeModParticleType.INVITE_GOD);
+
+                ((ServerLevel) level).sendParticles(ParticleTypes.FLASH, pos.getX(), pos.getY() + 1, pos.getZ(), 1, 0.0D, 0, 0, 1.0D);//类型，xyz，count，speed_xyz,maxSpeed
+                level.playSound(
+                        null,                     // 无特定来源实体（全局声音）
+                        pos, // 声音位置
+                        SoundEvents.BELL_BLOCK, // 声音事件（原版或自定义）
+                        SoundSource.AMBIENT,       // 声音类别（BLOCKS, PLAYERS, AMBIENT 等）
+                        1.0F, 3.0F                // 音量、音高
+                );
+            }
+
+        }
     }
 
     // 将uuid存储到 NBT 中

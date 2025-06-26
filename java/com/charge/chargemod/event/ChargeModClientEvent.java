@@ -29,6 +29,7 @@ public class ChargeModClientEvent {
     public static void onParticleFactoryRegistration(RegisterParticleProvidersEvent event) {
         event.registerSpriteSet(ChargeModParticleType.SWORD_BLADE_PARTICLE_TYPE.get(), ChargeBaseParticleProvider::new);    //注册的粒子
         event.registerSpriteSet(ChargeModParticleType.SWORD_MASK_PARTICLE_TYPE.get(), ChargeBaseParticleProvider::new);
+        event.registerSpriteSet(ChargeModParticleType.INVITE_GOD_PARTICLE_TYPE.get(), ChargeBaseParticleProvider::new);
     }
 
 

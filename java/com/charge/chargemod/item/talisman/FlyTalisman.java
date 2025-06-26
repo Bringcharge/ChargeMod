@@ -40,6 +40,13 @@ public class FlyTalisman extends ChargeBaseTalisman {
             if (stack.isEmpty()) {
                 player.getInventory().removeItem(stack);
             }
+            level.playSound(
+                    null,                     // 无特定来源实体（全局声音）
+                    BlockPos.containing(player.position()), // 声音位置
+                    SoundEvents.BLAZE_BURN, // 声音事件（原版或自定义）
+                    SoundSource.PLAYERS,       // 声音类别（BLOCKS, PLAYERS, AMBIENT 等）
+                    1.0F, 1.0F                // 音量、音高
+            );
             return InteractionResultHolder.success(stack); // success
         }
         return InteractionResultHolder.fail(player.getItemInHand(hand)); // 冷却中返回fail

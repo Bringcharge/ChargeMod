@@ -1,5 +1,6 @@
 package com.charge.chargemod.particle;
 
+import com.charge.chargemod.particle.particleList.InviteGodParticle;
 import com.charge.chargemod.particle.particleList.SwordBladeParticle;
 import com.charge.chargemod.particle.particleList.SwordMaskParticle;
 import net.minecraft.client.multiplayer.ClientLevel;
@@ -27,7 +28,11 @@ public class ChargeBaseParticleProvider implements ParticleProvider<ChargeBasePa
             swordMaskParticle.pickSprite(this.sprites);
             return swordMaskParticle;
         }
-
+        if (pType.type().equals(ChargeModParticleType.INVITE_GOD)) {
+            InviteGodParticle inviteGodParticle = new InviteGodParticle(pLevel, pX, pY, pZ, pType.getSpeed());
+            inviteGodParticle.pickSprite(this.sprites);
+            return inviteGodParticle;
+        }
         SwordBladeParticle swordBladeParticle = new SwordBladeParticle(pLevel, pX, pY, pZ, pType.getSpeed());
         // 随机选择一张图片作为纹理图
         swordBladeParticle.pickSprite(this.sprites);
