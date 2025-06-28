@@ -12,6 +12,7 @@ public class BaseStoneScreen extends ChargeBaseScreen {
         super(title);
         leftStringLocal = "首先说的是法坛的地基。法坛想要运作，需要借助天地之力。地基是灵力于石头结合，可以吸收自然灵气。按照八卦的方式摆放能够汇聚灵气。\n" +
                 "地基也是阵盘的原料之一，在构建炼丹炼器阵时大量需要，光一个阵法就需约莫百十来个。";
+        showCrafting = true;
         rightImage = new ResourceLocation(ChargeModItemRegistry.MODID,"textures/gui/empty.png");
         topItem = Items.STONE;
         topLeftItem = ChargeModItemRegistry.chargeLingShi.get();

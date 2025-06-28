@@ -1,5 +1,6 @@
 package com.charge.chargemod.gui;
 
+import com.charge.chargemod.gui.array.*;
 import com.charge.chargemod.gui.pellet.*;
 import com.charge.chargemod.gui.swords.*;
 import com.charge.chargemod.gui.talisman.*;
@@ -22,10 +23,8 @@ public class GuideCenter implements GuidePageDelegate { //多页码索引
         addScreen(new LevelScreen());
         addScreen(new BaseStoneScreen());
         addScreen(new AltarScreen());
-        addScreen(new AlchemyStoveScreen());
-        addScreen(new LianDanScreen());
-        addScreen(new AlchemyAnvilScreen());
-        addScreen(new LianQiScreen());
+        addScreen(new AlchemyStoveScreen());//八卦炉
+        addScreen(new LianDanScreen());//炼丹多方块
         //丹药
         addScreen(new BiGuPelletScreen());//辟谷丹
         addScreen(new HongYunPelletScreen());//鸿运齐天丹
@@ -51,6 +50,8 @@ public class GuideCenter implements GuidePageDelegate { //多页码索引
         addScreen(new SuanBuDuiTalismanScreen());//仙符 算不对
         addScreen(new MazeTalismanScreen());//仙符 迷惘
         //剑
+        addScreen(new AlchemyAnvilScreen());//炼器铁砧
+        addScreen(new LianQiScreen());//炼器多方块
         addScreen(new KongFangScreen());//金剑——孔方
         addScreen(new FuYaoScreen());//木剑——扶摇
         addScreen(new WaterSplitScreen());//水剑——断水
@@ -69,6 +70,13 @@ public class GuideCenter implements GuidePageDelegate { //多页码索引
         addScreen(new QiuXiaoYaoScreen());//仙剑——求逍遥
         addScreen(new LuanYinGuoScreen());//仙剑——乱因果
         //阵
+        addScreen(new ArrayDiskScreen());//阵盘
+        addScreen(new ArrayFlagScreen());//阵旗
+        addScreen(new JuLingArrayScreen());//聚灵阵
+        addScreen(new TeleportArrayScreen());//传送阵
+        addScreen(new TongQianArrayScreen());//铜钱阵
+        addScreen(new ZhenYaoArrayScreen());//镇妖阵
+
     }
 
     private void addScreen(ChargeBaseScreen screen) {   //方便重复添加的函数
@@ -93,5 +101,9 @@ public class GuideCenter implements GuidePageDelegate { //多页码索引
     @Override
     public void changeToNextPage(int nowPage) {
         showPage(nowPage + 1);
+    }
+
+    public void changeToPageWithIndex(int index) {
+        showPage(index);
     }
 }

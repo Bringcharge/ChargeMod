@@ -14,6 +14,7 @@ public class ArrayFlagScreen extends ChargeBaseScreen {
         leftStringLocal = "阵旗是用于阵法的道具，每个阵法都需要4个阵旗，经过老夫的化简基本上阵法都是对称的，无需仔细分辨东西南北。\n" +
                 "当然也化简了所用材料，任意羊毛下面是木棍，木棍下面是灵石，在工作台即可合成。";
         rightImage = new ResourceLocation(ChargeModItemRegistry.MODID,"textures/gui/empty.png");
+        showCrafting = true;
         topLeftItem = Items.WHITE_WOOL;
         leftItem = Items.STICK;
         bottomLeftItem = ChargeModItemRegistry.chargeLingShi.get();

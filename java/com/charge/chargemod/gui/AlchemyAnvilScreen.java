@@ -12,6 +12,7 @@ public class AlchemyAnvilScreen extends ChargeBaseScreen {
         super(title);
         leftStringLocal = "想要炼制武器，自然需要个炼器炉，老夫根据天地特色，把炉子造成了铁砧的模样，哈哈。按照图在工作台便可合成。\n" +
                 "炼器需要消耗灵力，灵力不足自然无法炼制，某些高级的武器也许超出当前灵力上限，等突破了再尝试吧。";
+        showCrafting = true;
         rightImage = new ResourceLocation(ChargeModItemRegistry.MODID,"textures/gui/empty.png");
         topLeftItem = Items.COPPER_INGOT;
         topItem = Items.BAMBOO;

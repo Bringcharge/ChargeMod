@@ -63,6 +63,11 @@ public class ChargeBaseScreen extends Screen {
         }
         this.addRenderableWidget(Button.builder(Component.literal("<"), btn -> goToPreviousPage()).bounds(width / 2 - 110 - 20, height / 2 - 10, 20, 20).build());
         this.addRenderableWidget(Button.builder(Component.literal(">"), btn -> goToNextPage()).bounds(width / 2 + 110 , height / 2 - 10, 20, 20).build());
+        this.addRenderableWidget(Button.builder(Component.literal("首页"), btn -> goIndex(0)).bounds(((width - 20) / 5) * 0 + 10 , height - 30, 40, 20).build());
+        this.addRenderableWidget(Button.builder(Component.literal("炼丹"), btn -> goIndex(5)).bounds(((width - 20) / 5) * 1 + 10 , height - 30, 40, 20).build());
+        this.addRenderableWidget(Button.builder(Component.literal("制符"), btn -> goIndex(16)).bounds(((width - 20) / 5) * 2 + 10 , height - 30, 40, 20).build());
+        this.addRenderableWidget(Button.builder(Component.literal("炼器"), btn -> goIndex(29)).bounds(((width - 20) / 5) * 3 + 10 , height - 30, 40, 20).build());
+        this.addRenderableWidget(Button.builder(Component.literal("阵法"), btn -> goIndex(48)).bounds(((width - 20) / 5) * 4 + 10 , height - 30, 40, 20).build());
     }
 
     @Override
@@ -190,5 +195,9 @@ public class ChargeBaseScreen extends Screen {
     }
     private void goToNextPage() {
         delegate.changeToNextPage(index);
+    }
+
+    private void goIndex(int index) {
+        delegate.changeToPageWithIndex(index);
     }
 }

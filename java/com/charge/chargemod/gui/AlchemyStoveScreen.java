@@ -12,6 +12,7 @@ public class AlchemyStoveScreen extends ChargeBaseScreen {
         super(title);
         leftStringLocal = "想要炼制丹药、符箓，需要一个炼丹炉，并且按照阵法摆放基石，汇聚天地之力，借用自身灵力后可以炼制。按照下图在工作台可以合成。\n" +
                 "也正如上文所说，炼丹需要消耗灵力，灵力不足自然无法炼制，某些高级的丹药也许超出当前灵力上限，等突破了再尝试吧。";
+        showCrafting = true;
         rightImage = new ResourceLocation(ChargeModItemRegistry.MODID,"textures/gui/empty.png");
         topLeftItem = Items.COAL;
         topItem = Items.IRON_INGOT;

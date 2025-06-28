@@ -13,9 +13,15 @@ public class AltarScreen extends ChargeBaseScreen {
         leftStringLocal = "置物坛是与八卦炉、炼器铁砧配套使用的方块。可以往里面放置材料、取出材料。制作起来需要竹子，相对麻烦。\n" +
                 "合成需要竹子，木棍，石头，按照如图所示的方式合成即可。";
         rightImage = new ResourceLocation(ChargeModItemRegistry.MODID,"textures/gui/empty.png");
-        topLeftItem = topItem = topRightItem = Items.BAMBOO;
-        leftItem = rightItem = Items.STICK;
-        bottomLeftItem = bottomItem = bottomRightItem = Items.STONE;
+        showCrafting = true;
+        topLeftItem = Items.BAMBOO;
+        topItem = Items.BAMBOO;
+        topRightItem = Items.BAMBOO;
+        leftItem = Items.STICK;
+        rightItem = Items.STICK;
+        bottomLeftItem = Items.STONE;
+        bottomItem = Items.STONE;
+        bottomRightItem = Items.STONE;
         rightStringLocal = "置物台的作用仅仅是存放东西，一次存放一个。单纯摆在家里做展示柜也未尝不可。";
     }
 

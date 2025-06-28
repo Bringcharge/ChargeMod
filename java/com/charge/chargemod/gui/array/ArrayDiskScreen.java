@@ -13,6 +13,7 @@ public class ArrayDiskScreen extends ChargeBaseScreen {
         super(title);
         leftStringLocal = "阵盘是阵法的核心，放置于阵法中央。最初的阵法是布置于天地之间，而后老夫加入阵盘，将阵法汇聚保留在阵盘上，形成各类阵，放下便可使用。\n" +
                 "只是这类阵法一旦放置便不可拆，放置时还请谨慎。";
+        showCrafting = true;
         rightImage = new ResourceLocation(ChargeModItemRegistry.MODID,"textures/gui/empty.png");
         topLeftItem = Items.BONE_MEAL;
         topRightItem = ChargeModItemRegistry.chargeBaseBlockItem.get();
