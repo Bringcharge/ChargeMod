@@ -60,8 +60,8 @@ public class ChargeAlchemyStoveBlock extends Block implements EntityBlock {
                     BlockPos blockPos = check.isCompleted(level, pos);  //检查方块是否完整
 
                     if (blockPos == null) { //完整
-                        player.sendSystemMessage(Component.literal("多方快结构完整")
-                                .withStyle(ChatFormatting.AQUA));
+//                        player.sendSystemMessage(Component.literal("多方快结构完整")
+//                                .withStyle(ChatFormatting.AQUA));
 
                         List<ItemStack> list = new ArrayList<ItemStack>();
                         for (int i = 0; i< 8; i++) {   //获取8个祭坛的东西

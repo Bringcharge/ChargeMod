@@ -84,10 +84,14 @@ public class TeleportEditScreen extends Screen {
 
     private void clickConfirmButton() {
         this.saveChanges();
-        this.minecraft.setScreen((Screen)null);
+        if (this.minecraft != null) {
+            this.minecraft.setScreen((Screen) null);
+        }
     }
     private void clickCancelButton() {
-        this.minecraft.setScreen((Screen)null);
+        if (this.minecraft != null) {
+            this.minecraft.setScreen((Screen) null);
+        }
     }
     private void saveChanges() {    //存储ui附带设置的数据
         if (this.entity!=null) {
