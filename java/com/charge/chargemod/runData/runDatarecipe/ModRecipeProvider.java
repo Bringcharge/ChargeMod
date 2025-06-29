@@ -80,6 +80,11 @@ public class ModRecipeProvider extends RecipeProvider {
                 .save(consumer);
 
         // 无序合成
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ChargeModItemRegistry.CHARGE_GUIDE_BOOK.get())  //天书
+                .requires(ChargeModItemRegistry.chargeLingShi.get(), 1)
+                .requires(Items.BOOK, 1)
+                .unlockedBy("has_charge_ling_shi", has(ChargeModItemRegistry.chargeLingShi.get()))
+                .save(consumer);
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ChargeModItemRegistry.chargeBaseBlockItem.get())  //祭坛基石
                 .requires(ChargeModItemRegistry.chargeLingShi.get(), 1)
                 .requires(Items.STONE, 1)
