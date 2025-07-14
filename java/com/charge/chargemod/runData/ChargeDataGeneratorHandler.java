@@ -7,6 +7,7 @@ import com.charge.chargemod.runData.loot.ChargeBlockLootProvider;
 import com.charge.chargemod.runData.loot.ChargeLootTableProvider;
 import com.charge.chargemod.runData.ChargeWorldGen;
 import com.charge.chargemod.runData.runDatarecipe.ModRecipeProvider;
+import com.charge.chargemod.runData.tag.ModBlockTagProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DataProvider;
@@ -49,6 +50,9 @@ public class ChargeDataGeneratorHandler {
         //添加伤害类型
         event.getGenerator().addProvider(event.includeServer(), new DamageTypeTagGenerator(output, lookupProvider, efh));
         event.getGenerator().addProvider(event.includeServer(), (DataProvider.Factory<ModRecipeProvider>) pOutput -> new ModRecipeProvider(pOutput));
-
+        event.getGenerator().addProvider(   //Tag添加
+                event.includeServer(),
+                (DataProvider.Factory<ModBlockTagProvider>) pOutput -> new ModBlockTagProvider(pOutput,lp,ChargeModItemRegistry.MODID,efh)
+        );
     }
 }

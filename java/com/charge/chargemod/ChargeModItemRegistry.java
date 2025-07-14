@@ -239,8 +239,9 @@ public class ChargeModItemRegistry {
     //灵石矿
     public static final RegistryObject<Block> CHARGE_LING_SHI_ORE = BLOCKS.register("charge_ling_shi_ore", () -> {
        return new ChargeLingShiOre(BlockBehaviour.Properties.of()
-       .destroyTime(2.5f)
        .explosionResistance(20)
+       .strength(1.5f, 30.0f) //硬度，石头是1.5 & 爆炸抗性，黑曜石是50
+       .requiresCorrectToolForDrops()
        .lightLevel(state -> 5).sound(SoundType.GLASS)
        );
     });

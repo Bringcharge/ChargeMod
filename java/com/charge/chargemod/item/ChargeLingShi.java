@@ -7,7 +7,9 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.Nullable;
 
 public class ChargeLingShi extends Item {
     public ChargeLingShi() {
@@ -26,5 +28,8 @@ public class ChargeLingShi extends Item {
         return InteractionResultHolder.consume(stack); // 返回消耗结果
     }
 
-
+    @Override
+    public int getBurnTime(ItemStack itemStack, @Nullable RecipeType<?> recipeType) {
+        return 1600;
+    }
 }
