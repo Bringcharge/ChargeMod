@@ -4,6 +4,7 @@ package com.charge.chargemod.runData;
 import com.charge.chargemod.ChargeModItemRegistry;
 import com.charge.chargemod.runData.damage.DamageTypeTagGenerator;
 import com.charge.chargemod.runData.loot.ChargeBlockLootProvider;
+import com.charge.chargemod.runData.loot.ChargeChestLootProvider;
 import com.charge.chargemod.runData.loot.ChargeLootTableProvider;
 import com.charge.chargemod.runData.ChargeWorldGen;
 import com.charge.chargemod.runData.runDatarecipe.ModRecipeProvider;
@@ -44,7 +45,8 @@ public class ChargeDataGeneratorHandler {
                 event.includeServer(),
                 (DataProvider.Factory<ChargeLootTableProvider>)pOutput -> new ChargeLootTableProvider(pOutput, Collections.emptySet(),
                         List.of(
-                                new LootTableProvider.SubProviderEntry(ChargeBlockLootProvider::new, LootContextParamSets.BLOCK)
+                                new LootTableProvider.SubProviderEntry(ChargeBlockLootProvider::new, LootContextParamSets.BLOCK),
+                                new LootTableProvider.SubProviderEntry(ChargeChestLootProvider::new, LootContextParamSets.CHEST)
                         ))
         );
         //添加伤害类型
