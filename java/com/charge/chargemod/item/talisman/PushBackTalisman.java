@@ -2,9 +2,12 @@ package com.charge.chargemod.item.talisman;
 
 import com.charge.chargemod.damage.ChargeDamageTypes;
 import com.charge.chargemod.damage.DaoFaDamageSource;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.damagesource.DamageSource;
@@ -31,6 +34,14 @@ public class PushBackTalisman extends ChargeBaseTalisman {
         if (!level.isClientSide()) {
             int halfWidth = 10;
             int halfHeight = 7;
+
+            level.playSound(
+                    null,                     // 无特定来源实体（全局声音）
+                    BlockPos.containing(player.position()), // 声音位置
+                    SoundEvents.ANVIL_FALL, // 声音事件（原版或自定义）
+                    SoundSource.PLAYERS,       // 声音类别（BLOCKS, PLAYERS, AMBIENT 等）
+                    1.0F, 1.0F                // 音量、音高
+            );
 
             Vec3 eyePosition = player.getEyePosition(1.0F);
             Vec3 bottomWestSouth = eyePosition.add(-halfWidth, -halfHeight, halfWidth);

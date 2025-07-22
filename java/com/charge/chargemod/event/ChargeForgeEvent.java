@@ -11,6 +11,8 @@ import com.charge.chargemod.network.ChargeNetwork;
 import com.charge.chargemod.network.ChargePacketSender;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.profiling.jfr.event.WorldLoadFinishedEvent;
@@ -119,7 +121,7 @@ public class ChargeForgeEvent{
             }
         }
 
-        if (event.side == LogicalSide.SERVER) { // 只在 tick 开始时检查
+        if (event.side == LogicalSide.SERVER) { //碰撞检测
             if (tickCount % 10 == 0) { // 每 10 tick 检测一次
                 Player player = event.player;
                 boolean flag = false;
@@ -145,6 +147,13 @@ public class ChargeForgeEvent{
 
                                 animal.setInLove(player);
                                 animal.spawnChildFromBreeding((ServerLevel) player.level(), animal);
+                                Random random = new Random();
+                                for(int i = 0; i < 3; ++i) {
+                                    double d0 = random.nextGaussian() * 0.02D;
+                                    double d1 = random.nextGaussian() * 0.02D;
+                                    double d2 = random.nextGaussian() * 0.02D;
+                                    ((ServerLevel) player.level()).sendParticles(ParticleTypes.HEART, animal.getRandomX(1.0D), animal.getRandomY() + 0.5D, animal.getRandomZ(1.0D), 1, d0, d1, d2, 10);//类型，xyz，count，speed_xyz,maxSpeed
+                                }
                             }
                         }
                     }
